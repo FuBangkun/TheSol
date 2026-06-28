@@ -136,7 +136,7 @@ public class EntityUranusBossSlime extends EntityBossBase implements IMob, IEnti
 
     @Override
     public void dropKey() {
-        this.entityDropItem(new ItemStack(SolItems.KEY_TIER_7), 0.5F);
+        this.entityDropItem(new ItemStack(SolItems.KEY, 1, 3), 0.5F);
     }
 
     @Override

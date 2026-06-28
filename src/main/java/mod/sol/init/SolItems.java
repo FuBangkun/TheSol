@@ -22,12 +22,12 @@ public class SolItems {
     // unused
     // public static final Item TRANSLATION_INFO = new ItemBase("translation_info", TheSol.ITEM_TAB);
     // rocket stuff
-    public static final Item SCHEMATIC_ROCKET = new ItemSchematicTier("schematic");
+    public static final Item SCHEMATIC_ROCKET = new ItemSchematicTier("schematic");// 注册名叫 "key"
+    public static final Item KEY = new ItemKeyTier("key");
     // t4
     public static final Item REINFORCED_PLATE_T4 = new ItemBase("reinforced_plate_t4", TheSol.ITEM_TAB);
     public static final Item ROCKET_FINS_T4 = new ItemBase("rocket_fins_t4", TheSol.ITEM_TAB);
     public static final Item ENGINE_BOOSTER_T4 = new ItemBase("engine_booster_t4", TheSol.ITEM_TAB);
-    public static final Item KEY_TIER_4 = new ItemKeyTier4("key_t4");
     public static final Item ROCKET_T4 = new ItemTier4Rocket("rocket_t4");
     // t5
     public static final Item ROCKET_ENGINE_T5 = new ItemBase("rocket_engine_t5", TheSol.ITEM_TAB);
@@ -35,7 +35,6 @@ public class SolItems {
     public static final Item NOSE_CONE_T5 = new ItemBase("nose_cone_t5", TheSol.ITEM_TAB);
     public static final Item ROCKET_FINS_T5 = new ItemBase("rocket_fins_t5", TheSol.ITEM_TAB);
     public static final Item ENGINE_BOOSTER_T5 = new ItemBase("engine_booster_t5", TheSol.ITEM_TAB);
-    public static final Item KEY_TIER_5 = new ItemKeyTier5("key_t5");
     public static final Item ROCKET_T5 = new ItemTier5Rocket("rocket_t5");
     // t6
     public static final Item ROCKET_ENGINE_T6 = new ItemBase("rocket_engine_t6", TheSol.ITEM_TAB);
@@ -43,7 +42,6 @@ public class SolItems {
     public static final Item NOSE_CONE_T6 = new ItemBase("nose_cone_t6", TheSol.ITEM_TAB);
     public static final Item ROCKET_FINS_T6 = new ItemBase("rocket_fins_t6", TheSol.ITEM_TAB);
     public static final Item ENGINE_BOOSTER_T6 = new ItemBase("engine_booster_t6", TheSol.ITEM_TAB);
-    public static final Item KEY_TIER_6 = new ItemKeyTier6("key_t6");
     public static final Item ROCKET_T6 = new ItemTier6Rocket("rocket_t6");
     // t7
     public static final Item ROCKET_ENGINE_T7 = new ItemBase("rocket_engine_t7", TheSol.ITEM_TAB);
@@ -51,7 +49,6 @@ public class SolItems {
     public static final Item NOSE_CONE_T7 = new ItemBase("nose_cone_t7", TheSol.ITEM_TAB);
     public static final Item ROCKET_FINS_T7 = new ItemBase("rocket_fins_t7", TheSol.ITEM_TAB);
     public static final Item ENGINE_BOOSTER_T7 = new ItemBase("engine_booster_t7", TheSol.ITEM_TAB);
-    public static final Item KEY_TIER_7 = new ItemKeyTier7("key_t7");
     public static final Item ROCKET_T7 = new ItemTier7Rocket("rocket_t7");
     // t8
     public static final Item ROCKET_ENGINE_T8 = new ItemBase("rocket_engine_t8", TheSol.ITEM_TAB);
@@ -59,7 +56,6 @@ public class SolItems {
     public static final Item NOSE_CONE_T8 = new ItemBase("nose_cone_t8", TheSol.ITEM_TAB);
     public static final Item ROCKET_FINS_T8 = new ItemBase("rocket_fins_t8", TheSol.ITEM_TAB);
     public static final Item ENGINE_BOOSTER_T8 = new ItemBase("engine_booster_t8", TheSol.ITEM_TAB);
-    public static final Item KEY_TIER_8 = new ItemKeyTier8("key_t8");
     public static final Item ROCKET_T8 = new ItemTier8Rocket("rocket_t8");
     // t9
     public static final Item ROCKET_ENGINE_T9 = new ItemBase("rocket_engine_t9", TheSol.ITEM_TAB);
@@ -67,11 +63,9 @@ public class SolItems {
     public static final Item NOSE_CONE_T9 = new ItemBase("nose_cone_t9", TheSol.ITEM_TAB);
     public static final Item ROCKET_FINS_T9 = new ItemBase("rocket_fins_t9", TheSol.ITEM_TAB);
     public static final Item ENGINE_BOOSTER_T9 = new ItemBase("engine_booster_t9", TheSol.ITEM_TAB);
-    public static final Item KEY_TIER_9 = new ItemKeyTier9("key_t9");
     public static final Item ROCKET_T9 = new ItemTier9Rocket("rocket_t9");
     // t10
     public static final Item WARP_ENGINE = new ItemBase("warp_engine", TheSol.ITEM_TAB);
-    public static final Item KEY_TIER_10 = new ItemKeyTier10("key_t10");
     // battery
     public static final Item ADVANCED_BATTERY_TIER_1 = new ItemAdvancedBattery("advanced_battery_t1", 1);
     public static final Item ADVANCED_BATTERY_TIER_2 = new ItemAdvancedBattery("advanced_battery_t2", 2);

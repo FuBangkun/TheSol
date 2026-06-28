@@ -210,7 +210,7 @@ public class EntityNeptuneBossSpider extends EntityBossBase implements IEntityBr
 
     @Override
     public void dropKey() {
-        this.entityDropItem(new ItemStack(SolItems.KEY_TIER_8, 1), 0.5F);
+        this.entityDropItem(new ItemStack(SolItems.KEY, 1, 4), 0.5F);
     }
 
     @Override

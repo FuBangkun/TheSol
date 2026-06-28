@@ -100,13 +100,13 @@ item.engine_booster_t9.name=Tier 9 Booster
 item.warp_engine.name=Warp Engine
 
 # Keys
-key_t4.name=Tier 4 Dungeon Key
-key_t5.name=Tier 5 Dungeon Key
-key_t6.name=Tier 6 Dungeon Key
-key_t7.name=Tier 7 Dungeon Key
-key_t8.name=Tier 8 Dungeon Key
-key_t9.name=Tier 9 Dungeon Key
-key_t10.name=Tier 10 Dungeon Key
+item.key.t4.name=Tier 4 Dungeon Key
+item.key.t5.name=Tier 5 Dungeon Key
+item.key.t6.name=Tier 6 Dungeon Key
+item.key.t7.name=Tier 7 Dungeon Key
+item.key.t8.name=Tier 8 Dungeon Key
+item.key.t9.name=Tier 9 Dungeon Key
+item.key.t10.name=Tier 10 Dungeon Key
 
 # Schematics
 item.schematic.name=Nasa Workbench Schematic

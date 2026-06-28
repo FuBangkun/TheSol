@@ -100,13 +100,13 @@ item.engine_booster_t9.name=九阶火箭助推器
 item.warp_engine.name=曲速引擎
 
 # Keys
-key_t4.name=四阶地牢钥匙
-key_t5.name=五阶地牢钥匙
-key_t6.name=六阶地牢钥匙
-key_t7.name=七阶地牢钥匙
-key_t8.name=八阶地牢钥匙
-key_t9.name=九阶地牢钥匙
-key_t10.name=十阶地牢钥匙
+item.key.t4.name=四阶地牢钥匙
+item.key.t5.name=五阶地牢钥匙
+item.key.t6.name=六阶地牢钥匙
+item.key.t7.name=七阶地牢钥匙
+item.key.t8.name=八阶地牢钥匙
+item.key.t9.name=九阶地牢钥匙
+item.key.t10.name=十阶地牢钥匙
 
 # Schematics
 item.schematic.name=CNSA工程设计图

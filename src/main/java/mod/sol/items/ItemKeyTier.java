@@ -5,26 +5,17 @@ import micdoodle8.mods.galacticraft.core.items.ISortableItem;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
 import mod.sol.TheSol;
-import mod.sol.init.SolItems;
-import mod.sol.util.IHasModel;
+import mod.sol.util.Reference;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemKeyTier8 extends Item implements IKeyItem, ISortableItem, IHasModel {
-    public ItemKeyTier8(String name) {
-        super();
-        this.setTranslationKey(name);
-        this.setRegistryName(name);
+public class ItemKeyTier extends ItemMetadataBase implements IKeyItem, ISortableItem {
+    public ItemKeyTier(String name) {
+        super(name, "t4", "t5", "t6", "t7", "t8", "t9", "t10");
         this.setMaxStackSize(1);
-        this.setMaxDamage(0);
-        this.setHasSubtypes(false);
-
-        SolItems.ITEMS.add(this);
     }
 
     @Override
@@ -40,25 +31,8 @@ public class ItemKeyTier8 extends Item implements IKeyItem, ISortableItem, IHasM
     }
 
     @Override
-    public String getTranslationKey(ItemStack itemStack) {
-        return "key_t8";
-    }
-
-    @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-        if (tab == TheSol.ITEM_TAB || tab == CreativeTabs.SEARCH) {
-            list.add(new ItemStack(this, 1));
-        }
-    }
-
-    @Override
-    public int getMetadata(int par1) {
-        return par1;
-    }
-
-    @Override
     public int getTier(ItemStack keyStack) {
-        return 8;
+        return keyStack.getItemDamage() + 4;
     }
 
     @Override
@@ -68,6 +42,19 @@ public class ItemKeyTier8 extends Item implements IKeyItem, ISortableItem, IHasM
 
     @Override
     public void registerModels() {
-        TheSol.proxy.registerItemRenderer(this, 0, "inventory");
+        for (int meta = 0; meta <= maxMeta; meta++) {
+            int tier = meta + 4;
+
+            String modelName = "key_t" + tier;
+
+            net.minecraftforge.client.model.ModelLoader.setCustomModelResourceLocation(
+                    this,
+                    meta,
+                    new net.minecraft.client.renderer.block.model.ModelResourceLocation(
+                            new net.minecraft.util.ResourceLocation(Reference.MOD_ID, modelName),
+                            "inventory"
+                    )
+            );
+        }
     }
 }

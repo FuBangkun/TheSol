@@ -140,7 +140,7 @@ public class EntityBossMagmaCube extends EntityBossBase implements IMob, IEntity
 
     @Override
     public void dropKey() {
-        this.entityDropItem(new ItemStack(SolItems.KEY_TIER_10), 0.5F);
+        this.entityDropItem(new ItemStack(SolItems.KEY, 1, 6), 0.5F);
     }
 
     @Override

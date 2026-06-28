@@ -110,13 +110,12 @@ key_t10.name=十阶地牢钥匙
 
 # Schematics
 item.schematic.name=CNSA工程设计图
-schematic.tier4.name=四阶火箭
-schematic.tier5.name=五阶火箭
-schematic.tier6.name=六阶火箭
-schematic.tier7.name=七阶火箭
-schematic.tier8.name=八阶火箭
-schematic.tier9.name=九阶火箭
-schematic.tier10.name=十阶火箭
+item.schematic.tier4.name=四阶火箭
+item.schematic.tier5.name=五阶火箭
+item.schematic.tier6.name=六阶火箭
+item.schematic.tier7.name=七阶火箭
+item.schematic.tier8.name=八阶火箭
+item.schematic.tier9.name=九阶火箭
 
 # Rockets
 item.rocket_t4.t4Rocket.name=四阶火箭

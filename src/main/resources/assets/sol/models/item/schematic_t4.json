@@ -1,7 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "sol:items/schematic_rocket_t6"
+        "layer0": "sol:items/schematic_t4"
     },
     "display": {
         "thirdperson": {

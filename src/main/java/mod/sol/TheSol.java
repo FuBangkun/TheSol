@@ -657,24 +657,26 @@ public class TheSol {
         TheSol.registerNonMobEntity(EntityTier8Rocket.class, "rocket_t8", 150, 1, false);
         TheSol.registerNonMobEntity(EntityTier9Rocket.class, "rocket_t9", 150, 1, false);
         // schematic
+        Item schematicItem = SolItems.SCHEMATIC_ROCKET;
+        ItemSchematicTier schematicClass = (ItemSchematicTier) schematicItem;
+
         for (int tier = 4; tier <= 9; tier++) {
             final int t = tier;
+            final int meta = schematicClass.getMetaFromTier(tier);
             final Item rocketItem = tier == 4 ? SolItems.ROCKET_T4 :
-                                   tier == 5 ? SolItems.ROCKET_T5 :
-                                   tier == 6 ? SolItems.ROCKET_T6 :
-                                   tier == 7 ? SolItems.ROCKET_T7 :
-                                   tier == 8 ? SolItems.ROCKET_T8 : SolItems.ROCKET_T9;
-            final Item schematicItem = tier == 4 ? SolItems.SCHEMATIC_T4 :
-                                      tier == 5 ? SolItems.SCHEMATIC_T5 :
-                                      tier == 6 ? SolItems.SCHEMATIC_T6 :
-                                      tier == 7 ? SolItems.SCHEMATIC_T7 :
-                                      tier == 8 ? SolItems.SCHEMATIC_T8 : SolItems.SCHEMATIC_T9;
-            SchematicRegistry.registerSchematicRecipe(new SchematicRocket(t, schematicItem,
+                    tier == 5 ? SolItems.ROCKET_T5 :
+                    tier == 6 ? SolItems.ROCKET_T6 :
+                    tier == 7 ? SolItems.ROCKET_T7 :
+                    tier == 8 ? SolItems.ROCKET_T8 : SolItems.ROCKET_T9;
+            SchematicRegistry.registerSchematicRecipe(new SchematicRocket(
+                    t,
+                    schematicItem,
+                    meta,
                     (inv, pos) -> new GuiSchematicRocket(inv, pos, t, rocketItem),
-                    (inv, pos) -> new ContainerSchematicRocket(inv, pos, t)));
-            ItemSchematicTier.registerSchematicItems(schematicItem);
+                    (inv, pos) -> new ContainerSchematicRocket(inv, pos, t)
+            ));
+            ItemSchematicTier.registerSchematicItems(new ItemStack(schematicItem, 1, meta));
         }
-        ItemSchematicTier.registerSchematicItems(SolItems.SCHEMATIC_T10);
         RecipeManagerRocketsTier4.addUniversalRecipes();
         RecipeManagerRocketsTier5.addUniversalRecipes();
         RecipeManagerRocketsTier6.addUniversalRecipes();
@@ -690,14 +692,10 @@ public class TheSol {
         SolOreDict.registerOres();
         // chest
         SolTreasureChestRegistry.registry();
-
-        GalacticraftRegistry.addDungeonLoot(4, new ItemStack(SolItems.SCHEMATIC_T4, 1));
-        GalacticraftRegistry.addDungeonLoot(5, new ItemStack(SolItems.SCHEMATIC_T5, 1));
-        GalacticraftRegistry.addDungeonLoot(6, new ItemStack(SolItems.SCHEMATIC_T6, 1));
-        GalacticraftRegistry.addDungeonLoot(7, new ItemStack(SolItems.SCHEMATIC_T7, 1));
-        GalacticraftRegistry.addDungeonLoot(8, new ItemStack(SolItems.SCHEMATIC_T8, 1));
-        GalacticraftRegistry.addDungeonLoot(9, new ItemStack(SolItems.SCHEMATIC_T9, 1));
-        GalacticraftRegistry.addDungeonLoot(10, new ItemStack(SolItems.SCHEMATIC_T10, 1));
+        for (int tier = 4; tier <= 10; tier++) {
+            int meta = tier - 4;
+            GalacticraftRegistry.addDungeonLoot(tier, new ItemStack(SolItems.SCHEMATIC_ROCKET, 1, meta));
+        }
         // entity
         SolEntityRegistry.register();
         // dungeon

@@ -16,6 +16,7 @@ public class SchematicRocket extends SchematicPage {
 
     private final int tier;
     private final Item schematicItem;
+    private final int meta;
 
     @FunctionalInterface
     public interface GuiFactory {
@@ -30,9 +31,10 @@ public class SchematicRocket extends SchematicPage {
     private final GuiFactory guiFactory;
     private final ContainerFactory containerFactory;
 
-    public SchematicRocket(int tier, Item schematicItem, GuiFactory guiFactory, ContainerFactory containerFactory) {
+    public SchematicRocket(int tier, Item schematicItem, int meta, GuiFactory guiFactory, ContainerFactory containerFactory) {
         this.tier = tier;
         this.schematicItem = schematicItem;
+        this.meta = meta;
         this.guiFactory = guiFactory;
         this.containerFactory = containerFactory;
     }
@@ -49,7 +51,7 @@ public class SchematicRocket extends SchematicPage {
 
     @Override
     public ItemStack getRequiredItem() {
-        return new ItemStack(schematicItem, 1, 0);
+        return new ItemStack(schematicItem, 1, meta);
     }
 
     @SideOnly(Side.CLIENT)

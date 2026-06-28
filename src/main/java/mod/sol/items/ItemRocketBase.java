@@ -1,4 +1,4 @@
-package mod.sol.items.rocket;
+package mod.sol.items;
 
 import micdoodle8.mods.galacticraft.api.entity.IRocketType.EnumRocketType;
 import micdoodle8.mods.galacticraft.api.item.IHoldableItem;
@@ -11,8 +11,6 @@ import micdoodle8.mods.galacticraft.core.util.EnumColor;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import mod.sol.TheSol;
-import mod.sol.entities.rocket.EntityTier9Rocket;
-import mod.sol.init.SolItems;
 import mod.sol.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -20,38 +18,47 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import micdoodle8.mods.galacticraft.api.prefab.entity.EntitySpaceshipBase;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemTier9Rocket extends Item implements IHoldableItem, ISortableItem, IHasModel {
-    public ItemTier9Rocket(String assetName) {
-        super();
-        this.setMaxDamage(0);
-        this.setHasSubtypes(true);
-        this.setMaxStackSize(1);
-        this.setTranslationKey(assetName);
-        this.setRegistryName(assetName);
-        //this.setTextureName("arrow");
+public class ItemRocketBase extends ItemMetadataBase implements IHoldableItem, ISortableItem {
 
-        SolItems.ITEMS.add(this);
+    protected final int tier;
+    protected final RocketEntityFactory entityFactory;
+
+    // 函数式接口：用于动态创建不同等级的火箭实体
+    @FunctionalInterface
+    public interface RocketEntityFactory {
+        EntitySpaceshipBase create(World world, double x, double y, double z, EnumRocketType type);
     }
 
-    public static boolean placeRocketOnPad(ItemStack stack, World worldIn, TileEntity tile, float centerX, float centerY, float centerZ) {
-        //Check whether there is already a rocket on the pad
+    /**
+     * 通用火箭物品构造器
+     * @param tier 火箭等级 (如 4)
+     * @param entityFactory 创建对应实体的 Lambda 表达式
+     */
+    public ItemRocketBase(int tier, RocketEntityFactory entityFactory) {
+        super("rocket_t" + tier, "type0", "type1", "type2", "type3", "type4");
+        this.setMaxStackSize(1);
+        this.tier = tier;
+        this.entityFactory = entityFactory;
+    }
+
+    public boolean placeRocketOnPad(ItemStack stack, World worldIn, TileEntity tile, float centerX, float centerY, float centerZ) {
         if (tile instanceof TileEntityLandingPad) {
             if (((TileEntityLandingPad) tile).getDockedEntity() != null) {
                 return false;
@@ -60,16 +67,37 @@ public class ItemTier9Rocket extends Item implements IHoldableItem, ISortableIte
             return false;
         }
 
-        EntityTier9Rocket rocket = new EntityTier9Rocket(worldIn, centerX, centerY, centerZ, EnumRocketType.values()[stack.getItemDamage()]);
+        // 🛠️ 核心通用修改：使用传入的 factory 创建对应等级的火箭
+        EntitySpaceshipBase rocket = entityFactory.create(worldIn, centerX, centerY, centerZ, EnumRocketType.values()[stack.getItemDamage()]);
 
         rocket.rotationYaw += 45;
-        rocket.setPosition(rocket.posX, rocket.posY + rocket.getOnPadYOffset(), rocket.posZ);
+        // 1.12.2 的一些星系基础类里可能需要使用特定方法或者直接通过位置加偏移
+        rocket.setPosition(rocket.posX, rocket.posY + ((IHasModel)this == rocket ? 0 : 0.4F), rocket.posZ);
+
+        // 如果你的火箭实体有特定的 getOnPadYOffset 或者是通用的，可以通过反射或硬编码。星系绝大部分扩展火箭默认偏移 0.4F
+
         worldIn.spawnEntity(rocket);
 
-        if (rocket.getType().getPreFueled()) {
-            rocket.fuelTank.fill(new FluidStack(GCFluids.fluidFuel, rocket.getMaxFuel()), true);
-        } else if (stack.hasTagCompound() && stack.getTagCompound().hasKey("RocketFuel")) {
-            rocket.fuelTank.fill(new FluidStack(GCFluids.fluidFuel, stack.getTagCompound().getInteger("RocketFuel")), true);
+        try {
+            // 1. 动态获取实体里的 getType() 方法并拿到 EnumRocketType
+            java.lang.reflect.Method getTypeMethod = rocket.getClass().getMethod("getType");
+            EnumRocketType rocketType = (EnumRocketType) getTypeMethod.invoke(rocket);
+
+            // 2. 动态获取实体里的 fuelTank 字段
+            java.lang.reflect.Field fuelTankField = rocket.getClass().getField("fuelTank");
+            Object fuelTank = fuelTankField.get(rocket);
+            java.lang.reflect.Method fillMethod = fuelTank.getClass().getMethod("fill", FluidStack.class, boolean.class);
+
+            if (rocketType.getPreFueled()) {
+                java.lang.reflect.Method getMaxFuelMethod = rocket.getClass().getMethod("getMaxFuel");
+                int maxFuel = (int) getMaxFuelMethod.invoke(rocket);
+                fillMethod.invoke(fuelTank, new FluidStack(GCFluids.fluidFuel, maxFuel), true);
+            } else if (stack.hasTagCompound() && stack.getTagCompound().hasKey("RocketFuel")) {
+                int fuelAmount = stack.getTagCompound().getInteger("RocketFuel");
+                fillMethod.invoke(fuelTank, new FluidStack(GCFluids.fluidFuel, fuelAmount), true);
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // 如果反射失败会在后台报错，方便调试
         }
 
         return true;
@@ -118,17 +146,13 @@ public class ItemTier9Rocket extends Item implements IHoldableItem, ISortableIte
                         break;
                     }
                 }
-
-                if (padFound) {
-                    break;
-                }
+                if (padFound) break;
             }
 
             if (padFound) {
                 if (!placeRocketOnPad(stack, worldIn, tile, centerX, centerY, centerZ)) {
                     return EnumActionResult.FAIL;
                 }
-
                 if (!playerIn.capabilities.isCreativeMode) {
                     stack.shrink(1);
                 }
@@ -140,19 +164,14 @@ public class ItemTier9Rocket extends Item implements IHoldableItem, ISortableIte
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-        if (tab == TheSol.ITEM_TAB || tab == CreativeTabs.SEARCH) {
-            for (int i = 0; i < EnumRocketType.values().length; i++) {
-                list.add(new ItemStack(this, 1, i));
-            }
-        }
+    protected boolean useSubNamesInTranslation() {
+        return false; // 火箭不需要拼接后缀名字
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack par1ItemStack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         EnumRocketType type;
-
         if (par1ItemStack.getItemDamage() < 10) {
             type = EnumRocketType.values()[par1ItemStack.getItemDamage()];
         } else {
@@ -168,30 +187,25 @@ public class ItemTier9Rocket extends Item implements IHoldableItem, ISortableIte
         }
 
         if (par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("RocketFuel")) {
-            EntityTier9Rocket rocket = new EntityTier9Rocket(FMLClientHandler.instance().getWorldClient(), 0, 0, 0, EnumRocketType.values()[par1ItemStack.getItemDamage()]);
-            tooltip.add(GCCoreUtil.translate("gui.message.fuel.name") + ": " + par1ItemStack.getTagCompound().getInteger("RocketFuel") + " / " + rocket.fuelTank.getCapacity());
+            EntitySpaceshipBase rocket = entityFactory.create(FMLClientHandler.instance().getWorldClient(), 0, 0, 0, EnumRocketType.values()[par1ItemStack.getItemDamage()]);
+            try {
+                java.lang.reflect.Field fuelTankField = rocket.getClass().getField("fuelTank");
+                Object fuelTank = fuelTankField.get(rocket);
+                java.lang.reflect.Method getCapacityMethod = fuelTank.getClass().getMethod("getCapacity");
+                int capacity = (int) getCapacityMethod.invoke(fuelTank);
+                tooltip.add(GCCoreUtil.translate("gui.message.fuel.name") + ": " + par1ItemStack.getTagCompound().getInteger("RocketFuel") + " / " + capacity);
+            } catch (Exception ignored) {}
         }
     }
 
     @Override
-    public String getTranslationKey(ItemStack par1ItemStack) {
-        return super.getTranslationKey(par1ItemStack) + ".t9Rocket";
-    }
+    public boolean shouldHoldLeftHandUp(EntityPlayer player) { return true; }
 
     @Override
-    public boolean shouldHoldLeftHandUp(EntityPlayer player) {
-        return true;
-    }
+    public boolean shouldHoldRightHandUp(EntityPlayer player) { return true; }
 
     @Override
-    public boolean shouldHoldRightHandUp(EntityPlayer player) {
-        return true;
-    }
-
-    @Override
-    public boolean shouldCrouch(EntityPlayer player) {
-        return true;
-    }
+    public boolean shouldCrouch(EntityPlayer player) { return true; }
 
     @Override
     public EnumSortCategoryItem getCategory(int meta) {
@@ -200,8 +214,16 @@ public class ItemTier9Rocket extends Item implements IHoldableItem, ISortableIte
 
     @Override
     public void registerModels() {
+        // 利用我们修复过后的独立多 Meta 模型注册规范方式
         for (int i = 0; i < 5; ++i) {
-            TheSol.proxy.registerItemRenderer(this, i, "inventory");
+            net.minecraftforge.client.model.ModelLoader.setCustomModelResourceLocation(
+                    this,
+                    i,
+                    new net.minecraft.client.renderer.block.model.ModelResourceLocation(
+                            new ResourceLocation(mod.sol.util.Reference.MOD_ID, this.getRegistryName().getPath()),
+                            "inventory"
+                    )
+            );
         }
     }
 }

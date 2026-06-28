@@ -21,8 +21,8 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemSchematicTier extends ItemMetadataBase implements ISchematicItem, ISortableItem {
-    public ItemSchematicTier(String registryName) {
-        super(registryName, "t4", "t5", "t6", "t7", "t8", "t9");
+    public ItemSchematicTier() {
+        super("schematic", "t4", "t5", "t6", "t7", "t8", "t9");
     }
 
     public int getTier(int meta) {

@@ -13,8 +13,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemKeyTier extends ItemMetadataBase implements IKeyItem, ISortableItem {
-    public ItemKeyTier(String name) {
-        super(name, "t4", "t5", "t6", "t7", "t8", "t9", "t10");
+    public ItemKeyTier() {
+        super("key", "t4", "t5", "t6", "t7", "t8", "t9", "t10");
         this.setMaxStackSize(1);
     }
 

@@ -118,12 +118,12 @@ item.schematic.tier8.name=八阶火箭
 item.schematic.tier9.name=九阶火箭
 
 # Rockets
-item.rocket_t4.t4Rocket.name=四阶火箭
-item.rocket_t5.t5Rocket.name=五阶火箭
-item.rocket_t6.t6Rocket.name=六阶火箭
-item.rocket_t7.t7Rocket.name=七阶火箭
-item.rocket_t8.t8Rocket.name=八阶火箭
-item.rocket_t9.t9Rocket.name=九阶火箭
+item.rocket_t4.name=四阶火箭
+item.rocket_t5.name=五阶火箭
+item.rocket_t6.name=六阶火箭
+item.rocket_t7.name=七阶火箭
+item.rocket_t8.name=八阶火箭
+item.rocket_t9.name=九阶火箭
 
 # Battery
 item.advanced_battery_t1.name=硫电池

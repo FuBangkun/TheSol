@@ -118,12 +118,12 @@ item.schematic.tier8.name=Tier 8 Rocket
 item.schematic.tier9.name=Tier 9 Rocket
 
 # Rockets
-item.rocket_t4.t4Rocket.name=Tier 4 Rocket
-item.rocket_t5.t5Rocket.name=Tier 5 Rocket
-item.rocket_t6.t6Rocket.name=Tier 6 Rocket
-item.rocket_t7.t7Rocket.name=Tier 7 Rocket
-item.rocket_t8.t8Rocket.name=Tier 8 Rocket
-item.rocket_t9.t9Rocket.name=Tier 9 Rocket
+item.rocket_t4.name=Tier 4 Rocket
+item.rocket_t5.name=Tier 5 Rocket
+item.rocket_t6.name=Tier 6 Rocket
+item.rocket_t7.name=Tier 7 Rocket
+item.rocket_t8.name=Tier 8 Rocket
+item.rocket_t9.name=Tier 9 Rocket
 
 # Battery
 item.advanced_battery_t1.name=Advanced Battery (Tier 1)

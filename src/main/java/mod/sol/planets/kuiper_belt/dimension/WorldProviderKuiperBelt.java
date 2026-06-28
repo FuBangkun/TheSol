@@ -24,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.*;
 
 public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISolarLevel {
-    private HashSet<WorldProviderKuiperBelt.AsteroidData> asteroids = new HashSet();
+    private HashSet<WorldProviderKuiperBelt.AsteroidData> asteroids = new HashSet<>();
     private boolean dataNotLoaded = true;
     private KuiperBeltSaveData datafile;
     private double solarMultiplier = -1.0D;
@@ -166,10 +166,8 @@ public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISola
 
     private void writeToNBT(NBTTagCompound nbt) {
         NBTTagList coordList = new NBTTagList();
-        Iterator var3 = this.asteroids.iterator();
 
-        while (var3.hasNext()) {
-            WorldProviderKuiperBelt.AsteroidData coords = (WorldProviderKuiperBelt.AsteroidData) var3.next();
+        for (AsteroidData coords : this.asteroids) {
             NBTTagCompound tag = new NBTTagCompound();
             coords.writeToNBT(tag);
             coordList.appendTag(tag);
@@ -193,7 +191,7 @@ public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISola
             this.loadAsteroidSavedData();
         }
 
-        return this.asteroids.size() != 0;
+        return !this.asteroids.isEmpty();
     }
 
     public BlockVec3 getClosestAsteroidXZ(int x, int y, int z, boolean mark) {
@@ -203,7 +201,7 @@ public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISola
             BlockVec3 result = null;
             WorldProviderKuiperBelt.AsteroidData resultRoid = null;
             int lowestDistance = 2147483647;
-            Iterator var8 = this.asteroids.iterator();
+            Iterator<AsteroidData> var8 = this.asteroids.iterator();
 
             while (true) {
                 WorldProviderKuiperBelt.AsteroidData test;
@@ -242,8 +240,8 @@ public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISola
         if (!this.checkHasAsteroids()) {
             return null;
         } else {
-            TreeMap<Integer, BlockVec3> targets = new TreeMap();
-            Iterator var7 = this.asteroids.iterator();
+            TreeMap<Integer, BlockVec3> targets = new TreeMap<>();
+            Iterator<AsteroidData> var7 = this.asteroids.iterator();
 
             while (true) {
                 BlockVec3 test;
@@ -251,19 +249,17 @@ public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISola
                 while (true) {
                     if (!var7.hasNext()) {
                         int max = Math.max(count, targets.size());
-                        if (max <= 0) {
+                        if (max == 0) {
                             return null;
                         }
 
-                        ArrayList<BlockVec3> returnValues = new ArrayList();
+                        ArrayList<BlockVec3> returnValues = new ArrayList<>();
                         int i = 0;
                         int offset = 6;
-                        Iterator var18 = targets.values().iterator();
 
-                        while (var18.hasNext()) {
-                            BlockVec3 target = (BlockVec3) var18.next();
+                        for (BlockVec3 target : targets.values()) {
                             BlockVec3 coords = target.clone();
-                            GCLog.debug("Found nearby asteroid at " + target.toString());
+                            GCLog.debug("Found nearby asteroid at " + target);
                             switch (facing) {
                                 case 2:
                                     coords.z += offset;
@@ -336,7 +332,7 @@ public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISola
 
     public double getSolarEnergyMultiplier() {
         if (this.solarMultiplier < 0.0D) {
-            double s = (double) this.getSolarSize();
+            double s = this.getSolarSize();
             this.solarMultiplier = s * s * s * ConfigManagerCore.spaceStationEnergyScalar;
         }
 

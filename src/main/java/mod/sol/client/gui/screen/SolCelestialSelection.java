@@ -125,10 +125,8 @@ public class SolCelestialSelection extends GuiCelestialSelection {
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
         FloatBuffer fb = BufferUtils.createFloatBuffer(512);
         HashMap<CelestialBody, Matrix4f> matrixMap = Maps.newHashMap();
-        Iterator var4 = this.bodiesToRender.iterator();
 
-        while (var4.hasNext()) {
-            CelestialBody body = (CelestialBody) var4.next();
+        for (CelestialBody body : this.bodiesToRender) {
             boolean hasParent = body instanceof IChildBody;
             float alpha = this.getAlpha(body);
             if (alpha > 0.0F) {
@@ -231,8 +229,8 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                     fb.clear();
                     GL11.glScalef(0.06666667F, 0.06666667F, 1.0F);
                     this.mc.renderEngine.bindTexture(guiMain0);
-                    div = this.getZoomAdvanced() < 4.9F ? (float) (Math.sin((double) (this.ticksSinceSelectionF / 2.0F)) * 0.5D + 0.5D) : 1.0F;
-                    GL11.glColor4f(1.0F, 1.0F, 0.0F, 1.0F * div);
+                    div = this.getZoomAdvanced() < 4.9F ? (float) (Math.sin(this.ticksSinceSelectionF / 2.0F) * 0.5D + 0.5D) : 1.0F;
+                    GL11.glColor4f(1.0F, 1.0F, 0.0F, div);
                     int width = (int) Math.floor((double) this.getWidthForCelestialBody(this.selectedBody) / 2.0D * (this.selectedBody instanceof IChildBody ? 9.0D : 30.0D));
                     this.drawTexturedModalRect(-width, -width, width * 2, width * 2, 266, 29, 100, 100, false, false);
                 }
@@ -245,8 +243,8 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                     float scale = Math.max(0.3F, 1.5F / (this.ticksSinceSelectionF / 5.0F)) * 2.0F / div;
                     GL11.glScalef(scale, scale, 1.0F);
                     this.mc.renderEngine.bindTexture(guiMain0);
-                    float colMod = this.getZoomAdvanced() < 4.9F ? (float) (Math.sin((double) (this.ticksSinceSelectionF / 1.0F)) * 0.5D + 0.5D) : 1.0F;
-                    GL11.glColor4f(0.4F, 0.8F, 1.0F, 1.0F * colMod);
+                    float colMod = this.getZoomAdvanced() < 4.9F ? (float) (Math.sin(this.ticksSinceSelectionF / 1.0F) * 0.5D + 0.5D) : 1.0F;
+                    GL11.glColor4f(0.4F, 0.8F, 1.0F, colMod);
                     int width = this.getWidthForCelestialBody(this.selectedBody) * 13;
                     this.drawTexturedModalRect(-width, -width, width * 2, width * 2, 266, 29, 100, 100, false, false);
                 }
@@ -406,10 +404,10 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                     this.drawTexturedModalRect(RHS - 96, LHS, 96, 139, 63, 0, 96, 139, false, false);
                 } else {
                     selectedSatellite = (Satellite) this.selectedBody;
-                    barY = ((Map) this.spaceStationMap.get(this.getSatelliteParentID(selectedSatellite))).size();
+                    barY = this.spaceStationMap.get(this.getSatelliteParentID(selectedSatellite)).size();
                     this.mc.renderEngine.bindTexture(guiMain1);
                     int max = Math.min(this.height / 2 / 14, barY);
-                    this.drawTexturedModalRect(RHS - 95, LHS, 95, 53, this.selectedStationOwner.length() == 0 ? 95 : 0, 186, 95, 53, false, false);
+                    this.drawTexturedModalRect(RHS - 95, LHS, 95, 53, this.selectedStationOwner.isEmpty() ? 95 : 0, 186, 95, 53, false, false);
                     if (this.spaceStationListOffset <= 0) {
                         GL11.glColor4f(0.65F, 0.65F, 0.65F, 1.0F);
                     } else {
@@ -425,7 +423,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
 
                     this.drawTexturedModalRect(RHS - 85, LHS + 49 + max * 14, 61, 4, 0, 239, 61, 4, false, true);
                     GL11.glColor4f(0.0F, 0.6F, 1.0F, 1.0F);
-                    if (((Map) this.spaceStationMap.get(this.getSatelliteParentID(selectedSatellite))).get(this.selectedStationOwner) == null) {
+                    if (((Map<?, ?>) this.spaceStationMap.get(this.getSatelliteParentID(selectedSatellite))).get(this.selectedStationOwner) == null) {
                         str = GCCoreUtil.translate("gui.message.select_ss.name");
                         this.drawSplitString(str, RHS - 47, LHS + 20, 91, WHITE, false, false);
                     } else {
@@ -439,21 +437,21 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                     i = 0;
 
                     for (int j = 0; it.hasNext() && i < max; ++j) {
-                        Map.Entry<String, StationDataGUI> e = (Map.Entry) it.next();
+                        Map.Entry<String, StationDataGUI> e = it.next();
                         if (j >= this.spaceStationListOffset) {
                             this.mc.renderEngine.bindTexture(guiMain0);
                             GL11.glColor4f(0.0F, 0.6F, 1.0F, 1.0F);
                             xPos = 0;
-                            if (((String) e.getKey()).equalsIgnoreCase(this.selectedStationOwner)) {
+                            if (e.getKey().equalsIgnoreCase(this.selectedStationOwner)) {
                                 xPos -= 5;
                             }
 
                             this.drawTexturedModalRect(RHS - 95 + xPos, TOP + 50 + i * 14, 93, 12, 95, 464, 93, 12, true, false);
                             str = "";
-                            String str0 = ((GuiCelestialSelection.StationDataGUI) e.getValue()).getStationName();
+                            String str0 = e.getValue().getStationName();
 
                             for (point = 0; this.fontRenderer.getStringWidth(str) < 80 && point < str0.length(); ++point) {
-                                str = str + str0.substring(point, point + 1);
+                                str = str + str0.charAt(point);
                             }
 
                             if (this.fontRenderer.getStringWidth(str) >= 80) {
@@ -488,7 +486,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                         GL11.glColor4f(0.0F, 1.0F, 0.1F, 1.0F);
                         validInputMaterials = true;
                         i = 0;
-                        Iterator var44 = recipe.getInput().entrySet().iterator();
+                        Iterator<Map.Entry<Object, Integer>> var44 = recipe.getInput().entrySet().iterator();
 
                         label412:
                         while (true) {
@@ -528,7 +526,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                                     RenderHelper.enableGUIStandardItemLighting();
                                     ItemStack toRender = ((ItemStack) next).copy();
                                     this.itemRender.renderItemAndEffectIntoGUI(toRender, xPos, yPos);
-                                    this.itemRender.renderItemOverlayIntoGUI(this.mc.fontRenderer, toRender, xPos, yPos, (String) null);
+                                    this.itemRender.renderItemOverlayIntoGUI(this.mc.fontRenderer, toRender, xPos, yPos, null);
                                     RenderHelper.disableStandardItemLighting();
                                     GL11.glEnable(3042);
                                     if (mousePosX >= xPos && mousePosX <= xPos + 16 && mousePosY >= yPos && mousePosY <= yPos + 16) {
@@ -565,7 +563,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                                     }
 
                                     str = "" + e.getValue();
-                                    boolean valid = point >= (Integer) e.getValue();
+                                    boolean valid = point >= e.getValue();
                                     if (!valid && validInputMaterials) {
                                         validInputMaterials = false;
                                     }
@@ -604,7 +602,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
 
                                 if (toRender != null) {
                                     this.itemRender.renderItemAndEffectIntoGUI(toRender, xPos, yPos);
-                                    this.itemRender.renderItemOverlayIntoGUI(this.mc.fontRenderer, toRender, xPos, yPos, (String) null);
+                                    this.itemRender.renderItemOverlayIntoGUI(this.mc.fontRenderer, toRender, xPos, yPos, null);
                                     RenderHelper.disableStandardItemLighting();
                                     GL11.glEnable(3042);
                                     if (mousePosX >= xPos && mousePosX <= xPos + 16 && mousePosY >= yPos && mousePosY <= yPos + 16) {
@@ -641,7 +639,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                                     }
 
                                     str = "" + e.getValue();
-                                    boolean valid = amount >= (Integer) e.getValue();
+                                    boolean valid = amount >= e.getValue();
                                     if (!valid && validInputMaterials) {
                                         validInputMaterials = false;
                                     }
@@ -667,7 +665,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                 if (!(this.selectedBody instanceof Satellite)) {
                     this.drawTexturedModalRect(this.width / 2 - 47, TOP, 94, 11, 0, 414, 188, 22, false, false);
                 } else {
-                    if (this.selectedStationOwner.length() != 0 && this.selectedStationOwner.equalsIgnoreCase(PlayerUtil.getName(this.mc.player))) {
+                    if (!this.selectedStationOwner.isEmpty() && this.selectedStationOwner.equalsIgnoreCase(PlayerUtil.getName(this.mc.player))) {
                         GL11.glColor4f(0.0F, 1.0F, 0.0F, 1.0F);
                     } else {
                         GL11.glColor4f(1.0F, 0.0F, 0.0F, 1.0F);
@@ -688,7 +686,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
 
                     this.drawTexturedModalRect(this.width / 2 - 30, TOP + 11, 30, 11, 0, 414, 60, 22, false, false);
                     this.drawTexturedModalRect(this.width / 2, TOP + 11, 30, 11, 128, 414, 60, 22, false, false);
-                    str = GCCoreUtil.translateWithFormat("gui.message.tier.name", new Object[]{this.selectedBody.getTierRequirement() == 0 ? "?" : this.selectedBody.getTierRequirement()});
+                    str = GCCoreUtil.translateWithFormat("gui.message.tier.name", this.selectedBody.getTierRequirement() == 0 ? "?" : this.selectedBody.getTierRequirement());
                     this.fontRenderer.drawString(str, this.width / 2 - this.fontRenderer.getStringWidth(str) / 2, TOP + 13, canReach ? GREY4 : RED3);
                 }
 
@@ -702,7 +700,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                 GL11.glColor4f(0.0F, 0.6F, 1.0F, 1.0F);
                 this.drawTexturedModalRect(LHS + 4, TOP, 83, 12, 0, 477, 83, 12, false, false);
                 if (!this.mapMode) {
-                    if (this.selectedBody.getReachable() && (this.possibleBodies == null || this.possibleBodies.contains(this.selectedBody)) && (!(this.selectedBody instanceof Satellite) || !this.selectedStationOwner.equals(""))) {
+                    if (this.selectedBody.getReachable() && (this.possibleBodies == null || this.possibleBodies.contains(this.selectedBody)) && (!(this.selectedBody instanceof Satellite) || !this.selectedStationOwner.isEmpty())) {
                         GL11.glColor4f(0.0F, 1.0F, 0.0F, 1.0F);
                     } else {
                         GL11.glColor4f(1.0F, 0.0F, 0.0F, 1.0F);
@@ -726,8 +724,8 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                     GL11.glColor4f(0.0F, 0.6F, 1.0F, 1.0F);
                     this.mc.renderEngine.bindTexture(guiMain0);
                     this.drawTexturedModalRect(RHS - 182, this.height - BORDER_SIZE - BORDER_EDGE_SIZE - sliderPos, 83, 38, 346, 436, 166, 76, true, false);
-                    boolean flag0 = GalaxyRegistry.getSatellitesForCelestialBody(this.selectedBody).size() > 0;
-                    validInputMaterials = this.selectedBody instanceof Planet && GalaxyRegistry.getMoonsForPlanet((Planet) this.selectedBody).size() > 0;
+                    boolean flag0 = !GalaxyRegistry.getSatellitesForCelestialBody(this.selectedBody).isEmpty();
+                    validInputMaterials = this.selectedBody instanceof Planet && !GalaxyRegistry.getMoonsForPlanet((Planet) this.selectedBody).isEmpty();
                     if (flag0 && validInputMaterials) {
                         this.drawSplitString(GCCoreUtil.translate("gui.message.click_again.0.name"), RHS - 182 + 41, this.height - BORDER_SIZE - BORDER_EDGE_SIZE + 2 - sliderPos, 79, GREY5, false, false);
                     } else if (!flag0 && validInputMaterials) {
@@ -757,9 +755,9 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                     if (this.renamingString == null) {
                         selectedSatellite = (Satellite) this.selectedBody;
                         String playerName = PlayerUtil.getName(this.mc.player);
-                        this.renamingString = ((GuiCelestialSelection.StationDataGUI) ((Map) this.spaceStationMap.get(this.getSatelliteParentID(selectedSatellite))).get(playerName)).getStationName();
+                        this.renamingString = ((GuiCelestialSelection.StationDataGUI) ((Map<?, ?>) this.spaceStationMap.get(this.getSatelliteParentID(selectedSatellite))).get(playerName)).getStationName();
                         if (this.renamingString == null) {
-                            this.renamingString = ((GuiCelestialSelection.StationDataGUI) ((Map) this.spaceStationMap.get(this.getSatelliteParentID(selectedSatellite))).get(playerName.toLowerCase())).getStationName();
+                            this.renamingString = ((GuiCelestialSelection.StationDataGUI) ((Map<?, ?>) this.spaceStationMap.get(this.getSatelliteParentID(selectedSatellite))).get(playerName.toLowerCase())).getStationName();
                         }
 
                         if (this.renamingString == null) {

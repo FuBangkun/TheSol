@@ -306,8 +306,8 @@ public class ModelSaturnBossStray extends ModelBase {
         this.leftLeg.rotateAngleY = 0.0F;
 
         if (this.isRiding) {
-            this.rightArm.rotateAngleX += -(floatPI / 5F);
-            this.leftArm.rotateAngleX += -(floatPI / 5F);
+            this.rightArm.rotateAngleX -= (floatPI / 5F);
+            this.leftArm.rotateAngleX -= (floatPI / 5F);
             this.rightLeg.rotateAngleX = -(floatPI * 2F / 5F);
             this.leftLeg.rotateAngleX = -(floatPI * 2F / 5F);
             this.rightLeg.rotateAngleY = floatPI / 10F;
@@ -345,7 +345,7 @@ public class ModelSaturnBossStray extends ModelBase {
         final float f7 = MathHelper.sin((1.0F - (1.0F - this.swingProgress) * (1.0F - this.swingProgress)) * floatPI);
         this.rightArm.rotateAngleZ = 0.0F;
         this.leftArm.rotateAngleZ = 0.0F;
-        this.rightArm.rotateAngleY = 0.5F * (par4 / Constants.RADIANS_TO_DEGREES) + -(0.1F - f6 * 0.6F);
+        this.rightArm.rotateAngleY = 0.5F * (par4 / Constants.RADIANS_TO_DEGREES) - (0.1F - f6 * 0.6F);
         this.leftArm.rotateAngleY = 0.5F * (par4 / Constants.RADIANS_TO_DEGREES) + 0.1F - f6 * 0.6F;
         this.rightArm.rotateAngleX = -(floatPI / 2F);
         this.leftArm.rotateAngleX = -(floatPI / 2F);

@@ -10,7 +10,7 @@ public class MapGenDungeonMercury extends MapGenDungeon {
     static {
         try {
             MapGenDungeonMercury.initiateStructures();
-        } catch (Throwable e) {
+        } catch (Throwable ignored) {
 
         }
     }
@@ -19,7 +19,7 @@ public class MapGenDungeonMercury extends MapGenDungeon {
         super(configuration);
     }
 
-    public static void initiateStructures() throws Throwable {
+    public static void initiateStructures() {
         if (!MapGenDungeonMercury.initialized) {
             MapGenStructureIO.registerStructureComponent(RoomBossMercury.class, "MercuryDungeonBossRoom");
             MapGenStructureIO.registerStructureComponent(RoomTreasureMercury.class, "MercuryDungeonTreasureRoom");

@@ -26,11 +26,7 @@ public class LayerNeptuneBossSpiderEye<T extends EntityNeptuneBossSpider> implem
         GlStateManager.disableAlpha();
         GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
 
-        if (entitylivingbaseIn.isInvisible()) {
-            GlStateManager.depthMask(false);
-        } else {
-            GlStateManager.depthMask(true);
-        }
+        GlStateManager.depthMask(!entitylivingbaseIn.isInvisible());
 
         int i = 61680;
         int j = i % 65536;

@@ -18,8 +18,4 @@ public class BiomeIo extends BiomeGenBaseGC {
         return getModdedBiomeDecorator(new BiomeDecoratorIo());
     }
 
-    @Override
-    public float getSpawningChance() {
-        return 0.1F;
-    }
 }

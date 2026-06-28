@@ -52,7 +52,7 @@ public class ItemMagnetBoots extends ItemArmor implements IArmorGravity, ISortab
     @Override
     public int gravityOverrideIfLow(EntityPlayer p) {
         if (p.world.provider instanceof WorldProviderSpaceStation) {
-            Material material0 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 0, p.posZ - 0)).getMaterial();
+            Material material0 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY, p.posZ - 0)).getMaterial();
             Material material1 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 1, p.posZ - 0)).getMaterial();
             Material material2 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 2, p.posZ - 0)).getMaterial();
             if (material0 == Material.IRON || material0 == Material.ANVIL || material1 == Material.IRON || material1 == Material.ANVIL || material2 == Material.IRON || material2 == Material.ANVIL)
@@ -60,7 +60,7 @@ public class ItemMagnetBoots extends ItemArmor implements IArmorGravity, ISortab
             else
                 return 0;
         } else {
-            Material material0 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 0, p.posZ - 0)).getMaterial();
+            Material material0 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY, p.posZ - 0)).getMaterial();
             Material material1 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 1, p.posZ - 0)).getMaterial();
             Material material2 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 2, p.posZ - 0)).getMaterial();
             if (material0 == Material.IRON || material0 == Material.ANVIL || material1 == Material.IRON || material1 == Material.ANVIL || material2 == Material.IRON || material2 == Material.ANVIL)
@@ -73,7 +73,7 @@ public class ItemMagnetBoots extends ItemArmor implements IArmorGravity, ISortab
     @Override
     public int gravityOverrideIfHigh(EntityPlayer p) {
         if (p.world.provider instanceof WorldProviderSpaceStation) {
-            Material material0 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 0, p.posZ - 0)).getMaterial();
+            Material material0 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY, p.posZ - 0)).getMaterial();
             Material material1 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 1, p.posZ - 0)).getMaterial();
             Material material2 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 2, p.posZ - 0)).getMaterial();
             if (material0 == Material.IRON || material0 == Material.ANVIL || material1 == Material.IRON || material1 == Material.ANVIL || material2 == Material.IRON || material2 == Material.ANVIL)
@@ -81,7 +81,7 @@ public class ItemMagnetBoots extends ItemArmor implements IArmorGravity, ISortab
             else
                 return 0;
         } else {
-            Material material0 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 0, p.posZ - 0)).getMaterial();
+            Material material0 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY, p.posZ - 0)).getMaterial();
             Material material1 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 1, p.posZ - 0)).getMaterial();
             Material material2 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 2, p.posZ - 0)).getMaterial();
             if (material0 == Material.IRON || material0 == Material.ANVIL || material1 == Material.IRON || material1 == Material.ANVIL || material2 == Material.IRON || material2 == Material.ANVIL)

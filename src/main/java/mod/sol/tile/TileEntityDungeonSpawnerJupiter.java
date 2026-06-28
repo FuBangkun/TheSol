@@ -20,7 +20,7 @@ public class TileEntityDungeonSpawnerJupiter extends TileEntityDungeonSpawner<En
 
     @Override
     public List<Class<? extends EntityLiving>> getDisabledCreatures() {
-        List<Class<? extends EntityLiving>> list = new ArrayList<Class<? extends EntityLiving>>();
+        List<Class<? extends EntityLiving>> list = new ArrayList<>();
         list.add(EntityEvolvedSkeleton.class);
         list.add(EntityEvolvedZombie.class);
         list.add(EntityEvolvedSpider.class);

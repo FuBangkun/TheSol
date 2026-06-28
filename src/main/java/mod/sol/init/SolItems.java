@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SolItems {
-    public static final List<Item> ITEMS = new ArrayList<Item>();
+    public static final List<Item> ITEMS = new ArrayList<>();
     // unused
     // public static final Item TRANSLATION_INFO = new ItemBase("translation_info", TheSol.ITEM_TAB);
     // rocket stuff

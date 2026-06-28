@@ -44,7 +44,7 @@ public class EntityUranusBossSlime extends EntityBossBase implements IMob, IEnti
     @Override
     public void onCollideWithPlayer(EntityPlayer entityIn) {
         if (!entityIn.isCreative() && !this.isDead && !this.onGround && attackTimer > 20) {
-            entityIn.attackEntityFrom(new DamageSource("generic").causeMobDamage(this).setDamageBypassesArmor(), 2);
+            entityIn.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 2);
             this.attackTimer = 0;
         }
     }
@@ -130,8 +130,7 @@ public class EntityUranusBossSlime extends EntityBossBase implements IMob, IEnti
 
     @Override
     public ItemStack getGuaranteedLoot(Random rand) {
-        List<ItemStack> stackList = new LinkedList<>();
-        stackList.addAll(GalacticraftRegistry.getDungeonLoot(7));
+        List<ItemStack> stackList = new LinkedList<>(GalacticraftRegistry.getDungeonLoot(7));
         return stackList.get(rand.nextInt(stackList.size())).copy();
     }
 

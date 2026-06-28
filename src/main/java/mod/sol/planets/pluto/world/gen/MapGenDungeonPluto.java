@@ -10,7 +10,7 @@ public class MapGenDungeonPluto extends MapGenDungeon {
     static {
         try {
             MapGenDungeonPluto.initiateStructures();
-        } catch (Throwable e) {
+        } catch (Throwable ignored) {
 
         }
     }
@@ -19,7 +19,7 @@ public class MapGenDungeonPluto extends MapGenDungeon {
         super(configuration);
     }
 
-    public static void initiateStructures() throws Throwable {
+    public static void initiateStructures() {
         if (!MapGenDungeonPluto.initialized) {
             MapGenStructureIO.registerStructureComponent(RoomBossPluto.class, "PlutoDungeonBossRoom");
             MapGenStructureIO.registerStructureComponent(RoomTreasurePluto.class, "PlutoDungeonTreasureRoom");

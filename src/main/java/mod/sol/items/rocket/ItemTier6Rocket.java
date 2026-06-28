@@ -164,7 +164,7 @@ public class ItemTier6Rocket extends Item implements IHoldableItem, ISortableIte
         }
 
         if (type.getPreFueled()) {
-            tooltip.add(EnumColor.RED + "\u00a7o" + GCCoreUtil.translate("gui.creative_only.desc"));
+            tooltip.add(EnumColor.RED + "§o" + GCCoreUtil.translate("gui.creative_only.desc"));
         }
 
         if (par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("RocketFuel")) {

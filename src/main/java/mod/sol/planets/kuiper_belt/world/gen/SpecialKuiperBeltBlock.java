@@ -5,7 +5,7 @@ import net.minecraft.block.Block;
 import java.util.ArrayList;
 
 public class SpecialKuiperBeltBlock {
-    public static ArrayList<SpecialKuiperBeltBlock> register = new ArrayList();
+    public static ArrayList<SpecialKuiperBeltBlock> register = new ArrayList<>();
     public Block block;
     public byte meta;
     public int probability;

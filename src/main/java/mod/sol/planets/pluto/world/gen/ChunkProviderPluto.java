@@ -112,7 +112,7 @@ public class ChunkProviderPluto extends ChunkProviderBase {
                                 if (var12 <= 0) {
                                     state0 = Blocks.AIR.getDefaultState();
                                     state1 = BLOCK_LOWER;
-                                } else if (var16 >= var5 - -16 && var16 <= var5 + 1) {
+                                } else if (var16 >= var5 + 16 && var16 <= var5 + 1) {
                                     state0 = BLOCK_FILL;
                                 }
 
@@ -123,7 +123,7 @@ public class ChunkProviderPluto extends ChunkProviderBase {
                                     if (state0 == Blocks.SNOW.getDefaultState()) {
                                         primer.setBlockState(var8, var16 + 1, var9, Blocks.SNOW_LAYER.getDefaultState());
                                     }
-                                } else if (var16 < var5 - 1 && var16 >= var5 - 2) {
+                                } else if (var16 < var5 - 1 && var16 == var5 - 2) {
                                     primer.setBlockState(var8, var16, var9, state1);
                                 }
                             } else if (var13 > 0) {
@@ -167,7 +167,7 @@ public class ChunkProviderPluto extends ChunkProviderBase {
                 for (int x = 0; x < ChunkProviderPluto.CHUNK_SIZE_X; x++) {
                     for (int z = 0; z < ChunkProviderPluto.CHUNK_SIZE_Z; z++) {
                         if (Math.abs(this.randFromPoint(cx * 16 + x, (cz * 16 + z) * 1000)) < this.noiseGen4.getNoise(x * ChunkProviderPluto.CHUNK_SIZE_X + x, cz * ChunkProviderPluto.CHUNK_SIZE_Z + z) / ChunkProviderPluto.CRATER_PROB) {
-                            final Random random = new Random(cx * 16 + x + (cz * 16 + z) * 5000);
+                            final Random random = new Random(cx * 16L + x + (cz * 16L + z) * 5000);
                             final EnumCraterSize cSize = EnumCraterSize.sizeArray[random.nextInt(EnumCraterSize.sizeArray.length)];
                             final int size = random.nextInt(cSize.MAX_SIZE - cSize.MIN_SIZE) + cSize.MIN_SIZE;
                             this.makeCrater(cx * 16 + x, cz * 16 + z, chunkX * 16, chunkZ * 16, size, primer);

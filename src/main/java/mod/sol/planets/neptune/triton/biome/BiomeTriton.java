@@ -21,11 +21,6 @@ public class BiomeTriton extends BiomeGenBaseGC {
     }
 
     @Override
-    public float getSpawningChance() {
-        return 0.1F;
-    }
-
-    @Override
     public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal) {
         super.genTerrainBlocks(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
     }

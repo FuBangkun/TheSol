@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SolBlocks {
-    public static final List<Block> Blocks = new ArrayList<Block>();
+    public static final List<Block> Blocks = new ArrayList<>();
     //fluid
     public static final Block METHANE_FLUID_BLOCK = new BlockFluidBase("liquid_methane", SolFluid.METHANE, Material.WATER);
     //machine

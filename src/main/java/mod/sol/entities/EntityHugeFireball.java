@@ -41,7 +41,7 @@ public class EntityHugeFireball extends EntityFireball {
             }
 
             boolean flag = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.world, this.shootingEntity);
-            this.world.newExplosion((Entity) null, this.posX, this.posY, this.posZ, (float) this.explosionPower, flag, flag);
+            this.world.newExplosion(null, this.posX, this.posY, this.posZ, (float) this.explosionPower, flag, flag);
             this.setDead();
         }
     }

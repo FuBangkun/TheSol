@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Random;
 
 public class EntityNeptuneBossSpider extends EntityBossBase implements IEntityBreathable {
-    private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityNeptuneBossSpider.class, DataSerializers.BYTE);
+    private static final DataParameter<Byte> CLIMBING = EntityDataManager.createKey(EntityNeptuneBossSpider.class, DataSerializers.BYTE);
 
     public EntityNeptuneBossSpider(World worldIn) {
         super(worldIn);
@@ -55,16 +55,16 @@ public class EntityNeptuneBossSpider extends EntityBossBase implements IEntityBr
         this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 0.8D));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(6, new EntityAILookIdle(this));
-        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
-        this.targetTasks.addTask(2, new EntityNeptuneBossSpider.AISpiderTarget(this, EntityPlayer.class));
-        this.targetTasks.addTask(3, new EntityNeptuneBossSpider.AISpiderTarget(this, EntityIronGolem.class));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+        this.targetTasks.addTask(2, new EntityNeptuneBossSpider.AISpiderTarget<>(this, EntityPlayer.class));
+        this.targetTasks.addTask(3, new EntityNeptuneBossSpider.AISpiderTarget<>(this, EntityIronGolem.class));
     }
 
     /**
      * Returns the Y offset from the entity's position for any entity riding this one.
      */
     public double getMountedYOffset() {
-        return (double) (this.height * 0.5F);
+        return this.height * 0.5F;
     }
 
     /**
@@ -76,7 +76,7 @@ public class EntityNeptuneBossSpider extends EntityBossBase implements IEntityBr
 
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(CLIMBING, Byte.valueOf((byte) 0));
+        this.dataManager.register(CLIMBING, (byte) 0);
     }
 
     /**
@@ -153,7 +153,7 @@ public class EntityNeptuneBossSpider extends EntityBossBase implements IEntityBr
      * setBesideClimableBlock.
      */
     public boolean isBesideClimbableBlock() {
-        return (((Byte) this.dataManager.get(CLIMBING)).byteValue() & 1) != 0;
+        return (this.dataManager.get(CLIMBING) & 1) != 0;
     }
 
     /**
@@ -161,7 +161,7 @@ public class EntityNeptuneBossSpider extends EntityBossBase implements IEntityBr
      * false.
      */
     public void setBesideClimbableBlock(boolean climbing) {
-        byte b0 = ((Byte) this.dataManager.get(CLIMBING)).byteValue();
+        byte b0 = this.dataManager.get(CLIMBING);
 
         if (climbing) {
             b0 = (byte) (b0 | 1);
@@ -169,7 +169,7 @@ public class EntityNeptuneBossSpider extends EntityBossBase implements IEntityBr
             b0 = (byte) (b0 & -2);
         }
 
-        this.dataManager.set(CLIMBING, Byte.valueOf(b0));
+        this.dataManager.set(CLIMBING, b0);
     }
 
     /**
@@ -225,8 +225,7 @@ public class EntityNeptuneBossSpider extends EntityBossBase implements IEntityBr
 
     @Override
     public ItemStack getGuaranteedLoot(Random rand) {
-        List<ItemStack> stackList = new LinkedList<>();
-        stackList.addAll(GalacticraftRegistry.getDungeonLoot(8));
+        List<ItemStack> stackList = new LinkedList<>(GalacticraftRegistry.getDungeonLoot(8));
         return stackList.get(rand.nextInt(stackList.size())).copy();
     }
 
@@ -247,7 +246,7 @@ public class EntityNeptuneBossSpider extends EntityBossBase implements IEntityBr
             float f = this.attacker.getBrightness();
 
             if (f >= 0.5F && this.attacker.getRNG().nextInt(100) == 0) {
-                this.attacker.setAttackTarget((EntityLivingBase) null);
+                this.attacker.setAttackTarget(null);
                 return false;
             } else {
                 return super.shouldContinueExecuting();
@@ -255,7 +254,7 @@ public class EntityNeptuneBossSpider extends EntityBossBase implements IEntityBr
         }
 
         protected double getAttackReachSqr(EntityLivingBase attackTarget) {
-            return (double) (24.0F + attackTarget.width);
+            return 24.0F + attackTarget.width;
         }
     }
 
@@ -269,7 +268,7 @@ public class EntityNeptuneBossSpider extends EntityBossBase implements IEntityBr
          */
         public boolean shouldExecute() {
             float f = this.taskOwner.getBrightness();
-            return f >= 0.5F ? false : super.shouldExecute();
+            return !(f >= 0.5F) && super.shouldExecute();
         }
     }
 

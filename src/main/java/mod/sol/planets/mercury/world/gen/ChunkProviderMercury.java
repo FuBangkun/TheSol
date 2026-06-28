@@ -19,6 +19,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -107,7 +108,7 @@ public class ChunkProviderMercury extends ChunkProviderBase {
                                 if (var12 <= 0) {
                                     state0 = Blocks.AIR.getDefaultState();
                                     state1 = BLOCK_LOWER;
-                                } else if (var16 >= var5 - -16 && var16 <= var5 + 1) {
+                                } else if (var16 >= var5 + 16 && var16 <= var5 + 1) {
                                     state0 = BLOCK_FILL;
                                 }
 
@@ -115,7 +116,7 @@ public class ChunkProviderMercury extends ChunkProviderBase {
 
                                 if (var16 >= var5 - 1) {
                                     primer.setBlockState(var8, var16, var9, state0);
-                                } else if (var16 < var5 - 1 && var16 >= var5 - 2) {
+                                } else if (var16 < var5 - 1 && var16 == var5 - 2) {
                                     primer.setBlockState(var8, var16, var9, state1);
                                 }
                             } else if (var13 > 0) {
@@ -145,9 +146,7 @@ public class ChunkProviderMercury extends ChunkProviderBase {
         Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
         byte[] abyte = chunk.getBiomeArray();
         final byte b = (byte) Biome.getIdForBiome(BiomeAdaptive.biomeDefault);
-        for (int i = 0; i < abyte.length; ++i) {
-            abyte[i] = b;
-        }
+        Arrays.fill(abyte, b);
 
         chunk.generateSkylightMap();
         return chunk;
@@ -159,7 +158,7 @@ public class ChunkProviderMercury extends ChunkProviderBase {
                 for (int x = 0; x < ChunkProviderMercury.CHUNK_SIZE_X; x++) {
                     for (int z = 0; z < ChunkProviderMercury.CHUNK_SIZE_Z; z++) {
                         if (Math.abs(this.randFromPoint(cx * 16 + x, (cz * 16 + z) * 1000)) < this.noiseGen4.getNoise(x * ChunkProviderMercury.CHUNK_SIZE_X + x, cz * ChunkProviderMercury.CHUNK_SIZE_Z + z) / ChunkProviderMercury.CRATER_PROB) {
-                            final Random random = new Random(cx * 16 + x + (cz * 16 + z) * 5000);
+                            final Random random = new Random(cx * 16L + x + (cz * 16L + z) * 5000);
                             final EnumCraterSize cSize = EnumCraterSize.sizeArray[random.nextInt(EnumCraterSize.sizeArray.length)];
                             final int size = random.nextInt(cSize.MAX_SIZE - cSize.MIN_SIZE) + cSize.MIN_SIZE;
                             this.makeCrater(cx * 16 + x, cz * 16 + z, chunkX * 16, chunkZ * 16, size, primer);

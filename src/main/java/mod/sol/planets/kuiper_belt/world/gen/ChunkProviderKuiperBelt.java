@@ -65,7 +65,7 @@ public class ChunkProviderKuiperBelt extends ChunkProviderBase {
     private static final int WATER_CHANCE = 2;
     private static final int LAVA_CHANCE = 2;
     private static final int GLOWSTONE_CHANCE = 20;
-    private static HashSet<BlockVec3> chunksDone = new HashSet();
+    private static HashSet<BlockVec3> chunksDone = new HashSet<>();
     final Block ASTEROID_STONE;
     final byte ASTEROID_STONE_META_0;
     final byte ASTEROID_STONE_META_1;
@@ -114,7 +114,7 @@ public class ChunkProviderKuiperBelt extends ChunkProviderBase {
         this.LAVA_META = 0;
         this.WATER = Blocks.WATER;
         this.WATER_META = 0;
-        this.largeAsteroids = new LinkedList();
+        this.largeAsteroids = new LinkedList<>();
         this.largeCount = 0;
         this.dungeonGenerator = new MapGenAbandonedBase();
         this.world = par1World;
@@ -204,7 +204,7 @@ public class ChunkProviderKuiperBelt extends ChunkProviderBase {
                 for (int x = minX; x < maxX; x += 2) {
                     for (int z = minZ; z < maxZ; z += 2) {
                         if ((double) this.randFromPointPos(x, z) < ((double) this.asteroidDensity.getNoise((float) x, (float) z) + 0.4D) / 800.0D) {
-                            random.setSeed((long) (x + z * 3067));
+                            random.setSeed(x + z * 3067);
                             int y = random.nextInt(160) + 48;
                             int size = random.nextInt(20) + 5;
                             this.generateAsteroid(random, x, y, z, chunkX << 4, chunkZ << 4, size, primer, flagDataOnly);
@@ -261,7 +261,7 @@ public class ChunkProviderKuiperBelt extends ChunkProviderBase {
                 }
             }
 
-            ChunkProviderKuiperBelt.AsteroidData asteroidData = new ChunkProviderKuiperBelt.AsteroidData(isHollow, sizeYArray, xMin, zMin, xMax, zMax, zSize, size, asteroidX, asteroidY, asteroidZ);
+            ChunkProviderKuiperBelt.AsteroidData asteroidData = new AsteroidData(isHollow, sizeYArray, xMin, zMin, xMax, zMax, zSize, size, asteroidX, asteroidY, asteroidZ);
             this.largeAsteroids.add(asteroidData);
             this.largeAsteroidsLastChunkX = chunkX;
             this.largeAsteroidsLastChunkZ = chunkZ;
@@ -489,9 +489,7 @@ public class ChunkProviderKuiperBelt extends ChunkProviderBase {
         byte[] biomesArray = var4.getBiomeArray();
         byte b = (byte) Biome.getIdForBiome(BiomeAdaptive.biomeDefault);
 
-        for (int i = 0; i < biomesArray.length; ++i) {
-            biomesArray[i] = b;
-        }
+        Arrays.fill(biomesArray, b);
 
         this.generateSkylightMap(var4, par1, par2);
         return var4;
@@ -505,7 +503,7 @@ public class ChunkProviderKuiperBelt extends ChunkProviderBase {
         int ms100 = (int) ((time2 - time1) / 10000L);
         int msdecimal = ms100 % 100;
         String msd = (ms100 < 10 ? "0" : "") + ms100;
-        return "" + ms100 / 100 + "." + msd + "ms";
+        return ms100 / 100 + "." + msd + "ms";
     }
 
     private float randFromPoint(int x, int y, int z) {
@@ -542,7 +540,7 @@ public class ChunkProviderKuiperBelt extends ChunkProviderBase {
             int k;
             if (this.rand.nextBoolean()) {
                 double density = (double) this.asteroidDensity.getNoise((float) (chunkX * 16), (float) (chunkZ * 16)) * 0.54D;
-                double numOfBlocks = this.clamp((double) this.randFromPoint(chunkX, chunkZ), 0.4D, 1.0D) * 200.0D * density + 50.0D;
+                double numOfBlocks = this.clamp(this.randFromPoint(chunkX, chunkZ), 0.4D, 1.0D) * 200.0D * density + 50.0D;
                 zMin = this.rand.nextInt(2);
                 int yRange = 160;
                 x += 4;
@@ -589,7 +587,7 @@ public class ChunkProviderKuiperBelt extends ChunkProviderBase {
             }
 
             if (this.largeAsteroidsLastChunkX != chunkX || this.largeAsteroidsLastChunkZ != chunkZ) {
-                this.generateTerrain(chunkX, chunkZ, (ChunkPrimer) null, true);
+                this.generateTerrain(chunkX, chunkZ, null, true);
             }
 
             this.rand.setSeed((long) chunkX * var7 + (long) chunkZ * var9 ^ this.world.getSeed());
@@ -678,7 +676,7 @@ public class ChunkProviderKuiperBelt extends ChunkProviderBase {
     }
 
     public void recreateStructures(Chunk chunk, int x, int z) {
-        this.dungeonGenerator.generate(this.world, x, z, (ChunkPrimer) null);
+        this.dungeonGenerator.generate(this.world, x, z, null);
     }
 
     public void generateSkylightMap(Chunk chunk, int cx, int cz) {
@@ -711,10 +709,7 @@ public class ChunkProviderKuiperBelt extends ChunkProviderBase {
             }
         }
 
-        Iterator var16 = this.largeAsteroids.iterator();
-
-        while (var16.hasNext()) {
-            ChunkProviderKuiperBelt.AsteroidData a = (ChunkProviderKuiperBelt.AsteroidData) var16.next();
+        for (AsteroidData a : this.largeAsteroids) {
             yMin = a.asteroidYArray - a.asteroidSizeArray;
             int yMax = a.asteroidYArray + a.asteroidSizeArray;
             int xMin = a.xMinArray;
@@ -858,7 +853,7 @@ public class ChunkProviderKuiperBelt extends ChunkProviderBase {
         return false;
     }
 
-    private class AsteroidData {
+    private static class AsteroidData {
         public boolean isHollow;
         public float[] sizeYArray;
         public int xMinArray;
@@ -873,7 +868,7 @@ public class ChunkProviderKuiperBelt extends ChunkProviderBase {
 
         public AsteroidData(boolean hollow, float[] sizeYArray2, int xMin, int zMin, int xmax, int zmax, int zSize, int size, int asteroidX, int asteroidY, int asteroidZ) {
             this.isHollow = hollow;
-            this.sizeYArray = (float[]) sizeYArray2.clone();
+            this.sizeYArray = sizeYArray2.clone();
             this.xMinArray = xMin;
             this.zMinArray = zMin;
             this.xMax = xmax;

@@ -51,7 +51,7 @@ public class WorldProviderTitan extends WorldProviderSpace implements IGalacticr
     public Vector3 getSkyColor() {
         float night = this.getStarBrightness(1.0F);
         float day = 1.0F - this.getStarBrightness(1.0F);
-        float dayColR = 255.0F / 255.0F;
+        float dayColR = 1.0f;
         float dayColG = 207.0F / 255.0F;
         float dayColB = 81.0F / 255.0F;
         float nightColR = 118.0F / 255.0F;

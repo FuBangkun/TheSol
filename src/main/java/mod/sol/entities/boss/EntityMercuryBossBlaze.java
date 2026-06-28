@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.Random;
 
 public class EntityMercuryBossBlaze extends EntityBossBase implements IEntityBreathable {
-    private static final DataParameter<Byte> ON_FIRE = EntityDataManager.<Byte>createKey(EntityMercuryBossBlaze.class, DataSerializers.BYTE);
+    private static final DataParameter<Byte> ON_FIRE = EntityDataManager.createKey(EntityMercuryBossBlaze.class, DataSerializers.BYTE);
     /**
      * Random offset used in floating behaviour
      */
@@ -73,8 +73,8 @@ public class EntityMercuryBossBlaze extends EntityBossBase implements IEntityBre
         this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D, 0.0F));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
-        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[0]));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
     }
 
     protected void applyEntityAttributes() {
@@ -92,7 +92,7 @@ public class EntityMercuryBossBlaze extends EntityBossBase implements IEntityBre
 
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(ON_FIRE, Byte.valueOf((byte) 0));
+        this.dataManager.register(ON_FIRE, (byte) 0);
     }
 
     protected SoundEvent getAmbientSound() {
@@ -181,17 +181,12 @@ public class EntityMercuryBossBlaze extends EntityBossBase implements IEntityBre
         return this.isCharged();
     }
 
-    @Nullable
-    protected ResourceLocation getLootTable() {
-        return null;
-    }
-
     public boolean isCharged() {
-        return (((Byte) this.dataManager.get(ON_FIRE)).byteValue() & 1) != 0;
+        return (this.dataManager.get(ON_FIRE) & 1) != 0;
     }
 
     public void setOnFire(boolean onFire) {
-        byte b0 = ((Byte) this.dataManager.get(ON_FIRE)).byteValue();
+        byte b0 = this.dataManager.get(ON_FIRE);
 
         if (onFire) {
             b0 = (byte) (b0 | 1);
@@ -199,7 +194,7 @@ public class EntityMercuryBossBlaze extends EntityBossBase implements IEntityBre
             b0 = (byte) (b0 & -2);
         }
 
-        this.dataManager.set(ON_FIRE, Byte.valueOf(b0));
+        this.dataManager.set(ON_FIRE, b0);
     }
 
     /**
@@ -231,8 +226,7 @@ public class EntityMercuryBossBlaze extends EntityBossBase implements IEntityBre
 
     @Override
     public ItemStack getGuaranteedLoot(Random rand) {
-        List<ItemStack> stackList = new LinkedList<>();
-        stackList.addAll(GalacticraftRegistry.getDungeonLoot(4));
+        List<ItemStack> stackList = new LinkedList<>(GalacticraftRegistry.getDungeonLoot(4));
         return stackList.get(rand.nextInt(stackList.size())).copy();
     }
 
@@ -304,7 +298,7 @@ public class EntityMercuryBossBlaze extends EntityBossBase implements IEntityBre
 
                     if (this.attackStep > 1) {
                         float f = MathHelper.sqrt(MathHelper.sqrt(d0)) * 0.5F;
-                        this.blaze.world.playEvent((EntityPlayer) null, 1018, new BlockPos((int) this.blaze.posX, (int) this.blaze.posY, (int) this.blaze.posZ), 0);
+                        this.blaze.world.playEvent(null, 1018, new BlockPos((int) this.blaze.posX, (int) this.blaze.posY, (int) this.blaze.posZ), 0);
 
                         for (int i = 0; i < 1; ++i) {
                             EntityLargeFireball entitysmallfireball = new EntityLargeFireball(this.blaze.world, this.blaze, d1 + this.blaze.getRNG().nextGaussian() * (double) f, d2, d3 + this.blaze.getRNG().nextGaussian() * (double) f);

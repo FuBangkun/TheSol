@@ -114,7 +114,7 @@ public class ChunkProviderIo extends ChunkProviderBase {
                                 if (var12 <= 0) {
                                     state0 = Blocks.AIR.getDefaultState();
                                     state1 = BLOCK_LOWER;
-                                } else if (var16 >= var5 - -16 && var16 <= var5 + 1) {
+                                } else if (var16 >= var5 + 16 && var16 <= var5 + 1) {
                                     state0 = BLOCK_FILL;
                                 }
 
@@ -122,7 +122,7 @@ public class ChunkProviderIo extends ChunkProviderBase {
 
                                 if (var16 >= var5 - 1) {
                                     primer.setBlockState(var8, var16, var9, state0);
-                                } else if (var16 < var5 - 1 && var16 >= var5 - 2) {
+                                } else if (var16 < var5 - 1 && var16 == var5 - 2) {
                                     primer.setBlockState(var8, var16, var9, state1);
                                 }
                             } else if (var13 > 0) {
@@ -166,7 +166,7 @@ public class ChunkProviderIo extends ChunkProviderBase {
                 for (int x = 0; x < ChunkProviderIo.CHUNK_SIZE_X; x++) {
                     for (int z = 0; z < ChunkProviderIo.CHUNK_SIZE_Z; z++) {
                         if (Math.abs(this.randFromPoint(cx * 16 + x, (cz * 16 + z) * 1000)) < this.noiseGen4.getNoise(x * ChunkProviderIo.CHUNK_SIZE_X + x, cz * ChunkProviderIo.CHUNK_SIZE_Z + z) / ChunkProviderIo.CRATER_PROB) {
-                            final Random random = new Random(cx * 16 + x + (cz * 16 + z) * 5000);
+                            final Random random = new Random(cx * 16L + x + (cz * 16L + z) * 5000);
                             final EnumCraterSize cSize = EnumCraterSize.sizeArray[random.nextInt(EnumCraterSize.sizeArray.length)];
                             final int size = random.nextInt(cSize.MAX_SIZE - cSize.MIN_SIZE) + cSize.MIN_SIZE;
                             this.makeCrater(cx * 16 + x, cz * 16 + z, chunkX * 16, chunkZ * 16, size, primer);

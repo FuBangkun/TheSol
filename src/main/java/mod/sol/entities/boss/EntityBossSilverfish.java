@@ -46,8 +46,8 @@ public class EntityBossSilverfish extends EntityBossBase implements IEntityBreat
         this.tasks.addTask(3, this.summonSilverfish);
         this.tasks.addTask(4, new EntityAIAttackMelee(this, 1.0D, false));
 //        this.tasks.addTask(5, new EntityBossSilverfish.AIHideInStone(this));
-        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[0]));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
     }
 
     /**
@@ -180,8 +180,7 @@ public class EntityBossSilverfish extends EntityBossBase implements IEntityBreat
 
     @Override
     public ItemStack getGuaranteedLoot(Random rand) {
-        List<ItemStack> stackList = new LinkedList<>();
-        stackList.addAll(GalacticraftRegistry.getDungeonLoot(9));
+        List<ItemStack> stackList = new LinkedList<>(GalacticraftRegistry.getDungeonLoot(9));
         return stackList.get(rand.nextInt(stackList.size())).copy();
     }
 
@@ -230,7 +229,7 @@ public class EntityBossSilverfish extends EntityBossBase implements IEntityBreat
          * Returns whether an in-progress EntityAIBase should continue executing
          */
         public boolean shouldContinueExecuting() {
-            return this.doMerge ? false : super.shouldContinueExecuting();
+            return !this.doMerge && super.shouldContinueExecuting();
         }
 
         /**
@@ -295,7 +294,7 @@ public class EntityBossSilverfish extends EntityBossBase implements IEntityBreat
                                 if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(world, this.silverfish)) {
                                     world.destroyBlock(blockpos1, true);
                                 } else {
-                                    world.setBlockState(blockpos1, ((BlockSilverfish.EnumType) iblockstate.getValue(BlockSilverfish.VARIANT)).getModelBlock(), 3);
+                                    world.setBlockState(blockpos1, iblockstate.getValue(BlockSilverfish.VARIANT).getModelBlock(), 3);
                                 }
 
                                 if (random.nextBoolean()) {

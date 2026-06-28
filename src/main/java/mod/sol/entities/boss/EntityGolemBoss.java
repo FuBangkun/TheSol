@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class EntityGolemBoss extends EntityCreature implements IAnimals, IMob, IBoss {
-    private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(this.getDisplayName(), getHealthBarColor(), BossInfo.Overlay.PROGRESS));
+    private final BossInfoServer bossInfo = new BossInfoServer(this.getDisplayName(), getHealthBarColor(), BossInfo.Overlay.PROGRESS);
     public int deathTicks = 0;
 
     public int entitiesWithin;
@@ -49,11 +49,6 @@ public abstract class EntityGolemBoss extends EntityCreature implements IAnimals
     public abstract BossInfo.Color getHealthBarColor();
 
     public void fall(float distance, float damageMultiplier) {
-    }
-
-    @Nullable
-    protected SoundEvent getAmbientSound() {
-        return null;
     }
 
     @Nullable
@@ -130,7 +125,7 @@ public abstract class EntityGolemBoss extends EntityCreature implements IAnimals
             if (this.spawner != null && this.spawner.getChestPos() != null) {
                 TileEntity chestTest = this.world.getTileEntity(this.spawner.getChestPos());
 
-                if (chestTest != null && chestTest instanceof TileEntityTreasureChest) {
+                if (chestTest instanceof TileEntityTreasureChest) {
                     chest = (TileEntityTreasureChest) chestTest;
                 }
             }

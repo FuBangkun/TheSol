@@ -41,10 +41,10 @@ public class SkyProviderTriton extends IRenderHandler {
         for (int j = -byte2 * i; j <= byte2 * i; j += byte2) {
             for (int l = -byte2 * i; l <= byte2 * i; l += byte2) {
                 worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
-                worldRenderer.pos(j + 0, f, l + 0).endVertex();
-                worldRenderer.pos(j + byte2, f, l + 0).endVertex();
+                worldRenderer.pos(j, f, l).endVertex();
+                worldRenderer.pos(j + byte2, f, l).endVertex();
                 worldRenderer.pos(j + byte2, f, l + byte2).endVertex();
-                worldRenderer.pos(j + 0, f, l + byte2).endVertex();
+                worldRenderer.pos(j, f, l + byte2).endVertex();
                 tessellator.draw();
             }
         }
@@ -57,9 +57,9 @@ public class SkyProviderTriton extends IRenderHandler {
 
         for (int k = -byte2 * i; k <= byte2 * i; k += byte2) {
             for (int i1 = -byte2 * i; i1 <= byte2 * i; i1 += byte2) {
-                worldRenderer.pos(k + byte2, f, i1 + 0).endVertex();
-                worldRenderer.pos(k + 0, f, i1 + 0).endVertex();
-                worldRenderer.pos(k + 0, f, i1 + byte2).endVertex();
+                worldRenderer.pos(k + byte2, f, i1).endVertex();
+                worldRenderer.pos(k, f, i1).endVertex();
+                worldRenderer.pos(k, f, i1 + byte2).endVertex();
                 worldRenderer.pos(k + byte2, f, i1 + byte2).endVertex();
             }
         }

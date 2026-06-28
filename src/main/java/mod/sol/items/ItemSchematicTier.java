@@ -1,5 +1,6 @@
 package mod.sol.items;
 
+import lombok.Getter;
 import micdoodle8.mods.galacticraft.api.recipe.ISchematicItem;
 import micdoodle8.mods.galacticraft.api.recipe.SchematicRegistry;
 import micdoodle8.mods.galacticraft.core.items.ISortableItem;
@@ -25,6 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 
+@Getter
 public class ItemSchematicTier extends ItemSchematic implements ISchematicItem, ISortableItem, IHasModel {
     private static int indexOffset = 0;
     private final int tier;
@@ -97,7 +99,4 @@ public class ItemSchematicTier extends ItemSchematic implements ISchematicItem, 
         TheSol.proxy.registerItemRenderer(this, 0, "inventory");
     }
 
-    public int getTier() {
-        return tier;
-    }
 }

@@ -47,7 +47,7 @@ public class EntityBossMagmaCube extends EntityBossBase implements IMob, IEntity
         if (!entityIn.isCreative() && !this.isDead && attackTimer > 20) {
             entityIn.setFire(3);
             if (!this.onGround) {
-                entityIn.attackEntityFrom(new DamageSource("generic").causeMobDamage(this).setDamageBypassesArmor(), 2);
+                entityIn.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 2);
                 this.attackTimer = 0;
             }
         }
@@ -134,8 +134,7 @@ public class EntityBossMagmaCube extends EntityBossBase implements IMob, IEntity
 
     @Override
     public ItemStack getGuaranteedLoot(Random rand) {
-        List<ItemStack> stackList = new LinkedList<>();
-        stackList.addAll(GalacticraftRegistry.getDungeonLoot(10));
+        List<ItemStack> stackList = new LinkedList<>(GalacticraftRegistry.getDungeonLoot(10));
         return stackList.get(rand.nextInt(stackList.size())).copy();
     }
 

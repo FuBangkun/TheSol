@@ -22,7 +22,7 @@ public class BiomeKuiperBelt extends BiomeGenBaseGC {
     }
 
     public void registerTypes(Biome b) {
-        BiomeDictionary.addTypes(b, new Type[]{Type.COLD, Type.DRY, Type.DEAD, Type.SPOOKY});
+        BiomeDictionary.addTypes(b, Type.COLD, Type.DRY, Type.DEAD, Type.SPOOKY);
     }
 
     public void resetMonsterListByMode(boolean challengeMode) {

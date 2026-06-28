@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class EntityFlyingBossBase extends EntityFlying implements IBoss, IMob {
-    private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(this.getDisplayName(), getHealthBarColor(), BossInfo.Overlay.PROGRESS));
+    private final BossInfoServer bossInfo = new BossInfoServer(this.getDisplayName(), getHealthBarColor(), BossInfo.Overlay.PROGRESS);
     public int deathTicks = 0;
 
     public int entitiesWithin;
@@ -94,7 +94,7 @@ public abstract class EntityFlyingBossBase extends EntityFlying implements IBoss
             if (this.spawner != null && this.spawner.getChestPos() != null) {
                 TileEntity chestTest = this.world.getTileEntity(this.spawner.getChestPos());
 
-                if (chestTest != null && chestTest instanceof TileEntityTreasureChest) {
+                if (chestTest instanceof TileEntityTreasureChest) {
                     chest = (TileEntityTreasureChest) chestTest;
                 }
             }

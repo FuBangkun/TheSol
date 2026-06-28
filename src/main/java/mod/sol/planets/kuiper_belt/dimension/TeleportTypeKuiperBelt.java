@@ -75,23 +75,23 @@ public class TeleportTypeKuiperBelt implements ITeleportType {
                     this.loadChunksAround(bv3.x, bv3.z, 2, world.getChunkProvider());
                     this.loadChunksAround(bv3.x, bv3.z, -3, world.getChunkProvider());
                     if (this.goodAsteroidEntry(world, bv3.x, bv3.y, bv3.z)) {
-                        return new Vector3((double) bv3.x, 310.0D, (double) bv3.z);
+                        return new Vector3(bv3.x, 310.0D, bv3.z);
                     }
 
                     if (this.goodAsteroidEntry(world, bv3.x + 2, bv3.y, bv3.z + 2)) {
-                        return new Vector3((double) (bv3.x + 2), 310.0D, (double) (bv3.z + 2));
+                        return new Vector3(bv3.x + 2, 310.0D, bv3.z + 2);
                     }
 
                     if (this.goodAsteroidEntry(world, bv3.x + 2, bv3.y, bv3.z - 2)) {
-                        return new Vector3((double) (bv3.x + 2), 310.0D, (double) (bv3.z - 2));
+                        return new Vector3(bv3.x + 2, 310.0D, bv3.z - 2);
                     }
 
                     if (this.goodAsteroidEntry(world, bv3.x - 2, bv3.y, bv3.z - 2)) {
-                        return new Vector3((double) (bv3.x - 2), 310.0D, (double) (bv3.z - 2));
+                        return new Vector3(bv3.x - 2, 310.0D, bv3.z - 2);
                     }
 
                     if (this.goodAsteroidEntry(world, bv3.x - 2, bv3.y, bv3.z + 2)) {
-                        return new Vector3((double) (bv3.x - 2), 310.0D, (double) (bv3.z + 2));
+                        return new Vector3(bv3.x - 2, 310.0D, bv3.z + 2);
                     }
 
                     if (ConfigManagerCore.enableDebug) {
@@ -106,7 +106,7 @@ public class TeleportTypeKuiperBelt implements ITeleportType {
 
             GCLog.info("Failed to find good large asteroid landing spot! Falling back to making a small one.");
             this.makeSmallLandingSpot(world, x, z);
-            return new Vector3((double) x, 310.0D, (double) z);
+            return new Vector3(x, 310.0D, z);
         }
     }
 

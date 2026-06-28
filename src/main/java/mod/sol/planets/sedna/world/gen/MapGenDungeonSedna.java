@@ -10,7 +10,7 @@ public class MapGenDungeonSedna extends MapGenDungeon {
     static {
         try {
             MapGenDungeonSedna.initiateStructures();
-        } catch (Throwable e) {
+        } catch (Throwable ignored) {
 
         }
     }
@@ -19,7 +19,7 @@ public class MapGenDungeonSedna extends MapGenDungeon {
         super(configuration);
     }
 
-    public static void initiateStructures() throws Throwable {
+    public static void initiateStructures() {
         if (!MapGenDungeonSedna.initialized) {
             MapGenStructureIO.registerStructureComponent(RoomBossSedna.class, "SednaDungeonBossRoom");
             MapGenStructureIO.registerStructureComponent(RoomTreasureSedna.class, "SednaDungeonTreasureRoom");

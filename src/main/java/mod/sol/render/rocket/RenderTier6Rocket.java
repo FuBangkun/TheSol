@@ -83,7 +83,7 @@ public class RenderTier6Rocket extends Render<EntityTier6Rocket> {
         float rollAmplitude = entity.rollAmplitude / 3 - partialTicks;
 
         if (rollAmplitude > 0.0F) {
-            final float i = entity.getLaunched() ? (5 - MathHelper.floor(entity.timeUntilLaunch / 85)) / 10F : 0.3F;
+            final float i = entity.getLaunched() ? (5 - MathHelper.floor((float) entity.timeUntilLaunch / 85)) / 10F : 0.3F;
             GlStateManager.rotate(MathHelper.sin(rollAmplitude) * rollAmplitude * i * partialTicks, 1.0F, 0.0F, 0.0F);
             GlStateManager.rotate(MathHelper.sin(rollAmplitude) * rollAmplitude * i * partialTicks, 1.0F, 0.0F, 1.0F);
         }

@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.Random;
 
 public class EntityJupiterBossGhast extends EntityFlyingBossBase implements IEntityBreathable {
-    private static final DataParameter<Boolean> ATTACKING = EntityDataManager.<Boolean>createKey(EntityJupiterBossGhast.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> ATTACKING = EntityDataManager.createKey(EntityJupiterBossGhast.class, DataSerializers.BOOLEAN);
     /**
      * The explosion radius of spawned fireballs.
      */
@@ -69,11 +69,11 @@ public class EntityJupiterBossGhast extends EntityFlyingBossBase implements IEnt
 
     @SideOnly(Side.CLIENT)
     public boolean isAttacking() {
-        return ((Boolean) this.dataManager.get(ATTACKING)).booleanValue();
+        return this.dataManager.get(ATTACKING);
     }
 
     public void setAttacking(boolean attacking) {
-        this.dataManager.set(ATTACKING, Boolean.valueOf(attacking));
+        this.dataManager.set(ATTACKING, attacking);
     }
 
     public int getFireballStrength() {
@@ -107,7 +107,7 @@ public class EntityJupiterBossGhast extends EntityFlyingBossBase implements IEnt
 
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(ATTACKING, Boolean.valueOf(false));
+        this.dataManager.register(ATTACKING, Boolean.FALSE);
     }
 
     protected void applyEntityAttributes() {
@@ -203,8 +203,7 @@ public class EntityJupiterBossGhast extends EntityFlyingBossBase implements IEnt
 
     @Override
     public ItemStack getGuaranteedLoot(Random rand) {
-        List<ItemStack> stackList = new LinkedList<>();
-        stackList.addAll(GalacticraftRegistry.getDungeonLoot(5));
+        List<ItemStack> stackList = new LinkedList<>(GalacticraftRegistry.getDungeonLoot(5));
         return stackList.get(rand.nextInt(stackList.size())).copy();
     }
 
@@ -254,7 +253,7 @@ public class EntityJupiterBossGhast extends EntityFlyingBossBase implements IEnt
                 ++this.attackTimer;
 
                 if (this.attackTimer == 10) {
-                    world.playEvent((EntityPlayer) null, 1015, new BlockPos(this.parentEntity), 0);
+                    world.playEvent(null, 1015, new BlockPos(this.parentEntity), 0);
                 }
 
                 if (this.attackTimer == 20) {
@@ -263,7 +262,7 @@ public class EntityJupiterBossGhast extends EntityFlyingBossBase implements IEnt
                     double d2 = entitylivingbase.posX - (this.parentEntity.posX + vec3d.x * 4.0D);
                     double d3 = entitylivingbase.getEntityBoundingBox().minY + (double) (entitylivingbase.height / 2.0F) - (0.5D + this.parentEntity.posY + (double) (this.parentEntity.height / 2.0F));
                     double d4 = entitylivingbase.posZ - (this.parentEntity.posZ + vec3d.z * 4.0D);
-                    world.playEvent((EntityPlayer) null, 1016, new BlockPos(this.parentEntity), 0);
+                    world.playEvent(null, 1016, new BlockPos(this.parentEntity), 0);
                     EntityHugeFireball entitylargefireball = new EntityHugeFireball(world, this.parentEntity, d2, d3, d4);
 //                    entitylargefireball.explosionPower = this.parentEntity.getFireballStrength();
                     entitylargefireball.posX = this.parentEntity.posX + vec3d.x * 4.0D;
@@ -378,7 +377,7 @@ public class EntityJupiterBossGhast extends EntityFlyingBossBase implements IEnt
 
                 if (this.courseChangeCooldown-- <= 0) {
                     this.courseChangeCooldown += this.parentEntity.getRNG().nextInt(5) + 2;
-                    d3 = (double) MathHelper.sqrt(d3);
+                    d3 = MathHelper.sqrt(d3);
 
                     if (this.isNotColliding(this.posX, this.posY, this.posZ, d3)) {
                         this.parentEntity.motionX += d0 / d3 * 0.1D;

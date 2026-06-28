@@ -305,8 +305,7 @@ public class EntitySaturnBossStray extends EntityBossBase implements IEntityBrea
 
     @Override
     public ItemStack getGuaranteedLoot(Random rand) {
-        List<ItemStack> stackList = new LinkedList<>();
-        stackList.addAll(GalacticraftRegistry.getDungeonLoot(6));
+        List<ItemStack> stackList = new LinkedList<>(GalacticraftRegistry.getDungeonLoot(6));
         return stackList.get(rand.nextInt(stackList.size())).copy();
     }
 

@@ -144,7 +144,7 @@ public class ChunkProviderTitan extends ChunkProviderBase {
 
     private void replaceBlocksForBiome(int p_180517_1_, int p_180517_2_, ChunkPrimer p_180517_3_, Biome[] p_180517_4_) {
         double d0 = 0.03125D;
-        this.stoneNoise = this.noiseGen4.getRegion(this.stoneNoise, (double) (p_180517_1_ * 16), (double) (p_180517_2_ * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+        this.stoneNoise = this.noiseGen4.getRegion(this.stoneNoise, p_180517_1_ * 16, p_180517_2_ * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 
         for (int i = 0; i < 16; ++i) {
             for (int j = 0; j < 16; ++j) {
@@ -276,8 +276,8 @@ public class ChunkProviderTitan extends ChunkProviderBase {
                 }
 
                 ++j;
-                double d8 = (double) f3;
-                double d9 = (double) f2;
+                double d8 = f3;
+                double d9 = f2;
                 d8 = d8 + d7 * 0.2D;
                 d8 = d8 * 8.5 / 8.0D;
                 double d0 = 8.5 + d8 * 4.0D;
@@ -296,7 +296,7 @@ public class ChunkProviderTitan extends ChunkProviderBase {
                     double d5 = d3 - d1;
 
                     if (l1 > 29) {
-                        double d6 = (double) ((float) (l1 - 29) / 3.0F);
+                        double d6 = (float) (l1 - 29) / 3.0F;
                         d5 = d5 * (1.0D - d6) + -10.0D * d6;
                     }
 

@@ -17,8 +17,4 @@ public class BiomePluto extends BiomeGenBaseGC {
         return getModdedBiomeDecorator(new BiomeDecoratorPluto());
     }
 
-    @Override
-    public float getSpawningChance() {
-        return 0.1F;
-    }
 }

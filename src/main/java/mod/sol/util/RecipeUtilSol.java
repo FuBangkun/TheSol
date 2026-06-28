@@ -1,7 +1,6 @@
 package mod.sol.util;
 
 import micdoodle8.mods.galacticraft.api.recipe.INasaWorkbenchRecipe;
-import mod.sol.inventory.InventorySchematicRocket;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 

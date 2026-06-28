@@ -1,4 +1,4 @@
-package mod.sol.render.model.entity;
+package mod.sol.render.model;
 
 import micdoodle8.mods.galacticraft.core.Constants;
 import mod.sol.entities.boss.EntitySaturnBossStray;

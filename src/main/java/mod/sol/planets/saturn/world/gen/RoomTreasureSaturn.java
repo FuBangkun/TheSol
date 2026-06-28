@@ -6,7 +6,7 @@ import micdoodle8.mods.galacticraft.core.world.gen.dungeon.DungeonConfiguration;
 import micdoodle8.mods.galacticraft.core.world.gen.dungeon.RoomTreasure;
 import mod.sol.blocks.BlockTier6TreasureChest;
 import mod.sol.init.SolBlocks;
-import mod.sol.util.Reference;
+import mod.sol.Tags;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -18,7 +18,7 @@ import net.minecraft.world.storage.loot.LootTableList;
 import java.util.Random;
 
 public class RoomTreasureSaturn extends RoomTreasure {
-    public static ResourceLocation SATURNCHEST = new ResourceLocation(Reference.MOD_ID, "dungeon_tier_6");
+    public static ResourceLocation SATURNCHEST = new ResourceLocation(Tags.MOD_ID, "dungeon_tier_6");
     // public static ResourceLocation MERCURYCHEST = new ResourceLocation("galacticraftcore", "dungeon_tier_3");
     public static final ResourceLocation TABLE_TIER_6_DUNGEON = LootTableList.register(SATURNCHEST);
 

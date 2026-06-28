@@ -6,7 +6,7 @@ import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
 import mod.sol.TheSol;
 import mod.sol.init.SolItems;
 import mod.sol.util.IHasModel;
-import mod.sol.util.Reference;
+import mod.sol.Tags;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -29,11 +29,11 @@ public class ItemArmorManganese extends ItemArmor implements ISortableItem, IHas
     public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
         if (this.material == SolItems.ARMOR_MANGANESE) {
             if (stack.getItem() == SolItems.MANGANESE_HELMET) {
-                return Reference.MOD_ID + ":textures/model/manganese_1.png";
+                return Tags.MOD_ID + ":textures/model/manganese_1.png";
             } else if (stack.getItem() == SolItems.MANGANESE_CHESTPLATE || stack.getItem() == SolItems.MANGANESE_BOOTS) {
-                return Reference.MOD_ID + ":textures/model/manganese_2.png";
+                return Tags.MOD_ID + ":textures/model/manganese_2.png";
             } else if (stack.getItem() == SolItems.MANGANESE_LEGGINGS) {
-                return Reference.MOD_ID + ":textures/model/manganese_3.png";
+                return Tags.MOD_ID + ":textures/model/manganese_3.png";
             }
         }
         return null;

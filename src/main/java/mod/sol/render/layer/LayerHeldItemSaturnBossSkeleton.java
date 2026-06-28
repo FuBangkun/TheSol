@@ -2,7 +2,7 @@ package mod.sol.render.layer;
 
 import mod.sol.entities.boss.EntitySaturnBossStray;
 import mod.sol.render.entity.RenderSaturnBossStray;
-import mod.sol.render.model.entity.ModelSaturnBossStray;
+import mod.sol.render.model.ModelSaturnBossStray;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;

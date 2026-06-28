@@ -1,6 +1,5 @@
 package mod.sol;
 
-import com.google.common.collect.ImmutableList;
 import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 import micdoodle8.mods.galacticraft.api.galaxies.GalaxyRegistry;
@@ -16,10 +15,8 @@ import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection
 import micdoodle8.mods.galacticraft.core.client.model.OBJLoaderGC;
 import micdoodle8.mods.galacticraft.core.dimension.WorldProviderMoon;
 import micdoodle8.mods.galacticraft.core.entities.*;
-import micdoodle8.mods.galacticraft.core.util.ClientUtil;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
-import micdoodle8.mods.galacticraft.core.wrappers.ModelTransformWrapper;
 import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
 import micdoodle8.mods.galacticraft.planets.venus.ConfigManagerVenus;
@@ -32,8 +29,8 @@ import mod.sol.client.gui.container.*;
 import mod.sol.client.gui.screen.SolCelestialSelection;
 import mod.sol.config.ConfigManagerSol;
 import mod.sol.entities.EntityHugeFireball;
+import mod.sol.entities.EntityTierRocket;
 import mod.sol.entities.boss.*;
-import mod.sol.entities.rocket.*;
 import mod.sol.init.SolBlocks;
 import mod.sol.init.SolDimensions;
 import mod.sol.init.SolItems;
@@ -69,13 +66,12 @@ import mod.sol.planets.uranus.moon.ariel.dimension.TeleportTypeAriel;
 import mod.sol.planets.uranus.moon.ariel.dimension.WorldProviderAriel;
 import mod.sol.proxy.SolCommonProxy;
 import mod.sol.recipe.*;
+import mod.sol.render.RenderRocketBase;
 import mod.sol.render.entity.*;
-import mod.sol.render.model.item.*;
-import mod.sol.render.rocket.*;
 import mod.sol.render.tile.*;
 import mod.sol.schematic.*;
 import mod.sol.tile.*;
-import mod.sol.util.Reference;
+import mod.sol.util.RocketModelUtil;
 import mod.sol.util.SolEntityRegistry;
 import mod.sol.util.SolTreasureChestRegistry;
 import mod.sol.util.handler.SolEventHandlerClient;
@@ -92,8 +88,6 @@ import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.model.IModelState;
-import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -112,9 +106,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.io.File;
-import java.util.List;
 
-@Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION, dependencies = "required-after:galacticraftcore")
+@Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION, dependencies = "required-after:galacticraftcore")
 public class TheSol {
     public static final CreativeTabs ITEM_TAB = new CreativeTabs("sol_items") {
         @Nonnull
@@ -180,7 +173,7 @@ public class TheSol {
     public static Moon moonCharon;
     @Instance
     public static TheSol instance;
-    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.COMMON_PROXY_CLASS)
+    @SidedProxy(clientSide = "mod.sol.proxy.SolClientProxy", serverSide = "mod.sol.proxy.SolCommonProxy")
     public static SolCommonProxy proxy;
 
     static {
@@ -220,7 +213,7 @@ public class TheSol {
     }
 
     public static void registerNonMobEntity(Class<? extends Entity> var0, String var1, int trackingDistance, int updateFreq, boolean sendVel) {
-        ResourceLocation registryName = new ResourceLocation(Reference.MOD_ID, var1);
+        ResourceLocation registryName = new ResourceLocation(Tags.MOD_ID, var1);
         EntityRegistry.registerModEntity(registryName, var0, var1, GCCoreUtil.nextInternalID(), TheSol.instance, trackingDistance, updateFreq, sendVel);
     }
 
@@ -228,7 +221,7 @@ public class TheSol {
         TheSol.registerNonMobEntity(clazz, name, 80, 3, true);
         int nextEggID = GCCoreUtil.getNextValidID();
         if (nextEggID < 65536) {
-            ResourceLocation resourcelocation = new ResourceLocation(Reference.MOD_ID, name);
+            ResourceLocation resourcelocation = new ResourceLocation(Tags.MOD_ID, name);
             EntityList.ENTITY_EGGS.put(resourcelocation, new EntityList.EntityEggInfo(resourcelocation, back, fore));
         }
     }
@@ -241,13 +234,8 @@ public class TheSol {
     @EventHandler
     @SideOnly(Side.CLIENT)
     public void preInitClient(FMLPreInitializationEvent event) {
-        OBJLoaderGC.instance.addDomain(Reference.MOD_ID);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTier4Rocket.class, RenderTier4Rocket::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTier5Rocket.class, RenderTier5Rocket::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTier6Rocket.class, RenderTier6Rocket::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTier7Rocket.class, RenderTier7Rocket::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTier8Rocket.class, RenderTier8Rocket::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTier9Rocket.class, RenderTier9Rocket::new);
+        OBJLoaderGC.instance.addDomain(Tags.MOD_ID);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTierRocket.class, RenderRocketBase::new);
         MinecraftForge.EVENT_BUS.register(this);
 
         RenderingRegistry.registerEntityRenderingHandler(EntityHugeFireball.class, (RenderManager manager) -> new RenderHugeFireball(manager, 1));
@@ -348,13 +336,13 @@ public class TheSol {
         TheSol.planetMercury.setDimensionSuffix("_mercury");
         // Ceres
         TheSol.planetCeres = (DwarfPlanet) new DwarfPlanet("ceres").setParentSolarSystem(GalacticraftCore.solarSystemSol).setRingColorRGB(255.0F, 0.0F, 0.0F).setPhaseShift(2.48F).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(1.5F, 1.5F)).setRelativeOrbitTime(5.2433153256534542F);
-        TheSol.planetCeres.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/ceres.png"));
+        TheSol.planetCeres.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/ceres.png"));
         TheSol.planetCeres.setAtmosphere(new AtmosphereInfo(false, false, false, -1.7F, 0.0F, 0.0F));
         TheSol.planetCeres.setRelativeSize(0.1294F);
         TheSol.planetCeres.setDimensionSuffix("_ceres");
         // Pluto
         TheSol.planetPluto = (DwarfPlanet) new DwarfPlanet("pluto").setParentSolarSystem(GalacticraftCore.solarSystemSol).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift(3.25F).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(3.0F, 3.0F)).setRelativeOrbitTime(5.2433153256534542F);
-        TheSol.planetPluto.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/pluto.png"));
+        TheSol.planetPluto.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/pluto.png"));
         TheSol.planetPluto.setAtmosphere(new AtmosphereInfo(false, false, false, -6.0F, 0.0F, 0.0F));
         TheSol.planetPluto.setRelativeSize(0.1294F);
         TheSol.planetPluto.setDimensionInfo(ConfigManagerSol.dimensionidPluto, WorldProviderPluto.class).setTierRequired(8);
@@ -367,31 +355,31 @@ public class TheSol {
         TheSol.planetPluto.setDimensionSuffix("_pluto");
         // Haumea
         TheSol.planetHaumea = (DwarfPlanet) new DwarfPlanet("haumea").setParentSolarSystem(GalacticraftCore.solarSystemSol).setRingColorRGB(255.0F, 0.0F, 0.0F).setPhaseShift(3.92F).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(3.65F, 3.65F)).setRelativeOrbitTime(15.1415926F);
-        TheSol.planetHaumea.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/haumea.png"));
+        TheSol.planetHaumea.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/haumea.png"));
         TheSol.planetHaumea.setAtmosphere(new AtmosphereInfo(false, false, false, -6.0F, 0.0F, 0.0F));
         TheSol.planetHaumea.setRelativeSize(0.0294F);
         TheSol.planetHaumea.setDimensionSuffix("_haumea");
         // Eris
         TheSol.planetEris = (DwarfPlanet) new DwarfPlanet("eris").setParentSolarSystem(GalacticraftCore.solarSystemSol).setRingColorRGB(255.0F, 0.0F, 0.0F).setPhaseShift(2.42F).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(3.4F, 3.4F)).setRelativeOrbitTime(16.1415926F);
-        TheSol.planetEris.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/eris.png"));
+        TheSol.planetEris.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/eris.png"));
         TheSol.planetEris.setAtmosphere(new AtmosphereInfo(false, false, false, -6.0F, 0.0F, 0.0F));
         TheSol.planetEris.setRelativeSize(0.0294F);
         TheSol.planetEris.setDimensionSuffix("_eris");
         // Makemake
         TheSol.planetMakemake = (DwarfPlanet) new DwarfPlanet("makemake").setParentSolarSystem(GalacticraftCore.solarSystemSol).setRingColorRGB(255.0F, 0.0F, 0.0F).setPhaseShift(9.81F).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(3.8F, 3.8F)).setRelativeOrbitTime(11.1415926F);
-        TheSol.planetMakemake.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/makemake.png"));
+        TheSol.planetMakemake.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/makemake.png"));
         TheSol.planetMakemake.setAtmosphere(new AtmosphereInfo(false, false, false, -6.0F, 0.0F, 0.0F));
         TheSol.planetMakemake.setRelativeSize(0.0294F);
         TheSol.planetMakemake.setDimensionSuffix("_makemake");
         // Kuiperbelt
         TheSol.planetKuiperBelt = (Planet) new Planet("kuiper_belt").setParentSolarSystem(GalacticraftCore.solarSystemSol).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift((float) (Math.random() * (2 * Math.PI))).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(3.55F, 3.55F)).setRelativeOrbitTime(90.0F);
-        TheSol.planetKuiperBelt.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/kuiper_belt.png"));
+        TheSol.planetKuiperBelt.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/kuiper_belt.png"));
 //		TheSol.planetKuiperBelt.setDimensionInfo(ConfigManagerSol.dimensionidKuiperBelt, WorldProviderKuiperBelt.class).setTierRequired(8);
 //		TheSol.planetKuiperBelt.setBiomeInfo(BiomeKuiperBelt.kuiper_belt);
         TheSol.planetKuiperBelt.setDimensionSuffix("_kuiper_belt");
         // Sedna
         TheSol.planetSedna = (DwarfPlanet) new DwarfPlanet("sedna").setParentSolarSystem(GalacticraftCore.solarSystemSol).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift(14.421412354F).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(5F, 5F)).setRelativeOrbitTime(39.143442132456F);
-        TheSol.planetSedna.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/sedna.png"));
+        TheSol.planetSedna.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/sedna.png"));
         TheSol.planetSedna.setAtmosphere(new AtmosphereInfo(false, false, false, -6.0F, 0.0F, 0.0F));
         TheSol.planetSedna.setRelativeSize(0.1294F);
         TheSol.planetSedna.setDimensionInfo(ConfigManagerSol.dimensionidSedna, WorldProviderSedna.class).setTierRequired(9);
@@ -404,18 +392,18 @@ public class TheSol {
         TheSol.planetSedna.setDimensionSuffix("_sedna");
         // Oortcloud
         TheSol.planetOortCloud = (Planet) new Planet("oort_cloud").setParentSolarSystem(GalacticraftCore.solarSystemSol).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift((float) (Math.random() * (2 * Math.PI))).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(7.5F, 7.5F)).setRelativeOrbitTime(90.0F);
-        TheSol.planetOortCloud.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/oort_cloud.png"));
+        TheSol.planetOortCloud.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/oort_cloud.png"));
         TheSol.planetOortCloud.setDimensionSuffix("_oort_cloud");
         // Moons
         // Phobos
         TheSol.moonPhobos = (Moon) new Moon("phobos").setParentPlanet(MarsModule.planetMars).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift(1.45F).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(12F, 12F)).setRelativeOrbitTime(20.0F);
-        TheSol.moonPhobos.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/phobos.png"));
+        TheSol.moonPhobos.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/phobos.png"));
         TheSol.moonPhobos.setAtmosphere(new AtmosphereInfo(false, false, false, -1.0F, 0.0F, 0.0F));
         TheSol.moonPhobos.setRelativeSize(0.4312F);
         TheSol.moonPhobos.setDimensionSuffix("_phobos");
         // Deimos
         TheSol.moonDeimos = (Moon) new Moon("deimos").setParentPlanet(MarsModule.planetMars).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift(0.25F).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(20F, 20F)).setRelativeOrbitTime(45.68F);
-        TheSol.moonDeimos.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/deimos.png"));
+        TheSol.moonDeimos.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/deimos.png"));
         TheSol.moonDeimos.setAtmosphere(new AtmosphereInfo(false, false, false, -1.0F, 0.0F, 0.0F));
         TheSol.moonDeimos.setRelativeSize(0.4312F);
         TheSol.moonDeimos.setDimensionSuffix("_deimos");
@@ -460,13 +448,13 @@ public class TheSol {
         // Saturn
         // RingsOfSaturn
         TheSol.moonRingsOfSaturn = (Moon) new Moon("rings_of_saturn").setParentPlanet(TheSol.planetSaturn).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift((float) Math.PI).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(5.0F, 5.0F)).setRelativeOrbitTime(90.0F);
-        TheSol.moonRingsOfSaturn.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/rings_of_saturn.png"));
+        TheSol.moonRingsOfSaturn.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/rings_of_saturn.png"));
         TheSol.moonRingsOfSaturn.setRelativeSize(0.4312F);
         TheSol.moonRingsOfSaturn.setDimensionSuffix("_rings_of_saturn");
         // Mimas
         TheSol.moonMimas = (Moon) new Moon("mimas").setParentPlanet(TheSol.planetSaturn).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift((float) Math.PI).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(9.0F, 9.0F)).setRelativeOrbitTime(9.375F);
         TheSol.moonMimas.setAtmosphere(new AtmosphereInfo(false, false, false, -3.0F, 0.0F, 0.0F));
-        TheSol.moonMimas.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/mimas.png"));
+        TheSol.moonMimas.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/mimas.png"));
         TheSol.moonMimas.setRelativeSize(0.4312F);
         TheSol.moonMimas.setBiomeInfo(BiomeMimas.mimasFlat);
         TheSol.moonMimas.setDimensionInfo(ConfigManagerSol.dimensionidMimas, WorldProviderMimas.class).setTierRequired(5);
@@ -478,27 +466,27 @@ public class TheSol {
         TheSol.moonMimas.setDimensionSuffix("_mimas");
         // Enceladus
         TheSol.moonEnceladus = (Moon) new Moon("enceladus").setParentPlanet(TheSol.planetSaturn).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift((float) Math.PI).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(12.5F, 12.5F)).setRelativeOrbitTime(13.70218F);
-        TheSol.moonEnceladus.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/enceladus.png"));
+        TheSol.moonEnceladus.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/enceladus.png"));
         TheSol.moonEnceladus.setRelativeSize(0.4312F);
         TheSol.moonEnceladus.setDimensionSuffix("_enceladus");
         // Tethys
         TheSol.moonTethys = (Moon) new Moon("tethys").setParentPlanet(TheSol.planetSaturn).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift((float) Math.PI).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(16.5F, 16.5F)).setRelativeOrbitTime(18.87802F);
-        TheSol.moonTethys.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/tethys.png"));
+        TheSol.moonTethys.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/tethys.png"));
         TheSol.moonTethys.setRelativeSize(0.4312F);
         TheSol.moonTethys.setDimensionSuffix("_tethys");
         // Dione
         TheSol.moonDione = (Moon) new Moon("dione").setParentPlanet(TheSol.planetSaturn).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift((float) Math.PI).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(19.5F, 19.5F)).setRelativeOrbitTime(27.36915F);
-        TheSol.moonDione.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/dione.png"));
+        TheSol.moonDione.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/dione.png"));
         TheSol.moonDione.setRelativeSize(0.4312F);
         TheSol.moonDione.setDimensionSuffix("_dione");
         // Rhea
         TheSol.moonRhea = (Moon) new Moon("rhea").setParentPlanet(TheSol.planetSaturn).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift((float) Math.PI).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(23.5F, 23.5F)).setRelativeOrbitTime(45.18212F);
-        TheSol.moonRhea.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/rhea.png"));
+        TheSol.moonRhea.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/rhea.png"));
         TheSol.moonRhea.setRelativeSize(0.4312F);
         TheSol.moonRhea.setDimensionSuffix("_rhea");
         // Titan
         TheSol.moonTitan = (Moon) new Moon("titan").setParentPlanet(TheSol.planetSaturn).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift((float) Math.PI).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(26.5F, 26.5F)).setRelativeOrbitTime(159.45F);
-        TheSol.moonTitan.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/titan.png"));
+        TheSol.moonTitan.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/titan.png"));
         TheSol.moonTitan.setAtmosphere(new AtmosphereInfo(false, false, false, -3.0F, 0.5F, 0.3F));
         TheSol.moonTitan.atmosphereComponent(EnumAtmosphericGas.METHANE);
         TheSol.moonTitan.setRelativeSize(0.4312F);
@@ -513,7 +501,7 @@ public class TheSol {
         // Uranus
         // Ariel
         TheSol.moonAriel = (Moon) new Moon("ariel").setParentPlanet(TheSol.planetUranus).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift((float) Math.PI).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(9.0F, 9.0F)).setRelativeOrbitTime(17.69F);
-        TheSol.moonAriel.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/ariel.png"));
+        TheSol.moonAriel.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/ariel.png"));
         TheSol.moonAriel.setRelativeSize(0.4312F);
         TheSol.moonAriel.setBiomeInfo(BiomeAriel.arielFlat);
         TheSol.moonAriel.setDimensionInfo(ConfigManagerSol.dimensionidAriel, WorldProviderAriel.class).setTierRequired(6);
@@ -525,26 +513,26 @@ public class TheSol {
         TheSol.moonAriel.setDimensionSuffix("_ariel");
         // Umbriel
         TheSol.moonUmbriel = (Moon) new Moon("umbriel").setParentPlanet(TheSol.planetUranus).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift((float) Math.PI).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(12.5F, 12.5F)).setRelativeOrbitTime(35.51F);
-        TheSol.moonUmbriel.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/umbriel.png"));
+        TheSol.moonUmbriel.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/umbriel.png"));
         TheSol.moonUmbriel.setAtmosphere(new AtmosphereInfo(false, false, false, -2.5F, 0.0F, 0.0F));
         TheSol.moonUmbriel.setRelativeSize(0.4312F);
         TheSol.moonUmbriel.setDimensionSuffix("_umbriel");
         // Titania
         TheSol.moonTitania = (Moon) new Moon("titania").setParentPlanet(TheSol.planetUranus).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift((float) Math.PI).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(19.5F, 19.5F)).setRelativeOrbitTime(71.54F);
-        TheSol.moonTitania.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/titania.png"));
+        TheSol.moonTitania.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/titania.png"));
         TheSol.moonTitania.setAtmosphere(new AtmosphereInfo(false, false, false, -1.0F, 0.0F, 0.0F));
         TheSol.moonTitania.setRelativeSize(0.4312F);
         TheSol.moonTitania.setDimensionSuffix("_titania");
         // Oberon
         TheSol.moonOberon = (Moon) new Moon("oberon").setParentPlanet(TheSol.planetUranus).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift((float) Math.PI).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(25.5F, 25.5F)).setRelativeOrbitTime(166.89F);
-        TheSol.moonOberon.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/oberon.png"));
+        TheSol.moonOberon.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/oberon.png"));
         TheSol.moonOberon.setAtmosphere(new AtmosphereInfo(false, false, false, -1.0F, 0.0F, 0.0F));
         TheSol.moonOberon.setRelativeSize(0.4312F);
         TheSol.moonOberon.setDimensionSuffix("_oberon");
         // neptune
         // triton
         TheSol.moonTriton = (Moon) new Moon("triton").setParentPlanet(TheSol.planetNeptune).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift((float) Math.PI).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(12.5F, 12.5F)).setRelativeOrbitTime(35.51F);
-        TheSol.moonTriton.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/triton.png"));
+        TheSol.moonTriton.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/triton.png"));
         TheSol.moonTriton.setAtmosphere(new AtmosphereInfo(false, false, false, -2.5F, 0.0F, 0.0F));
         TheSol.moonTriton.setBiomeInfo(BiomeTriton.tritonFlat);
         TheSol.moonTriton.setDimensionInfo(ConfigManagerSol.dimensionidTriton, WorldProviderTriton.class).setTierRequired(7);
@@ -558,7 +546,7 @@ public class TheSol {
         // pluto
         // charon
         TheSol.moonCharon = (Moon) new Moon("charon").setParentPlanet(TheSol.planetPluto).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift((float) Math.PI).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(13.5F, 13.5F)).setRelativeOrbitTime(63.87230F);
-        TheSol.moonCharon.setBodyIcon(new ResourceLocation(Reference.MOD_ID, "textures/planets/charon.png"));
+        TheSol.moonCharon.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/charon.png"));
         TheSol.moonCharon.setRelativeSize(7.0F);
         TheSol.moonCharon.setDimensionSuffix("_charon");
         // register
@@ -567,13 +555,13 @@ public class TheSol {
         // planets
         GalaxyRegistry.registerPlanet(TheSol.planetMercury);
         GalacticraftRegistry.registerTeleportType(WorldProviderMercury.class, new TeleportTypeMercury());
-        GalacticraftRegistry.registerRocketGui(WorldProviderMercury.class, new ResourceLocation(Reference.MOD_ID, "textures/gui/rocketgui/mercury_rocket_gui.png"));
+        GalacticraftRegistry.registerRocketGui(WorldProviderMercury.class, new ResourceLocation(Tags.MOD_ID, "textures/gui/rocketgui/mercury_rocket_gui.png"));
 
         GalaxyRegistry.registerPlanet(TheSol.planetCeres);
 
         GalaxyRegistry.registerPlanet(TheSol.planetPluto);
         GalacticraftRegistry.registerTeleportType(WorldProviderPluto.class, new TeleportTypePluto());
-        GalacticraftRegistry.registerRocketGui(WorldProviderPluto.class, new ResourceLocation(Reference.MOD_ID, "textures/gui/rocketgui/pluto_rocket_gui.png"));
+        GalacticraftRegistry.registerRocketGui(WorldProviderPluto.class, new ResourceLocation(Tags.MOD_ID, "textures/gui/rocketgui/pluto_rocket_gui.png"));
 
         GalaxyRegistry.registerPlanet(TheSol.planetHaumea);
 
@@ -594,11 +582,11 @@ public class TheSol {
 
         GalaxyRegistry.registerMoon(TheSol.moonIo);
         GalacticraftRegistry.registerTeleportType(WorldProviderIo.class, new TeleportTypeIo());
-        GalacticraftRegistry.registerRocketGui(WorldProviderIo.class, new ResourceLocation(Reference.MOD_ID, "textures/gui/rocketgui/io_rocket_gui.png"));
+        GalacticraftRegistry.registerRocketGui(WorldProviderIo.class, new ResourceLocation(Tags.MOD_ID, "textures/gui/rocketgui/io_rocket_gui.png"));
 
         GalaxyRegistry.registerMoon(TheSol.moonEuropa);
         GalacticraftRegistry.registerTeleportType(WorldProviderEuropa.class, new TeleportTypeEuropa());
-        GalacticraftRegistry.registerRocketGui(WorldProviderEuropa.class, new ResourceLocation(Reference.MOD_ID, "textures/gui/rocketgui/europa_rocket_gui.png"));
+        GalacticraftRegistry.registerRocketGui(WorldProviderEuropa.class, new ResourceLocation(Tags.MOD_ID, "textures/gui/rocketgui/europa_rocket_gui.png"));
 
         GalaxyRegistry.registerMoon(TheSol.moonGanymede);
 
@@ -608,7 +596,7 @@ public class TheSol {
 
         GalaxyRegistry.registerMoon(TheSol.moonMimas);
         GalacticraftRegistry.registerTeleportType(WorldProviderMimas.class, new TeleportTypeMimas());
-        GalacticraftRegistry.registerRocketGui(WorldProviderMimas.class, new ResourceLocation(Reference.MOD_ID, "textures/gui/rocketgui/mimas_rocket_gui.png"));
+        GalacticraftRegistry.registerRocketGui(WorldProviderMimas.class, new ResourceLocation(Tags.MOD_ID, "textures/gui/rocketgui/mimas_rocket_gui.png"));
 
         GalaxyRegistry.registerMoon(TheSol.moonEnceladus);
 
@@ -620,11 +608,11 @@ public class TheSol {
 
         GalaxyRegistry.registerMoon(TheSol.moonTitan);
         GalacticraftRegistry.registerTeleportType(WorldProviderTitan.class, new TeleportTypeTitan());
-        GalacticraftRegistry.registerRocketGui(WorldProviderTitan.class, new ResourceLocation(Reference.MOD_ID, "textures/gui/rocketgui/titan_rocket_gui.png"));
+        GalacticraftRegistry.registerRocketGui(WorldProviderTitan.class, new ResourceLocation(Tags.MOD_ID, "textures/gui/rocketgui/titan_rocket_gui.png"));
 
         GalaxyRegistry.registerMoon(TheSol.moonAriel);
         GalacticraftRegistry.registerTeleportType(WorldProviderAriel.class, new TeleportTypeAriel());
-        GalacticraftRegistry.registerRocketGui(WorldProviderAriel.class, new ResourceLocation(Reference.MOD_ID, "textures/gui/rocketgui/ariel_rocket_gui.png"));
+        GalacticraftRegistry.registerRocketGui(WorldProviderAriel.class, new ResourceLocation(Tags.MOD_ID, "textures/gui/rocketgui/ariel_rocket_gui.png"));
 
         GalaxyRegistry.registerMoon(TheSol.moonUmbriel);
 
@@ -632,7 +620,7 @@ public class TheSol {
 
         GalaxyRegistry.registerMoon(TheSol.moonTriton);
         GalacticraftRegistry.registerTeleportType(WorldProviderTriton.class, new TeleportTypeTriton());
-        GalacticraftRegistry.registerRocketGui(WorldProviderTriton.class, new ResourceLocation(Reference.MOD_ID, "textures/gui/rocketgui/triton_rocket_gui.png"));
+        GalacticraftRegistry.registerRocketGui(WorldProviderTriton.class, new ResourceLocation(Tags.MOD_ID, "textures/gui/rocketgui/triton_rocket_gui.png"));
 
         GalaxyRegistry.registerMoon(TheSol.moonCharon);
         // fake planets
@@ -650,12 +638,7 @@ public class TheSol {
         // rockets
         TheSol.registerNonMobEntity(EntityHugeFireball.class, "fireball_huge", 150, 1, false);
 
-        TheSol.registerNonMobEntity(EntityTier4Rocket.class, "rocket_t4", 150, 1, false);
-        TheSol.registerNonMobEntity(EntityTier5Rocket.class, "rocket_t5", 150, 1, false);
-        TheSol.registerNonMobEntity(EntityTier6Rocket.class, "rocket_t6", 150, 1, false);
-        TheSol.registerNonMobEntity(EntityTier7Rocket.class, "rocket_t7", 150, 1, false);
-        TheSol.registerNonMobEntity(EntityTier8Rocket.class, "rocket_t8", 150, 1, false);
-        TheSol.registerNonMobEntity(EntityTier9Rocket.class, "rocket_t9", 150, 1, false);
+        TheSol.registerNonMobEntity(EntityTierRocket.class, "rocket", 150, 1, false);
         // schematic
         Item schematicItem = SolItems.SCHEMATIC_ROCKET;
         ItemSchematicTier schematicClass = (ItemSchematicTier) schematicItem;
@@ -755,30 +738,16 @@ public class TheSol {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void onModelBakeEvent(ModelBakeEvent event) {
-        replaceModelDefault(event, "rocket_t4", "tier4rocket.obj", ImmutableList.of("Boosters", "Cube", "NoseCone", "Rocket"), ItemModelRocketT4.class, TRSRTransformation.identity());
-        replaceModelDefault(event, "rocket_t5", "tier5rocket.obj", ImmutableList.of("Boosters", "Cube", "NoseCone", "Rocket"), ItemModelRocketT5.class, TRSRTransformation.identity());
-        replaceModelDefault(event, "rocket_t6", "tier6rocket.obj", ImmutableList.of("Boosters", "Cube", "NoseCone", "Rocket"), ItemModelRocketT6.class, TRSRTransformation.identity());
-        replaceModelDefault(event, "rocket_t7", "tier7rocket.obj", ImmutableList.of("Boosters", "Cube", "NoseCone", "Rocket"), ItemModelRocketT7.class, TRSRTransformation.identity());
-        replaceModelDefault(event, "rocket_t8", "tier8rocket.obj", ImmutableList.of("Boosters", "Cube", "NoseCone", "Rocket"), ItemModelRocketT8.class, TRSRTransformation.identity());
-        replaceModelDefault(event, "rocket_t9", "tier9rocket.obj", ImmutableList.of("Boosters", "Cube", "NoseCone", "Rocket"), ItemModelRocketT9.class, TRSRTransformation.identity());
-    }
-
-    private void replaceModelDefault(ModelBakeEvent event, String resLoc, String objLoc, List<String> visibleGroups, Class<? extends ModelTransformWrapper> clazz, IModelState parentState, String... variants) {
-        ClientUtil.replaceModel(Reference.MOD_ID, event, resLoc, objLoc, visibleGroups, clazz, parentState, variants);
+        for (int i = 4; i <= 9; i++) {
+            RocketModelUtil.replaceModel(event, i);
+        }
     }
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void loadTextures(TextureStitchEvent.Pre event) {
-        registerTexture(event, "tier4rocket");
-        registerTexture(event, "tier5rocket");
-        registerTexture(event, "tier6rocket");
-        registerTexture(event, "tier7rocket");
-        registerTexture(event, "tier8rocket");
-        registerTexture(event, "tier9rocket");
-    }
-
-    private void registerTexture(TextureStitchEvent.Pre event, String texture) {
-        event.getMap().registerSprite(new ResourceLocation(Reference.MOD_ID + ":" + "rockets/" + texture));
+        for (int i = 4; i <= 9; i++) {
+            event.getMap().registerSprite(new ResourceLocation(Tags.MOD_ID, "rockets/tier" + i + "rocket"));
+        }
     }
 }

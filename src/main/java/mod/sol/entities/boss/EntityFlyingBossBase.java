@@ -6,6 +6,7 @@ import micdoodle8.mods.galacticraft.core.network.PacketSimple;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityDungeonSpawner;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityTreasureChest;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.IMob;
@@ -161,7 +162,7 @@ public abstract class EntityFlyingBossBase extends EntityFlying implements IBoss
                 List<EntityPlayer> entitiesWithin2 = this.world.getEntitiesWithinAABB(EntityPlayer.class, this.spawner.getRangeBoundsPlus11());
 
                 for (EntityPlayer p : entitiesWithin2) {
-                    p.sendMessage(new TextComponentString(GCCoreUtil.translate("gui.skeleton_boss.message")));
+                    p.sendMessage(new TextComponentString(I18n.format("gui.skeleton_boss.message")));
                 }
 
                 this.setDead();

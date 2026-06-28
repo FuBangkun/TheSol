@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class SolTreasureChestRegistry {
     public static void registry() {
         // registerBlock(SolBlocks.TREASURE_CHEST_T4, ItemBlockDesc.class);
-        // ClientUtil.registerBlockJson(Reference.MOD_ID, SolBlocks.TREASURE_CHEST_T4);
+        // ClientUtil.registerBlockJson(Tags.MOD_ID, SolBlocks.TREASURE_CHEST_T4);
         GameRegistry.registerTileEntity(TileEntityTreasureChestTier4.class, "Sol Tier 4 Treasure Chest");
         GameRegistry.registerTileEntity(TileEntityTreasureChestTier5.class, "Sol Tier 5 Treasure Chest");
         GameRegistry.registerTileEntity(TileEntityTreasureChestTier6.class, "Sol Tier 6 Treasure Chest");

@@ -3,7 +3,7 @@ package mod.sol.planets.saturn.moons.titan.sky;
 import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import mod.sol.util.Reference;
+import mod.sol.Tags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.*;
@@ -22,7 +22,7 @@ import java.util.Random;
 
 @SideOnly(Side.CLIENT)
 public class SkyProviderTitan extends IRenderHandler {
-    private static final ResourceLocation overworldTexture = new ResourceLocation(Reference.MOD_ID, "textures/sky/planets/saturn.png");
+    private static final ResourceLocation overworldTexture = new ResourceLocation(Tags.MOD_ID, "textures/sky/planets/saturn.png");
     private static final ResourceLocation sunTexture = new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/planets/orbitalsun.png");
 
     public int starList;

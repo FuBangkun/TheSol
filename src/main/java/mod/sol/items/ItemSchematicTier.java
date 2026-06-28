@@ -6,7 +6,7 @@ import micdoodle8.mods.galacticraft.core.items.ISortableItem;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
 import mod.sol.TheSol;
-import mod.sol.util.Reference;
+import mod.sol.Tags;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -39,7 +39,7 @@ public class ItemSchematicTier extends ItemMetadataBase implements ISchematicIte
 
     @SideOnly(value = Side.CLIENT)
     public static void registerTextures(int tier) {
-        SchematicRegistry.registerTexture(new ResourceLocation(Reference.MOD_ID, "textures/items/schematic_t" + tier + ".png"));
+        SchematicRegistry.registerTexture(new ResourceLocation(Tags.MOD_ID, "textures/items/schematic_t" + tier + ".png"));
     }
 
     @Override
@@ -82,7 +82,7 @@ public class ItemSchematicTier extends ItemMetadataBase implements ISchematicIte
                     this,
                     meta,
                     new net.minecraft.client.renderer.block.model.ModelResourceLocation(
-                            new net.minecraft.util.ResourceLocation(mod.sol.util.Reference.MOD_ID, modelName),
+                            new net.minecraft.util.ResourceLocation(mod.sol.Tags.MOD_ID, modelName),
                             "inventory"
                     )
             );

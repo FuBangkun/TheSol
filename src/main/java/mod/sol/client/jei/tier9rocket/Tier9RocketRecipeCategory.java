@@ -7,15 +7,15 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import mod.sol.client.jei.SolJeiManager;
-import mod.sol.util.Reference;
+import mod.sol.Tags;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
 public class Tier9RocketRecipeCategory implements IRecipeCategory {
-    private static final ResourceLocation rocketGuiTexture = new ResourceLocation(Reference.MOD_ID, "textures/gui/schematic_rocket_t9_jei.png");
+    private static final ResourceLocation rocketGuiTexture = new ResourceLocation(Tags.MOD_ID, "textures/gui/schematic_rocket_t9_jei.png");
 
     @Nonnull
     private final IDrawable background;
@@ -24,7 +24,7 @@ public class Tier9RocketRecipeCategory implements IRecipeCategory {
 
     public Tier9RocketRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(rocketGuiTexture, 0, 0, 168, 126);
-        this.localizedName = GCCoreUtil.translate("tile.rocket_workbench.name");
+        this.localizedName = I18n.format("tile.rocket_workbench.name");
 
     }
 
@@ -80,6 +80,6 @@ public class Tier9RocketRecipeCategory implements IRecipeCategory {
 
     @Override
     public String getModName() {
-        return Reference.NAME;
+        return Tags.MOD_NAME;
     }
 }

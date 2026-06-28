@@ -136,5 +136,5 @@ public class SolBlocks {
     public static Block BOSS_SPAWNER_URANUS = new BlockBossSpawnerUranus("boss_spawner_uranus");
     public static Block BOSS_SPAWNER_NEPTUNE = new BlockBossSpawnerNeptune("boss_spawner_neptune");
     public static Block BOSS_SPAWNER_PLUTO = new BlockBossSpawnerPluto("boss_spawner_pluto");
-    public static Block BOSS_SPAWNER_SEDNA = new BlockBossSpawnerSedna("boss_spawner_sedna ");
+    public static Block BOSS_SPAWNER_SEDNA = new BlockBossSpawnerSedna("boss_spawner_sedna");
 }

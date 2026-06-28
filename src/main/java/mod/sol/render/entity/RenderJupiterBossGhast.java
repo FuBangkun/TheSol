@@ -1,7 +1,7 @@
 package mod.sol.render.entity;
 
 import mod.sol.entities.boss.EntityJupiterBossGhast;
-import mod.sol.util.Reference;
+import mod.sol.Tags;
 import net.minecraft.client.model.ModelGhast;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -12,8 +12,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderJupiterBossGhast extends RenderLiving<EntityJupiterBossGhast> {
-    private static final ResourceLocation GHAST_TEXTURES = new ResourceLocation(Reference.MOD_ID, "textures/entities/ghast/boss_ghast.png");
-    private static final ResourceLocation GHAST_SHOOTING_TEXTURES = new ResourceLocation(Reference.MOD_ID, "textures/entities/ghast/boss_ghast_shooting.png");
+    private static final ResourceLocation GHAST_TEXTURES = new ResourceLocation(Tags.MOD_ID, "textures/entities/ghast/boss_ghast.png");
+    private static final ResourceLocation GHAST_SHOOTING_TEXTURES = new ResourceLocation(Tags.MOD_ID, "textures/entities/ghast/boss_ghast_shooting.png");
 
     public RenderJupiterBossGhast(RenderManager renderManagerIn) {
         super(renderManagerIn, new ModelGhast(), 1F);

@@ -5,7 +5,7 @@ import micdoodle8.mods.galacticraft.core.items.ISortableItem;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
 import mod.sol.TheSol;
-import mod.sol.util.Reference;
+import mod.sol.Tags;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -51,7 +51,7 @@ public class ItemKeyTier extends ItemMetadataBase implements IKeyItem, ISortable
                     this,
                     meta,
                     new net.minecraft.client.renderer.block.model.ModelResourceLocation(
-                            new net.minecraft.util.ResourceLocation(Reference.MOD_ID, modelName),
+                            new net.minecraft.util.ResourceLocation(Tags.MOD_ID, modelName),
                             "inventory"
                     )
             );

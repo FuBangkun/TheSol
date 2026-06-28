@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RecipeUtilSol {
+public class RecipeUtil {
     private static final Map<Integer, List<INasaWorkbenchRecipe>> rocketBenchRecipes = new HashMap<>();
 
     static {

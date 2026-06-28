@@ -6,7 +6,7 @@ import micdoodle8.mods.galacticraft.core.world.gen.dungeon.DungeonConfiguration;
 import micdoodle8.mods.galacticraft.core.world.gen.dungeon.RoomTreasure;
 import mod.sol.blocks.BlockTier9TreasureChest;
 import mod.sol.init.SolBlocks;
-import mod.sol.util.Reference;
+import mod.sol.Tags;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -18,7 +18,7 @@ import net.minecraft.world.storage.loot.LootTableList;
 import java.util.Random;
 
 public class RoomTreasurePluto extends RoomTreasure {
-    public static ResourceLocation PLUTO_CHEST = new ResourceLocation(Reference.MOD_ID, "dungeon_tier_9");
+    public static ResourceLocation PLUTO_CHEST = new ResourceLocation(Tags.MOD_ID, "dungeon_tier_9");
 
     public static final ResourceLocation TABLE_TIER_9_DUNGEON = LootTableList.register(PLUTO_CHEST);
 

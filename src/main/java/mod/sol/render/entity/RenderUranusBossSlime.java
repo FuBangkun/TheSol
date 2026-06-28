@@ -2,7 +2,7 @@ package mod.sol.render.entity;
 
 import mod.sol.entities.boss.EntityUranusBossSlime;
 import mod.sol.render.layer.LayerUranusBossSlimeGel;
-import mod.sol.util.Reference;
+import mod.sol.Tags;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderUranusBossSlime extends RenderLiving<EntityUranusBossSlime> {
-    private static final ResourceLocation SLIME_TEXTURES = new ResourceLocation(Reference.MOD_ID, "textures/entities/slime_boss.png");
+    private static final ResourceLocation SLIME_TEXTURES = new ResourceLocation(Tags.MOD_ID, "textures/entities/slime_boss.png");
 
     public RenderUranusBossSlime(RenderManager p_i47193_1_) {
         super(p_i47193_1_, new ModelSlime(16), 0.25F);

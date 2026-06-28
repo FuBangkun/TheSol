@@ -1,4 +1,4 @@
-package mod.sol.render.model.entity;
+package mod.sol.render.model;
 
 import mod.sol.entities.boss.EntityBossMagmaCube;
 import net.minecraft.client.model.ModelBase;

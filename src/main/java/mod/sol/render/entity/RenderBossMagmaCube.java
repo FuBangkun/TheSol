@@ -1,8 +1,8 @@
 package mod.sol.render.entity;
 
 import mod.sol.entities.boss.EntityBossMagmaCube;
-import mod.sol.render.model.entity.ModelBossMagmaCube;
-import mod.sol.util.Reference;
+import mod.sol.render.model.ModelBossMagmaCube;
+import mod.sol.Tags;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderBossMagmaCube extends RenderLiving<EntityBossMagmaCube> {
-    private static final ResourceLocation MAGMA_CUBE_TEXTURES = new ResourceLocation(Reference.MOD_ID, "textures/entities/magmacube.png");
+    private static final ResourceLocation MAGMA_CUBE_TEXTURES = new ResourceLocation(Tags.MOD_ID, "textures/entities/magmacube.png");
 
     public RenderBossMagmaCube(RenderManager renderManagerIn) {
         super(renderManagerIn, new ModelBossMagmaCube(), 0.25F);

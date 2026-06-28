@@ -96,9 +96,6 @@ item.nose_cone_t9.name=九阶火箭鼻锥
 item.rocket_fins_t9.name=九阶火箭尾翼
 item.engine_booster_t9.name=九阶火箭助推器
 
-# Tier 10 Items
-item.warp_engine.name=曲速引擎
-
 # Keys
 item.key.t4.name=四阶地牢钥匙
 item.key.t5.name=五阶地牢钥匙

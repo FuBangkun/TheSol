@@ -4,7 +4,7 @@ import micdoodle8.mods.galacticraft.api.recipe.INasaWorkbenchRecipe;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple;
 import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import mod.sol.util.RecipeUtilSol;
+import mod.sol.util.RecipeUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
@@ -41,7 +41,7 @@ public class SlotSchematicRocket extends Slot {
         if (par1ItemStack == null)
             return false;
 
-        List<INasaWorkbenchRecipe> recipes = RecipeUtilSol.getRocketRecipes(tier);
+        List<INasaWorkbenchRecipe> recipes = RecipeUtil.getRocketRecipes(tier);
         for (INasaWorkbenchRecipe recipe : recipes) {
             if (ItemStack.areItemsEqual(par1ItemStack, recipe.getRecipeInput().get(this.index)))
                 return true;

@@ -6,7 +6,7 @@ import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
 import mod.sol.TheSol;
 import mod.sol.init.SolItems;
 import mod.sol.util.IHasModel;
-import mod.sol.util.Reference;
+import mod.sol.Tags;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -29,11 +29,11 @@ public class ItemArmorSulfur extends ItemArmor implements ISortableItem, IHasMod
     public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
         if (this.material == SolItems.ARMOR_SULFUR) {
             if (stack.getItem() == SolItems.SULFUR_HELMET) {
-                return Reference.MOD_ID + ":textures/model/sulfur_1.png";
+                return Tags.MOD_ID + ":textures/model/sulfur_1.png";
             } else if (stack.getItem() == SolItems.SULFUR_CHESTPLATE || stack.getItem() == SolItems.SULFUR_BOOTS) {
-                return Reference.MOD_ID + ":textures/model/sulfur_2.png";
+                return Tags.MOD_ID + ":textures/model/sulfur_2.png";
             } else if (stack.getItem() == SolItems.SULFUR_LEGGINGS) {
-                return Reference.MOD_ID + ":textures/model/sulfur_3.png";
+                return Tags.MOD_ID + ":textures/model/sulfur_3.png";
             }
         }
         return null;

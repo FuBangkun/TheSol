@@ -3,7 +3,7 @@ package mod.sol.planets.pluto.sky;
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import mod.sol.planets.pluto.dimension.WorldProviderPluto;
-import mod.sol.util.Reference;
+import mod.sol.Tags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.*;
@@ -18,7 +18,7 @@ import org.lwjgl.opengl.GL11;
 import java.util.Random;
 
 public class SkyProviderPluto extends IRenderHandler {
-    private static final ResourceLocation overworldTexture = new ResourceLocation(Reference.MOD_ID, "textures/planets/charon.png");
+    private static final ResourceLocation overworldTexture = new ResourceLocation(Tags.MOD_ID, "textures/planets/charon.png");
     private static final ResourceLocation sunTexture = new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/planets/orbitalsun.png");
 
     public int starGLCallList = GLAllocation.generateDisplayLists(3);

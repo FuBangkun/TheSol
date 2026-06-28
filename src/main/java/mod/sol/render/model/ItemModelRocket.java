@@ -1,4 +1,4 @@
-package mod.sol.render.model.item;
+package mod.sol.render.model;
 
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.util.ClientUtil;
@@ -11,8 +11,8 @@ import javax.vecmath.Matrix4f;
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
-public class ItemModelRocketT9 extends ModelTransformWrapper {
-    public ItemModelRocketT9(IBakedModel modelToWrap) {
+public class ItemModelRocket extends ModelTransformWrapper {
+    public ItemModelRocket(IBakedModel modelToWrap) {
         super(modelToWrap);
     }
 

@@ -2,7 +2,7 @@ package mod.sol.planets.mercury.sky;
 
 import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import mod.sol.util.Reference;
+import mod.sol.Tags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.*;
@@ -16,7 +16,7 @@ import org.lwjgl.opengl.GL12;
 import java.util.Random;
 
 public class SkyProviderMercury extends IRenderHandler {
-    private static final ResourceLocation sunTexture = new ResourceLocation(Reference.MOD_ID, "textures/sky/star/lightsun.png");
+    private static final ResourceLocation sunTexture = new ResourceLocation(Tags.MOD_ID, "textures/sky/star/lightsun.png");
 
     public int starList;
     public int glSkyList;

@@ -8,7 +8,7 @@ import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
 import mod.sol.TheSol;
 import mod.sol.init.SolItems;
 import mod.sol.util.IHasModel;
-import mod.sol.util.Reference;
+import mod.sol.Tags;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,7 +37,7 @@ public class ItemMagnetBoots extends ItemArmor implements IArmorGravity, ISortab
     public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
         if (this.material == ArmorMaterial.IRON) {
             if (stack.getItem() == SolItems.MAGNET_BOOTS) {
-                return Reference.MOD_ID + ":textures/model/magnet_boots.png";
+                return Tags.MOD_ID + ":textures/model/magnet_boots.png";
             }
         }
         return null;

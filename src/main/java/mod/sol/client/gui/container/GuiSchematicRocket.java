@@ -3,10 +3,10 @@ package mod.sol.client.gui.container;
 import micdoodle8.mods.galacticraft.api.recipe.ISchematicResultPage;
 import micdoodle8.mods.galacticraft.api.recipe.SchematicRegistry;
 import micdoodle8.mods.galacticraft.core.client.gui.container.GuiPositionedContainer;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import mod.sol.inventory.ContainerSchematicRocket;
-import mod.sol.util.Reference;
+import mod.sol.Tags;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,7 +22,7 @@ public class GuiSchematicRocket extends GuiPositionedContainer implements ISchem
     public GuiSchematicRocket(InventoryPlayer par1InventoryPlayer, BlockPos pos, int tier, Item rocketItem) {
         super(new ContainerSchematicRocket(par1InventoryPlayer, pos, tier), pos);
         this.ySize = 238;
-        this.schematicTexture = new ResourceLocation(Reference.MOD_ID, "textures/gui/schematic_rocket_t" + tier + ".png");
+        this.schematicTexture = new ResourceLocation(Tags.MOD_ID, "textures/gui/schematic_rocket_t" + tier + ".png");
         this.rocketItem = rocketItem;
     }
 
@@ -32,8 +32,8 @@ public class GuiSchematicRocket extends GuiPositionedContainer implements ISchem
     public void initGui() {
         super.initGui();
         this.buttonList.clear();
-        this.buttonList.add(new GuiButton(0, this.width / 2 - 130, this.height / 2 - 110, 40, 20, GCCoreUtil.translate("gui.button.back.name")));
-        this.buttonList.add(new GuiButton(1, this.width / 2 - 130, this.height / 2 - 110 + 25, 40, 20, GCCoreUtil.translate("gui.button.next.name")));
+        this.buttonList.add(new GuiButton(0, this.width / 2 - 130, this.height / 2 - 110, 40, 20, I18n.format("gui.button.back.name")));
+        this.buttonList.add(new GuiButton(1, this.width / 2 - 130, this.height / 2 - 110 + 25, 40, 20, I18n.format("gui.button.next.name")));
     }
 
     @Override
@@ -53,7 +53,7 @@ public class GuiSchematicRocket extends GuiPositionedContainer implements ISchem
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         this.fontRenderer.drawString(rocketItem.getItemStackDisplayName(new ItemStack(rocketItem, 1, 0)), 7, -20 + 27, 4210752);
-        this.fontRenderer.drawString(GCCoreUtil.translate("container.inventory"), 8, 220 - 104 + 2 + 27, 4210752);
+        this.fontRenderer.drawString(I18n.format("container.inventory"), 8, 220 - 104 + 2 + 27, 4210752);
     }
 
     @Override

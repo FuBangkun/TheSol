@@ -1,11 +1,11 @@
-newmtl tier4rocket
+newmtl tierrocket
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 d 1.000000
-map_Kd sol:rockets/tier4rocket
+map_Kd sol:rockets/tierrocket
 
-newmtl tier4rocket_tier4rocket.png
+newmtl tierrocket_tierrocket.png
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
 d 1.000000
-map_Kd sol:rockets/tier4rocket
+map_Kd sol:rockets/tierrocket

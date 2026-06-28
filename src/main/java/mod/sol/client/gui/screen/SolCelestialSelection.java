@@ -6,7 +6,6 @@ import micdoodle8.mods.galacticraft.api.galaxies.*;
 import micdoodle8.mods.galacticraft.api.recipe.SpaceStationRecipe;
 import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection;
 import micdoodle8.mods.galacticraft.core.util.ColorUtil;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 import mod.sol.api.galaxy.DwarfPlanet;
@@ -14,6 +13,7 @@ import mod.sol.api.galaxy.GasGiant;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.BufferUtils;
@@ -280,7 +280,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
             this.mc.renderEngine.bindTexture(guiMain0);
             GL11.glColor4f(0.0F, 0.6F, 1.0F, 1.0F);
             this.drawTexturedModalRect(this.width / 2 - 43, LHS, 86, 15, 266, 0, 172, 29, false, false);
-            str = GCCoreUtil.translate("gui.message.catalog.name").toUpperCase();
+            str = I18n.format("gui.message.catalog.name").toUpperCase();
             this.fontRenderer.drawString(str, this.width / 2 - this.fontRenderer.getStringWidth(str) / 2, LHS + this.fontRenderer.FONT_HEIGHT / 2, WHITE);
             if (this.selectedBody != null) {
                 this.mc.renderEngine.bindTexture(guiMain0);
@@ -291,7 +291,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                 }
 
                 this.drawTexturedModalRect(LHS, LHS, 88, 13, 0, 392, 148, 22, false, false);
-                str = GCCoreUtil.translate("gui.message.back.name").toUpperCase();
+                str = I18n.format("gui.message.back.name").toUpperCase();
                 this.fontRenderer.drawString(str, LHS + 45 - this.fontRenderer.getStringWidth(str) / 2, LHS + this.fontRenderer.FONT_HEIGHT / 2 - 2, WHITE);
                 this.mc.renderEngine.bindTexture(guiMain0);
                 if (mousePosX > RHS - 88 && mousePosX < RHS && mousePosY > LHS && mousePosY < LHS + 13) {
@@ -309,47 +309,47 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                 int posX2 = (int) ((float) LHS + Math.min(this.ticksSinceSelectionF * 1.25F, 15.0F) - 15.0F);
                 sliderPos = menuTopLeft + BORDER_EDGE_SIZE + this.fontRenderer.FONT_HEIGHT / 2 - 2;
                 this.drawTexturedModalRect(posX, menuTopLeft + 12, 133, 196, 0, 0, 266, 392, false, false);
-                str = GCCoreUtil.translate("gui.message.daynightcycle.name") + ":";
+                str = I18n.format("gui.message.daynightcycle.name") + ":";
                 this.fontRenderer.drawString(str, posX + 5, sliderPos + 14, CYAN);
-                str = GCCoreUtil.translate("gui.message." + this.selectedBody.getName() + ".daynightcycle.0.name");
+                str = I18n.format("gui.message." + this.selectedBody.getName() + ".daynightcycle.0.name");
                 this.fontRenderer.drawString(str, posX + 10, sliderPos + 25, WHITE);
-                str = GCCoreUtil.translate("gui.message." + this.selectedBody.getName() + ".daynightcycle.1.name");
+                str = I18n.format("gui.message." + this.selectedBody.getName() + ".daynightcycle.1.name");
                 if (!str.isEmpty()) {
                     this.fontRenderer.drawString(str, posX + 10, sliderPos + 36, WHITE);
                 }
 
-                str = GCCoreUtil.translate("gui.message.surfacegravity.name") + ":";
+                str = I18n.format("gui.message.surfacegravity.name") + ":";
                 this.fontRenderer.drawString(str, posX + 5, sliderPos + 50, CYAN);
-                str = GCCoreUtil.translate("gui.message." + this.selectedBody.getName() + ".surfacegravity.0.name");
+                str = I18n.format("gui.message." + this.selectedBody.getName() + ".surfacegravity.0.name");
                 this.fontRenderer.drawString(str, posX + 10, sliderPos + 61, WHITE);
-                str = GCCoreUtil.translate("gui.message." + this.selectedBody.getName() + ".surfacegravity.1.name");
+                str = I18n.format("gui.message." + this.selectedBody.getName() + ".surfacegravity.1.name");
                 if (!str.isEmpty()) {
                     this.fontRenderer.drawString(str, posX + 10, sliderPos + 72, WHITE);
                 }
 
-                str = GCCoreUtil.translate("gui.message.surfacecomposition.name") + ":";
+                str = I18n.format("gui.message.surfacecomposition.name") + ":";
                 this.fontRenderer.drawString(str, posX + 5, sliderPos + 88, CYAN);
-                str = GCCoreUtil.translate("gui.message." + this.selectedBody.getName() + ".surfacecomposition.0.name");
+                str = I18n.format("gui.message." + this.selectedBody.getName() + ".surfacecomposition.0.name");
                 this.fontRenderer.drawString(str, posX + 10, sliderPos + 99, WHITE);
-                str = GCCoreUtil.translate("gui.message." + this.selectedBody.getName() + ".surfacecomposition.1.name");
+                str = I18n.format("gui.message." + this.selectedBody.getName() + ".surfacecomposition.1.name");
                 if (!str.isEmpty()) {
                     this.fontRenderer.drawString(str, posX + 10, sliderPos + 110, WHITE);
                 }
 
-                str = GCCoreUtil.translate("gui.message.atmosphere.name") + ":";
+                str = I18n.format("gui.message.atmosphere.name") + ":";
                 this.fontRenderer.drawString(str, posX + 5, sliderPos + 126, CYAN);
-                str = GCCoreUtil.translate("gui.message." + this.selectedBody.getName() + ".atmosphere.0.name");
+                str = I18n.format("gui.message." + this.selectedBody.getName() + ".atmosphere.0.name");
                 this.fontRenderer.drawString(str, posX + 10, sliderPos + 137, WHITE);
-                str = GCCoreUtil.translate("gui.message." + this.selectedBody.getName() + ".atmosphere.1.name");
+                str = I18n.format("gui.message." + this.selectedBody.getName() + ".atmosphere.1.name");
                 if (!str.isEmpty()) {
                     this.fontRenderer.drawString(str, posX + 10, sliderPos + 148, WHITE);
                 }
 
-                str = GCCoreUtil.translate("gui.message.meansurfacetemp.name") + ":";
+                str = I18n.format("gui.message.meansurfacetemp.name") + ":";
                 this.fontRenderer.drawString(str, posX + 5, sliderPos + 165, CYAN);
-                str = GCCoreUtil.translate("gui.message." + this.selectedBody.getName() + ".meansurfacetemp.0.name");
+                str = I18n.format("gui.message." + this.selectedBody.getName() + ".meansurfacetemp.0.name");
                 this.fontRenderer.drawString(str, posX + 10, sliderPos + 176, WHITE);
-                str = GCCoreUtil.translate("gui.message." + this.selectedBody.getName() + ".meansurfacetemp.1.name");
+                str = I18n.format("gui.message." + this.selectedBody.getName() + ".meansurfacetemp.1.name");
                 if (!str.isEmpty()) {
                     this.fontRenderer.drawString(str, posX + 10, sliderPos + 187, WHITE);
                 }
@@ -362,7 +362,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
             this.mc.renderEngine.bindTexture(guiMain0);
             GL11.glColor4f(0.0F, 0.6F, 1.0F, 1.0F);
             this.drawTexturedModalRect(LHS, LHS, 74, 11, 0, 392, 148, 22, false, false);
-            str = GCCoreUtil.translate("gui.message.catalog.name").toUpperCase();
+            str = I18n.format("gui.message.catalog.name").toUpperCase();
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             this.fontRenderer.drawString(str, LHS + 40 - this.fontRenderer.getStringWidth(str) / 2, LHS + 1, WHITE);
             menuTopLeft = (int) Math.min(95.0F, this.ticksSinceMenuOpenF * 12.0F);
@@ -387,7 +387,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                 GL11.glColor4f(1.0F, 0.0F, 0.0F, 1.0F);
                 this.mc.renderEngine.bindTexture(guiMain0);
                 this.drawTexturedModalRect(RHS - 74, LHS, 74, 11, 0, 392, 148, 22, true, false);
-                str = GCCoreUtil.translate("gui.message.exit.name").toUpperCase();
+                str = I18n.format("gui.message.exit.name").toUpperCase();
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
                 this.fontRenderer.drawString(str, RHS - 40 - this.fontRenderer.getStringWidth(str) / 2, LHS + 1, WHITE);
             }
@@ -424,10 +424,10 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                     this.drawTexturedModalRect(RHS - 85, LHS + 49 + max * 14, 61, 4, 0, 239, 61, 4, false, true);
                     GL11.glColor4f(0.0F, 0.6F, 1.0F, 1.0F);
                     if (((Map<?, ?>) this.spaceStationMap.get(this.getSatelliteParentID(selectedSatellite))).get(this.selectedStationOwner) == null) {
-                        str = GCCoreUtil.translate("gui.message.select_ss.name");
+                        str = I18n.format("gui.message.select_ss.name");
                         this.drawSplitString(str, RHS - 47, LHS + 20, 91, WHITE, false, false);
                     } else {
-                        str = GCCoreUtil.translate("gui.message.ss_owner.name");
+                        str = I18n.format("gui.message.ss_owner.name");
                         this.fontRenderer.drawString(str, RHS - 85, LHS + 18, WHITE);
                         str = this.selectedStationOwner;
                         this.fontRenderer.drawString(str, RHS - 47 - this.fontRenderer.getStringWidth(str) / 2, LHS + 30, WHITE);
@@ -469,7 +469,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                 if (this.canCreateSpaceStation(this.selectedBody) && !(this.selectedBody instanceof Satellite)) {
                     GL11.glColor4f(0.0F, 0.6F, 1.0F, 1.0F);
                     this.mc.renderEngine.bindTexture(guiMain1);
-                    sliderPos = Math.max(0, this.drawSplitString(GCCoreUtil.translate("gui.message.can_create_space_station.name"), 0, 0, 91, 0, true, true) - 2);
+                    sliderPos = Math.max(0, this.drawSplitString(I18n.format("gui.message.can_create_space_station.name"), 0, 0, 91, 0, true, true) - 2);
                     this.canCreateOffset = sliderPos * this.fontRenderer.FONT_HEIGHT;
                     this.drawTexturedModalRect(RHS - 95, TOP + 134, 93, 4, 159, 102, 93, 4, false, false);
 
@@ -481,7 +481,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                     this.drawTexturedModalRect(RHS - 79, TOP + 129, 61, 4, 0, 170, 61, 4, false, false);
                     SpaceStationRecipe recipe = WorldUtil.getSpaceStationRecipe(this.selectedBody.getDimensionID());
                     if (recipe == null) {
-                        this.drawSplitString(GCCoreUtil.translate("gui.message.cannot_create_space_station.name"), RHS - 48, TOP + 138, 91, WHITE, true, false);
+                        this.drawSplitString(I18n.format("gui.message.cannot_create_space_station.name"), RHS - 48, TOP + 138, 91, WHITE, true, false);
                     } else {
                         GL11.glColor4f(0.0F, 1.0F, 0.1F, 1.0F);
                         validInputMaterials = true;
@@ -505,9 +505,9 @@ public class SolCelestialSelection extends GuiCelestialSelection {
 
                                     this.drawTexturedModalRect(RHS - 95, TOP + 182 + this.canCreateOffset, 93, 12, 0, 174, 93, 12, false, false);
                                     i = (int) ((Math.sin((double) this.ticksSinceMenuOpenF / 5.0D) * 0.5D + 0.5D) * 255.0D);
-                                    this.drawSplitString(GCCoreUtil.translate("gui.message.can_create_space_station.name"), RHS - 48, TOP + 137, 91, ColorUtil.to32BitColor(255, i, 255, i), true, false);
+                                    this.drawSplitString(I18n.format("gui.message.can_create_space_station.name"), RHS - 48, TOP + 137, 91, ColorUtil.to32BitColor(255, i, 255, i), true, false);
                                     if (!this.mapMode) {
-                                        this.drawSplitString(GCCoreUtil.translate("gui.message.create_ss.name").toUpperCase(), RHS - 48, TOP + 185 + this.canCreateOffset, 91, WHITE, false, false);
+                                        this.drawSplitString(I18n.format("gui.message.create_ss.name").toUpperCase(), RHS - 48, TOP + 185 + this.canCreateOffset, 91, WHITE, false, false);
                                     }
                                     break label412;
                                 }
@@ -658,7 +658,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                 this.mc.renderEngine.bindTexture(guiMain0);
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.3F - Math.min(0.3F, this.ticksSinceSelectionF / 50.0F));
                 this.drawTexturedModalRect(LHS, TOP, 74, 11, 0, 392, 148, 22, false, false);
-                str = GCCoreUtil.translate("gui.message.catalog.name").toUpperCase();
+                str = I18n.format("gui.message.catalog.name").toUpperCase();
                 this.fontRenderer.drawString(str, LHS + 40 - this.fontRenderer.getStringWidth(str) / 2, TOP + 1, WHITE);
                 this.mc.renderEngine.bindTexture(guiMain0);
                 GL11.glColor4f(0.0F, 0.6F, 1.0F, 1.0F);
@@ -686,13 +686,13 @@ public class SolCelestialSelection extends GuiCelestialSelection {
 
                     this.drawTexturedModalRect(this.width / 2 - 30, TOP + 11, 30, 11, 0, 414, 60, 22, false, false);
                     this.drawTexturedModalRect(this.width / 2, TOP + 11, 30, 11, 128, 414, 60, 22, false, false);
-                    str = GCCoreUtil.translateWithFormat("gui.message.tier.name", this.selectedBody.getTierRequirement() == 0 ? "?" : this.selectedBody.getTierRequirement());
+                    str = I18n.format("gui.message.tier.name", this.selectedBody.getTierRequirement() == 0 ? "?" : this.selectedBody.getTierRequirement());
                     this.fontRenderer.drawString(str, this.width / 2 - this.fontRenderer.getStringWidth(str) / 2, TOP + 13, canReach ? GREY4 : RED3);
                 }
 
                 str = this.selectedBody.getLocalizedName();
                 if (this.selectedBody instanceof Satellite) {
-                    str = GCCoreUtil.translate("gui.message.rename.name").toUpperCase();
+                    str = I18n.format("gui.message.rename.name").toUpperCase();
                 }
 
                 this.fontRenderer.drawString(str, this.width / 2 - this.fontRenderer.getStringWidth(str) / 2, TOP + 2, WHITE);
@@ -708,7 +708,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
 
                     this.mc.renderEngine.bindTexture(guiMain0);
                     this.drawTexturedModalRect(RHS - 74, TOP, 74, 11, 0, 392, 148, 22, true, false);
-                    str = GCCoreUtil.translate("gui.message.launch.name").toUpperCase();
+                    str = I18n.format("gui.message.launch.name").toUpperCase();
                     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
                     this.fontRenderer.drawString(str, RHS - 40 - this.fontRenderer.getStringWidth(str) / 2, TOP + 2, WHITE);
                 }
@@ -727,13 +727,13 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                     boolean flag0 = !GalaxyRegistry.getSatellitesForCelestialBody(this.selectedBody).isEmpty();
                     validInputMaterials = this.selectedBody instanceof Planet && !GalaxyRegistry.getMoonsForPlanet((Planet) this.selectedBody).isEmpty();
                     if (flag0 && validInputMaterials) {
-                        this.drawSplitString(GCCoreUtil.translate("gui.message.click_again.0.name"), RHS - 182 + 41, this.height - BORDER_SIZE - BORDER_EDGE_SIZE + 2 - sliderPos, 79, GREY5, false, false);
+                        this.drawSplitString(I18n.format("gui.message.click_again.0.name"), RHS - 182 + 41, this.height - BORDER_SIZE - BORDER_EDGE_SIZE + 2 - sliderPos, 79, GREY5, false, false);
                     } else if (!flag0 && validInputMaterials) {
-                        this.drawSplitString(GCCoreUtil.translate("gui.message.click_again.1.name"), RHS - 182 + 41, this.height - BORDER_SIZE - BORDER_EDGE_SIZE + 6 - sliderPos, 79, GREY5, false, false);
+                        this.drawSplitString(I18n.format("gui.message.click_again.1.name"), RHS - 182 + 41, this.height - BORDER_SIZE - BORDER_EDGE_SIZE + 6 - sliderPos, 79, GREY5, false, false);
                     } else if (flag0) {
-                        this.drawSplitString(GCCoreUtil.translate("gui.message.click_again.2.name"), RHS - 182 + 41, this.height - BORDER_SIZE - BORDER_EDGE_SIZE + 6 - sliderPos, 79, GREY5, false, false);
+                        this.drawSplitString(I18n.format("gui.message.click_again.2.name"), RHS - 182 + 41, this.height - BORDER_SIZE - BORDER_EDGE_SIZE + 6 - sliderPos, 79, GREY5, false, false);
                     } else {
-                        this.drawSplitString(GCCoreUtil.translate("gui.message.click_again.3.name"), RHS - 182 + 41, this.height - BORDER_SIZE - BORDER_EDGE_SIZE + 11 - sliderPos, 79, GREY5, false, false);
+                        this.drawSplitString(I18n.format("gui.message.click_again.3.name"), RHS - 182 + 41, this.height - BORDER_SIZE - BORDER_EDGE_SIZE + 11 - sliderPos, 79, GREY5, false, false);
                     }
                 }
 
@@ -746,11 +746,11 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                     this.drawTexturedModalRect(this.width / 2 - 90 + 8, this.height / 2 - 38 + 18, 161, 13, 159, 67, 161, 13, false, false);
                     this.drawTexturedModalRect(this.width / 2 - 90 + 17, this.height / 2 - 38 + 59, 72, 12, 159, 80, 72, 12, true, false);
                     this.drawTexturedModalRect(this.width / 2, this.height / 2 - 38 + 59, 72, 12, 159, 80, 72, 12, false, false);
-                    str = GCCoreUtil.translate("gui.message.assign_name.name");
+                    str = I18n.format("gui.message.assign_name.name");
                     this.fontRenderer.drawString(str, this.width / 2 - this.fontRenderer.getStringWidth(str) / 2, this.height / 2 - 35, WHITE);
-                    str = GCCoreUtil.translate("gui.message.apply.name");
+                    str = I18n.format("gui.message.apply.name");
                     this.fontRenderer.drawString(str, this.width / 2 - this.fontRenderer.getStringWidth(str) / 2 - 36, this.height / 2 + 23, WHITE);
-                    str = GCCoreUtil.translate("gui.message.cancel.name");
+                    str = I18n.format("gui.message.cancel.name");
                     this.fontRenderer.drawString(str, this.width / 2 + 36 - this.fontRenderer.getStringWidth(str) / 2, this.height / 2 + 23, WHITE);
                     if (this.renamingString == null) {
                         selectedSatellite = (Satellite) this.selectedBody;

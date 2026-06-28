@@ -1,7 +1,7 @@
 package mod.sol.inventory;
 
 import micdoodle8.mods.galacticraft.core.inventory.SlotRocketBenchResult;
-import mod.sol.util.RecipeUtilSol;
+import mod.sol.util.RecipeUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -92,7 +92,7 @@ public class ContainerSchematicRocket extends Container {
 
     @Override
     public void onCraftMatrixChanged(IInventory par1IInventory) {
-        this.craftResult.setInventorySlotContents(0, RecipeUtilSol.findMatchingSpaceshipRecipe(this.craftMatrix, tier));
+        this.craftResult.setInventorySlotContents(0, RecipeUtil.findMatchingSpaceshipRecipe(this.craftMatrix, tier));
     }
 
     @Override

@@ -2,7 +2,7 @@ package mod.sol.render.tile;
 
 import micdoodle8.mods.galacticraft.core.client.model.block.ModelTreasureChest;
 import mod.sol.tile.TileEntityTreasureChestTier10;
-import mod.sol.util.Reference;
+import mod.sol.Tags;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL12;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityTreasureTier10ChestRenderer extends TileEntitySpecialRenderer<TileEntityTreasureChestTier10> {
-    private static final ResourceLocation treasureChestTexture = new ResourceLocation(Reference.MOD_ID, "textures/model/treasure_t10.png");
+    private static final ResourceLocation treasureChestTexture = new ResourceLocation(Tags.MOD_ID, "textures/model/treasure_t10.png");
 
     private final ModelTreasureChest chestModel = new ModelTreasureChest();
 

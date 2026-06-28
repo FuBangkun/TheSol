@@ -96,9 +96,6 @@ item.nose_cone_t9.name=Tier 9 Nose Cone
 item.rocket_fins_t9.name=Tier 9 Rocket Fins
 item.engine_booster_t9.name=Tier 9 Booster
 
-# Tier 10 Items
-item.warp_engine.name=Warp Engine
-
 # Keys
 item.key.t4.name=Tier 4 Dungeon Key
 item.key.t5.name=Tier 5 Dungeon Key

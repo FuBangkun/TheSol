@@ -6,7 +6,7 @@ import micdoodle8.mods.galacticraft.core.world.gen.dungeon.DungeonConfiguration;
 import micdoodle8.mods.galacticraft.core.world.gen.dungeon.RoomTreasure;
 import mod.sol.blocks.BlockTier8TreasureChest;
 import mod.sol.init.SolBlocks;
-import mod.sol.util.Reference;
+import mod.sol.Tags;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -18,7 +18,7 @@ import net.minecraft.world.storage.loot.LootTableList;
 import java.util.Random;
 
 public class RoomTreasureNeptune extends RoomTreasure {
-    public static ResourceLocation NEPTUNE_CHEST = new ResourceLocation(Reference.MOD_ID, "dungeon_tier_8");
+    public static ResourceLocation NEPTUNE_CHEST = new ResourceLocation(Tags.MOD_ID, "dungeon_tier_8");
 
     public static final ResourceLocation TABLE_TIER_8_DUNGEON = LootTableList.register(NEPTUNE_CHEST);
 

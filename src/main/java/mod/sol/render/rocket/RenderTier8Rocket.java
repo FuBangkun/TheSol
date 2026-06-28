@@ -31,32 +31,25 @@ import org.lwjgl.opengl.GL11;
 import java.io.IOException;
 
 @SideOnly(Side.CLIENT)
-public class RenderTier8Rocket extends Render<EntityTier8Rocket>
-{
+public class RenderTier8Rocket extends Render<EntityTier8Rocket> {
     private OBJModel.OBJBakedModel rocketModel;
     private OBJModel.OBJBakedModel coneModel;
     private OBJModel.OBJBakedModel cubeModel;
 
-    public RenderTier8Rocket(RenderManager manager)
-    {
+    public RenderTier8Rocket(RenderManager manager) {
         super(manager);
         this.shadowSize = 2F;
     }
 
-    private void updateModel()
-    {
-        if (this.rocketModel == null)
-        {
-            try
-            {
+    private void updateModel() {
+        if (this.rocketModel == null) {
+            try {
                 IModel model = OBJLoaderGC.instance.loadModel(new ResourceLocation(Reference.MOD_ID, "tier8rocket.obj"));
                 Function<ResourceLocation, TextureAtlasSprite> spriteFunction = location -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(location.toString());
                 this.rocketModel = (OBJModel.OBJBakedModel) model.bake(new OBJModel.OBJState(ImmutableList.of("Boosters", "Rocket"), false), DefaultVertexFormats.ITEM, spriteFunction);
                 this.coneModel = (OBJModel.OBJBakedModel) model.bake(new OBJModel.OBJState(ImmutableList.of("NoseCone"), false), DefaultVertexFormats.ITEM, spriteFunction);
                 this.cubeModel = (OBJModel.OBJBakedModel) model.bake(new OBJModel.OBJState(ImmutableList.of("Cube"), false), DefaultVertexFormats.ITEM, spriteFunction);
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 //            Function<ResourceLocation, TextureAtlasSprite> textureGetter = new Function<ResourceLocation, TextureAtlasSprite>()
@@ -74,14 +67,12 @@ public class RenderTier8Rocket extends Render<EntityTier8Rocket>
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityTier8Rocket entity)
-    {
+    protected ResourceLocation getEntityTexture(EntityTier8Rocket entity) {
         return TextureMap.LOCATION_BLOCKS_TEXTURE;
     }
 
     @Override
-    public void doRender(EntityTier8Rocket entity, double x, double y, double z, float entityYaw, float partialTicks)
-    {
+    public void doRender(EntityTier8Rocket entity, double x, double y, double z, float entityYaw, float partialTicks) {
         float pitch = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks + 180;
         GlStateManager.disableRescaleNormal();
         GlStateManager.pushMatrix();
@@ -91,8 +82,7 @@ public class RenderTier8Rocket extends Render<EntityTier8Rocket>
         GlStateManager.translate(0.0F, entity.getRenderOffsetY(), 0.0F);
         float rollAmplitude = entity.rollAmplitude / 3 - partialTicks;
 
-        if (rollAmplitude > 0.0F)
-        {
+        if (rollAmplitude > 0.0F) {
             final float i = entity.getLaunched() ? (5 - MathHelper.floor(entity.timeUntilLaunch / 85)) / 10F : 0.3F;
             GlStateManager.rotate(MathHelper.sin(rollAmplitude) * rollAmplitude * i * partialTicks, 1.0F, 0.0F, 0.0F);
             GlStateManager.rotate(MathHelper.sin(rollAmplitude) * rollAmplitude * i * partialTicks, 1.0F, 0.0F, 1.0F);
@@ -101,29 +91,23 @@ public class RenderTier8Rocket extends Render<EntityTier8Rocket>
         this.updateModel();
         this.bindEntityTexture(entity);
 
-        if (Minecraft.isAmbientOcclusionEnabled())
-        {
+        if (Minecraft.isAmbientOcclusionEnabled()) {
             GlStateManager.shadeModel(GL11.GL_SMOOTH);
-        }
-        else
-        {
+        } else {
             GlStateManager.shadeModel(GL11.GL_FLAT);
         }
 
-		GlStateManager.scale(-1.0F, -1.0F, 1.0F);
-		GlStateManager.scale(0.8F, 0.8F, 0.8F);
+        GlStateManager.scale(-1.0F, -1.0F, 1.0F);
+        GlStateManager.scale(0.8F, 0.8F, 0.8F);
         ClientUtil.drawBakedModel(this.rocketModel);
 
         Vector3 teamColor = ClientUtil.updateTeamColor(PlayerUtil.getName(FMLClientHandler.instance().getClient().player), true);
 
-        if (teamColor != null)
-        {
-            int color = ColorUtil.to32BitColor(255, (int)(teamColor.floatZ() * 255), (int)(teamColor.floatY() * 255), (int)(teamColor.floatX() * 255));
+        if (teamColor != null) {
+            int color = ColorUtil.to32BitColor(255, (int) (teamColor.floatZ() * 255), (int) (teamColor.floatY() * 255), (int) (teamColor.floatX() * 255));
             GlStateManager.disableTexture2D();
             ClientUtil.drawBakedModelColored(coneModel, color);
-        }
-        else
-        {
+        } else {
             ClientUtil.drawBakedModel(coneModel);
             GlStateManager.disableTexture2D();
         }
@@ -143,8 +127,7 @@ public class RenderTier8Rocket extends Render<EntityTier8Rocket>
     }
 
     @Override
-    public boolean shouldRender(EntityTier8Rocket rocket, ICamera camera, double camX, double camY, double camZ)
-    {
+    public boolean shouldRender(EntityTier8Rocket rocket, ICamera camera, double camX, double camY, double camZ) {
         AxisAlignedBB axisalignedbb = rocket.getEntityBoundingBox().grow(0.5D, 0, 0.5D);
         return rocket.isInRangeToRender3d(camX, camY, camZ) && camera.isBoundingBoxInFrustum(axisalignedbb);
     }

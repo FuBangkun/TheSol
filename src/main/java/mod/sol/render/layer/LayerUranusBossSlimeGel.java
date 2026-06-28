@@ -10,20 +10,16 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class LayerUranusBossSlimeGel implements LayerRenderer<EntityUranusBossSlime>
-{
+public class LayerUranusBossSlimeGel implements LayerRenderer<EntityUranusBossSlime> {
     private final RenderUranusBossSlime slimeRenderer;
     private final ModelBase slimeModel = new ModelSlime(0);
 
-    public LayerUranusBossSlimeGel(RenderUranusBossSlime slimeRendererIn)
-    {
+    public LayerUranusBossSlimeGel(RenderUranusBossSlime slimeRendererIn) {
         this.slimeRenderer = slimeRendererIn;
     }
 
-    public void doRenderLayer(EntityUranusBossSlime entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)
-    {
-        if (!entitylivingbaseIn.isInvisible())
-        {
+    public void doRenderLayer(EntityUranusBossSlime entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+        if (!entitylivingbaseIn.isInvisible()) {
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             GlStateManager.enableNormalize();
             GlStateManager.enableBlend();
@@ -35,8 +31,7 @@ public class LayerUranusBossSlimeGel implements LayerRenderer<EntityUranusBossSl
         }
     }
 
-    public boolean shouldCombineTextures()
-    {
+    public boolean shouldCombineTextures() {
         return true;
     }
 }

@@ -9,15 +9,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBlockBaseSol extends ItemBlock {
-	public ItemBlockBaseSol(Block block) 
-	{
-		super(block);
-	}
-	
-	@Override
+    public ItemBlockBaseSol(Block block) {
+        super(block);
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
         return ClientProxyCore.galacticraftItem;
     }
 }

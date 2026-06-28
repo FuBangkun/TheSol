@@ -1,38 +1,23 @@
 package mod.sol.planets.kuiper_belt.dimension;
 
-import java.util.Random;
-import micdoodle8.mods.galacticraft.api.entity.IRocketType.EnumRocketType;
-import micdoodle8.mods.galacticraft.api.recipe.SchematicRegistry;
 import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.api.world.ITeleportType;
-import micdoodle8.mods.galacticraft.core.GCItems;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
 import micdoodle8.mods.galacticraft.core.util.CompatibilityManager;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
 import micdoodle8.mods.galacticraft.planets.asteroids.entities.EntityEntryPod;
-import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
-import micdoodle8.mods.galacticraft.planets.mars.blocks.MarsBlocks;
-import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.init.PotionTypes;
-import net.minecraft.item.ItemMonsterPlacer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionUtils;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.ChunkProviderServer;
+
+import java.util.Random;
 
 public class TeleportTypeKuiperBelt implements ITeleportType {
     public TeleportTypeKuiperBelt() {
@@ -75,7 +60,7 @@ public class TeleportTypeKuiperBelt implements ITeleportType {
             do {
                 BlockVec3 bv3 = null;
                 if (world.provider instanceof WorldProviderKuiperBelt) {
-                    bv3 = ((WorldProviderKuiperBelt)world.provider).getClosestAsteroidXZ(x, 0, z, true);
+                    bv3 = ((WorldProviderKuiperBelt) world.provider).getClosestAsteroidXZ(x, 0, z, true);
                 }
 
                 if (bv3 != null) {
@@ -90,45 +75,45 @@ public class TeleportTypeKuiperBelt implements ITeleportType {
                     this.loadChunksAround(bv3.x, bv3.z, 2, world.getChunkProvider());
                     this.loadChunksAround(bv3.x, bv3.z, -3, world.getChunkProvider());
                     if (this.goodAsteroidEntry(world, bv3.x, bv3.y, bv3.z)) {
-                        return new Vector3((double)bv3.x, 310.0D, (double)bv3.z);
+                        return new Vector3((double) bv3.x, 310.0D, (double) bv3.z);
                     }
 
                     if (this.goodAsteroidEntry(world, bv3.x + 2, bv3.y, bv3.z + 2)) {
-                        return new Vector3((double)(bv3.x + 2), 310.0D, (double)(bv3.z + 2));
+                        return new Vector3((double) (bv3.x + 2), 310.0D, (double) (bv3.z + 2));
                     }
 
                     if (this.goodAsteroidEntry(world, bv3.x + 2, bv3.y, bv3.z - 2)) {
-                        return new Vector3((double)(bv3.x + 2), 310.0D, (double)(bv3.z - 2));
+                        return new Vector3((double) (bv3.x + 2), 310.0D, (double) (bv3.z - 2));
                     }
 
                     if (this.goodAsteroidEntry(world, bv3.x - 2, bv3.y, bv3.z - 2)) {
-                        return new Vector3((double)(bv3.x - 2), 310.0D, (double)(bv3.z - 2));
+                        return new Vector3((double) (bv3.x - 2), 310.0D, (double) (bv3.z - 2));
                     }
 
                     if (this.goodAsteroidEntry(world, bv3.x - 2, bv3.y, bv3.z + 2)) {
-                        return new Vector3((double)(bv3.x - 2), 310.0D, (double)(bv3.z + 2));
+                        return new Vector3((double) (bv3.x - 2), 310.0D, (double) (bv3.z + 2));
                     }
 
                     if (ConfigManagerCore.enableDebug) {
                         GCLog.info("Removing drilled out asteroid at x" + bv3.x + " z" + bv3.z);
                     }
 
-                    ((WorldProviderKuiperBelt)world.provider).removeAsteroid(bv3.x, bv3.y, bv3.z);
+                    ((WorldProviderKuiperBelt) world.provider).removeAsteroid(bv3.x, bv3.y, bv3.z);
                 }
 
                 ++attemptCount;
-            } while(attemptCount < 5);
+            } while (attemptCount < 5);
 
             GCLog.info("Failed to find good large asteroid landing spot! Falling back to making a small one.");
             this.makeSmallLandingSpot(world, x, z);
-            return new Vector3((double)x, 310.0D, (double)z);
+            return new Vector3((double) x, 310.0D, (double) z);
         }
     }
 
     private boolean goodAsteroidEntry(World world, int x, int yorig, int z) {
-        for(int k = 208; k > 48; --k) {
+        for (int k = 208; k > 48; --k) {
             if (!world.isAirBlock(new BlockPos(x, k, z)) && Math.abs(k - yorig) <= 20) {
-                for(int y = k + 2; y < 256; ++y) {
+                for (int y = k + 2; y < 256; ++y) {
                     if (world.getBlockState(new BlockPos(x, y, z)).getBlock() == AsteroidBlocks.blockBasic) {
                         world.setBlockToAir(new BlockPos(x, y, z));
                     }
@@ -158,9 +143,9 @@ public class TeleportTypeKuiperBelt implements ITeleportType {
     }
 
     private void makeSmallLandingSpot(World world, int x, int z) {
-        this.loadChunksAround(x, z, -1, (ChunkProviderServer)world.getChunkProvider());
+        this.loadChunksAround(x, z, -1, (ChunkProviderServer) world.getChunkProvider());
 
-        for(int k = 255; k > 48; --k) {
+        for (int k = 255; k > 48; --k) {
             if (!world.isAirBlock(new BlockPos(x, k, z))) {
                 this.makePlatform(world, x, k - 1, z);
                 return;
@@ -202,16 +187,16 @@ public class TeleportTypeKuiperBelt implements ITeleportType {
     private void makePlatform(World world, int x, int y, int z) {
         int xx;
         int zz;
-        for(xx = -3; xx < 3; ++xx) {
-            for(zz = -3; zz < 3; ++zz) {
+        for (xx = -3; xx < 3; ++xx) {
+            for (zz = -3; zz < 3; ++zz) {
                 if ((xx != -3 || zz != -3 && zz != 2) && (xx != 2 || zz != -3 && zz != 2)) {
                     this.doBlock(world, x + xx, y, z + zz);
                 }
             }
         }
 
-        for(xx = -2; xx < 2; ++xx) {
-            for(zz = -2; zz < 2; ++zz) {
+        for (xx = -2; xx < 2; ++xx) {
+            for (zz = -2; zz < 2; ++zz) {
                 this.doBlock(world, x + xx, y - 1, z + zz);
             }
         }
@@ -223,7 +208,7 @@ public class TeleportTypeKuiperBelt implements ITeleportType {
     }
 
     private void doBlock(World world, int x, int y, int z) {
-        int meta = (int)(world.rand.nextFloat() * 1.5F);
+        int meta = (int) (world.rand.nextFloat() * 1.5F);
         if (world.isAirBlock(new BlockPos(x, y, z))) {
             world.setBlockState(new BlockPos(x, y, z), AsteroidBlocks.blockBasic.getStateFromMeta(meta), 2);
         }
@@ -241,13 +226,13 @@ public class TeleportTypeKuiperBelt implements ITeleportType {
     private void preGenChunks(World w, int cx, int cz) {
         this.preGenChunk(w, cx, cz);
 
-        for(int r = 1; r < 3; ++r) {
+        for (int r = 1; r < 3; ++r) {
             int xmin = cx - r;
             int xmax = cx + r;
             int zmin = cz - r;
             int zmax = cz + r;
 
-            for(int i = -r; i < r; ++i) {
+            for (int i = -r; i < r; ++i) {
                 this.preGenChunk(w, xmin, cz + i);
                 this.preGenChunk(w, xmax, cz - i);
                 this.preGenChunk(w, cx - i, zmin);
@@ -258,7 +243,7 @@ public class TeleportTypeKuiperBelt implements ITeleportType {
     }
 
     private void preGenChunk(World w, int chunkX, int chunkZ) {
-        w.getChunkFromChunkCoords(chunkX, chunkZ);
+        w.getChunk(chunkX, chunkZ);
     }
 
     public void onSpaceDimensionChanged(World newWorld, EntityPlayerMP player, boolean ridingAutoRocket) {
@@ -271,10 +256,10 @@ public class TeleportTypeKuiperBelt implements ITeleportType {
 
                 if (!newWorld.isRemote) {
                     EntityEntryPod entryPod = new EntityEntryPod(player);
-                    boolean previous = CompatibilityManager.forceLoadChunks((WorldServer)newWorld);
+                    boolean previous = CompatibilityManager.forceLoadChunks((WorldServer) newWorld);
                     entryPod.forceSpawn = true;
                     newWorld.spawnEntity(entryPod);
-                    CompatibilityManager.forceLoadChunksEnd((WorldServer)newWorld, previous);
+                    CompatibilityManager.forceLoadChunksEnd((WorldServer) newWorld, previous);
                 }
 
                 stats.setTeleportCooldown(10);

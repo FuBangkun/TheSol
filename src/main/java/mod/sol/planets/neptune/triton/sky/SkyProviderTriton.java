@@ -5,23 +5,18 @@ import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import mod.sol.planets.jupiter.moons.io.dimension.WorldProviderIo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.client.renderer.GLAllocation;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.client.FMLClientHandler;
-
 import org.lwjgl.opengl.GL11;
+
 import java.util.Random;
 
-public class SkyProviderTriton extends IRenderHandler
-{
+public class SkyProviderTriton extends IRenderHandler {
     private static final ResourceLocation overworldTexture = new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/celestialbodies/neptune.png");
     private static final ResourceLocation sunTexture = new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/planets/orbitalsun.png");
 
@@ -29,8 +24,7 @@ public class SkyProviderTriton extends IRenderHandler
     public int glSkyList;
     public int glSkyList2;
 
-    public SkyProviderTriton()
-    {
+    public SkyProviderTriton() {
         GL11.glPushMatrix();
         GL11.glNewList(this.starGLCallList, GL11.GL_COMPILE);
         this.renderStars();
@@ -44,10 +38,8 @@ public class SkyProviderTriton extends IRenderHandler
         float f = 16F;
         BufferBuilder worldRenderer = tessellator.getBuffer();
 
-        for (int j = -byte2 * i; j <= byte2 * i; j += byte2)
-        {
-            for (int l = -byte2 * i; l <= byte2 * i; l += byte2)
-            {
+        for (int j = -byte2 * i; j <= byte2 * i; j += byte2) {
+            for (int l = -byte2 * i; l <= byte2 * i; l += byte2) {
                 worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
                 worldRenderer.pos(j + 0, f, l + 0).endVertex();
                 worldRenderer.pos(j + byte2, f, l + 0).endVertex();
@@ -63,10 +55,8 @@ public class SkyProviderTriton extends IRenderHandler
         f = -16F;
         worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
 
-        for (int k = -byte2 * i; k <= byte2 * i; k += byte2)
-        {
-            for (int i1 = -byte2 * i; i1 <= byte2 * i; i1 += byte2)
-            {
+        for (int k = -byte2 * i; k <= byte2 * i; k += byte2) {
+            for (int i1 = -byte2 * i; i1 <= byte2 * i; i1 += byte2) {
                 worldRenderer.pos(k + byte2, f, i1 + 0).endVertex();
                 worldRenderer.pos(k + 0, f, i1 + 0).endVertex();
                 worldRenderer.pos(k + 0, f, i1 + byte2).endVertex();
@@ -79,12 +69,10 @@ public class SkyProviderTriton extends IRenderHandler
     }
 
     @Override
-    public void render(float partialTicks, WorldClient world, Minecraft mc)
-    {
+    public void render(float partialTicks, WorldClient world, Minecraft mc) {
         WorldProviderIo gcProvider = null;
 
-        if (world.provider instanceof WorldProviderIo)
-        {
+        if (world.provider instanceof WorldProviderIo) {
             gcProvider = (WorldProviderIo) world.provider;
         }
 
@@ -107,13 +95,11 @@ public class SkyProviderTriton extends IRenderHandler
 
         float var20 = 0;
 
-        if (gcProvider != null)
-        {
+        if (gcProvider != null) {
             var20 = gcProvider.getStarBrightness(partialTicks);
         }
 
-        if (var20 > 0.0F)
-        {
+        if (var20 > 0.0F) {
             GL11.glPushMatrix();
             GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
             GL11.glRotatef(world.getCelestialAngle(partialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
@@ -190,8 +176,7 @@ public class SkyProviderTriton extends IRenderHandler
         GL11.glColor3f(0.0F, 0.0F, 0.0F);
         final double var25 = mc.player.getPosition().getY() - world.getHorizon();
 
-        if (var25 < 0.0D)
-        {
+        if (var25 < 0.0D) {
             GL11.glPushMatrix();
             GL11.glTranslatef(0.0F, 12.0F, 0.0F);
             GL11.glCallList(this.glSkyList2);
@@ -237,23 +222,20 @@ public class SkyProviderTriton extends IRenderHandler
         GL11.glDisable(GL11.GL_BLEND);
     }
 
-    private void renderStars()
-    {
+    private void renderStars() {
         final Random var1 = new Random(10842L);
         final Tessellator var2 = Tessellator.getInstance();
         BufferBuilder worldRenderer = var2.getBuffer();
         worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
 
-        for (int var3 = 0; var3 < (ConfigManagerCore.moreStars ? 20000 : 6000); ++var3)
-        {
+        for (int var3 = 0; var3 < (ConfigManagerCore.moreStars ? 20000 : 6000); ++var3) {
             double var4 = var1.nextFloat() * 2.0F - 1.0F;
             double var6 = var1.nextFloat() * 2.0F - 1.0F;
             double var8 = var1.nextFloat() * 2.0F - 1.0F;
             final double var10 = 0.15F + var1.nextFloat() * 0.1F;
             double var12 = var4 * var4 + var6 * var6 + var8 * var8;
 
-            if (var12 < 1.0D && var12 > 0.01D)
-            {
+            if (var12 < 1.0D && var12 > 0.01D) {
                 var12 = 1.0D / Math.sqrt(var12);
                 var4 *= var12;
                 var6 *= var12;
@@ -271,8 +253,7 @@ public class SkyProviderTriton extends IRenderHandler
                 final double var34 = Math.sin(var32);
                 final double var36 = Math.cos(var32);
 
-                for (int var38 = 0; var38 < 4; ++var38)
-                {
+                for (int var38 = 0; var38 < 4; ++var38) {
                     final double var39 = 0.0D;
                     final double var41 = ((var38 & 2) - 1) * var10;
                     final double var43 = ((var38 + 1 & 2) - 1) * var10;
@@ -290,23 +271,19 @@ public class SkyProviderTriton extends IRenderHandler
         var2.draw();
     }
 
-    private Vec3d getCustomSkyColor()
-    {
+    private Vec3d getCustomSkyColor() {
         return new Vec3d(0.26796875D, 0.1796875D, 0.0D);
     }
 
-    public float getSkyBrightness(float par1)
-    {
+    public float getSkyBrightness(float par1) {
         final float var2 = FMLClientHandler.instance().getClient().world.getCelestialAngle(par1);
         float var3 = 1.0F - (MathHelper.sin(var2 * Constants.twoPI) * 2.0F + 0.25F);
 
-        if (var3 < 0.0F)
-        {
+        if (var3 < 0.0F) {
             var3 = 0.0F;
         }
 
-        if (var3 > 1.0F)
-        {
+        if (var3 > 1.0F) {
             var3 = 1.0F;
         }
 

@@ -23,84 +23,73 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemSchematicTier8 extends ItemSchematic implements ISchematicItem, ISortableItem, IHasModel
-{
+public class ItemSchematicTier8 extends ItemSchematic implements ISchematicItem, ISortableItem, IHasModel {
     private static int indexOffset = 0;
 
-    public ItemSchematicTier8(String name)
-    {
+    public ItemSchematicTier8(String name) {
         super("schematic");
         this.setHasSubtypes(false);
         this.setRegistryName(name);
-        this.setUnlocalizedName(name);
-        
-		SolItems.ITEMS.add(this);
-    }
-    
-    @Override
-    @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
-        return ClientProxyCore.galacticraftItem;
-    }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public CreativeTabs getCreativeTab()
-    {
-        return TheSol.ITEM_TAB;
-    }
-    
-    @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list)
-    {
-        if (tab == TheSol.ITEM_TAB || tab == CreativeTabs.SEARCH)
-        {
-            list.add(new ItemStack(this, 1));
-        }
-    }
-    
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack par1ItemStack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
-    {
+        this.setTranslationKey(name);
+
+        SolItems.ITEMS.add(this);
     }
 
-    @Override
-    public EnumSortCategoryItem getCategory(int meta)
-    {
-        return EnumSortCategoryItem.SCHEMATIC;
-    }
-    
-    /** 
-     *  Higher tiers should use this form and make sure they have set up the
-     *  indexOffset correctly in registerSchematicItems()
-     */
-    @Override
-    protected int getIndex(int damage)
-    {
-        return damage + indexOffset;
-    }
-    
     /**
      * Make sure the number of these will match the index values
      */
-    public static void registerSchematicItems()
-    {
+    public static void registerSchematicItems() {
         indexOffset = SchematicRegistry.registerSchematicItem(new ItemStack(SolItems.SCHEMATIC_T8, 1, 0));
     }
 
     /**
      * Make sure the order of these will match the index values
      */
-    @SideOnly(value=Side.CLIENT)
-    public static void registerTextures()
-    {
+    @SideOnly(value = Side.CLIENT)
+    public static void registerTextures() {
         SchematicRegistry.registerTexture(new ResourceLocation(Reference.MOD_ID, "textures/items/schematic_rocket_t8.png"));
     }
-    
+
     @Override
-	public void registerModels() {
-		TheSol.proxy.registerItemRenderer(this, 0, "inventory");
-	}
+    @SideOnly(Side.CLIENT)
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
+        return ClientProxyCore.galacticraftItem;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public CreativeTabs getCreativeTab() {
+        return TheSol.ITEM_TAB;
+    }
+
+    @Override
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
+        if (tab == TheSol.ITEM_TAB || tab == CreativeTabs.SEARCH) {
+            list.add(new ItemStack(this, 1));
+        }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack par1ItemStack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+    }
+
+    @Override
+    public EnumSortCategoryItem getCategory(int meta) {
+        return EnumSortCategoryItem.SCHEMATIC;
+    }
+
+    /**
+     * Higher tiers should use this form and make sure they have set up the
+     * indexOffset correctly in registerSchematicItems()
+     */
+    @Override
+    protected int getIndex(int damage) {
+        return damage + indexOffset;
+    }
+
+    @Override
+    public void registerModels() {
+        TheSol.proxy.registerItemRenderer(this, 0, "inventory");
+    }
 }

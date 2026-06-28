@@ -1,6 +1,5 @@
 package mod.sol.items.tools;
 
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.items.ISortableItem;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
@@ -14,37 +13,32 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemShovelBase extends ItemSpade implements ISortableItem, IHasModel
-{
-    public ItemShovelBase(ToolMaterial par2EnumToolMaterial)
-    {
+public class ItemShovelBase extends ItemSpade implements ISortableItem, IHasModel {
+    public ItemShovelBase(ToolMaterial par2EnumToolMaterial) {
         super(par2EnumToolMaterial);
-        
-		SolItems.ITEMS.add(this);
+
+        SolItems.ITEMS.add(this);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
         return ClientProxyCore.galacticraftItem;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public CreativeTabs getCreativeTab()
-    {
+    public CreativeTabs getCreativeTab() {
         return TheSol.ITEM_TAB;
     }
 
     @Override
-    public EnumSortCategoryItem getCategory(int meta)
-    {
+    public EnumSortCategoryItem getCategory(int meta) {
         return EnumSortCategoryItem.TOOLS;
     }
-    
+
     @Override
-	public void registerModels() {
-		TheSol.proxy.registerItemRenderer(this, 0, "inventory");
-	}
+    public void registerModels() {
+        TheSol.proxy.registerItemRenderer(this, 0, "inventory");
+    }
 }

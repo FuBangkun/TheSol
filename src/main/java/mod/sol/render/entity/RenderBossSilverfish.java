@@ -11,33 +11,28 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderBossSilverfish extends RenderLiving<EntityBossSilverfish>
-{
+public class RenderBossSilverfish extends RenderLiving<EntityBossSilverfish> {
     private static final ResourceLocation SILVERFISH_TEXTURES = new ResourceLocation(Reference.MOD_ID, "textures/entities/silverfish.png");
 
-    public RenderBossSilverfish(RenderManager renderManagerIn)
-    {
+    public RenderBossSilverfish(RenderManager renderManagerIn) {
         super(renderManagerIn, new ModelSilverfish(), 2.4F);
     }
 
-    protected float getDeathMaxRotation(EntityBossSilverfish entityLivingBaseIn)
-    {
+    protected float getDeathMaxRotation(EntityBossSilverfish entityLivingBaseIn) {
         return 180.0F;
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(EntityBossSilverfish entity)
-    {
+    protected ResourceLocation getEntityTexture(EntityBossSilverfish entity) {
         return SILVERFISH_TEXTURES;
     }
 
     /**
      * Allows the render to do state modifications necessary before the model is rendered.
      */
-    protected void preRenderCallback(EntityBossSilverfish entitylivingbaseIn, float partialTickTime)
-    {
+    protected void preRenderCallback(EntityBossSilverfish entitylivingbaseIn, float partialTickTime) {
         float f = 1.0F;
         float f1 = 4.5F;
         float f2 = 4.5F;

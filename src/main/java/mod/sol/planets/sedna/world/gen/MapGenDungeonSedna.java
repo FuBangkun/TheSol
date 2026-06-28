@@ -4,31 +4,23 @@ import micdoodle8.mods.galacticraft.core.world.gen.dungeon.DungeonConfiguration;
 import micdoodle8.mods.galacticraft.core.world.gen.dungeon.MapGenDungeon;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 
-public class MapGenDungeonSedna extends MapGenDungeon
-{
+public class MapGenDungeonSedna extends MapGenDungeon {
     private static boolean initialized;
 
-    static
-    {
-        try
-        {
+    static {
+        try {
             MapGenDungeonSedna.initiateStructures();
-        }
-        catch (Throwable e)
-        {
+        } catch (Throwable e) {
 
         }
     }
 
-    public MapGenDungeonSedna(DungeonConfiguration configuration)
-    {
+    public MapGenDungeonSedna(DungeonConfiguration configuration) {
         super(configuration);
     }
 
-    public static void initiateStructures() throws Throwable
-    {
-        if (!MapGenDungeonSedna.initialized)
-        {
+    public static void initiateStructures() throws Throwable {
+        if (!MapGenDungeonSedna.initialized) {
             MapGenStructureIO.registerStructureComponent(RoomBossSedna.class, "SednaDungeonBossRoom");
             MapGenStructureIO.registerStructureComponent(RoomTreasureSedna.class, "SednaDungeonTreasureRoom");
         }

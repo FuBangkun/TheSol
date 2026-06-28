@@ -22,7 +22,6 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateGround;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.BossInfo;
@@ -33,8 +32,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-public class EntityBossMagmaCube extends EntityBossBase implements IMob, IEntityBreathable
-{
+public class EntityBossMagmaCube extends EntityBossBase implements IMob, IEntityBreathable {
     protected int attackTimer = 0;
 
     public EntityBossMagmaCube(World worldIn) {
@@ -78,11 +76,10 @@ public class EntityBossMagmaCube extends EntityBossBase implements IMob, IEntity
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-            return SoundEvents.ENTITY_SLIME_ATTACK;
+        return SoundEvents.ENTITY_SLIME_ATTACK;
     }
 
-    protected void initEntityAI()
-    {
+    protected void initEntityAI() {
         this.tasks.addTask(1, new EntityBossMagmaCube.AISlimeFloat(this));
         this.tasks.addTask(2, new EntityBossMagmaCube.AISlimeAttack(this));
         this.tasks.addTask(3, new EntityBossMagmaCube.AISlimeFaceRandom(this));
@@ -92,15 +89,15 @@ public class EntityBossMagmaCube extends EntityBossBase implements IMob, IEntity
     }
 
     @Override
-    protected void applyEntityAttributes()
-    {
+    protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         double difficulty = 0.75;
-        switch (this.world.getDifficulty())
-        {
-            case HARD : difficulty = 1.25D;
+        switch (this.world.getDifficulty()) {
+            case HARD:
+                difficulty = 1.25D;
                 break;
-            case NORMAL : difficulty = 1D;
+            case NORMAL:
+                difficulty = 1D;
                 break;
         }
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(850.0F * ConfigManagerCore.dungeonBossHealthMod);
@@ -108,278 +105,26 @@ public class EntityBossMagmaCube extends EntityBossBase implements IMob, IEntity
     }
 
     @Override
-    protected void onDeathUpdate()
-    {
+    protected void onDeathUpdate() {
         super.onDeathUpdate();
 
-        if (!this.world.isRemote)
-        {
-            if (this.deathTicks == 100)
-            {
-                GalacticraftCore.packetPipeline.sendToAllAround(new PacketSimple(PacketSimple.EnumSimplePacket.C_PLAY_SOUND_BOSS_DEATH, GCCoreUtil.getDimensionID(this.world), new Object[] { 1.5F }), new NetworkRegistry.TargetPoint(GCCoreUtil.getDimensionID(this.world), this.posX, this.posY, this.posZ, 40.0D));
+        if (!this.world.isRemote) {
+            if (this.deathTicks == 100) {
+                GalacticraftCore.packetPipeline.sendToAllAround(new PacketSimple(PacketSimple.EnumSimplePacket.C_PLAY_SOUND_BOSS_DEATH, GCCoreUtil.getDimensionID(this.world), new Object[]{1.5F}), new NetworkRegistry.TargetPoint(GCCoreUtil.getDimensionID(this.world), this.posX, this.posY, this.posZ, 40.0D));
             }
         }
     }
 
-    protected SoundEvent getJumpSound()
-    {
+    protected SoundEvent getJumpSound() {
         return SoundEvents.ENTITY_MAGMACUBE_JUMP;
     }
 
-    protected int getJumpDelay()
-    {
+    protected int getJumpDelay() {
         return this.rand.nextInt(20) + 10;
     }
 
-    protected boolean makesSoundOnJump()
-    {
+    protected boolean makesSoundOnJump() {
         return true;
-    }
-
-    static class AISlimeAttack extends EntityAIBase
-    {
-        private final EntityBossMagmaCube slime;
-        private int growTieredTimer;
-
-        public AISlimeAttack(EntityBossMagmaCube slimeIn)
-        {
-            this.slime = slimeIn;
-            this.setMutexBits(2);
-        }
-
-        /**
-         * Returns whether the EntityAIBase should begin execution.
-         */
-        public boolean shouldExecute()
-        {
-            EntityLivingBase entitylivingbase = this.slime.getAttackTarget();
-
-            if (entitylivingbase == null)
-            {
-                return false;
-            }
-            else if (!entitylivingbase.isEntityAlive())
-            {
-                return false;
-            }
-            else
-            {
-                return !(entitylivingbase instanceof EntityPlayer) || !((EntityPlayer)entitylivingbase).capabilities.disableDamage;
-            }
-        }
-
-        /**
-         * Execute a one shot task or start executing a continuous task
-         */
-        public void startExecuting()
-        {
-            this.growTieredTimer = 300;
-            super.startExecuting();
-        }
-
-        /**
-         * Returns whether an in-progress EntityAIBase should continue executing
-         */
-        public boolean shouldContinueExecuting()
-        {
-            EntityLivingBase entitylivingbase = this.slime.getAttackTarget();
-
-            if (entitylivingbase == null)
-            {
-                return false;
-            }
-            else if (!entitylivingbase.isEntityAlive())
-            {
-                return false;
-            }
-            else if (entitylivingbase instanceof EntityPlayer && ((EntityPlayer)entitylivingbase).capabilities.disableDamage)
-            {
-                return false;
-            }
-            else
-            {
-                return --this.growTieredTimer > 0;
-            }
-        }
-
-        /**
-         * Keep ticking a continuous task that has already been started
-         */
-        public void updateTask()
-        {
-            this.slime.faceEntity(this.slime.getAttackTarget(), 10.0F, 10.0F);
-            ((EntityBossMagmaCube.SlimeMoveHelper)this.slime.getMoveHelper()).setDirection(this.slime.rotationYaw, true);
-        }
-    }
-
-    static class AISlimeFaceRandom extends EntityAIBase
-    {
-        private final EntityBossMagmaCube slime;
-        private float chosenDegrees;
-        private int nextRandomizeTime;
-
-        public AISlimeFaceRandom(EntityBossMagmaCube slimeIn)
-        {
-            this.slime = slimeIn;
-            this.setMutexBits(2);
-        }
-
-        /**
-         * Returns whether the EntityAIBase should begin execution.
-         */
-        public boolean shouldExecute()
-        {
-            return this.slime.getAttackTarget() == null && (this.slime.onGround || this.slime.isInWater() || this.slime.isInLava() || this.slime.isPotionActive(MobEffects.LEVITATION));
-        }
-
-        /**
-         * Keep ticking a continuous task that has already been started
-         */
-        public void updateTask()
-        {
-            if (--this.nextRandomizeTime <= 0)
-            {
-                this.nextRandomizeTime = 40 + this.slime.getRNG().nextInt(60);
-                this.chosenDegrees = (float)this.slime.getRNG().nextInt(360);
-            }
-
-            ((EntityBossMagmaCube.SlimeMoveHelper)this.slime.getMoveHelper()).setDirection(this.chosenDegrees, false);
-        }
-    }
-
-    static class AISlimeFloat extends EntityAIBase
-    {
-        private final EntityBossMagmaCube slime;
-
-        public AISlimeFloat(EntityBossMagmaCube slimeIn)
-        {
-            this.slime = slimeIn;
-            this.setMutexBits(5);
-            ((PathNavigateGround)slimeIn.getNavigator()).setCanSwim(true);
-        }
-
-        /**
-         * Returns whether the EntityAIBase should begin execution.
-         */
-        public boolean shouldExecute()
-        {
-            return this.slime.isInWater() || this.slime.isInLava();
-        }
-
-        /**
-         * Keep ticking a continuous task that has already been started
-         */
-        public void updateTask()
-        {
-            if (this.slime.getRNG().nextFloat() < 0.8F)
-            {
-                this.slime.getJumpHelper().setJumping();
-            }
-
-            ((EntityBossMagmaCube.SlimeMoveHelper)this.slime.getMoveHelper()).setSpeed(1.2D);
-        }
-    }
-
-    static class AISlimeHop extends EntityAIBase
-    {
-        private final EntityBossMagmaCube slime;
-
-        public AISlimeHop(EntityBossMagmaCube slimeIn)
-        {
-            this.slime = slimeIn;
-            this.setMutexBits(5);
-        }
-
-        /**
-         * Returns whether the EntityAIBase should begin execution.
-         */
-        public boolean shouldExecute()
-        {
-            return true;
-        }
-
-        /**
-         * Keep ticking a continuous task that has already been started
-         */
-        public void updateTask()
-        {
-            ((EntityBossMagmaCube.SlimeMoveHelper)this.slime.getMoveHelper()).setSpeed(1.0D);
-        }
-    }
-
-    static class SlimeMoveHelper extends EntityMoveHelper
-    {
-        private float yRot;
-        private int jumpDelay;
-        private final EntityBossMagmaCube slime;
-        private boolean isAggressive;
-
-        public SlimeMoveHelper(EntityBossMagmaCube slimeIn)
-        {
-            super(slimeIn);
-            this.slime = slimeIn;
-            this.yRot = 180.0F * slimeIn.rotationYaw / (float)Math.PI;
-        }
-
-        public void setDirection(float p_179920_1_, boolean p_179920_2_)
-        {
-            this.yRot = p_179920_1_;
-            this.isAggressive = p_179920_2_;
-        }
-
-        public void setSpeed(double speedIn)
-        {
-            this.speed = speedIn;
-            this.action = Action.MOVE_TO;
-        }
-
-        public void onUpdateMoveHelper()
-        {
-            this.entity.rotationYaw = this.limitAngle(this.entity.rotationYaw, this.yRot, 90.0F);
-            this.entity.rotationYawHead = this.entity.rotationYaw;
-            this.entity.renderYawOffset = this.entity.rotationYaw;
-
-            if (this.action != Action.MOVE_TO)
-            {
-                this.entity.setMoveForward(0.0F);
-            }
-            else
-            {
-                this.action = Action.WAIT;
-
-                if (this.entity.onGround)
-                {
-                    this.entity.setAIMoveSpeed((float)(this.speed * this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
-
-                    if (this.jumpDelay-- <= 0)
-                    {
-                        this.jumpDelay = this.slime.getJumpDelay();
-
-                        if (this.isAggressive)
-                        {
-                            this.jumpDelay /= 3;
-                        }
-
-                        this.slime.getJumpHelper().setJumping();
-
-                        if (this.slime.makesSoundOnJump())
-                        {
-                            this.slime.playSound(this.slime.getJumpSound(), this.slime.getSoundVolume(), ((this.slime.getRNG().nextFloat() - this.slime.getRNG().nextFloat()) * 0.2F + 1.0F) * 0.8F);
-                        }
-                    }
-                    else
-                    {
-                        this.slime.moveStrafing = 0.0F;
-                        this.slime.moveForward = 0.0F;
-                        this.entity.setAIMoveSpeed(0.0F);
-                    }
-                }
-                else
-                {
-                    this.entity.setAIMoveSpeed((float)(this.speed * this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
-                }
-            }
-        }
     }
 
     @Override
@@ -407,5 +152,203 @@ public class EntityBossMagmaCube extends EntityBossBase implements IMob, IEntity
     @Override
     public boolean canBreath() {
         return true;
+    }
+
+    static class AISlimeAttack extends EntityAIBase {
+        private final EntityBossMagmaCube slime;
+        private int growTieredTimer;
+
+        public AISlimeAttack(EntityBossMagmaCube slimeIn) {
+            this.slime = slimeIn;
+            this.setMutexBits(2);
+        }
+
+        /**
+         * Returns whether the EntityAIBase should begin execution.
+         */
+        public boolean shouldExecute() {
+            EntityLivingBase entitylivingbase = this.slime.getAttackTarget();
+
+            if (entitylivingbase == null) {
+                return false;
+            } else if (!entitylivingbase.isEntityAlive()) {
+                return false;
+            } else {
+                return !(entitylivingbase instanceof EntityPlayer) || !((EntityPlayer) entitylivingbase).capabilities.disableDamage;
+            }
+        }
+
+        /**
+         * Execute a one shot task or start executing a continuous task
+         */
+        public void startExecuting() {
+            this.growTieredTimer = 300;
+            super.startExecuting();
+        }
+
+        /**
+         * Returns whether an in-progress EntityAIBase should continue executing
+         */
+        public boolean shouldContinueExecuting() {
+            EntityLivingBase entitylivingbase = this.slime.getAttackTarget();
+
+            if (entitylivingbase == null) {
+                return false;
+            } else if (!entitylivingbase.isEntityAlive()) {
+                return false;
+            } else if (entitylivingbase instanceof EntityPlayer && ((EntityPlayer) entitylivingbase).capabilities.disableDamage) {
+                return false;
+            } else {
+                return --this.growTieredTimer > 0;
+            }
+        }
+
+        /**
+         * Keep ticking a continuous task that has already been started
+         */
+        public void updateTask() {
+            this.slime.faceEntity(this.slime.getAttackTarget(), 10.0F, 10.0F);
+            ((EntityBossMagmaCube.SlimeMoveHelper) this.slime.getMoveHelper()).setDirection(this.slime.rotationYaw, true);
+        }
+    }
+
+    static class AISlimeFaceRandom extends EntityAIBase {
+        private final EntityBossMagmaCube slime;
+        private float chosenDegrees;
+        private int nextRandomizeTime;
+
+        public AISlimeFaceRandom(EntityBossMagmaCube slimeIn) {
+            this.slime = slimeIn;
+            this.setMutexBits(2);
+        }
+
+        /**
+         * Returns whether the EntityAIBase should begin execution.
+         */
+        public boolean shouldExecute() {
+            return this.slime.getAttackTarget() == null && (this.slime.onGround || this.slime.isInWater() || this.slime.isInLava() || this.slime.isPotionActive(MobEffects.LEVITATION));
+        }
+
+        /**
+         * Keep ticking a continuous task that has already been started
+         */
+        public void updateTask() {
+            if (--this.nextRandomizeTime <= 0) {
+                this.nextRandomizeTime = 40 + this.slime.getRNG().nextInt(60);
+                this.chosenDegrees = (float) this.slime.getRNG().nextInt(360);
+            }
+
+            ((EntityBossMagmaCube.SlimeMoveHelper) this.slime.getMoveHelper()).setDirection(this.chosenDegrees, false);
+        }
+    }
+
+    static class AISlimeFloat extends EntityAIBase {
+        private final EntityBossMagmaCube slime;
+
+        public AISlimeFloat(EntityBossMagmaCube slimeIn) {
+            this.slime = slimeIn;
+            this.setMutexBits(5);
+            ((PathNavigateGround) slimeIn.getNavigator()).setCanSwim(true);
+        }
+
+        /**
+         * Returns whether the EntityAIBase should begin execution.
+         */
+        public boolean shouldExecute() {
+            return this.slime.isInWater() || this.slime.isInLava();
+        }
+
+        /**
+         * Keep ticking a continuous task that has already been started
+         */
+        public void updateTask() {
+            if (this.slime.getRNG().nextFloat() < 0.8F) {
+                this.slime.getJumpHelper().setJumping();
+            }
+
+            ((EntityBossMagmaCube.SlimeMoveHelper) this.slime.getMoveHelper()).setSpeed(1.2D);
+        }
+    }
+
+    static class AISlimeHop extends EntityAIBase {
+        private final EntityBossMagmaCube slime;
+
+        public AISlimeHop(EntityBossMagmaCube slimeIn) {
+            this.slime = slimeIn;
+            this.setMutexBits(5);
+        }
+
+        /**
+         * Returns whether the EntityAIBase should begin execution.
+         */
+        public boolean shouldExecute() {
+            return true;
+        }
+
+        /**
+         * Keep ticking a continuous task that has already been started
+         */
+        public void updateTask() {
+            ((EntityBossMagmaCube.SlimeMoveHelper) this.slime.getMoveHelper()).setSpeed(1.0D);
+        }
+    }
+
+    static class SlimeMoveHelper extends EntityMoveHelper {
+        private final EntityBossMagmaCube slime;
+        private float yRot;
+        private int jumpDelay;
+        private boolean isAggressive;
+
+        public SlimeMoveHelper(EntityBossMagmaCube slimeIn) {
+            super(slimeIn);
+            this.slime = slimeIn;
+            this.yRot = 180.0F * slimeIn.rotationYaw / (float) Math.PI;
+        }
+
+        public void setDirection(float p_179920_1_, boolean p_179920_2_) {
+            this.yRot = p_179920_1_;
+            this.isAggressive = p_179920_2_;
+        }
+
+        public void setSpeed(double speedIn) {
+            this.speed = speedIn;
+            this.action = Action.MOVE_TO;
+        }
+
+        public void onUpdateMoveHelper() {
+            this.entity.rotationYaw = this.limitAngle(this.entity.rotationYaw, this.yRot, 90.0F);
+            this.entity.rotationYawHead = this.entity.rotationYaw;
+            this.entity.renderYawOffset = this.entity.rotationYaw;
+
+            if (this.action != Action.MOVE_TO) {
+                this.entity.setMoveForward(0.0F);
+            } else {
+                this.action = Action.WAIT;
+
+                if (this.entity.onGround) {
+                    this.entity.setAIMoveSpeed((float) (this.speed * this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
+
+                    if (this.jumpDelay-- <= 0) {
+                        this.jumpDelay = this.slime.getJumpDelay();
+
+                        if (this.isAggressive) {
+                            this.jumpDelay /= 3;
+                        }
+
+                        this.slime.getJumpHelper().setJumping();
+
+                        if (this.slime.makesSoundOnJump()) {
+                            this.slime.playSound(this.slime.getJumpSound(), this.slime.getSoundVolume(), ((this.slime.getRNG().nextFloat() - this.slime.getRNG().nextFloat()) * 0.2F + 1.0F) * 0.8F);
+                        }
+                    } else {
+                        this.slime.moveStrafing = 0.0F;
+                        this.slime.moveForward = 0.0F;
+                        this.entity.setAIMoveSpeed(0.0F);
+                    }
+                } else {
+                    this.entity.setAIMoveSpeed((float) (this.speed * this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
+                }
+            }
+        }
     }
 }

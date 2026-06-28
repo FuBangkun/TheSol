@@ -10,9 +10,8 @@ import net.minecraftforge.oredict.OreDictionary;
 import java.util.HashMap;
 
 public class RecipeManagerRocketsTier9 {
-	public static void addUniversalRecipes()
-    {
-		HashMap<Integer, ItemStack> input = new HashMap<>();
+    public static void addUniversalRecipes() {
+        HashMap<Integer, ItemStack> input = new HashMap<>();
         ItemStack plate = new ItemStack(SolItems.REINFORCED_PLATE_T9);
         ItemStack rocketFins = new ItemStack(SolItems.ROCKET_FINS_T9);
         input.put(1, new ItemStack(SolItems.NOSE_CONE_T9));
@@ -37,18 +36,17 @@ public class RecipeManagerRocketsTier9 {
         input.put(20, ItemStack.EMPTY);
         input.put(21, ItemStack.EMPTY);
         input.put(22, ItemStack.EMPTY);
-    
+
         NonNullList<ItemStack> woodChests = OreDictionary.getOres("chestWood");
         HashMap<Integer, ItemStack> input2;
 
-        for (ItemStack woodChest : woodChests)
-        {
-        	for (int i = 0; i < 4; ++i) {
-            	input2 = new HashMap<Integer, ItemStack>(input);
+        for (ItemStack woodChest : woodChests) {
+            for (int i = 0; i < 4; ++i) {
+                input2 = new HashMap<Integer, ItemStack>(input);
                 input2.put(22, new ItemStack(SolItems.ROCKET_T8, 1, i));
                 RecipeUtilSol.addT9RocketRecipe(new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T9, 1, 0), input2));
             }
-        	
+
             for (int i = 0; i < 4; ++i) {
                 input2 = new HashMap<Integer, ItemStack>(input);
                 input2.put(19, woodChest);
@@ -57,7 +55,7 @@ public class RecipeManagerRocketsTier9 {
                 input2.put(22, new ItemStack(SolItems.ROCKET_T8, 1, i));
                 RecipeUtilSol.addT9RocketRecipe(new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T9, 1, 1), input2));
             }
-            
+
             for (int i = 0; i < 4; ++i) {
                 input2 = new HashMap<Integer, ItemStack>(input);
                 input2.put(19, ItemStack.EMPTY);
@@ -104,7 +102,7 @@ public class RecipeManagerRocketsTier9 {
             }
 
             for (int i = 0; i < 4; ++i) {
-            	input2 = new HashMap<Integer, ItemStack>(input);
+                input2 = new HashMap<Integer, ItemStack>(input);
                 input2.put(19, woodChest);
                 input2.put(20, woodChest);
                 input2.put(21, woodChest);

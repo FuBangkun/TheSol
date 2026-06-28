@@ -13,24 +13,22 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class BlockBaseMagnesiumOre extends Block implements IHasModel
-{
-	public BlockBaseMagnesiumOre(String name, Material material, String toolClass, int harvestLevel, CreativeTabs tab) {
-		super(material);
-		this.setUnlocalizedName(name);
-		this.setRegistryName(name);
-		this.setHarvestLevel(toolClass, harvestLevel);
-		this.setCreativeTab(tab);
+public class BlockBaseMagnesiumOre extends Block implements IHasModel {
+    public BlockBaseMagnesiumOre(String name, Material material, String toolClass, int harvestLevel, CreativeTabs tab) {
+        super(material);
+        this.setTranslationKey(name);
+        this.setRegistryName(name);
+        this.setHarvestLevel(toolClass, harvestLevel);
+        this.setCreativeTab(tab);
 
-		GameRegistry.addSmelting(new ItemStack(this), new ItemStack(GCItems.basicItem, 1, 5), 1F);
+        GameRegistry.addSmelting(new ItemStack(this), new ItemStack(GCItems.basicItem, 1, 5), 1F);
 
-		SolBlocks.Blocks.add(this);
-		SolItems.ITEMS.add(new ItemBlockBaseSol(this).setRegistryName(this.getRegistryName()));
-	}
+        SolBlocks.Blocks.add(this);
+        SolItems.ITEMS.add(new ItemBlockBaseSol(this).setRegistryName(this.getRegistryName()));
+    }
 
-	@Override
-	public void registerModels() 
-	{
-		TheSol.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
-	}
+    @Override
+    public void registerModels() {
+        TheSol.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+    }
 }

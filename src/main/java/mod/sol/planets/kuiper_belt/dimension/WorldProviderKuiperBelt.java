@@ -1,10 +1,5 @@
 package mod.sol.planets.kuiper_belt.dimension;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.TreeMap;
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.WorldProviderSpace;
 import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
@@ -14,12 +9,9 @@ import micdoodle8.mods.galacticraft.core.event.EventHandlerGC;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
 import micdoodle8.mods.galacticraft.core.world.gen.dungeon.RoomTreasure;
-import micdoodle8.mods.galacticraft.planets.GCPlanetDimensions;
-import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 import micdoodle8.mods.galacticraft.planets.asteroids.world.gen.ChunkProviderAsteroids;
 import mod.sol.TheSol;
 import mod.sol.init.SolDimensions;
-import mod.sol.planets.kuiper_belt.world.gen.ChunkProviderKuiperBelt;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -28,6 +20,8 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.*;
 
 public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISolarLevel {
     private HashSet<WorldProviderKuiperBelt.AsteroidData> asteroids = new HashSet();
@@ -145,7 +139,7 @@ public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISola
     }
 
     private void loadAsteroidSavedData() {
-        this.datafile = (KuiperBeltSaveData)this.world.loadData(KuiperBeltSaveData.class, "../sol/SolKuiperBeltData");
+        this.datafile = (KuiperBeltSaveData) this.world.loadData(KuiperBeltSaveData.class, "../sol/SolKuiperBeltData");
         if (this.datafile == null) {
             this.datafile = new KuiperBeltSaveData("");
             this.world.setData("../sol/SolKuiperBeltData", this.datafile);
@@ -160,7 +154,7 @@ public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISola
     private void readFromNBT(NBTTagCompound nbt) {
         NBTTagList coordList = nbt.getTagList("coords", 10);
         if (coordList.tagCount() > 0) {
-            for(int j = 0; j < coordList.tagCount(); ++j) {
+            for (int j = 0; j < coordList.tagCount(); ++j) {
                 NBTTagCompound tag1 = coordList.getCompoundTagAt(j);
                 if (tag1 != null) {
                     this.asteroids.add(WorldProviderKuiperBelt.AsteroidData.readFromNBT(tag1));
@@ -174,8 +168,8 @@ public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISola
         NBTTagList coordList = new NBTTagList();
         Iterator var3 = this.asteroids.iterator();
 
-        while(var3.hasNext()) {
-            WorldProviderKuiperBelt.AsteroidData coords = (WorldProviderKuiperBelt.AsteroidData)var3.next();
+        while (var3.hasNext()) {
+            WorldProviderKuiperBelt.AsteroidData coords = (WorldProviderKuiperBelt.AsteroidData) var3.next();
             NBTTagCompound tag = new NBTTagCompound();
             coords.writeToNBT(tag);
             coordList.appendTag(tag);
@@ -211,7 +205,7 @@ public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISola
             int lowestDistance = 2147483647;
             Iterator var8 = this.asteroids.iterator();
 
-            while(true) {
+            while (true) {
                 WorldProviderKuiperBelt.AsteroidData test;
                 do {
                     if (!var8.hasNext()) {
@@ -229,8 +223,8 @@ public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISola
                         return result;
                     }
 
-                    test = (WorldProviderKuiperBelt.AsteroidData)var8.next();
-                } while(mark && (test.sizeAndLandedFlag & 128) > 0);
+                    test = (WorldProviderKuiperBelt.AsteroidData) var8.next();
+                } while (mark && (test.sizeAndLandedFlag & 128) > 0);
 
                 int dx = x - test.centre.x;
                 int dz = z - test.centre.z;
@@ -251,10 +245,10 @@ public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISola
             TreeMap<Integer, BlockVec3> targets = new TreeMap();
             Iterator var7 = this.asteroids.iterator();
 
-            while(true) {
+            while (true) {
                 BlockVec3 test;
                 label59:
-                while(true) {
+                while (true) {
                     if (!var7.hasNext()) {
                         int max = Math.max(count, targets.size());
                         if (max <= 0) {
@@ -266,11 +260,11 @@ public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISola
                         int offset = 6;
                         Iterator var18 = targets.values().iterator();
 
-                        while(var18.hasNext()) {
-                            BlockVec3 target = (BlockVec3)var18.next();
+                        while (var18.hasNext()) {
+                            BlockVec3 target = (BlockVec3) var18.next();
                             BlockVec3 coords = target.clone();
                             GCLog.debug("Found nearby asteroid at " + target.toString());
-                            switch(facing) {
+                            switch (facing) {
                                 case 2:
                                     coords.z += offset;
                                     break;
@@ -294,9 +288,9 @@ public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISola
                         return returnValues;
                     }
 
-                    WorldProviderKuiperBelt.AsteroidData roid = (WorldProviderKuiperBelt.AsteroidData)var7.next();
+                    WorldProviderKuiperBelt.AsteroidData roid = (WorldProviderKuiperBelt.AsteroidData) var7.next();
                     test = roid.centre;
-                    switch(facing) {
+                    switch (facing) {
                         case 2:
                             if (z - 16 < test.z) {
                                 break;
@@ -342,7 +336,7 @@ public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISola
 
     public double getSolarEnergyMultiplier() {
         if (this.solarMultiplier < 0.0D) {
-            double s = (double)this.getSolarSize();
+            double s = (double) this.getSolarSize();
             this.solarMultiplier = s * s * s * ConfigManagerCore.spaceStationEnergyScalar;
         }
 
@@ -392,32 +386,6 @@ public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISola
             this.centre = bv;
         }
 
-        public int hashCode() {
-            return this.centre != null ? this.centre.hashCode() : 0;
-        }
-
-        public boolean equals(Object o) {
-            BlockVec3 vector;
-            if (o instanceof WorldProviderKuiperBelt.AsteroidData) {
-                vector = ((WorldProviderKuiperBelt.AsteroidData)o).centre;
-                return this.centre.x == vector.x && this.centre.y == vector.y && this.centre.z == vector.z;
-            } else if (!(o instanceof BlockVec3)) {
-                return false;
-            } else {
-                vector = (BlockVec3)o;
-                return this.centre.x == vector.x && this.centre.y == vector.y && this.centre.z == vector.z;
-            }
-        }
-
-        public NBTTagCompound writeToNBT(NBTTagCompound tag) {
-            tag.setInteger("x", this.centre.x);
-            tag.setInteger("y", this.centre.y);
-            tag.setInteger("z", this.centre.z);
-            tag.setInteger("coreAndFlag", this.coreAndSpawnedFlag);
-            tag.setInteger("sizeAndFlag", this.sizeAndLandedFlag);
-            return tag;
-        }
-
         public static WorldProviderKuiperBelt.AsteroidData readFromNBT(NBTTagCompound tag) {
             BlockVec3 tempVector = new BlockVec3();
             tempVector.x = tag.getInteger("x");
@@ -433,6 +401,32 @@ public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISola
             }
 
             return roid;
+        }
+
+        public int hashCode() {
+            return this.centre != null ? this.centre.hashCode() : 0;
+        }
+
+        public boolean equals(Object o) {
+            BlockVec3 vector;
+            if (o instanceof WorldProviderKuiperBelt.AsteroidData) {
+                vector = ((WorldProviderKuiperBelt.AsteroidData) o).centre;
+                return this.centre.x == vector.x && this.centre.y == vector.y && this.centre.z == vector.z;
+            } else if (!(o instanceof BlockVec3)) {
+                return false;
+            } else {
+                vector = (BlockVec3) o;
+                return this.centre.x == vector.x && this.centre.y == vector.y && this.centre.z == vector.z;
+            }
+        }
+
+        public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+            tag.setInteger("x", this.centre.x);
+            tag.setInteger("y", this.centre.y);
+            tag.setInteger("z", this.centre.z);
+            tag.setInteger("coreAndFlag", this.coreAndSpawnedFlag);
+            tag.setInteger("sizeAndFlag", this.sizeAndLandedFlag);
+            return tag;
         }
     }
 }

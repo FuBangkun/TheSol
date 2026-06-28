@@ -10,22 +10,20 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class BlockBase extends Block implements IHasModel
-{
-	public BlockBase(String name, Material material, String toolClass, int harvestLevel, CreativeTabs tab) {
-		super(material);
-		this.setUnlocalizedName(name);
-		this.setRegistryName(name);
-		this.setHarvestLevel(toolClass, harvestLevel);
-		this.setCreativeTab(tab);
+public class BlockBase extends Block implements IHasModel {
+    public BlockBase(String name, Material material, String toolClass, int harvestLevel, CreativeTabs tab) {
+        super(material);
+        this.setTranslationKey(name);
+        this.setRegistryName(name);
+        this.setHarvestLevel(toolClass, harvestLevel);
+        this.setCreativeTab(tab);
 
-		SolBlocks.Blocks.add(this);
-		SolItems.ITEMS.add(new ItemBlockBaseSol(this).setRegistryName(this.getRegistryName()));
-	}
+        SolBlocks.Blocks.add(this);
+        SolItems.ITEMS.add(new ItemBlockBaseSol(this).setRegistryName(this.getRegistryName()));
+    }
 
-	@Override
-	public void registerModels() 
-	{
-		TheSol.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
-	}
+    @Override
+    public void registerModels() {
+        TheSol.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+    }
 }

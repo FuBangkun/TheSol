@@ -1,7 +1,6 @@
 {
-    "pack": {
-        "description": "The Sol",
-        "pack_format": 3,
-        "_comment": "©2021-2023 Arrokoth486958/Arrokoth233\nRepublishing without permission is prohibited.\nThis Mod ONLY publish on MCMOD百科(mcmod.cn), Github(github.com) and Curseforge(curseforge.com)"
-    }
+	"pack": {
+		"description": "${mod_name} Resources",
+		"pack_format": 3
+	}
 }

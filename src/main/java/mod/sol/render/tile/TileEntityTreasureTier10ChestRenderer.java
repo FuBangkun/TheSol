@@ -2,7 +2,6 @@ package mod.sol.render.tile;
 
 import micdoodle8.mods.galacticraft.core.client.model.block.ModelTreasureChest;
 import mod.sol.tile.TileEntityTreasureChestTier10;
-import mod.sol.tile.TileEntityTreasureChestTier9;
 import mod.sol.util.Reference;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -12,23 +11,18 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityTreasureTier10ChestRenderer extends TileEntitySpecialRenderer<TileEntityTreasureChestTier10>
-{
+public class TileEntityTreasureTier10ChestRenderer extends TileEntitySpecialRenderer<TileEntityTreasureChestTier10> {
     private static final ResourceLocation treasureChestTexture = new ResourceLocation(Reference.MOD_ID, "textures/model/treasure_t10.png");
 
     private final ModelTreasureChest chestModel = new ModelTreasureChest();
 
     @Override
-    public void render(TileEntityTreasureChestTier10 chest, double x, double y, double z, float par7, int par8, float alpha)
-    {
+    public void render(TileEntityTreasureChestTier10 chest, double x, double y, double z, float par7, int par8, float alpha) {
         int var9;
 
-        if (!chest.hasWorld())
-        {
+        if (!chest.hasWorld()) {
             var9 = 0;
-        }
-        else
-        {
+        } else {
             var9 = chest.getBlockMetadata();
         }
 
@@ -42,23 +36,19 @@ public class TileEntityTreasureTier10ChestRenderer extends TileEntitySpecialRend
         GL11.glTranslatef(0.5F, 0.5F, 0.5F);
         short var11 = 0;
 
-        if (var9 == 2)
-        {
+        if (var9 == 2) {
             var11 = 180;
         }
 
-        if (var9 == 3)
-        {
+        if (var9 == 3) {
             var11 = 0;
         }
 
-        if (var9 == 4)
-        {
+        if (var9 == 4) {
             var11 = 90;
         }
 
-        if (var9 == 5)
-        {
+        if (var9 == 5) {
             var11 = -90;
         }
 

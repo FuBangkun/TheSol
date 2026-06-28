@@ -28,18 +28,15 @@ public class ItemMagnetBoots extends ItemArmor implements IArmorGravity, ISortab
         this.material = materialIn;
         this.setCreativeTab(TheSol.ITEM_TAB);
         this.setRegistryName(name);
-        this.setUnlocalizedName(name);
+        this.setTranslationKey(name);
 
         SolItems.ITEMS.add(this);
     }
 
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type)
-    {
-        if (this.material == ArmorMaterial.IRON)
-        {
-            if (stack.getItem() == SolItems.MAGNET_BOOTS)
-            {
+    public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
+        if (this.material == ArmorMaterial.IRON) {
+            if (stack.getItem() == SolItems.MAGNET_BOOTS) {
                 return Reference.MOD_ID + ":textures/model/magnet_boots.png";
             }
         }
@@ -48,8 +45,7 @@ public class ItemMagnetBoots extends ItemArmor implements IArmorGravity, ISortab
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
         return ClientProxyCore.galacticraftItem;
     }
 
@@ -63,8 +59,7 @@ public class ItemMagnetBoots extends ItemArmor implements IArmorGravity, ISortab
                 return -1000;
             else
                 return 0;
-        }
-        else {
+        } else {
             Material material0 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 0, p.posZ - 0)).getMaterial();
             Material material1 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 1, p.posZ - 0)).getMaterial();
             Material material2 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 2, p.posZ - 0)).getMaterial();
@@ -85,8 +80,7 @@ public class ItemMagnetBoots extends ItemArmor implements IArmorGravity, ISortab
                 return -1000;
             else
                 return 0;
-        }
-        else {
+        } else {
             Material material0 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 0, p.posZ - 0)).getMaterial();
             Material material1 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 1, p.posZ - 0)).getMaterial();
             Material material2 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 2, p.posZ - 0)).getMaterial();
@@ -103,8 +97,7 @@ public class ItemMagnetBoots extends ItemArmor implements IArmorGravity, ISortab
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
-    {
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
         return repair.getItem() == SolItems.MAGNET_INGOT;
     }
 

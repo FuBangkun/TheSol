@@ -1,7 +1,5 @@
 package mod.sol.render.layer;
 
-import micdoodle8.mods.galacticraft.core.client.render.entities.RenderEvolvedSkeletonBoss;
-import micdoodle8.mods.galacticraft.core.entities.EntitySkeletonBoss;
 import mod.sol.entities.boss.EntitySaturnBossStray;
 import mod.sol.render.entity.RenderSaturnBossStray;
 import mod.sol.render.model.entity.ModelSaturnBossStray;
@@ -15,48 +13,38 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class LayerHeldItemSaturnBossSkeleton implements LayerRenderer<EntitySaturnBossStray>
-{
+public class LayerHeldItemSaturnBossSkeleton implements LayerRenderer<EntitySaturnBossStray> {
     private final RenderSaturnBossStray renderer;
 
-    public LayerHeldItemSaturnBossSkeleton(RenderSaturnBossStray renderer)
-    {
+    public LayerHeldItemSaturnBossSkeleton(RenderSaturnBossStray renderer) {
         this.renderer = renderer;
     }
 
     @Override
-    public void doRenderLayer(EntitySaturnBossStray entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)
-    {
-        if (entity.throwTimer + entity.postThrowDelay == 0)
-        {
+    public void doRenderLayer(EntitySaturnBossStray entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+        if (entity.throwTimer + entity.postThrowDelay == 0) {
             this.renderHeldItem(entity, ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND);
             this.renderHeldItem(entity, ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND);
         }
     }
 
     @Override
-    public boolean shouldCombineTextures()
-    {
+    public boolean shouldCombineTextures() {
         return false;
     }
 
-    private void renderHeldItem(EntitySaturnBossStray entity, ItemCameraTransforms.TransformType type)
-    {
+    private void renderHeldItem(EntitySaturnBossStray entity, ItemCameraTransforms.TransformType type) {
         ItemStack bow = new ItemStack(Items.BOW);
 
-        if (bow != null)
-        {
+        if (bow != null) {
             GlStateManager.pushMatrix();
-            ((ModelSaturnBossStray)this.renderer.getMainModel()).postRenderArm(0.0625F, type);
+            ((ModelSaturnBossStray) this.renderer.getMainModel()).postRenderArm(0.0625F, type);
 
-            if (type == ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND)
-            {
+            if (type == ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND) {
                 GlStateManager.rotate(-90.0F, 1.0F, 0.0F, 0.0F);
                 GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
                 GlStateManager.translate(0.05F, 0.125F, -1.525F);
-            }
-            else
-            {
+            } else {
                 GlStateManager.translate(0.025F, 1.525F, -0.125F);
             }
 

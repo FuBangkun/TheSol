@@ -7,15 +7,12 @@ import mod.sol.util.RecipeUtilSol;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tier5RocketRecipeMaker
-{
-    public static List<INasaWorkbenchRecipe> getRecipesList()
-    {
+public class Tier5RocketRecipeMaker {
+    public static List<INasaWorkbenchRecipe> getRecipesList() {
         List<INasaWorkbenchRecipe> recipes = new ArrayList<>();
 
         int chestCount = -1;
-        for (INasaWorkbenchRecipe recipe : RecipeUtilSol.getRocketT5Recipes())
-        {
+        for (INasaWorkbenchRecipe recipe : RecipeUtilSol.getRocketT5Recipes()) {
             int chests = Tier1RocketRecipeMaker.countChests(recipe);
             if (chests == chestCount)
                 continue;

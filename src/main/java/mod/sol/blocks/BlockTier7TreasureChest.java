@@ -14,31 +14,27 @@ import net.minecraft.world.World;
 
 public class BlockTier7TreasureChest extends BlockTier1TreasureChest implements IHasModel {
 
-	public BlockTier7TreasureChest(String name)
-	{
-		super(name);
-		setUnlocalizedName(name);
-		setRegistryName(name);
+    public BlockTier7TreasureChest(String name) {
+        super(name);
+        setTranslationKey(name);
+        setRegistryName(name);
 
-		SolBlocks.Blocks.add(this);
-		SolItems.ITEMS.add(new ItemBlockBaseSol(this).setRegistryName(this.getRegistryName()));
-	}
-	
-	@Override
-    public CreativeTabs getCreativeTabToDisplayOn()
-    {
+        SolBlocks.Blocks.add(this);
+        SolItems.ITEMS.add(new ItemBlockBaseSol(this).setRegistryName(this.getRegistryName()));
+    }
+
+    @Override
+    public CreativeTabs getCreativeTab() {
         return TheSol.BLOCK_TAB;
     }
-	
-	@Override
-    public TileEntity createNewTileEntity(World worldIn, int meta)
-    {
+
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityTreasureChestTier7();
     }
-	
-	@Override
-	public void registerModels() 
-	{
-		TheSol.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
-	}
+
+    @Override
+    public void registerModels() {
+        TheSol.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+    }
 }

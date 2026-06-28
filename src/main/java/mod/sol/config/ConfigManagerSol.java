@@ -2,7 +2,6 @@ package mod.sol.config;
 
 import mod.sol.TheSol;
 import mod.sol.util.Reference;
-import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -21,8 +20,8 @@ public class ConfigManagerSol {
     public static int dimensionidAriel = -(Reference.MOD_ID.hashCode() + 701);
     public static int dimensionidTriton = -(Reference.MOD_ID.hashCode() + 801);
     public static int dimensionidPluto = -(Reference.MOD_ID.hashCode() + 900);
-    public static int dimensionidKuiperBelt= -(Reference.MOD_ID.hashCode() + 1000);
-    public static int dimensionidSedna= -(Reference.MOD_ID.hashCode() + 1100);
+    public static int dimensionidKuiperBelt = -(Reference.MOD_ID.hashCode() + 1000);
+    public static int dimensionidSedna = -(Reference.MOD_ID.hashCode() + 1100);
 
     public static void init(File file) {
         config = new Configuration(file);
@@ -45,7 +44,7 @@ public class ConfigManagerSol {
         config.save();
     }
 
-    public static void  registerConfig(FMLPreInitializationEvent event) {
+    public static void registerConfig(FMLPreInitializationEvent event) {
         TheSol.configSol = new File(event.getModConfigurationDirectory() + "/" + Reference.MOD_ID);
         TheSol.configSol.mkdirs();
         init(new File(TheSol.configSol.getPath(), Reference.MOD_ID + ".conf"));

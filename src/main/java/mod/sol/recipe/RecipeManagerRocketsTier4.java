@@ -1,8 +1,5 @@
 package mod.sol.recipe;
 
-import java.util.HashMap;
-
-import micdoodle8.mods.galacticraft.core.GCItems;
 import micdoodle8.mods.galacticraft.core.recipe.NasaWorkbenchRecipe;
 import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
 import mod.sol.init.SolItems;
@@ -11,10 +8,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.HashMap;
+
 public class RecipeManagerRocketsTier4 {
-	public static void addUniversalRecipes()
-    {
-		HashMap<Integer, ItemStack> input = new HashMap<>();
+    public static void addUniversalRecipes() {
+        HashMap<Integer, ItemStack> input = new HashMap<>();
         ItemStack plateTier4 = new ItemStack(SolItems.REINFORCED_PLATE_T4);
         ItemStack rocketFinsTier4 = new ItemStack(SolItems.ROCKET_FINS_T4);
         input.put(1, new ItemStack(AsteroidsItems.heavyNoseCone));
@@ -40,18 +38,17 @@ public class RecipeManagerRocketsTier4 {
         input.put(20, ItemStack.EMPTY);
         input.put(21, ItemStack.EMPTY);
         // RecipeUtilSol.addT4RocketRecipe(new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T4, 1, 0), input));
-        
+
         NonNullList<ItemStack> woodChests = OreDictionary.getOres("chestWood");
         HashMap<Integer, ItemStack> input2;
 
-        for (ItemStack woodChest : woodChests)
-        {
-        	for (int i = 0; i < 4; ++i) {
-            	input2 = new HashMap<Integer, ItemStack>(input);
+        for (ItemStack woodChest : woodChests) {
+            for (int i = 0; i < 4; ++i) {
+                input2 = new HashMap<Integer, ItemStack>(input);
                 input2.put(22, new ItemStack(AsteroidsItems.tier3Rocket, 1, i));
                 RecipeUtilSol.addT4RocketRecipe(new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T4, 1, 0), input2));
             }
-        	
+
             for (int i = 0; i < 4; ++i) {
                 input2 = new HashMap<Integer, ItemStack>(input);
                 input2.put(19, woodChest);
@@ -60,7 +57,7 @@ public class RecipeManagerRocketsTier4 {
                 input2.put(22, new ItemStack(AsteroidsItems.tier3Rocket, 1, i));
                 RecipeUtilSol.addT4RocketRecipe(new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T4, 1, 1), input2));
             }
-            
+
             for (int i = 0; i < 4; ++i) {
                 input2 = new HashMap<Integer, ItemStack>(input);
                 input2.put(19, ItemStack.EMPTY);
@@ -107,7 +104,7 @@ public class RecipeManagerRocketsTier4 {
             }
 
             for (int i = 0; i < 4; ++i) {
-            	input2 = new HashMap<Integer, ItemStack>(input);
+                input2 = new HashMap<Integer, ItemStack>(input);
                 input2.put(19, woodChest);
                 input2.put(20, woodChest);
                 input2.put(21, woodChest);

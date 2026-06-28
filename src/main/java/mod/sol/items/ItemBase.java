@@ -13,24 +13,22 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBase extends Item implements IHasModel {
 
-	public ItemBase(String name, CreativeTabs tab)
-	{
-		setUnlocalizedName(name);
-		setRegistryName(name);
-		setCreativeTab(tab);
-		
-		SolItems.ITEMS.add(this);
-	}
+    public ItemBase(String name, CreativeTabs tab) {
+        setTranslationKey(name);
+        setRegistryName(name);
+        setCreativeTab(tab);
 
-	@Override
+        SolItems.ITEMS.add(this);
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
         return ClientProxyCore.galacticraftItem;
     }
-	
-	@Override
-	public void registerModels() {
-		TheSol.proxy.registerItemRenderer(this, 0, "inventory");
-	}
+
+    @Override
+    public void registerModels() {
+        TheSol.proxy.registerItemRenderer(this, 0, "inventory");
+    }
 }

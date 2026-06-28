@@ -10,10 +10,10 @@ public class SpecialKuiperBeltBlockHandler {
     public SpecialKuiperBeltBlockHandler(SpecialKuiperBeltBlock... asteroidBlocks) {
         Iterator var2 = this.asteroidBlocks.iterator();
 
-        while(var2.hasNext()) {
-            SpecialKuiperBeltBlock asteroidBlock = (SpecialKuiperBeltBlock)var2.next();
+        while (var2.hasNext()) {
+            SpecialKuiperBeltBlock asteroidBlock = (SpecialKuiperBeltBlock) var2.next();
 
-            for(int i = 0; i < asteroidBlock.probability; ++i) {
+            for (int i = 0; i < asteroidBlock.probability; ++i) {
                 this.asteroidBlocks.add(asteroidBlock);
             }
         }
@@ -24,7 +24,7 @@ public class SpecialKuiperBeltBlockHandler {
     }
 
     public void addBlock(SpecialKuiperBeltBlock asteroidBlock) {
-        for(int i = 0; i < asteroidBlock.probability; ++i) {
+        for (int i = 0; i < asteroidBlock.probability; ++i) {
             this.asteroidBlocks.add(asteroidBlock);
         }
 
@@ -33,11 +33,11 @@ public class SpecialKuiperBeltBlockHandler {
     public SpecialKuiperBeltBlock getBlock(Random rand, int size) {
         int s = this.asteroidBlocks.size();
         if (s < 10) {
-            return (SpecialKuiperBeltBlock)this.asteroidBlocks.get(rand.nextInt(s));
+            return (SpecialKuiperBeltBlock) this.asteroidBlocks.get(rand.nextInt(s));
         } else {
             Double r = rand.nextDouble();
-            int index = (int)((double)s * Math.pow(r, (double)(size + 5) * 0.05D));
-            return (SpecialKuiperBeltBlock)this.asteroidBlocks.get(index);
+            int index = (int) ((double) s * Math.pow(r, (double) (size + 5) * 0.05D));
+            return (SpecialKuiperBeltBlock) this.asteroidBlocks.get(index);
         }
     }
 }

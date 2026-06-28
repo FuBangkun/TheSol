@@ -17,52 +17,48 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockBossSpawnerUranus extends BlockBossSpawner implements IHasModel
-{
-	public BlockBossSpawnerUranus(String assetName)
-    {
+public class BlockBossSpawnerUranus extends BlockBossSpawner implements IHasModel {
+    public BlockBossSpawnerUranus(String assetName) {
         super(assetName);
-        this.setUnlocalizedName(assetName);
-		this.setRegistryName(assetName);
+        this.setTranslationKey(assetName);
+        this.setRegistryName(assetName);
 
         SolBlocks.Blocks.add(this);
-		SolItems.ITEMS.add(new ItemBlockBaseSol(this).setRegistryName(this.getRegistryName()));
+        SolItems.ITEMS.add(new ItemBlockBaseSol(this).setRegistryName(this.getRegistryName()));
     }
 
     @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta)
-    {
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityDungeonSpawnerUranus();
     }
-    
+
     @Override
     public Block setCreativeTab(CreativeTabs tab) {
-    	return null;
+        return null;
     }
-    
+
     @Override
-    public CreativeTabs getCreativeTabToDisplayOn() {
-    	return null;
+    public CreativeTabs getCreativeTab() {
+        return null;
     }
-    
-    @Override
-	public void registerModels() 
-	{
-		TheSol.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
-	}
-    
-    @Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-		return NULL_AABB;
-	}
 
-	@Override
-	public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
-		return true;
-	}
+    @Override
+    public void registerModels() {
+        TheSol.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+    }
 
-	@Override
-	public boolean isFullCube(IBlockState state) {
-		return false;
-	}
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+        return NULL_AABB;
+    }
+
+    @Override
+    public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
+        return true;
+    }
+
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
 }

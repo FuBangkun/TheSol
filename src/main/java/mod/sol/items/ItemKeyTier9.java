@@ -15,69 +15,59 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemKeyTier9 extends Item implements IKeyItem, ISortableItem, IHasModel
-{
-    public ItemKeyTier9(String name)
-    {
+public class ItemKeyTier9 extends Item implements IKeyItem, ISortableItem, IHasModel {
+    public ItemKeyTier9(String name) {
         super();
-		this.setUnlocalizedName(name);
-		this.setRegistryName(name);
+        this.setTranslationKey(name);
+        this.setRegistryName(name);
         this.setMaxStackSize(1);
         this.setMaxDamage(0);
         this.setHasSubtypes(false);
-        
-		SolItems.ITEMS.add(this);
+
+        SolItems.ITEMS.add(this);
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
+    public EnumRarity getRarity(ItemStack par1ItemStack) {
         return ClientProxyCore.galacticraftItem;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public CreativeTabs getCreativeTab()
-    {
+    public CreativeTabs getCreativeTab() {
         return TheSol.ITEM_TAB;
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack itemStack)
-    {
+    public String getTranslationKey(ItemStack itemStack) {
         return "key_t9";
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list)
-    {
-        if (tab == TheSol.ITEM_TAB || tab == CreativeTabs.SEARCH)
-        {
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
+        if (tab == TheSol.ITEM_TAB || tab == CreativeTabs.SEARCH) {
             list.add(new ItemStack(this, 1));
         }
     }
 
     @Override
-    public int getMetadata(int par1)
-    {
+    public int getMetadata(int par1) {
         return par1;
     }
 
     @Override
-    public int getTier(ItemStack keyStack)
-    {
+    public int getTier(ItemStack keyStack) {
         return 9;
     }
 
     @Override
-    public EnumSortCategoryItem getCategory(int meta)
-    {
+    public EnumSortCategoryItem getCategory(int meta) {
         return EnumSortCategoryItem.KEYS;
     }
-    
+
     @Override
-	public void registerModels() {
-		TheSol.proxy.registerItemRenderer(this, 0, "inventory");
-	}
+    public void registerModels() {
+        TheSol.proxy.registerItemRenderer(this, 0, "inventory");
+    }
 }

@@ -21,157 +21,121 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class EntityTier6Rocket extends EntityTieredRocket
-{
-    public EntityTier6Rocket(World par1World)
-    {
+public class EntityTier6Rocket extends EntityTieredRocket {
+    public EntityTier6Rocket(World par1World) {
         super(par1World);
         this.setSize(1.8F, 6F);
     }
 
-    public EntityTier6Rocket(World par1World, double par2, double par4, double par6, EnumRocketType rocketType)
-    {
+    public EntityTier6Rocket(World par1World, double par2, double par4, double par6, EnumRocketType rocketType) {
         super(par1World, par2, par4, par6);
         this.rocketType = rocketType;
         this.stacks = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
     }
 
-    public EntityTier6Rocket(World par1World, double par2, double par4, double par6, boolean reversed, EnumRocketType rocketType, NonNullList<ItemStack> inv)
-    {
+    public EntityTier6Rocket(World par1World, double par2, double par4, double par6, boolean reversed, EnumRocketType rocketType, NonNullList<ItemStack> inv) {
         this(par1World, par2, par4, par6, rocketType);
         this.stacks = inv;
     }
 
     @Override
-    public double getYOffset()
-    {
+    public double getYOffset() {
         return 1.5F;
     }
 
     @Override
-    public ItemStack getPickedResult(RayTraceResult target)
-    {
+    public ItemStack getPickedResult(RayTraceResult target) {
         return new ItemStack(SolItems.ROCKET_T6, 1, this.rocketType.getIndex());
     }
 
     @Override
-    protected void entityInit()
-    {
+    protected void entityInit() {
         super.entityInit();
     }
 
     @Override
-    public double getMountedYOffset()
-    {
+    public double getMountedYOffset() {
         return 1.75D;
     }
 
     @Override
-    public float getRotateOffset()
-    {
+    public float getRotateOffset() {
         return 1.5F;
     }
 
     @Override
-    public double getOnPadYOffset()
-    {
+    public double getOnPadYOffset() {
         return 0.0D;
     }
 
     @Override
-    public void onUpdate()
-    {
+    public void onUpdate() {
         super.onUpdate();
 
         int i;
 
-        if (this.timeUntilLaunch >= 100)
-        {
+        if (this.timeUntilLaunch >= 100) {
             i = Math.abs(this.timeUntilLaunch / 100);
-        }
-        else
-        {
+        } else {
             i = 1;
         }
 
-        if ((this.getLaunched() || this.launchPhase == EnumLaunchPhase.IGNITED.ordinal() && this.rand.nextInt(i) == 0) && !ConfigManagerCore.disableSpaceshipParticles && this.hasValidFuel())
-        {
-            if (this.world.isRemote)
-            {
+        if ((this.getLaunched() || this.launchPhase == EnumLaunchPhase.IGNITED.ordinal() && this.rand.nextInt(i) == 0) && !ConfigManagerCore.disableSpaceshipParticles && this.hasValidFuel()) {
+            if (this.world.isRemote) {
                 this.spawnParticles(this.getLaunched());
             }
         }
 
-        if (this.launchPhase >= EnumLaunchPhase.LAUNCHED.ordinal() && this.hasValidFuel())
-        {
-            if (this.launchPhase == EnumLaunchPhase.LAUNCHED.ordinal())
-            {
+        if (this.launchPhase >= EnumLaunchPhase.LAUNCHED.ordinal() && this.hasValidFuel()) {
+            if (this.launchPhase == EnumLaunchPhase.LAUNCHED.ordinal()) {
                 double d = this.timeSinceLaunch / 150;
 
-                if (this.world.provider instanceof IGalacticraftWorldProvider && ((IGalacticraftWorldProvider) this.world.provider).hasNoAtmosphere())
-                {
+                if (this.world.provider instanceof IGalacticraftWorldProvider && ((IGalacticraftWorldProvider) this.world.provider).hasNoAtmosphere()) {
                     d = Math.min(d * 1.2, 2);
-                }
-                else
-                {
+                } else {
                     d = Math.min(d, 1.4);
                 }
 
-                if (d != 0.0)
-                {
+                if (d != 0.0) {
                     this.motionY = -d * 2.5D * Math.cos((this.rotationPitch - 180) / Constants.RADIANS_TO_DEGREES);
                 }
-            }
-            else
-            {
+            } else {
                 this.motionY -= 0.008D;
             }
 
             double multiplier = 1.0D;
 
-            if (this.world.provider instanceof IGalacticraftWorldProvider)
-            {
+            if (this.world.provider instanceof IGalacticraftWorldProvider) {
                 multiplier = ((IGalacticraftWorldProvider) this.world.provider).getFuelUsageMultiplier();
 
-                if (multiplier <= 0)
-                {
+                if (multiplier <= 0) {
                     multiplier = 1;
                 }
             }
 
-            if (this.timeSinceLaunch % MathHelper.floor(2 * (1 / multiplier)) == 0)
-            {
+            if (this.timeSinceLaunch % MathHelper.floor(2 * (1 / multiplier)) == 0) {
                 this.removeFuel(1);
-                if (!this.hasValidFuel())
-                {
+                if (!this.hasValidFuel()) {
                     this.stopRocketSound();
                 }
             }
-        }
-        else if (!this.hasValidFuel() && this.getLaunched() && !this.world.isRemote)
-        {
-            if (Math.abs(Math.sin(this.timeSinceLaunch / 1000)) / 10 != 0.0)
-            {
+        } else if (!this.hasValidFuel() && this.getLaunched() && !this.world.isRemote) {
+            if (Math.abs(Math.sin(this.timeSinceLaunch / 1000)) / 10 != 0.0) {
                 this.motionY -= Math.abs(Math.sin(this.timeSinceLaunch / 1000)) / 20;
             }
         }
     }
 
     @Override
-    public void onTeleport(EntityPlayerMP player)
-    {
+    public void onTeleport(EntityPlayerMP player) {
         EntityPlayerMP playerBase = PlayerUtil.getPlayerBaseServerFromPlayer(player, false);
 
-        if (playerBase != null)
-        {
+        if (playerBase != null) {
             GCPlayerStats stats = GCPlayerStats.get(playerBase);
 
-            if (this.stacks == null || this.stacks.isEmpty())
-            {
+            if (this.stacks == null || this.stacks.isEmpty()) {
                 stats.setRocketStacks(NonNullList.withSize(2, ItemStack.EMPTY));
-            }
-            else
-            {
+            } else {
                 stats.setRocketStacks(this.stacks);
             }
 
@@ -181,16 +145,13 @@ public class EntityTier6Rocket extends EntityTieredRocket
         }
     }
 
-    protected void spawnParticles(boolean launched)
-    {
-        if (!this.isDead)
-        {
+    protected void spawnParticles(boolean launched) {
+        if (!this.isDead) {
             double sinPitch = Math.sin(this.rotationPitch / Constants.RADIANS_TO_DEGREES_D);
             double x1 = 3.2 * Math.cos(this.rotationYaw / Constants.RADIANS_TO_DEGREES_D) * sinPitch;
             double z1 = 3.2 * Math.sin(this.rotationYaw / Constants.RADIANS_TO_DEGREES_D) * sinPitch;
             double y1 = 3.2 * Math.cos((this.rotationPitch - 180) / Constants.RADIANS_TO_DEGREES_D);
-            if (this.launchPhase == EnumLaunchPhase.LANDING.ordinal() && this.targetVec != null)
-            {
+            if (this.launchPhase == EnumLaunchPhase.LANDING.ordinal() && this.targetVec != null) {
                 double modifier = this.posY - this.targetVec.getY();
                 modifier = Math.max(modifier, 180.0);
                 x1 *= modifier / 200.0D;
@@ -213,7 +174,7 @@ public class EntityTier6Rocket extends EntityTieredRocket
             Vector3 mv4 = motionVec.clone().translate(d4);
             //T4 - Four flameballs which spread
             EntityLivingBase riddenByEntity = this.getPassengers().isEmpty() || !(this.getPassengers().get(0) instanceof EntityLivingBase) ? null : (EntityLivingBase) this.getPassengers().get(0);
-            Object[] rider = new Object[] { riddenByEntity };
+            Object[] rider = new Object[]{riddenByEntity};
             makeFlame(x2 + d1.x, y2 + d1.y, z2 + d1.z, mv1, this.getLaunched(), rider);
             makeFlame(x2 + d2.x, y2 + d2.y, z2 + d2.z, mv2, this.getLaunched(), rider);
             makeFlame(x2 + d3.x, y2 + d3.y, z2 + d3.z, mv3, this.getLaunched(), rider);
@@ -221,10 +182,8 @@ public class EntityTier6Rocket extends EntityTieredRocket
         }
     }
 
-    private void makeFlame(double x2, double y2, double z2, Vector3 motionVec, boolean getLaunched, Object[] rider)
-    {
-        if (getLaunched)
-        {
+    private void makeFlame(double x2, double y2, double z2, Vector3 motionVec, boolean getLaunched, Object[] rider) {
+        if (getLaunched) {
             GalacticraftCore.proxy.spawnParticle("launchFlameLaunched", new Vector3(x2 + 0.4 - this.rand.nextDouble() / 10D, y2, z2 + 0.4 - this.rand.nextDouble() / 10D), motionVec, rider);
             GalacticraftCore.proxy.spawnParticle("launchFlameLaunched", new Vector3(x2 - 0.4 + this.rand.nextDouble() / 10D, y2, z2 + 0.4 - this.rand.nextDouble() / 10D), motionVec, rider);
             GalacticraftCore.proxy.spawnParticle("launchFlameLaunched", new Vector3(x2 - 0.4 + this.rand.nextDouble() / 10D, y2, z2 - 0.4 + this.rand.nextDouble() / 10D), motionVec, rider);
@@ -254,56 +213,47 @@ public class EntityTier6Rocket extends EntityTieredRocket
     }
 
     @Override
-    public boolean isUsableByPlayer(EntityPlayer par1EntityPlayer)
-    {
+    public boolean isUsableByPlayer(EntityPlayer par1EntityPlayer) {
         return !this.isDead && par1EntityPlayer.getDistanceSq(this) <= 64.0D;
     }
 
     @Override
-    protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
-    {
+    protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeEntityToNBT(par1NBTTagCompound);
     }
 
     @Override
-    protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
-    {
+    protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readEntityFromNBT(par1NBTTagCompound);
     }
 
     @Override
-    public int getRocketTier()
-    {
+    public int getRocketTier() {
         return 6;
     }
 
     @Override
-    public int getFuelTankCapacity()
-    {
+    public int getFuelTankCapacity() {
         return 2500;
     }
 
     @Override
-    public int getPreLaunchWait()
-    {
+    public int getPreLaunchWait() {
         return 400;
     }
 
     @Override
-    public float getCameraZoom()
-    {
+    public float getCameraZoom() {
         return 15.0F;
     }
 
     @Override
-    public boolean defaultThirdPerson()
-    {
+    public boolean defaultThirdPerson() {
         return true;
     }
 
     @Override
-    public List<ItemStack> getItemsDropped(List<ItemStack> droppedItems)
-    {
+    public List<ItemStack> getItemsDropped(List<ItemStack> droppedItems) {
         super.getItemsDropped(droppedItems);
         ItemStack rocket = new ItemStack(SolItems.ROCKET_T6, 1, this.rocketType.getIndex());
         rocket.setTagCompound(new NBTTagCompound());
@@ -313,8 +263,7 @@ public class EntityTier6Rocket extends EntityTieredRocket
     }
 
     @Override
-    public float getRenderOffsetY()
-    {
+    public float getRenderOffsetY() {
         return -1F;
     }
 }

@@ -8,19 +8,16 @@ import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
-public class Tier5RocketRecipeWrapper implements IRecipeWrapper
-{
+public class Tier5RocketRecipeWrapper implements IRecipeWrapper {
     @Nonnull
     private final INasaWorkbenchRecipe recipe;
 
-    public Tier5RocketRecipeWrapper(@Nonnull INasaWorkbenchRecipe recipe)
-    {
+    public Tier5RocketRecipeWrapper(@Nonnull INasaWorkbenchRecipe recipe) {
         this.recipe = recipe;
     }
 
     @Override
-    public void getIngredients(IIngredients ingredients)
-    {
+    public void getIngredients(IIngredients ingredients) {
         ingredients.setInputs(ItemStack.class, Lists.newArrayList(this.recipe.getRecipeInput().values()));
         ingredients.setOutput(ItemStack.class, this.recipe.getRecipeOutput());
     }

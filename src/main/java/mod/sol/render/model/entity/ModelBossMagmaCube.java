@@ -9,31 +9,25 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelBossMagmaCube extends ModelBase
-{
+public class ModelBossMagmaCube extends ModelBase {
     ModelRenderer[] segments = new ModelRenderer[8];
     ModelRenderer core;
 
-    public ModelBossMagmaCube()
-    {
-        for (int i = 0; i < this.segments.length; ++i)
-        {
+    public ModelBossMagmaCube() {
+        for (int i = 0; i < this.segments.length; ++i) {
             int j = 0;
             int k = i;
 
-            if (i == 2)
-            {
+            if (i == 2) {
                 j = 24;
                 k = 10;
-            }
-            else if (i == 3)
-            {
+            } else if (i == 3) {
                 j = 24;
                 k = 19;
             }
 
             this.segments[i] = new ModelRenderer(this, j, k);
-            this.segments[i].addBox(-4.0F, (float)(16 + i), -4.0F, 8, 1, 8);
+            this.segments[i].addBox(-4.0F, (float) (16 + i), -4.0F, 8, 1, 8);
         }
 
         this.core = new ModelRenderer(this, 0, 16);
@@ -44,32 +38,27 @@ public class ModelBossMagmaCube extends ModelBase
      * Used for easily adding entity-dependent animations. The second and third float params here are the same second
      * and third as in the setRotationAngles method.
      */
-    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime)
-    {
-        EntityBossMagmaCube entitymagmacube = (EntityBossMagmaCube)entitylivingbaseIn;
+    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
+        EntityBossMagmaCube entitymagmacube = (EntityBossMagmaCube) entitylivingbaseIn;
         float f = 0 * partialTickTime;
 
-        if (f < 0.0F)
-        {
+        if (f < 0.0F) {
             f = 0.0F;
         }
 
-        for (int i = 0; i < this.segments.length; ++i)
-        {
-            this.segments[i].rotationPointY = (float)(-(4 - i)) * f * 1.7F;
+        for (int i = 0; i < this.segments.length; ++i) {
+            this.segments[i].rotationPointY = (float) (-(4 - i)) * f * 1.7F;
         }
     }
 
     /**
      * Sets the models various rotation angles then renders the model.
      */
-    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
-    {
+    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
         this.core.render(scale);
 
-        for (ModelRenderer modelrenderer : this.segments)
-        {
+        for (ModelRenderer modelrenderer : this.segments) {
             modelrenderer.render(scale);
         }
     }

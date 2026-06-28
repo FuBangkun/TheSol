@@ -30,8 +30,7 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.Nonnull;
 
 @JEIPlugin
-public class SolJeiManager extends BlankModPlugin
-{
+public class SolJeiManager extends BlankModPlugin {
     public static final String ROCKET_T4_ID = "sol.rocketT4";
     public static final String ROCKET_T5_ID = "sol.rocketT5";
     public static final String ROCKET_T6_ID = "sol.rocketT6";
@@ -41,8 +40,7 @@ public class SolJeiManager extends BlankModPlugin
     public static final String ROCKET_T10_ID = "sol.rocketT10";
 
     @Override
-    public void register(@Nonnull IModRegistry registry)
-    {
+    public void register(@Nonnull IModRegistry registry) {
         registry.handleRecipes(INasaWorkbenchRecipe.class, Tier4RocketRecipeWrapper::new, SolJeiManager.ROCKET_T4_ID);
         registry.handleRecipes(INasaWorkbenchRecipe.class, Tier5RocketRecipeWrapper::new, SolJeiManager.ROCKET_T5_ID);
         registry.handleRecipes(INasaWorkbenchRecipe.class, Tier6RocketRecipeWrapper::new, SolJeiManager.ROCKET_T6_ID);
@@ -66,8 +64,7 @@ public class SolJeiManager extends BlankModPlugin
     }
 
     @Override
-    public void registerCategories(IRecipeCategoryRegistration registry)
-    {
+    public void registerCategories(IRecipeCategoryRegistration registry) {
         IGuiHelper guiHelper = registry.getJeiHelpers().getGuiHelper();
         registry.addRecipeCategories(new Tier4RocketRecipeCategory(guiHelper));
         registry.addRecipeCategories(new Tier5RocketRecipeCategory(guiHelper));

@@ -12,7 +12,7 @@ public class Tier4RocketRecipeMaker {
         List<INasaWorkbenchRecipe> recipes = new ArrayList<>();
 
         int chestCount = -1;
-        for (INasaWorkbenchRecipe recipe : RecipeUtilSol.getRocketT4Recipes()) {
+        for (INasaWorkbenchRecipe recipe : RecipeUtilSol.getRocketRecipes(4)) {
             int chests = Tier1RocketRecipeMaker.countChests(recipe);
             if (chests == chestCount)
                 continue;

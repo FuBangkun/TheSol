@@ -109,13 +109,14 @@ key_t9.name=Tier 9 Dungeon Key
 key_t10.name=Tier 10 Dungeon Key
 
 # Schematics
-item.schematic_rocket_t4.name=Nasa Workbench Schematic (Tier 4 Rocket)
-item.schematic_rocket_t5.name=Nasa Workbench Schematic (Tier 5 Rocket)
-item.schematic_rocket_t6.name=Nasa Workbench Schematic (Tier 6 Rocket)
-item.schematic_rocket_t7.name=Nasa Workbench Schematic (Tier 7 Rocket)
-item.schematic_rocket_t8.name=Nasa Workbench Schematic (Tier 8 Rocket)
-item.schematic_rocket_t9.name=Nasa Workbench Schematic (Tier 9 Rocket)
-item.schematic_rocket_t10.name=Nasa Workbench Schematic (Tier 10 Rocket)
+item.schematic.name=Nasa Workbench Schematic
+schematic.tier4.name=Tier 4 Rocket
+schematic.tier5.name=Tier 5 Rocket
+schematic.tier6.name=Tier 6 Rocket
+schematic.tier7.name=Tier 7 Rocket
+schematic.tier8.name=Tier 8 Rocket
+schematic.tier9.name=Tier 9 Rocket
+schematic.tier10.name=Tier 10 Rocket
 
 # Rockets
 item.rocket_t4.t4Rocket.name=Tier 4 Rocket

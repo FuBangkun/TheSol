@@ -6,6 +6,7 @@ import micdoodle8.mods.galacticraft.core.items.ISortableItem;
 import micdoodle8.mods.galacticraft.core.items.ItemSchematic;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import mod.sol.TheSol;
 import mod.sol.init.SolItems;
 import mod.sol.util.IHasModel;
@@ -13,6 +14,7 @@ import mod.sol.util.Reference;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -23,14 +25,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemSchematicTier8 extends ItemSchematic implements ISchematicItem, ISortableItem, IHasModel {
+public class ItemSchematicTier extends ItemSchematic implements ISchematicItem, ISortableItem, IHasModel {
     private static int indexOffset = 0;
+    private final int tier;
 
-    public ItemSchematicTier8(String name) {
+    public ItemSchematicTier(String name, int tier) {
         super("schematic");
         this.setHasSubtypes(false);
         this.setRegistryName(name);
-        this.setTranslationKey(name);
+        this.tier = tier;
 
         SolItems.ITEMS.add(this);
     }
@@ -38,16 +41,16 @@ public class ItemSchematicTier8 extends ItemSchematic implements ISchematicItem,
     /**
      * Make sure the number of these will match the index values
      */
-    public static void registerSchematicItems() {
-        indexOffset = SchematicRegistry.registerSchematicItem(new ItemStack(SolItems.SCHEMATIC_T8, 1, 0));
+    public static void registerSchematicItems(Item schematicItem) {
+        indexOffset = SchematicRegistry.registerSchematicItem(new ItemStack(schematicItem, 1, 0));
     }
 
     /**
      * Make sure the order of these will match the index values
      */
     @SideOnly(value = Side.CLIENT)
-    public static void registerTextures() {
-        SchematicRegistry.registerTexture(new ResourceLocation(Reference.MOD_ID, "textures/items/schematic_rocket_t8.png"));
+    public static void registerTextures(int tier) {
+        SchematicRegistry.registerTexture(new ResourceLocation(Reference.MOD_ID, "textures/items/schematic_rocket_t" + tier + ".png"));
     }
 
     @Override
@@ -72,6 +75,7 @@ public class ItemSchematicTier8 extends ItemSchematic implements ISchematicItem,
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack par1ItemStack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        tooltip.add(GCCoreUtil.translate("schematic.tier" + tier + ".name"));
     }
 
     @Override
@@ -91,5 +95,9 @@ public class ItemSchematicTier8 extends ItemSchematic implements ISchematicItem,
     @Override
     public void registerModels() {
         TheSol.proxy.registerItemRenderer(this, 0, "inventory");
+    }
+
+    public int getTier() {
+        return tier;
     }
 }

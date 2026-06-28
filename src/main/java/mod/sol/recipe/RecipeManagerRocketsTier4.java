@@ -44,72 +44,72 @@ public class RecipeManagerRocketsTier4 {
 
         for (ItemStack woodChest : woodChests) {
             for (int i = 0; i < 4; ++i) {
-                input2 = new HashMap<Integer, ItemStack>(input);
+                input2 = new HashMap<>(input);
                 input2.put(22, new ItemStack(AsteroidsItems.tier3Rocket, 1, i));
-                RecipeUtilSol.addT4RocketRecipe(new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T4, 1, 0), input2));
+                RecipeUtilSol.addRocketRecipe(4, new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T4, 1, 0), input2));
             }
 
             for (int i = 0; i < 4; ++i) {
-                input2 = new HashMap<Integer, ItemStack>(input);
+                input2 = new HashMap<>(input);
                 input2.put(19, woodChest);
                 input2.put(20, ItemStack.EMPTY);
                 input2.put(21, ItemStack.EMPTY);
                 input2.put(22, new ItemStack(AsteroidsItems.tier3Rocket, 1, i));
-                RecipeUtilSol.addT4RocketRecipe(new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T4, 1, 1), input2));
+                RecipeUtilSol.addRocketRecipe(4, new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T4, 1, 1), input2));
             }
 
             for (int i = 0; i < 4; ++i) {
-                input2 = new HashMap<Integer, ItemStack>(input);
+                input2 = new HashMap<>(input);
                 input2.put(19, ItemStack.EMPTY);
                 input2.put(20, woodChest);
                 input2.put(21, ItemStack.EMPTY);
                 input2.put(22, new ItemStack(AsteroidsItems.tier3Rocket, 1, i));
-                RecipeUtilSol.addT4RocketRecipe(new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T4, 1, 1), input2));
+                RecipeUtilSol.addRocketRecipe(4, new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T4, 1, 1), input2));
             }
 
             for (int i = 0; i < 4; ++i) {
-                input2 = new HashMap<Integer, ItemStack>(input);
+                input2 = new HashMap<>(input);
                 input2.put(19, ItemStack.EMPTY);
                 input2.put(20, ItemStack.EMPTY);
                 input2.put(21, woodChest);
                 input2.put(22, new ItemStack(AsteroidsItems.tier3Rocket, 1, i));
-                RecipeUtilSol.addT4RocketRecipe(new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T4, 1, 1), input2));
+                RecipeUtilSol.addRocketRecipe(4, new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T4, 1, 1), input2));
             }
 
             for (int i = 0; i < 4; ++i) {
-                input2 = new HashMap<Integer, ItemStack>(input);
+                input2 = new HashMap<>(input);
                 input2.put(19, woodChest);
                 input2.put(20, woodChest);
                 input2.put(21, ItemStack.EMPTY);
                 input2.put(22, new ItemStack(AsteroidsItems.tier3Rocket, 1, i));
-                RecipeUtilSol.addT4RocketRecipe(new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T4, 1, 2), input2));
+                RecipeUtilSol.addRocketRecipe(4, new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T4, 1, 2), input2));
             }
 
             for (int i = 0; i < 4; ++i) {
-                input2 = new HashMap<Integer, ItemStack>(input);
+                input2 = new HashMap<>(input);
                 input2.put(19, woodChest);
                 input2.put(20, ItemStack.EMPTY);
                 input2.put(21, woodChest);
                 input2.put(22, new ItemStack(AsteroidsItems.tier3Rocket, 1, i));
-                RecipeUtilSol.addT4RocketRecipe(new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T4, 1, 2), input2));
+                RecipeUtilSol.addRocketRecipe(4, new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T4, 1, 2), input2));
             }
 
             for (int i = 0; i < 4; ++i) {
-                input2 = new HashMap<Integer, ItemStack>(input);
+                input2 = new HashMap<>(input);
                 input2.put(19, ItemStack.EMPTY);
                 input2.put(20, woodChest);
                 input2.put(21, woodChest);
                 input2.put(22, new ItemStack(AsteroidsItems.tier3Rocket, 1, i));
-                RecipeUtilSol.addT4RocketRecipe(new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T4, 1, 2), input2));
+                RecipeUtilSol.addRocketRecipe(4, new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T4, 1, 2), input2));
             }
 
             for (int i = 0; i < 4; ++i) {
-                input2 = new HashMap<Integer, ItemStack>(input);
+                input2 = new HashMap<>(input);
                 input2.put(19, woodChest);
                 input2.put(20, woodChest);
                 input2.put(21, woodChest);
                 input2.put(22, new ItemStack(AsteroidsItems.tier3Rocket, 1, i));
-                RecipeUtilSol.addT4RocketRecipe(new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T4, 1, 3), input2));
+                RecipeUtilSol.addRocketRecipe(4, new NasaWorkbenchRecipe(new ItemStack(SolItems.ROCKET_T4, 1, 3), input2));
             }
         }
     }

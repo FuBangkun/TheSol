@@ -28,6 +28,7 @@ import micdoodle8.mods.galacticraft.planets.venus.dimension.WorldProviderVenus;
 import micdoodle8.mods.galacticraft.planets.venus.world.gen.BiomeVenus;
 import mod.sol.api.galaxy.DwarfPlanet;
 import mod.sol.api.galaxy.GasGiant;
+import mod.sol.client.gui.container.*;
 import mod.sol.client.gui.screen.SolCelestialSelection;
 import mod.sol.config.ConfigManagerSol;
 import mod.sol.entities.EntityHugeFireball;
@@ -37,6 +38,7 @@ import mod.sol.init.SolBlocks;
 import mod.sol.init.SolDimensions;
 import mod.sol.init.SolItems;
 import mod.sol.init.SolOreDict;
+import mod.sol.inventory.*;
 import mod.sol.items.*;
 import mod.sol.planets.jupiter.moons.europa.biome.BiomeEuropa;
 import mod.sol.planets.jupiter.moons.europa.dimension.TeleportTypeEuropa;
@@ -82,6 +84,7 @@ import net.minecraft.client.settings.GameSettings;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
@@ -654,19 +657,24 @@ public class TheSol {
         TheSol.registerNonMobEntity(EntityTier8Rocket.class, "rocket_t8", 150, 1, false);
         TheSol.registerNonMobEntity(EntityTier9Rocket.class, "rocket_t9", 150, 1, false);
         // schematic
-        SchematicRegistry.registerSchematicRecipe(new SchematicRocketT4());
-        ItemSchematicTier4.registerSchematicItems();
-        SchematicRegistry.registerSchematicRecipe(new SchematicRocketT5());
-        ItemSchematicTier5.registerSchematicItems();
-        SchematicRegistry.registerSchematicRecipe(new SchematicRocketT6());
-        ItemSchematicTier6.registerSchematicItems();
-        SchematicRegistry.registerSchematicRecipe(new SchematicRocketT7());
-        ItemSchematicTier7.registerSchematicItems();
-        SchematicRegistry.registerSchematicRecipe(new SchematicRocketT8());
-        ItemSchematicTier8.registerSchematicItems();
-        SchematicRegistry.registerSchematicRecipe(new SchematicRocketT9());
-        ItemSchematicTier9.registerSchematicItems();
-        ItemSchematicTier10.registerSchematicItems();
+        for (int tier = 4; tier <= 9; tier++) {
+            final int t = tier;
+            final Item rocketItem = tier == 4 ? SolItems.ROCKET_T4 :
+                                   tier == 5 ? SolItems.ROCKET_T5 :
+                                   tier == 6 ? SolItems.ROCKET_T6 :
+                                   tier == 7 ? SolItems.ROCKET_T7 :
+                                   tier == 8 ? SolItems.ROCKET_T8 : SolItems.ROCKET_T9;
+            final Item schematicItem = tier == 4 ? SolItems.SCHEMATIC_T4 :
+                                      tier == 5 ? SolItems.SCHEMATIC_T5 :
+                                      tier == 6 ? SolItems.SCHEMATIC_T6 :
+                                      tier == 7 ? SolItems.SCHEMATIC_T7 :
+                                      tier == 8 ? SolItems.SCHEMATIC_T8 : SolItems.SCHEMATIC_T9;
+            SchematicRegistry.registerSchematicRecipe(new SchematicRocket(t, schematicItem,
+                    (inv, pos) -> new GuiSchematicRocket(inv, pos, t, rocketItem),
+                    (inv, pos) -> new ContainerSchematicRocket(inv, pos, t)));
+            ItemSchematicTier.registerSchematicItems(schematicItem);
+        }
+        ItemSchematicTier.registerSchematicItems(SolItems.SCHEMATIC_T10);
         RecipeManagerRocketsTier4.addUniversalRecipes();
         RecipeManagerRocketsTier5.addUniversalRecipes();
         RecipeManagerRocketsTier6.addUniversalRecipes();
@@ -714,13 +722,9 @@ public class TheSol {
     @EventHandler
     @SideOnly(Side.CLIENT)
     public void initClient(FMLInitializationEvent event) {
-        ItemSchematicTier4.registerTextures();
-        ItemSchematicTier5.registerTextures();
-        ItemSchematicTier6.registerTextures();
-        ItemSchematicTier7.registerTextures();
-        ItemSchematicTier8.registerTextures();
-        ItemSchematicTier9.registerTextures();
-        ItemSchematicTier10.registerTextures();
+        for (int tier = 4; tier <= 10; tier++) {
+            ItemSchematicTier.registerTextures(tier);
+        }
     }
 
     @SubscribeEvent

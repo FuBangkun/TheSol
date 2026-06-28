@@ -9,14 +9,19 @@ import net.minecraftforge.fluids.FluidRegistry;
 import java.awt.*;
 
 public class SolFluid {
-    public static final Fluid METHANE = new FluidBase("liquid_methane", new ResourceLocation(Reference.MOD_ID, "blocks/fluid/liquid_methane_still"), new ResourceLocation(Reference.MOD_ID, "blocks/fluid/liquid_methane_flow")).setColor(new Color(39, 120, 142));
+    public static final Fluid METHANE;
 
-    public static void registerFluids() {
-        registerFluid(SolFluid.METHANE);
+    static {
+        METHANE = registerFluid(new FluidBase("liquid_methane", new ResourceLocation(Reference.MOD_ID, "blocks/fluid/liquid_methane_still"), new ResourceLocation(Reference.MOD_ID, "blocks/fluid/liquid_methane_flow")).setColor(new Color(39, 120, 142)));
     }
 
-    private static void registerFluid(Fluid fluid) {
+    private static Fluid registerFluid(Fluid fluid) {
         FluidRegistry.registerFluid(fluid);
         FluidRegistry.addBucketForFluid(fluid);
+        return fluid;
+    }
+
+    public static void registerFluids() {
+        // kept for compatibility; registration now happens in static initializer
     }
 }

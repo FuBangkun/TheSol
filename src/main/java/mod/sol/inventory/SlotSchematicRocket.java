@@ -14,16 +14,18 @@ import net.minecraft.util.math.BlockPos;
 
 import java.util.List;
 
-public class SlotSchematicTier8Rocket extends Slot {
+public class SlotSchematicRocket extends Slot {
     private final int index;
     private final BlockPos pos;
     private final EntityPlayer player;
+    private final int tier;
 
-    public SlotSchematicTier8Rocket(IInventory par2IInventory, int par3, int par4, int par5, BlockPos pos, EntityPlayer player) {
+    public SlotSchematicRocket(IInventory par2IInventory, int par3, int par4, int par5, BlockPos pos, EntityPlayer player, int tier) {
         super(par2IInventory, par3, par4, par5);
         this.index = par3;
         this.pos = pos;
         this.player = player;
+        this.tier = tier;
     }
 
     @Override
@@ -39,7 +41,7 @@ public class SlotSchematicTier8Rocket extends Slot {
         if (par1ItemStack == null)
             return false;
 
-        List<INasaWorkbenchRecipe> recipes = RecipeUtilSol.getRocketT8Recipes();
+        List<INasaWorkbenchRecipe> recipes = RecipeUtilSol.getRocketRecipes(tier);
         for (INasaWorkbenchRecipe recipe : recipes) {
             if (ItemStack.areItemsEqual(par1ItemStack, recipe.getRecipeInput().get(this.index)))
                 return true;

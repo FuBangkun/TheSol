@@ -23,9 +23,9 @@ import java.util.Random;
 public class BiomeProviderPluto extends BiomeProvider {
     private GenLayer unzoomedBiomes;
     private GenLayer zoomedBiomes;
-    private BiomeCache biomeCache;
-    private List<Biome> biomesToSpawnIn;
-    private CelestialBody body;
+    private final BiomeCache biomeCache;
+    private final List<Biome> biomesToSpawnIn;
+    private final CelestialBody body;
 
     protected BiomeProviderPluto() {
         body = TheSol.planetPluto;

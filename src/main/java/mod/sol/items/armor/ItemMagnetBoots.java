@@ -3,22 +3,20 @@ package mod.sol.items.armor;
 import micdoodle8.mods.galacticraft.api.item.IArmorGravity;
 import micdoodle8.mods.galacticraft.core.dimension.WorldProviderSpaceStation;
 import micdoodle8.mods.galacticraft.core.items.ISortableItem;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
+import mod.sol.Tags;
 import mod.sol.TheSol;
 import mod.sol.init.SolItems;
 import mod.sol.util.IHasModel;
-import mod.sol.Tags;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 public class ItemMagnetBoots extends ItemArmor implements IArmorGravity, ISortableItem, IHasModel {
     private final ArmorMaterial material;
@@ -34,7 +32,7 @@ public class ItemMagnetBoots extends ItemArmor implements IArmorGravity, ISortab
     }
 
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
+    public String getArmorTexture(@Nonnull ItemStack stack, @Nonnull Entity entity, @Nonnull EntityEquipmentSlot slot, @Nonnull String type) {
         if (this.material == ArmorMaterial.IRON) {
             if (stack.getItem() == SolItems.MAGNET_BOOTS) {
                 return Tags.MOD_ID + ":textures/model/magnet_boots.png";
@@ -43,52 +41,28 @@ public class ItemMagnetBoots extends ItemArmor implements IArmorGravity, ISortab
         return null;
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack) {
-        return ClientProxyCore.galacticraftItem;
+    private int getGravityOverride(EntityPlayer p) {
+        Material material0 = p.world.getBlockState(new BlockPos(p.posX, (int) p.posY, p.posZ)).getMaterial();
+        Material material1 = p.world.getBlockState(new BlockPos(p.posX, (int) p.posY - 1, p.posZ)).getMaterial();
+        Material material2 = p.world.getBlockState(new BlockPos(p.posX, (int) p.posY - 2, p.posZ)).getMaterial();
+
+        boolean hasIron = material0 == Material.IRON || material0 == Material.ANVIL || material1 == Material.IRON || material1 == Material.ANVIL || material2 == Material.IRON || material2 == Material.ANVIL;
+
+        if (!hasIron) {
+            return 0;
+        }
+
+        return p.world.provider instanceof WorldProviderSpaceStation ? -1000 : 1000;
     }
 
     @Override
     public int gravityOverrideIfLow(EntityPlayer p) {
-        if (p.world.provider instanceof WorldProviderSpaceStation) {
-            Material material0 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY, p.posZ - 0)).getMaterial();
-            Material material1 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 1, p.posZ - 0)).getMaterial();
-            Material material2 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 2, p.posZ - 0)).getMaterial();
-            if (material0 == Material.IRON || material0 == Material.ANVIL || material1 == Material.IRON || material1 == Material.ANVIL || material2 == Material.IRON || material2 == Material.ANVIL)
-                return -1000;
-            else
-                return 0;
-        } else {
-            Material material0 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY, p.posZ - 0)).getMaterial();
-            Material material1 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 1, p.posZ - 0)).getMaterial();
-            Material material2 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 2, p.posZ - 0)).getMaterial();
-            if (material0 == Material.IRON || material0 == Material.ANVIL || material1 == Material.IRON || material1 == Material.ANVIL || material2 == Material.IRON || material2 == Material.ANVIL)
-                return 1000;
-            else
-                return 0;
-        }
+        return getGravityOverride(p);
     }
 
     @Override
     public int gravityOverrideIfHigh(EntityPlayer p) {
-        if (p.world.provider instanceof WorldProviderSpaceStation) {
-            Material material0 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY, p.posZ - 0)).getMaterial();
-            Material material1 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 1, p.posZ - 0)).getMaterial();
-            Material material2 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 2, p.posZ - 0)).getMaterial();
-            if (material0 == Material.IRON || material0 == Material.ANVIL || material1 == Material.IRON || material1 == Material.ANVIL || material2 == Material.IRON || material2 == Material.ANVIL)
-                return -1000;
-            else
-                return 0;
-        } else {
-            Material material0 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY, p.posZ - 0)).getMaterial();
-            Material material1 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 1, p.posZ - 0)).getMaterial();
-            Material material2 = p.world.getBlockState(new BlockPos(p.posX - 0, (int) p.posY - 2, p.posZ - 0)).getMaterial();
-            if (material0 == Material.IRON || material0 == Material.ANVIL || material1 == Material.IRON || material1 == Material.ANVIL || material2 == Material.IRON || material2 == Material.ANVIL)
-                return 1000;
-            else
-                return 0;
-        }
+        return getGravityOverride(p);
     }
 
     @Override
@@ -97,7 +71,7 @@ public class ItemMagnetBoots extends ItemArmor implements IArmorGravity, ISortab
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+    public boolean getIsRepairable(@Nonnull ItemStack toRepair, ItemStack repair) {
         return repair.getItem() == SolItems.MAGNET_INGOT;
     }
 

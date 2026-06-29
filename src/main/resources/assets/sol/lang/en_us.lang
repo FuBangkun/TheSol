@@ -57,44 +57,44 @@ tile.fluid.methane.name=Liquid Methane
 #////////////////           Items            ////////////////#
 
 # Tier 4 Items
-item.reinforced_plate_t4.name=Tier 4 Duty-Plate
-item.rocket_fins_t4.name=Tier 4 Rocket Fins
-item.engine_booster_t4.name=Tier 4 Rocket Booster
+item.reinforced_plate.t4.name=Tier 4 Duty-Plate
+item.rocket_fins.t4.name=Tier 4 Rocket Fins
+item.engine_booster.t4.name=Tier 4 Rocket Booster
 
 # Tier 5 Items
-item.rocket_engine_t5.name=Tier 5 Rocket Engine
-item.reinforced_plate_t5.name=Tier 5 Duty-Plate
-item.nose_cone_t5.name=Tier 5 Nose Cone
-item.rocket_fins_t5.name=Tier 5 Rocket Fins
-item.engine_booster_t5.name=Tier 5 Booster
+item.rocket_engine.t5.name=Tier 5 Rocket Engine
+item.reinforced_plate.t5.name=Tier 5 Duty-Plate
+item.nose_cone.t5.name=Tier 5 Nose Cone
+item.rocket_fins.t5.name=Tier 5 Rocket Fins
+item.engine_booster.t5.name=Tier 5 Booster
 
 # Tier 6 Items
-item.rocket_engine_t6.name=Tier 6 Rocket Engine
-item.reinforced_plate_t6.name=Tier 6 Duty-Plate
-item.nose_cone_t6.name=Tier 6 Nose Cone
-item.rocket_fins_t6.name=Tier 6 Rocket Fins
-item.engine_booster_t6.name=Tier 6 Booster
+item.rocket_engine.t6.name=Tier 6 Rocket Engine
+item.reinforced_plate.t6.name=Tier 6 Duty-Plate
+item.nose_cone.t6.name=Tier 6 Nose Cone
+item.rocket_fins.t6.name=Tier 6 Rocket Fins
+item.engine_booster.t6.name=Tier 6 Booster
 
 # Tier 7 Items
-item.rocket_engine_t7.name=Tier 7 Rocket Engine
-item.reinforced_plate_t7.name=Tier 7 Duty-Plate
-item.nose_cone_t7.name=Tier 7 Nose Cone
-item.rocket_fins_t7.name=Tier 7 Rocket Fins
-item.engine_booster_t7.name=Tier 7 Booster
+item.rocket_engine.t7.name=Tier 7 Rocket Engine
+item.reinforced_plate.t7.name=Tier 7 Duty-Plate
+item.nose_cone.t7.name=Tier 7 Nose Cone
+item.rocket_fins.t7.name=Tier 7 Rocket Fins
+item.engine_booster.t7.name=Tier 7 Booster
 
 # Tier 8 Items
-item.rocket_engine_t8.name=Tier 8 Rocket Engine
-item.reinforced_plate_t8.name=Tier 8 Duty-Plate
-item.nose_cone_t8.name=Tier 8 Nose Cone
-item.rocket_fins_t8.name=Tier 8 Rocket Fins
-item.engine_booster_t8.name=Tier 8 Booster
+item.rocket_engine.t8.name=Tier 8 Rocket Engine
+item.reinforced_plate.t8.name=Tier 8 Duty-Plate
+item.nose_cone.t8.name=Tier 8 Nose Cone
+item.rocket_fins.t8.name=Tier 8 Rocket Fins
+item.engine_booster.t8.name=Tier 8 Booster
 
 # Tier 9 Items
-item.rocket_engine_t9.name=Tier 9 Rocket Engine
-item.reinforced_plate_t9.name=Tier 9 Duty-Plate
-item.nose_cone_t9.name=Tier 9 Nose Cone
-item.rocket_fins_t9.name=Tier 9 Rocket Fins
-item.engine_booster_t9.name=Tier 9 Booster
+item.rocket_engine.t9.name=Tier 9 Rocket Engine
+item.reinforced_plate.t9.name=Tier 9 Duty-Plate
+item.nose_cone.t9.name=Tier 9 Nose Cone
+item.rocket_fins.t9.name=Tier 9 Rocket Fins
+item.engine_booster.t9.name=Tier 9 Booster
 
 # Keys
 item.key.t4.name=Tier 4 Dungeon Key

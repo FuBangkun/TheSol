@@ -24,7 +24,7 @@ import java.nio.FloatBuffer;
 import java.util.*;
 
 public class SolCelestialSelection extends GuiCelestialSelection {
-    private static Random rand = new Random();
+    private static final Random rand = new Random();
 
     public SolCelestialSelection(boolean mapMode, List<CelestialBody> possibleBodies, boolean canCreateStations) {
         super(mapMode, possibleBodies, canCreateStations);
@@ -243,7 +243,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                     float scale = Math.max(0.3F, 1.5F / (this.ticksSinceSelectionF / 5.0F)) * 2.0F / div;
                     GL11.glScalef(scale, scale, 1.0F);
                     this.mc.renderEngine.bindTexture(guiMain0);
-                    float colMod = this.getZoomAdvanced() < 4.9F ? (float) (Math.sin(this.ticksSinceSelectionF / 1.0F) * 0.5D + 0.5D) : 1.0F;
+                    float colMod = this.getZoomAdvanced() < 4.9F ? (float) (Math.sin(this.ticksSinceSelectionF) * 0.5D + 0.5D) : 1.0F;
                     GL11.glColor4f(0.4F, 0.8F, 1.0F, colMod);
                     int width = this.getWidthForCelestialBody(this.selectedBody) * 13;
                     this.drawTexturedModalRect(-width, -width, width * 2, width * 2, 266, 29, 100, 100, false, false);
@@ -512,7 +512,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                                     break label412;
                                 }
 
-                                Map.Entry<Object, Integer> e = (Map.Entry) var44.next();
+                                Map.Entry<Object, Integer> e = var44.next();
                                 Object next = e.getKey();
                                 xPos = (int) ((double) (RHS - 95) + (double) (i * 93) / (double) recipe.getInput().size() + 5.0D);
                                 int yPos = TOP + 154 + this.canCreateOffset;

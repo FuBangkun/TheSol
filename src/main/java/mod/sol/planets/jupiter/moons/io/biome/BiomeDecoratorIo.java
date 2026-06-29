@@ -16,11 +16,11 @@ public class BiomeDecoratorIo extends BiomeDecorator {
     private World world;
     private Random randomGenerator;
 
-    private WorldGenerator dirtGen;
-    private WorldGenerator aluminumGen;
-    private WorldGenerator copperGen;
-    private WorldGenerator ironGen;
-    private WorldGenerator sulfurGen;
+    private final WorldGenerator dirtGen;
+    private final WorldGenerator aluminumGen;
+    private final WorldGenerator copperGen;
+    private final WorldGenerator ironGen;
+    private final WorldGenerator sulfurGen;
 
     public BiomeDecoratorIo() {
         this.aluminumGen = new WorldGenMinableMeta(SolBlocks.IO_ALUMINUM_ORE, 6, 0, true, SolBlocks.IO_ROCK, 0);

@@ -3,20 +3,16 @@ package mod.sol.items;
 import micdoodle8.mods.galacticraft.api.item.ElectricItemHelper;
 import micdoodle8.mods.galacticraft.core.energy.item.ItemElectricBase;
 import micdoodle8.mods.galacticraft.core.items.ISortableItem;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
 import mod.sol.TheSol;
 import mod.sol.init.SolItems;
 import mod.sol.util.IHasModel;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemAdvancedBattery extends ItemElectricBase implements ISortableItem, IHasModel {
-    private int batteryTier = 0;
+    private final int batteryTier;
 
     public ItemAdvancedBattery(String assetName, int tier) {
         super();
@@ -24,7 +20,6 @@ public class ItemAdvancedBattery extends ItemElectricBase implements ISortableIt
         this.setRegistryName(assetName);
         this.setTranslationKey(assetName);
         this.batteryTier = tier;
-        //this.setTextureName(Constants.TEXTURE_PREFIX + assetName);
 
         SolItems.ITEMS.add(this);
     }
@@ -40,12 +35,6 @@ public class ItemAdvancedBattery extends ItemElectricBase implements ISortableIt
     @Override
     public CreativeTabs getCreativeTab() {
         return TheSol.ITEM_TAB;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack) {
-        return ClientProxyCore.galacticraftItem;
     }
 
     @Override

@@ -316,7 +316,7 @@ public class EntitySaturnBossStray extends EntityBossBase implements IEntityBrea
 
     @Override
     public void dropKey() {
-        this.entityDropItem(new ItemStack(SolItems.KEY, 1, 2), 0.5F);
+        this.entityDropItem(new ItemStack(SolItems.KEYS, 1, 2), 0.5F);
     }
 
     @Override

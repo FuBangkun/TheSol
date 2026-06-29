@@ -385,8 +385,6 @@ public class SolEventHandlerClient {
 
         @SubscribeEvent
         public void onRenderPlanetPost(CelestialBodyRenderEvent.Post event) {
-            final Minecraft minecraft = FMLClientHandler.instance().getClient();
-
             if (FMLClientHandler.instance().getClient().currentScreen instanceof GuiCelestialSelection) {
                 if (event.celestialBody == TheSol.planetSaturn) {
                     FMLClientHandler.instance().getClient().renderEngine.bindTexture(ClientProxyCore.saturnRingTexture);

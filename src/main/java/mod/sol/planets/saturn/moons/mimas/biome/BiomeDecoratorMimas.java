@@ -16,12 +16,12 @@ public class BiomeDecoratorMimas extends BiomeDecorator {
     private World world;
     private Random randomGenerator;
 
-    private WorldGenerator dirtGen;
-    private WorldGenerator copperGen;
-    private WorldGenerator deshGen;
-    private WorldGenerator ironGen;
-    private WorldGenerator maganeseGen;
-    private WorldGenerator tinGen;
+    private final WorldGenerator dirtGen;
+    private final WorldGenerator copperGen;
+    private final WorldGenerator deshGen;
+    private final WorldGenerator ironGen;
+    private final WorldGenerator maganeseGen;
+    private final WorldGenerator tinGen;
 
     public BiomeDecoratorMimas() {
         this.copperGen = new WorldGenMinableMeta(SolBlocks.MIMAS_COPPER_ORE, 8, 0, true, SolBlocks.MIMAS_ROCK, 0);

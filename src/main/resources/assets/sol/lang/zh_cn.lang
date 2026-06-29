@@ -57,44 +57,44 @@ tile.fluid.methane.name=液态甲烷
 #////////////////           Items            ////////////////#
 
 # Tier 4 Items
-item.reinforced_plate_t4.name=四阶重装板
-item.rocket_fins_t4.name=四阶火箭尾翼
-item.engine_booster_t4.name=四阶火箭助推器
+item.reinforced_plate.t4.name=四阶重装板
+item.rocket_fins.t4.name=四阶火箭尾翼
+item.engine_booster.t4.name=四阶火箭助推器
 
 # Tier 5 Items
-item.rocket_engine_t5.name=五阶火箭引擎
-item.reinforced_plate_t5.name=五阶重装板
-item.nose_cone_t5.name=五阶火箭鼻锥
-item.rocket_fins_t5.name=五阶火箭尾翼
-item.engine_booster_t5.name=五阶火箭助推器
+item.rocket_engine.t5.name=五阶火箭引擎
+item.reinforced_plate.t5.name=五阶重装板
+item.nose_cone.t5.name=五阶火箭鼻锥
+item.rocket_fins.t5.name=五阶火箭尾翼
+item.engine_booster.t5.name=五阶火箭助推器
 
 # Tier 6 Items
-item.rocket_engine_t6.name=六阶火箭引擎
-item.reinforced_plate_t6.name=六阶重装板
-item.nose_cone_t6.name=六阶火箭鼻锥
-item.rocket_fins_t6.name=六阶火箭尾翼
-item.engine_booster_t6.name=六阶火箭助推器
+item.rocket_engine.t6.name=六阶火箭引擎
+item.reinforced_plate.t6.name=六阶重装板
+item.nose_cone.t6.name=六阶火箭鼻锥
+item.rocket_fins.t6.name=六阶火箭尾翼
+item.engine_booster.t6.name=六阶火箭助推器
 
 # Tier 7 Items
-item.rocket_engine_t7.name=七阶火箭引擎
-item.reinforced_plate_t7.name=七阶重装板
-item.nose_cone_t7.name=七阶火箭鼻锥
-item.rocket_fins_t7.name=七阶火箭尾翼
-item.engine_booster_t7.name=七阶火箭助推器
+item.rocket_engine.t7.name=七阶火箭引擎
+item.reinforced_plate.t7.name=七阶重装板
+item.nose_cone.t7.name=七阶火箭鼻锥
+item.rocket_fins.t7.name=七阶火箭尾翼
+item.engine_booster.t7.name=七阶火箭助推器
 
 # Tier 8 Items
-item.rocket_engine_t8.name=八阶火箭引擎
-item.reinforced_plate_t8.name=八阶重装板
-item.nose_cone_t8.name=八阶火箭鼻锥
-item.rocket_fins_t8.name=八阶火箭尾翼
-item.engine_booster_t8.name=八阶火箭助推器
+item.rocket_engine.t8.name=八阶火箭引擎
+item.reinforced_plate.t8.name=八阶重装板
+item.nose_cone.t8.name=八阶火箭鼻锥
+item.rocket_fins.t8.name=八阶火箭尾翼
+item.engine_booster.t8.name=八阶火箭助推器
 
 # Tier 9 Items
-item.rocket_engine_t9.name=九阶火箭引擎
-item.reinforced_plate_t9.name=九阶重装板
-item.nose_cone_t9.name=九阶火箭鼻锥
-item.rocket_fins_t9.name=九阶火箭尾翼
-item.engine_booster_t9.name=九阶火箭助推器
+item.rocket_engine.t9.name=九阶火箭引擎
+item.reinforced_plate.t9.name=九阶重装板
+item.nose_cone.t9.name=九阶火箭鼻锥
+item.rocket_fins.t9.name=九阶火箭尾翼
+item.engine_booster.t9.name=九阶火箭助推器
 
 # Keys
 item.key.t4.name=四阶地牢钥匙

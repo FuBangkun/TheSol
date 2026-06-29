@@ -33,7 +33,7 @@ public class ChunkProviderEuropa extends ChunkProviderBase {
     private final Gradient noiseGenSmooth1;
     private final double[] terrainCalcs;
     private final float[] parabolicField;
-    private Random rand;
+    private final Random rand;
     private NoiseGeneratorOctaves noiseGen1;
     private NoiseGeneratorOctaves noiseGen2;
     private NoiseGeneratorOctaves noiseGen3;
@@ -41,10 +41,10 @@ public class ChunkProviderEuropa extends ChunkProviderBase {
     private NoiseGeneratorOctaves noiseGen5;
     private NoiseGeneratorOctaves noiseGen6;
     private NoiseGeneratorOctaves mobSpawnerNoise;
-    private World world;
-    private WorldType worldType;
+    private final World world;
+    private final WorldType worldType;
     private double[] stoneNoise = new double[256];
-    private MapGenBaseMeta caveGenerator = new MapGenCavesEuropa();
+    private final MapGenBaseMeta caveGenerator = new MapGenCavesEuropa();
     private Biome[] biomesForGeneration;
     private double[] octaves1;
     private double[] octaves2;

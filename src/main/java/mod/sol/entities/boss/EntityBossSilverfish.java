@@ -165,7 +165,7 @@ public class EntityBossSilverfish extends EntityBossBase implements IEntityBreat
 
     @Override
     public void dropKey() {
-        this.entityDropItem(new ItemStack(SolItems.KEY, 1, 5), 0.5F);
+        this.entityDropItem(new ItemStack(SolItems.KEYS, 1, 5), 0.5F);
     }
 
     @Override

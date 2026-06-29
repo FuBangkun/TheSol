@@ -2,7 +2,6 @@ package mod.sol.items.tools;
 
 import com.google.common.collect.Sets;
 import micdoodle8.mods.galacticraft.core.items.ISortableItem;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
 import mod.sol.TheSol;
 import mod.sol.init.SolItems;
@@ -12,12 +11,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import java.util.Set;
 
 public class ItemAxeBase extends ItemTool implements ISortableItem, IHasModel {
@@ -29,12 +28,6 @@ public class ItemAxeBase extends ItemTool implements ISortableItem, IHasModel {
         this.attackSpeed = -3.0F;
 
         SolItems.ITEMS.add(this);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack) {
-        return ClientProxyCore.galacticraftItem;
     }
 
     @SideOnly(Side.CLIENT)
@@ -49,7 +42,7 @@ public class ItemAxeBase extends ItemTool implements ISortableItem, IHasModel {
     }
 
     @Override
-    public float getDestroySpeed(ItemStack stack, IBlockState state) {
+    public float getDestroySpeed(@Nonnull ItemStack stack, IBlockState state) {
         Material material = state.getMaterial();
         return material != Material.WOOD && material != Material.PLANTS && material != Material.VINE ? super.getDestroySpeed(stack, state) : this.efficiency;
     }

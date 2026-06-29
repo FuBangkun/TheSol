@@ -5,7 +5,7 @@ import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.core.util.ClientUtil;
 import micdoodle8.mods.galacticraft.core.util.ColorUtil;
 import micdoodle8.mods.galacticraft.core.util.PlayerUtil;
-import mod.sol.entities.EntityRocketBase;
+import mod.sol.entities.EntityTierRocket;
 import mod.sol.util.RocketModelUtil;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -24,8 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 
 @SideOnly(Side.CLIENT)
-public class RenderRocketBase<T extends EntityRocketBase> extends Render<T> {
-
+public class RenderRocketBase<T extends EntityTierRocket> extends Render<T> {
     public RenderRocketBase(RenderManager manager) {
         super(manager);
         this.shadowSize = 2F;
@@ -93,12 +92,7 @@ public class RenderRocketBase<T extends EntityRocketBase> extends Render<T> {
         );
 
         if (teamColor != null) {
-            int color = ColorUtil.to32BitColor(
-                    255,
-                    (int) (teamColor.floatZ() * 255),
-                    (int) (teamColor.floatY() * 255),
-                    (int) (teamColor.floatX() * 255)
-            );
+            int color = ColorUtil.to32BitColor(255, (int) (teamColor.floatZ() * 255), (int) (teamColor.floatY() * 255), (int) (teamColor.floatX() * 255));
 
             GlStateManager.disableTexture2D();
             ClientUtil.drawBakedModelColored(coneModel, color);
@@ -111,12 +105,7 @@ public class RenderRocketBase<T extends EntityRocketBase> extends Render<T> {
 
         boolean red = ((entity.ticksExisted >> 3) & 1) == 0;
 
-        int color = ColorUtil.to32BitColor(
-                255,
-                0,
-                red ? 0 : 255,
-                red ? 255 : 0
-        );
+        int color = ColorUtil.to32BitColor(255, 0, red ? 0 : 255, red ? 255 : 0);
 
         ClientUtil.drawBakedModelColored(cubeModel, color);
 

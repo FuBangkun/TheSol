@@ -1,8 +1,8 @@
 package mod.sol.render.layer;
 
+import mod.sol.Tags;
 import mod.sol.entities.boss.EntityNeptuneBossSpider;
 import mod.sol.render.entity.RenderNeptuneBossSpider;
-import mod.sol.Tags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;

@@ -1,8 +1,8 @@
 package mod.sol.render.entity;
 
+import mod.sol.Tags;
 import mod.sol.entities.boss.EntityUranusBossSlime;
 import mod.sol.render.layer.LayerUranusBossSlimeGel;
-import mod.sol.Tags;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

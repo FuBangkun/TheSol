@@ -1,8 +1,8 @@
 package mod.sol.render.entity;
 
+import mod.sol.Tags;
 import mod.sol.entities.boss.EntityBossMagmaCube;
 import mod.sol.render.model.ModelBossMagmaCube;
-import mod.sol.Tags;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

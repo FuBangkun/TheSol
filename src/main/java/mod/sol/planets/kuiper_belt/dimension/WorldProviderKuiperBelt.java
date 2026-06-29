@@ -24,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.*;
 
 public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISolarLevel {
-    private HashSet<WorldProviderKuiperBelt.AsteroidData> asteroids = new HashSet<>();
+    private final HashSet<WorldProviderKuiperBelt.AsteroidData> asteroids = new HashSet<>();
     private boolean dataNotLoaded = true;
     private KuiperBeltSaveData datafile;
     private double solarMultiplier = -1.0D;
@@ -221,7 +221,7 @@ public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISola
                         return result;
                     }
 
-                    test = (WorldProviderKuiperBelt.AsteroidData) var8.next();
+                    test = var8.next();
                 } while (mark && (test.sizeAndLandedFlag & 128) > 0);
 
                 int dx = x - test.centre.x;
@@ -284,7 +284,7 @@ public class WorldProviderKuiperBelt extends WorldProviderSpace implements ISola
                         return returnValues;
                     }
 
-                    WorldProviderKuiperBelt.AsteroidData roid = (WorldProviderKuiperBelt.AsteroidData) var7.next();
+                    WorldProviderKuiperBelt.AsteroidData roid = var7.next();
                     test = roid.centre;
                     switch (facing) {
                         case 2:

@@ -1,9 +1,9 @@
 package mod.sol.render.entity;
 
+import mod.sol.Tags;
 import mod.sol.entities.boss.EntitySaturnBossStray;
 import mod.sol.render.layer.LayerHeldItemSaturnBossSkeleton;
 import mod.sol.render.model.ModelSaturnBossStray;
-import mod.sol.Tags;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

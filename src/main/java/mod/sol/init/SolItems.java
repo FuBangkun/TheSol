@@ -19,56 +19,29 @@ import java.util.List;
 
 public class SolItems {
     public static final List<Item> ITEMS = new ArrayList<>();
-    // unused
-    // public static final Item TRANSLATION_INFO = new ItemBase("translation_info", TheSol.ITEM_TAB);
     // rocket stuff
-    public static final Item SCHEMATIC_ROCKET = new ItemSchematicTier();
-    public static final Item KEY = new ItemKeyTier();
+    public static final Item SCHEMATICS = new ItemSchematic();
+    public static final Item KEYS = new ItemKey();
+    public static final Item ROCKET_ENGINES = new ItemRocketPart("rocket_engine", false);
+    public static final Item REINFORCED_PLATES = new ItemRocketPart("reinforced_plate", true);
+    public static final Item NOSE_CONES = new ItemRocketPart("nose_cone", false);
+    public static final Item ROCKET_FINS = new ItemRocketPart("rocket_fins", true);
+    public static final Item ENGINE_BOOSTERS = new ItemRocketPart("engine_booster", true);
     // t4
-    public static final Item REINFORCED_PLATE_T4 = new ItemBase("reinforced_plate_t4", TheSol.ITEM_TAB);
-    public static final Item ROCKET_FINS_T4 = new ItemBase("rocket_fins_t4", TheSol.ITEM_TAB);
-    public static final Item ENGINE_BOOSTER_T4 = new ItemBase("engine_booster_t4", TheSol.ITEM_TAB);
     public static final Item ROCKET_T4 = new ItemRocket(4, EntityTierRocket::new);
     // t5
-    public static final Item ROCKET_ENGINE_T5 = new ItemBase("rocket_engine_t5", TheSol.ITEM_TAB);
-    public static final Item REINFORCED_PLATE_T5 = new ItemBase("reinforced_plate_t5", TheSol.ITEM_TAB);
-    public static final Item NOSE_CONE_T5 = new ItemBase("nose_cone_t5", TheSol.ITEM_TAB);
-    public static final Item ROCKET_FINS_T5 = new ItemBase("rocket_fins_t5", TheSol.ITEM_TAB);
-    public static final Item ENGINE_BOOSTER_T5 = new ItemBase("engine_booster_t5", TheSol.ITEM_TAB);
     public static final Item ROCKET_T5 = new ItemRocket(5, EntityTierRocket::new);
     // t6
-    public static final Item ROCKET_ENGINE_T6 = new ItemBase("rocket_engine_t6", TheSol.ITEM_TAB);
-    public static final Item REINFORCED_PLATE_T6 = new ItemBase("reinforced_plate_t6", TheSol.ITEM_TAB);
-    public static final Item NOSE_CONE_T6 = new ItemBase("nose_cone_t6", TheSol.ITEM_TAB);
-    public static final Item ROCKET_FINS_T6 = new ItemBase("rocket_fins_t6", TheSol.ITEM_TAB);
-    public static final Item ENGINE_BOOSTER_T6 = new ItemBase("engine_booster_t6", TheSol.ITEM_TAB);
     public static final Item ROCKET_T6 = new ItemRocket(6, EntityTierRocket::new);
     // t7
-    public static final Item ROCKET_ENGINE_T7 = new ItemBase("rocket_engine_t7", TheSol.ITEM_TAB);
-    public static final Item REINFORCED_PLATE_T7 = new ItemBase("reinforced_plate_t7", TheSol.ITEM_TAB);
-    public static final Item NOSE_CONE_T7 = new ItemBase("nose_cone_t7", TheSol.ITEM_TAB);
-    public static final Item ROCKET_FINS_T7 = new ItemBase("rocket_fins_t7", TheSol.ITEM_TAB);
-    public static final Item ENGINE_BOOSTER_T7 = new ItemBase("engine_booster_t7", TheSol.ITEM_TAB);
     public static final Item ROCKET_T7 = new ItemRocket(7, EntityTierRocket::new);
     // t8
-    public static final Item ROCKET_ENGINE_T8 = new ItemBase("rocket_engine_t8", TheSol.ITEM_TAB);
-    public static final Item REINFORCED_PLATE_T8 = new ItemBase("reinforced_plate_t8", TheSol.ITEM_TAB);
-    public static final Item NOSE_CONE_T8 = new ItemBase("nose_cone_t8", TheSol.ITEM_TAB);
-    public static final Item ROCKET_FINS_T8 = new ItemBase("rocket_fins_t8", TheSol.ITEM_TAB);
-    public static final Item ENGINE_BOOSTER_T8 = new ItemBase("engine_booster_t8", TheSol.ITEM_TAB);
     public static final Item ROCKET_T8 = new ItemRocket(8, EntityTierRocket::new);
     // t9
-    public static final Item ROCKET_ENGINE_T9 = new ItemBase("rocket_engine_t9", TheSol.ITEM_TAB);
-    public static final Item REINFORCED_PLATE_T9 = new ItemBase("reinforced_plate_t9", TheSol.ITEM_TAB);
-    public static final Item NOSE_CONE_T9 = new ItemBase("nose_cone_t9", TheSol.ITEM_TAB);
-    public static final Item ROCKET_FINS_T9 = new ItemBase("rocket_fins_t9", TheSol.ITEM_TAB);
-    public static final Item ENGINE_BOOSTER_T9 = new ItemBase("engine_booster_t9", TheSol.ITEM_TAB);
     public static final Item ROCKET_T9 = new ItemRocket(9, EntityTierRocket::new);
     // battery
     public static final Item ADVANCED_BATTERY_TIER_1 = new ItemAdvancedBattery("advanced_battery_t1", 1);
     public static final Item ADVANCED_BATTERY_TIER_2 = new ItemAdvancedBattery("advanced_battery_t2", 2);
-    // oxygen tank
-    // public static final Item ADVANCED_OXYGEN_TANK = new ItemOxygenTankAdvanced(4, "advanced_oxygen_tank");
     // crafting material
     // sulfur
     public static final Item SULFUR_INGOT = new ItemBase("ingot_sulfur", TheSol.ITEM_TAB);
@@ -94,8 +67,6 @@ public class SolItems {
     // magnesium
     public static final Item OSMIUM_INGOT = new ItemBase("ingot_osmium", TheSol.ITEM_TAB);
     public static final Item COMPRESSED_OSMIUM = new ItemBase("compressed_osmium", TheSol.ITEM_TAB);
-    // shield
-//	public static final Item HEAVY_SHIELD = new ItemHeavyShield("shield_heavy", TheSol.ITEM_TAB);
     // armor
     public static final ArmorMaterial ARMOR_SULFUR = EnumHelper.addArmorMaterial("SULFUR", "", 42, new int[]{5, 8, 9, 5}, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
     public static final Item SULFUR_HELMET = new ItemArmorSulfur(SolItems.ARMOR_SULFUR, 7, EntityEquipmentSlot.HEAD).setTranslationKey("sulfur_helmet").setRegistryName("sulfur_helmet");

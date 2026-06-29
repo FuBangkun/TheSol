@@ -1,8 +1,8 @@
 package mod.sol.render.entity;
 
+import mod.sol.Tags;
 import mod.sol.entities.boss.EntityNeptuneBossSpider;
 import mod.sol.render.layer.LayerNeptuneBossSpiderEye;
-import mod.sol.Tags;
 import net.minecraft.client.model.ModelSpider;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

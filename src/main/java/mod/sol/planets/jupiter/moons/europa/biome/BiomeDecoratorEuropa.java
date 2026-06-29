@@ -16,10 +16,10 @@ public class BiomeDecoratorEuropa extends BiomeDecorator {
     private World world;
     private Random randomGenerator;
 
-    private WorldGenerator dirtGen;
-    private WorldGenerator aluminumGen;
-    private WorldGenerator copperGen;
-    private WorldGenerator ironGen;
+    private final WorldGenerator dirtGen;
+    private final WorldGenerator aluminumGen;
+    private final WorldGenerator copperGen;
+    private final WorldGenerator ironGen;
 
     public BiomeDecoratorEuropa() {
         this.aluminumGen = new WorldGenMinableMeta(SolBlocks.EUROPA_ALUMINUM_ORE, 6, 0, true, SolBlocks.EUROPA_ROCK, 0);

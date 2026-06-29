@@ -23,14 +23,6 @@ public class RecipeUtil {
         rocketBenchRecipes.get(tier).add(recipe);
     }
 
-    public static void removeRocketRecipe(int tier, INasaWorkbenchRecipe recipe) {
-        rocketBenchRecipes.get(tier).remove(recipe);
-    }
-
-    public static void removeAllRocketRecipes(int tier) {
-        rocketBenchRecipes.get(tier).clear();
-    }
-
     public static List<INasaWorkbenchRecipe> getRocketRecipes(int tier) {
         return rocketBenchRecipes.get(tier);
     }

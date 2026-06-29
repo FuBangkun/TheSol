@@ -65,7 +65,7 @@ public class ChunkProviderKuiperBelt extends ChunkProviderBase {
     private static final int WATER_CHANCE = 2;
     private static final int LAVA_CHANCE = 2;
     private static final int GLOWSTONE_CHANCE = 20;
-    private static HashSet<BlockVec3> chunksDone = new HashSet<>();
+    private static final HashSet<BlockVec3> chunksDone = new HashSet<>();
     final Block ASTEROID_STONE;
     final byte ASTEROID_STONE_META_0;
     final byte ASTEROID_STONE_META_1;
@@ -92,7 +92,7 @@ public class ChunkProviderKuiperBelt extends ChunkProviderBase {
     private final SpecialKuiperBeltBlockHandler shellHandler;
     private final MapGenAbandonedBase dungeonGenerator;
     EnumType GRASS_TYPE;
-    private LinkedList<ChunkProviderKuiperBelt.AsteroidData> largeAsteroids;
+    private final LinkedList<ChunkProviderKuiperBelt.AsteroidData> largeAsteroids;
     private int largeCount;
     private int largeAsteroidsLastChunkX;
     private int largeAsteroidsLastChunkZ;
@@ -204,7 +204,7 @@ public class ChunkProviderKuiperBelt extends ChunkProviderBase {
                 for (int x = minX; x < maxX; x += 2) {
                     for (int z = minZ; z < maxZ; z += 2) {
                         if ((double) this.randFromPointPos(x, z) < ((double) this.asteroidDensity.getNoise((float) x, (float) z) + 0.4D) / 800.0D) {
-                            random.setSeed(x + z * 3067);
+                            random.setSeed(x + z * 3067L);
                             int y = random.nextInt(160) + 48;
                             int size = random.nextInt(20) + 5;
                             this.generateAsteroid(random, x, y, z, chunkX << 4, chunkZ << 4, size, primer, flagDataOnly);

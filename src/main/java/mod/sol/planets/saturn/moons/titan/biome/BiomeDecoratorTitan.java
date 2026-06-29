@@ -16,13 +16,13 @@ public class BiomeDecoratorTitan extends BiomeDecorator {
     private World world;
     private Random randomGenerator;
 
-    private WorldGenerator dirtGen;
-    private WorldGenerator aluminumGen;
-    private WorldGenerator deshGen;
-    private WorldGenerator diamondGen;
-    private WorldGenerator ilmeniteGen;
-    private WorldGenerator maganeseGen;
-    private WorldGenerator tinGen;
+    private final WorldGenerator dirtGen;
+    private final WorldGenerator aluminumGen;
+    private final WorldGenerator deshGen;
+    private final WorldGenerator diamondGen;
+    private final WorldGenerator ilmeniteGen;
+    private final WorldGenerator maganeseGen;
+    private final WorldGenerator tinGen;
 
     public BiomeDecoratorTitan() {
         this.aluminumGen = new WorldGenMinableMeta(SolBlocks.TITAN_ALUMINUM_ORE, 6, 0, true, SolBlocks.TITAN_ROCK, 0);

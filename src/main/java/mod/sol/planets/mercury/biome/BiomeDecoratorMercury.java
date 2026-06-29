@@ -16,14 +16,14 @@ public class BiomeDecoratorMercury extends BiomeDecorator {
     private World world;
     private Random randomGenerator;
 
-    private WorldGenerator dirtGen;
-    private WorldGenerator aluminumGen;
-    private WorldGenerator copperGen;
-    private WorldGenerator deshGen;
-    private WorldGenerator ilmenitGen;
-    private WorldGenerator ironGen;
-    private WorldGenerator siliconGen;
-    private WorldGenerator tinGen;
+    private final WorldGenerator dirtGen;
+    private final WorldGenerator aluminumGen;
+    private final WorldGenerator copperGen;
+    private final WorldGenerator deshGen;
+    private final WorldGenerator ilmenitGen;
+    private final WorldGenerator ironGen;
+    private final WorldGenerator siliconGen;
+    private final WorldGenerator tinGen;
 
     public BiomeDecoratorMercury() {
         this.aluminumGen = new WorldGenMinableMeta(SolBlocks.MERCURY_ALUMINUM_ORE, 8, 0, true, SolBlocks.MERCURY_ROCK, 0);

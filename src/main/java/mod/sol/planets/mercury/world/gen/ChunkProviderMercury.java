@@ -42,7 +42,7 @@ public class ChunkProviderMercury extends ChunkProviderBase {
     private final World world;
     private final MapGenDungeonMercury dungeonGeneratorMercury = new MapGenDungeonMercury(new DungeonConfiguration(SolBlocks.MERCURY_DUNGEON_BRICK.getDefaultState(), 25, 8, 16, 5, 6, RoomBossMercury.class, RoomTreasureMercury.class));
     private final MapGenBaseMeta caveGenerator = new MapGenCavesMercury();
-    private Biome[] biomesForGeneration = {BiomeAdaptive.biomeDefault};
+    private final Biome[] biomesForGeneration = {BiomeAdaptive.biomeDefault};
 
     public ChunkProviderMercury(World par1World, long par2, boolean par4) {
         this.world = par1World;

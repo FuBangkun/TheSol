@@ -44,7 +44,7 @@ public class ChunkProviderAriel extends ChunkProviderBase {
     private final World world;
     private final MapGenDungeonUranus dungeonGenerator = new MapGenDungeonUranus(new DungeonConfiguration(SolBlocks.URANUS_DUNGEON_BRICK.getDefaultState(), 25, 8, 16, 5, 6, RoomBossUranus.class, RoomTreasureUranus.class));
     private final MapGenBaseMeta caveGenerator = new MapGenCavesAriel();
-    private Biome[] biomesForGeneration = {BiomeAdaptive.biomeDefault};
+    private final Biome[] biomesForGeneration = {BiomeAdaptive.biomeDefault};
 
     public ChunkProviderAriel(World par1World, long par2, boolean par4) {
         this.world = par1World;

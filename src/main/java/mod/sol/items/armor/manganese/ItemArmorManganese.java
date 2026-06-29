@@ -1,20 +1,20 @@
 package mod.sol.items.armor.manganese;
 
 import micdoodle8.mods.galacticraft.core.items.ISortableItem;
-import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
+import mod.sol.Tags;
 import mod.sol.TheSol;
 import mod.sol.init.SolItems;
 import mod.sol.util.IHasModel;
-import mod.sol.Tags;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 public class ItemArmorManganese extends ItemArmor implements ISortableItem, IHasModel {
     private final ArmorMaterial material;
@@ -26,7 +26,7 @@ public class ItemArmorManganese extends ItemArmor implements ISortableItem, IHas
     }
 
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
+    public String getArmorTexture(@Nonnull ItemStack stack, @Nonnull Entity entity, @Nonnull EntityEquipmentSlot slot, @Nonnull String type) {
         if (this.material == SolItems.ARMOR_MANGANESE) {
             if (stack.getItem() == SolItems.MANGANESE_HELMET) {
                 return Tags.MOD_ID + ":textures/model/manganese_1.png";
@@ -46,18 +46,12 @@ public class ItemArmorManganese extends ItemArmor implements ISortableItem, IHas
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack) {
-        return ClientProxyCore.galacticraftItem;
-    }
-
-    @Override
     public EnumSortCategoryItem getCategory(int meta) {
         return EnumSortCategoryItem.ARMOR;
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+    public boolean getIsRepairable(@Nonnull ItemStack toRepair, ItemStack repair) {
         return repair.getItem() == SolItems.COMPRESSED_MANGANESE;
     }
 

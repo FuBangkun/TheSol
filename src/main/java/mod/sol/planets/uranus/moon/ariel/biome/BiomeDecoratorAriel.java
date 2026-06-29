@@ -16,14 +16,14 @@ public class BiomeDecoratorAriel extends BiomeDecorator {
     private World world;
     private Random randomGenerator;
 
-    private WorldGenerator dirtGen;
-    private WorldGenerator aluminumGen;
-    private WorldGenerator deshGen;
-    private WorldGenerator ilmenitGen;
-    private WorldGenerator ironGen;
-    private WorldGenerator lithiumGen;
-    private WorldGenerator surfaceCarbonGen;
-    private WorldGenerator tinGen;
+    private final WorldGenerator dirtGen;
+    private final WorldGenerator aluminumGen;
+    private final WorldGenerator deshGen;
+    private final WorldGenerator ilmenitGen;
+    private final WorldGenerator ironGen;
+    private final WorldGenerator lithiumGen;
+    private final WorldGenerator surfaceCarbonGen;
+    private final WorldGenerator tinGen;
 
     public BiomeDecoratorAriel() {
         this.aluminumGen = new WorldGenMinableMeta(SolBlocks.ARIEL_ALUMINUM_ORE, 6, 0, true, SolBlocks.ARIEL_ROCK, 0);

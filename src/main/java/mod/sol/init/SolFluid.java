@@ -1,7 +1,7 @@
 package mod.sol.init;
 
-import mod.sol.fluid.FluidBase;
 import mod.sol.Tags;
+import mod.sol.fluid.FluidBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;

@@ -188,7 +188,7 @@ public class EntityJupiterBossGhast extends EntityFlyingBossBase implements IEnt
 
     @Override
     public void dropKey() {
-        this.entityDropItem(new ItemStack(SolItems.KEY, 1, 1), 0.5F);
+        this.entityDropItem(new ItemStack(SolItems.KEYS, 1, 1), 0.5F);
     }
 
     @Override

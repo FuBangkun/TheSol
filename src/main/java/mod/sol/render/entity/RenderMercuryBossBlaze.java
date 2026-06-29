@@ -1,7 +1,7 @@
 package mod.sol.render.entity;
 
-import mod.sol.entities.boss.EntityMercuryBossBlaze;
 import mod.sol.Tags;
+import mod.sol.entities.boss.EntityMercuryBossBlaze;
 import net.minecraft.client.model.ModelBlaze;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

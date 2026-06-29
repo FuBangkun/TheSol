@@ -1,7 +1,7 @@
 package mod.sol.render.entity;
 
-import mod.sol.entities.boss.EntityBossSilverfish;
 import mod.sol.Tags;
+import mod.sol.entities.boss.EntityBossSilverfish;
 import net.minecraft.client.model.ModelSilverfish;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

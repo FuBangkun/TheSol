@@ -16,16 +16,16 @@ public class BiomeDecoratorTriton extends BiomeDecorator {
     private World world;
     private Random randomGenerator;
 
-    private WorldGenerator dirtGen;
-    private WorldGenerator aluminumGen;
-    private WorldGenerator deshGen;
-    private WorldGenerator ilmenitGen;
-    private WorldGenerator ironGen;
-    private WorldGenerator lithiumGen;
-    private WorldGenerator magnesiumGen;
-    private WorldGenerator magnetGen;
-    private WorldGenerator siliconGen;
-    private WorldGenerator tinGen;
+    private final WorldGenerator dirtGen;
+    private final WorldGenerator aluminumGen;
+    private final WorldGenerator deshGen;
+    private final WorldGenerator ilmenitGen;
+    private final WorldGenerator ironGen;
+    private final WorldGenerator lithiumGen;
+    private final WorldGenerator magnesiumGen;
+    private final WorldGenerator magnetGen;
+    private final WorldGenerator siliconGen;
+    private final WorldGenerator tinGen;
 
     public BiomeDecoratorTriton() {
         this.aluminumGen = new WorldGenMinableMeta(SolBlocks.TRITON_ALUMINUM_ORE, 6, 0, true, SolBlocks.TRITON_ROCK, 0);

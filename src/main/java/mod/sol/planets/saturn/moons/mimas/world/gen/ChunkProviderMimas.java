@@ -45,7 +45,7 @@ public class ChunkProviderMimas extends ChunkProviderBase {
     private final World world;
     private final MapGenDungeonSaturn dungeonGenerator = new MapGenDungeonSaturn(new DungeonConfiguration(SolBlocks.MERCURY_DUNGEON_BRICK.getDefaultState(), 25, 8, 16, 5, 6, RoomBossSaturn.class, RoomTreasureSaturn.class));
     private final MapGenBaseMeta caveGenerator = new MapGenCavesMimas();
-    private Biome[] biomesForGeneration = {BiomeAdaptive.biomeDefault};
+    private final Biome[] biomesForGeneration = {BiomeAdaptive.biomeDefault};
 
     public ChunkProviderMimas(World par1World, long par2, boolean par4) {
         this.world = par1World;

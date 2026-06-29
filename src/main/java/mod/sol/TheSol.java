@@ -15,9 +15,11 @@ import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection
 import micdoodle8.mods.galacticraft.core.client.model.OBJLoaderGC;
 import micdoodle8.mods.galacticraft.core.dimension.WorldProviderMoon;
 import micdoodle8.mods.galacticraft.core.entities.*;
+import micdoodle8.mods.galacticraft.core.util.ColorUtil;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
+import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
 import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
 import micdoodle8.mods.galacticraft.planets.venus.ConfigManagerVenus;
 import micdoodle8.mods.galacticraft.planets.venus.dimension.TeleportTypeVenus;
@@ -25,9 +27,9 @@ import micdoodle8.mods.galacticraft.planets.venus.dimension.WorldProviderVenus;
 import micdoodle8.mods.galacticraft.planets.venus.world.gen.BiomeVenus;
 import mod.sol.api.galaxy.DwarfPlanet;
 import mod.sol.api.galaxy.GasGiant;
-import mod.sol.client.gui.container.*;
+import mod.sol.client.gui.container.GuiSchematicRocket;
 import mod.sol.client.gui.screen.SolCelestialSelection;
-import mod.sol.config.ConfigManagerSol;
+import mod.sol.config.ConfigManager;
 import mod.sol.entities.EntityHugeFireball;
 import mod.sol.entities.EntityTierRocket;
 import mod.sol.entities.boss.*;
@@ -35,8 +37,8 @@ import mod.sol.init.SolBlocks;
 import mod.sol.init.SolDimensions;
 import mod.sol.init.SolItems;
 import mod.sol.init.SolOreDict;
-import mod.sol.inventory.*;
-import mod.sol.items.*;
+import mod.sol.inventory.ContainerSchematicRocket;
+import mod.sol.items.ItemSchematic;
 import mod.sol.planets.jupiter.moons.europa.biome.BiomeEuropa;
 import mod.sol.planets.jupiter.moons.europa.dimension.TeleportTypeEuropa;
 import mod.sol.planets.jupiter.moons.europa.dimension.WorldProviderEuropa;
@@ -65,15 +67,15 @@ import mod.sol.planets.uranus.moon.ariel.biome.BiomeAriel;
 import mod.sol.planets.uranus.moon.ariel.dimension.TeleportTypeAriel;
 import mod.sol.planets.uranus.moon.ariel.dimension.WorldProviderAriel;
 import mod.sol.proxy.SolCommonProxy;
-import mod.sol.recipe.*;
+import mod.sol.recipe.BaseRocketRecipeManager;
+import mod.sol.recipe.SolRecipeCompressor;
+import mod.sol.recipe.SolRecipeSmelting;
 import mod.sol.render.RenderRocketBase;
 import mod.sol.render.entity.*;
 import mod.sol.render.tile.*;
-import mod.sol.schematic.*;
+import mod.sol.schematic.SchematicRocket;
 import mod.sol.tile.*;
 import mod.sol.util.RocketModelUtil;
-import mod.sol.util.SolEntityRegistry;
-import mod.sol.util.SolTreasureChestRegistry;
 import mod.sol.util.handler.SolEventHandlerClient;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.settings.GameSettings;
@@ -82,6 +84,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraftforge.client.event.GuiOpenEvent;
@@ -100,12 +103,10 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
-import java.io.File;
 
 @Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION, dependencies = "required-after:galacticraftcore")
 public class TheSol {
@@ -113,7 +114,7 @@ public class TheSol {
         @Nonnull
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(SolItems.ROCKET_T4);
+            return new ItemStack(SolItems.ENGINE_BOOSTERS, 1, 0);
         }
     };
     public static final CreativeTabs BLOCK_TAB = new CreativeTabs("sol_blocks") {
@@ -123,11 +124,10 @@ public class TheSol {
             return new ItemStack(SolBlocks.MERCURY_DUNGEON_BRICK);
         }
     };
-    public static File configSol;
     // SolarSystem
     // GCCore
     public static Planet planetVenus;
-//    public static Planet planetMars;
+    //    public static Planet planetMars;
     // Planets
     public static Planet planetMercury;
     public static DwarfPlanet planetCeres;
@@ -138,8 +138,6 @@ public class TheSol {
     public static DwarfPlanet planetMakemake;
     public static DwarfPlanet planetSedna;
     public static Planet planetOortCloud;
-    // Override
-    public static Planet planetAsteroids;
     // Fake
     public static GasGiant planetJupiter;
     public static GasGiant planetSaturn;
@@ -182,22 +180,22 @@ public class TheSol {
 
     @EventHandler
     public static void postInit(FMLPostInitializationEvent event) {
-        SolDimensions.Mercury = WorldUtil.getDimensionTypeById(ConfigManagerSol.dimensionidMercury);
+        SolDimensions.Mercury = WorldUtil.getDimensionTypeById(ConfigManager.dimensionIds.dimensionidMercury);
 
-        SolDimensions.Io = WorldUtil.getDimensionTypeById(ConfigManagerSol.dimensionidIo);
-        SolDimensions.Europa = WorldUtil.getDimensionTypeById(ConfigManagerSol.dimensionidEuropa);
+        SolDimensions.Io = WorldUtil.getDimensionTypeById(ConfigManager.dimensionIds.dimensionidIo);
+        SolDimensions.Europa = WorldUtil.getDimensionTypeById(ConfigManager.dimensionIds.dimensionidEuropa);
 
-        SolDimensions.Mimas = WorldUtil.getDimensionTypeById(ConfigManagerSol.dimensionidMimas);
-        SolDimensions.Titan = WorldUtil.getDimensionTypeById(ConfigManagerSol.dimensionidTitan);
+        SolDimensions.Mimas = WorldUtil.getDimensionTypeById(ConfigManager.dimensionIds.dimensionidMimas);
+        SolDimensions.Titan = WorldUtil.getDimensionTypeById(ConfigManager.dimensionIds.dimensionidTitan);
 
-        SolDimensions.Ariel = WorldUtil.getDimensionTypeById(ConfigManagerSol.dimensionidAriel);
+        SolDimensions.Ariel = WorldUtil.getDimensionTypeById(ConfigManager.dimensionIds.dimensionidAriel);
 
-        SolDimensions.Triton = WorldUtil.getDimensionTypeById(ConfigManagerSol.dimensionidTriton);
+        SolDimensions.Triton = WorldUtil.getDimensionTypeById(ConfigManager.dimensionIds.dimensionidTriton);
 
-        SolDimensions.Pluto = WorldUtil.getDimensionTypeById(ConfigManagerSol.dimensionidPluto);
-        SolDimensions.KuiperBelt = WorldUtil.getDimensionTypeById(ConfigManagerSol.dimensionidKuiperBelt);
+        SolDimensions.Pluto = WorldUtil.getDimensionTypeById(ConfigManager.dimensionIds.dimensionidPluto);
+        SolDimensions.KuiperBelt = WorldUtil.getDimensionTypeById(ConfigManager.dimensionIds.dimensionidKuiperBelt);
 
-        SolDimensions.Sedna = WorldUtil.getDimensionTypeById(ConfigManagerSol.dimensionidSedna);
+        SolDimensions.Sedna = WorldUtil.getDimensionTypeById(ConfigManager.dimensionIds.dimensionidSedna);
     }
 
     @EventHandler
@@ -227,11 +225,6 @@ public class TheSol {
     }
 
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        ConfigManagerSol.registerConfig(event);
-    }
-
-    @EventHandler
     @SideOnly(Side.CLIENT)
     public void preInitClient(FMLPreInitializationEvent event) {
         OBJLoaderGC.instance.addDomain(Tags.MOD_ID);
@@ -251,21 +244,6 @@ public class TheSol {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-//    	TheSol.planetMars = (Planet) new Planet("mars").setParentSolarSystem(GalacticraftCore.solarSystemSol).setRingColorRGB(0.67F, 0.1F, 0.1F).setPhaseShift(0.1667F).setRelativeSize(0.5319F).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(1.25F, 1.25F)).setRelativeOrbitTime(1.8811610076670317634173055859803F);
-//        TheSol.planetMars.setBiomeInfo(BiomeMars.marsFlat);
-//    	TheSol.planetMars.setBodyIcon(new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/celestialbodies/mars.png"));
-//        TheSol.planetMars.setDimensionInfo(ConfigManagerMars.dimensionIDMars, WorldProviderMars.class).setTierRequired(2);
-//        TheSol.planetMars.setAtmosphere(new AtmosphereInfo(false, false, false, -1.0F, 0.3F, 0.1F));
-//        TheSol.planetMars.atmosphereComponent(EnumAtmosphericGas.CO2).atmosphereComponent(EnumAtmosphericGas.ARGON).atmosphereComponent(EnumAtmosphericGas.NITROGEN);
-//        TheSol.planetMars.addMobInfo(new Biome.SpawnListEntry(EntityEvolvedZombie.class, 8, 2, 3));
-//        TheSol.planetMars.addMobInfo(new Biome.SpawnListEntry(EntityEvolvedSpider.class, 8, 2, 3));
-//        TheSol.planetMars.addMobInfo(new Biome.SpawnListEntry(EntityEvolvedSkeleton.class, 8, 2, 3));
-//        TheSol.planetMars.addMobInfo(new Biome.SpawnListEntry(EntityEvolvedCreeper.class, 8, 2, 3));
-//        TheSol.planetMars.addMobInfo(new Biome.SpawnListEntry(EntityEvolvedEnderman.class, 10, 1, 4));
-//        TheSol.planetMars.addChecklistKeys("equip_oxygen_suit", "thermal_padding");
-//        GalaxyRegistry.registerPlanet(TheSol.planetMars);
-//        GalacticraftRegistry.registerTeleportType(WorldProviderMars.class, new TeleportTypeMars());
-
         TheSol.planetVenus = (Planet) new Planet("venus").setParentSolarSystem(GalacticraftCore.solarSystemSol).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift(2.0F).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(0.75F, 0.75F)).setRelativeOrbitTime(0.61527929901423877327491785323111F);
         TheSol.planetVenus.setBiomeInfo(BiomeVenus.venusFlat, BiomeVenus.venusMountain, BiomeVenus.venusValley);
         TheSol.planetVenus.setBodyIcon(new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/celestialbodies/venus.png"));
@@ -299,35 +277,14 @@ public class TheSol {
         TheSol.planetNeptune.setBodyIcon(new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/celestialbodies/neptune.png"));
         // Override
         AsteroidsModule.planetAsteroids.setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(1.65F, 1.65F));
-//		AsteroidsModule.planetAsteroids = new Planet("asteroids").setParentSolarSystem(GalacticraftCore.solarSystemSol);
-//		AsteroidsModule.planetAsteroids.setDimensionInfo(ConfigManagerAsteroids.dimensionIDAsteroids, WorldProviderAsteroids.class).setTierRequired(3);
-//		AsteroidsModule.planetAsteroids.setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(1.55F, 1.55F)).setRelativeOrbitTime(45.0F).setPhaseShift((float) (Math.random() * (2 * Math.PI)));
-//		AsteroidsModule.planetAsteroids.setBodyIcon(new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/celestialbodies/asteroid.png"));
-//		AsteroidsModule.planetAsteroids.setAtmosphere(new AtmosphereInfo(false, false, false, -1.5F, 0.05F, 0.0F));
-//		AsteroidsModule.planetAsteroids.addChecklistKeys("equip_oxygen_suit", "craft_grapple_hook", "thermal_padding");
-//		AsteroidsModule.planetAsteroids.addMobInfo(new SpawnListEntry(EntityEvolvedZombie.class, 8, 2, 3));
-//		AsteroidsModule.planetAsteroids.addMobInfo(new SpawnListEntry(EntityEvolvedSpider.class, 8, 2, 3));
-//		AsteroidsModule.planetAsteroids.addMobInfo(new SpawnListEntry(EntityEvolvedSkeleton.class, 8, 2, 3));
-//		AsteroidsModule.planetAsteroids.addMobInfo(new SpawnListEntry(EntityEvolvedCreeper.class, 8, 2, 3));
-//		AsteroidsModule.planetAsteroids.addMobInfo(new SpawnListEntry(EntityEvolvedEnderman.class, 10, 1, 4));
-//		TheSol.planetAsteroids = new Planet("asteroids").setParentSolarSystem(GalacticraftCore.solarSystemSol);
-//		TheSol.planetAsteroids.setDimensionInfo(ConfigManagerAsteroids.dimensionIDAsteroids, WorldProviderAsteroids.class).setTierRequired(3);
-//		TheSol.planetAsteroids.setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(1.55F, 1.55F)).setRelativeOrbitTime(45.0F).setPhaseShift((float) (Math.random() * (2 * Math.PI)));
-//		TheSol.planetAsteroids.setBodyIcon(new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/celestialbodies/asteroid.png"));
-//		TheSol.planetAsteroids.setAtmosphere(new AtmosphereInfo(false, false, false, -1.5F, 0.05F, 0.0F));
-//		TheSol.planetAsteroids.addChecklistKeys("equip_oxygen_suit", "craft_grapple_hook", "thermal_padding");
-//		TheSol.planetAsteroids.addMobInfo(new SpawnListEntry(EntityEvolvedZombie.class, 8, 2, 3));
-//		TheSol.planetAsteroids.addMobInfo(new SpawnListEntry(EntityEvolvedSpider.class, 8, 2, 3));
-//		TheSol.planetAsteroids.addMobInfo(new SpawnListEntry(EntityEvolvedSkeleton.class, 8, 2, 3));
-//		TheSol.planetAsteroids.addMobInfo(new SpawnListEntry(EntityEvolvedCreeper.class, 8, 2, 3));
-//		TheSol.planetAsteroids.addMobInfo(new SpawnListEntry(EntityEvolvedEnderman.class, 10, 1, 4));
+
         // Planets
         // Mercury
         TheSol.planetMercury = (Planet) new Planet("mercury").setParentSolarSystem(GalacticraftCore.solarSystemSol).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift(1.45F).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(0.5F, 0.5F)).setRelativeOrbitTime(0.24096385542168674698795180722892F);
         TheSol.planetMercury.setBodyIcon(new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/celestialbodies/mercury.png"));
         TheSol.planetMercury.setAtmosphere(new AtmosphereInfo(false, false, false, 5.0F, 0.0F, 0.0F));
         TheSol.planetMercury.setRelativeSize(0.4312F);
-        TheSol.planetMercury.setDimensionInfo(ConfigManagerSol.dimensionidMercury, WorldProviderMercury.class).setTierRequired(3).setBiomeInfo(BiomeMercury.mercuryFlat);
+        TheSol.planetMercury.setDimensionInfo(ConfigManager.dimensionIds.dimensionidMercury, WorldProviderMercury.class).setTierRequired(3).setBiomeInfo(BiomeMercury.mercuryFlat);
         TheSol.planetMercury.addMobInfo(new SpawnListEntry(EntityEvolvedZombie.class, 8, 2, 3));
         TheSol.planetMercury.addMobInfo(new SpawnListEntry(EntityEvolvedSpider.class, 8, 2, 3));
         TheSol.planetMercury.addMobInfo(new SpawnListEntry(EntityEvolvedSkeleton.class, 8, 2, 3));
@@ -345,7 +302,7 @@ public class TheSol {
         TheSol.planetPluto.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/pluto.png"));
         TheSol.planetPluto.setAtmosphere(new AtmosphereInfo(false, false, false, -6.0F, 0.0F, 0.0F));
         TheSol.planetPluto.setRelativeSize(0.1294F);
-        TheSol.planetPluto.setDimensionInfo(ConfigManagerSol.dimensionidPluto, WorldProviderPluto.class).setTierRequired(8);
+        TheSol.planetPluto.setDimensionInfo(ConfigManager.dimensionIds.dimensionidPluto, WorldProviderPluto.class).setTierRequired(8);
         TheSol.planetPluto.setBiomeInfo(BiomePluto.plutoFlat, BiomePluto.plutoSnowfield);
         TheSol.planetPluto.addMobInfo(new SpawnListEntry(EntityEvolvedZombie.class, 8, 2, 3));
         TheSol.planetPluto.addMobInfo(new SpawnListEntry(EntityEvolvedSpider.class, 8, 2, 3));
@@ -374,15 +331,13 @@ public class TheSol {
         // Kuiperbelt
         TheSol.planetKuiperBelt = (Planet) new Planet("kuiper_belt").setParentSolarSystem(GalacticraftCore.solarSystemSol).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift((float) (Math.random() * (2 * Math.PI))).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(3.55F, 3.55F)).setRelativeOrbitTime(90.0F);
         TheSol.planetKuiperBelt.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/kuiper_belt.png"));
-//		TheSol.planetKuiperBelt.setDimensionInfo(ConfigManagerSol.dimensionidKuiperBelt, WorldProviderKuiperBelt.class).setTierRequired(8);
-//		TheSol.planetKuiperBelt.setBiomeInfo(BiomeKuiperBelt.kuiper_belt);
         TheSol.planetKuiperBelt.setDimensionSuffix("_kuiper_belt");
         // Sedna
         TheSol.planetSedna = (DwarfPlanet) new DwarfPlanet("sedna").setParentSolarSystem(GalacticraftCore.solarSystemSol).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift(14.421412354F).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(5F, 5F)).setRelativeOrbitTime(39.143442132456F);
         TheSol.planetSedna.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/sedna.png"));
         TheSol.planetSedna.setAtmosphere(new AtmosphereInfo(false, false, false, -6.0F, 0.0F, 0.0F));
         TheSol.planetSedna.setRelativeSize(0.1294F);
-        TheSol.planetSedna.setDimensionInfo(ConfigManagerSol.dimensionidSedna, WorldProviderSedna.class).setTierRequired(9);
+        TheSol.planetSedna.setDimensionInfo(ConfigManager.dimensionIds.dimensionidSedna, WorldProviderSedna.class).setTierRequired(9);
         TheSol.planetSedna.setBiomeInfo(BiomeSedna.sednaFlat);
         TheSol.planetSedna.addMobInfo(new SpawnListEntry(EntityEvolvedZombie.class, 8, 2, 3));
         TheSol.planetSedna.addMobInfo(new SpawnListEntry(EntityEvolvedSpider.class, 8, 2, 3));
@@ -413,7 +368,7 @@ public class TheSol {
         TheSol.moonIo.setAtmosphere(new AtmosphereInfo(false, false, false, -2.0F, 0.0F, 0.0F));
         TheSol.moonIo.setRelativeSize(0.4312F);
         TheSol.moonIo.setBiomeInfo(BiomeIo.ioFlat, BiomeIo.ioAshLand, BiomeIo.ioSulfurField);
-        TheSol.moonIo.setDimensionInfo(ConfigManagerSol.dimensionidIo, WorldProviderIo.class).setTierRequired(4);
+        TheSol.moonIo.setDimensionInfo(ConfigManager.dimensionIds.dimensionidIo, WorldProviderIo.class).setTierRequired(4);
         TheSol.moonIo.addMobInfo(new SpawnListEntry(EntityEvolvedZombie.class, 8, 2, 3));
         TheSol.moonIo.addMobInfo(new SpawnListEntry(EntityEvolvedSpider.class, 8, 2, 3));
         TheSol.moonIo.addMobInfo(new SpawnListEntry(EntityEvolvedSkeleton.class, 8, 2, 3));
@@ -426,7 +381,7 @@ public class TheSol {
         TheSol.moonEuropa.setAtmosphere(new AtmosphereInfo(false, false, false, -2.0F, 0.0F, 0.0F));
         TheSol.moonEuropa.setRelativeSize(0.4312F);
         TheSol.moonEuropa.setBiomeInfo(BiomeEuropa.europaFlat, BiomeEuropa.europaMountain, BiomeEuropa.europaValley);
-        TheSol.moonEuropa.setDimensionInfo(ConfigManagerSol.dimensionidEuropa, WorldProviderEuropa.class).setTierRequired(4);
+        TheSol.moonEuropa.setDimensionInfo(ConfigManager.dimensionIds.dimensionidEuropa, WorldProviderEuropa.class).setTierRequired(4);
         TheSol.moonEuropa.addMobInfo(new SpawnListEntry(EntityEvolvedZombie.class, 10, 2, 3));
         TheSol.moonEuropa.addMobInfo(new SpawnListEntry(EntityEvolvedSpider.class, 10, 2, 3));
         TheSol.moonEuropa.addMobInfo(new SpawnListEntry(EntityEvolvedSkeleton.class, 10, 2, 3));
@@ -457,7 +412,7 @@ public class TheSol {
         TheSol.moonMimas.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/mimas.png"));
         TheSol.moonMimas.setRelativeSize(0.4312F);
         TheSol.moonMimas.setBiomeInfo(BiomeMimas.mimasFlat);
-        TheSol.moonMimas.setDimensionInfo(ConfigManagerSol.dimensionidMimas, WorldProviderMimas.class).setTierRequired(5);
+        TheSol.moonMimas.setDimensionInfo(ConfigManager.dimensionIds.dimensionidMimas, WorldProviderMimas.class).setTierRequired(5);
         TheSol.moonMimas.addMobInfo(new SpawnListEntry(EntityEvolvedZombie.class, 10, 2, 3));
         TheSol.moonMimas.addMobInfo(new SpawnListEntry(EntityEvolvedSpider.class, 10, 2, 3));
         TheSol.moonMimas.addMobInfo(new SpawnListEntry(EntityEvolvedSkeleton.class, 10, 2, 3));
@@ -491,7 +446,7 @@ public class TheSol {
         TheSol.moonTitan.atmosphereComponent(EnumAtmosphericGas.METHANE);
         TheSol.moonTitan.setRelativeSize(0.4312F);
         TheSol.moonTitan.setBiomeInfo(BiomeTitan.titanFlat, BiomeTitan.titanMountain, BiomeTitan.titanOcean);
-        TheSol.moonTitan.setDimensionInfo(ConfigManagerSol.dimensionidTitan, WorldProviderTitan.class).setTierRequired(5);
+        TheSol.moonTitan.setDimensionInfo(ConfigManager.dimensionIds.dimensionidTitan, WorldProviderTitan.class).setTierRequired(5);
         TheSol.moonTitan.addMobInfo(new SpawnListEntry(EntityEvolvedZombie.class, 10, 2, 3));
         TheSol.moonTitan.addMobInfo(new SpawnListEntry(EntityEvolvedSpider.class, 10, 2, 3));
         TheSol.moonTitan.addMobInfo(new SpawnListEntry(EntityEvolvedSkeleton.class, 10, 2, 3));
@@ -504,7 +459,7 @@ public class TheSol {
         TheSol.moonAriel.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/ariel.png"));
         TheSol.moonAriel.setRelativeSize(0.4312F);
         TheSol.moonAriel.setBiomeInfo(BiomeAriel.arielFlat);
-        TheSol.moonAriel.setDimensionInfo(ConfigManagerSol.dimensionidAriel, WorldProviderAriel.class).setTierRequired(6);
+        TheSol.moonAriel.setDimensionInfo(ConfigManager.dimensionIds.dimensionidAriel, WorldProviderAriel.class).setTierRequired(6);
         TheSol.moonAriel.addMobInfo(new SpawnListEntry(EntityEvolvedZombie.class, 10, 2, 3));
         TheSol.moonAriel.addMobInfo(new SpawnListEntry(EntityEvolvedSpider.class, 10, 2, 3));
         TheSol.moonAriel.addMobInfo(new SpawnListEntry(EntityEvolvedSkeleton.class, 10, 2, 3));
@@ -535,7 +490,7 @@ public class TheSol {
         TheSol.moonTriton.setBodyIcon(new ResourceLocation(Tags.MOD_ID, "textures/planets/triton.png"));
         TheSol.moonTriton.setAtmosphere(new AtmosphereInfo(false, false, false, -2.5F, 0.0F, 0.0F));
         TheSol.moonTriton.setBiomeInfo(BiomeTriton.tritonFlat);
-        TheSol.moonTriton.setDimensionInfo(ConfigManagerSol.dimensionidTriton, WorldProviderTriton.class).setTierRequired(7);
+        TheSol.moonTriton.setDimensionInfo(ConfigManager.dimensionIds.dimensionidTriton, WorldProviderTriton.class).setTierRequired(7);
         TheSol.moonTriton.addMobInfo(new SpawnListEntry(EntityEvolvedZombie.class, 10, 2, 3));
         TheSol.moonTriton.addMobInfo(new SpawnListEntry(EntityEvolvedSpider.class, 10, 2, 3));
         TheSol.moonTriton.addMobInfo(new SpawnListEntry(EntityEvolvedSkeleton.class, 10, 2, 3));
@@ -640,17 +595,23 @@ public class TheSol {
 
         TheSol.registerNonMobEntity(EntityTierRocket.class, "rocket", 150, 1, false);
         // schematic
-        Item schematicItem = SolItems.SCHEMATIC_ROCKET;
-        ItemSchematicTier schematicClass = (ItemSchematicTier) schematicItem;
+        Item schematicItem = SolItems.SCHEMATICS;
+        ItemSchematic schematicClass = (ItemSchematic) schematicItem;
+
+        Item[] tierRockets = {
+                SolItems.ROCKET_T4,
+                SolItems.ROCKET_T5,
+                SolItems.ROCKET_T6,
+                SolItems.ROCKET_T7,
+                SolItems.ROCKET_T8,
+                SolItems.ROCKET_T9
+        };
 
         for (int tier = 4; tier <= 9; tier++) {
             final int t = tier;
             final int meta = schematicClass.getMetaFromTier(tier);
-            final Item rocketItem = tier == 4 ? SolItems.ROCKET_T4 :
-                    tier == 5 ? SolItems.ROCKET_T5 :
-                    tier == 6 ? SolItems.ROCKET_T6 :
-                    tier == 7 ? SolItems.ROCKET_T7 :
-                    tier == 8 ? SolItems.ROCKET_T8 : SolItems.ROCKET_T9;
+            Item rocketItem = tierRockets[t - 4];
+
             SchematicRegistry.registerSchematicRecipe(new SchematicRocket(
                     t,
                     schematicItem,
@@ -658,14 +619,33 @@ public class TheSol {
                     (inv, pos) -> new GuiSchematicRocket(inv, pos, t, rocketItem),
                     (inv, pos) -> new ContainerSchematicRocket(inv, pos, t)
             ));
-            ItemSchematicTier.registerSchematicItems(new ItemStack(schematicItem, 1, meta));
+            ItemSchematic.registerSchematicItems(new ItemStack(schematicItem, 1, meta));
+
+            if (tier == 4) {
+                BaseRocketRecipeManager.registerRocketRecipes(
+                        4,
+                        new ItemStack(AsteroidsItems.heavyNoseCone),
+                        new ItemStack(SolItems.REINFORCED_PLATES, 1, 0),
+                        new ItemStack(SolItems.ENGINE_BOOSTERS, 1, 0),
+                        new ItemStack(SolItems.ROCKET_FINS, 1, 0),
+                        new ItemStack(AsteroidsItems.basicItem, 1, 1),
+                        new ItemStack(AsteroidsItems.tier3Rocket, 1, 0),
+                        new ItemStack(SolItems.ROCKET_T4, 1, 0)
+                );
+            } else {
+                int k = tier - 5;
+                BaseRocketRecipeManager.registerRocketRecipes(
+                        tier,
+                        new ItemStack(SolItems.NOSE_CONES, 1, k),
+                        new ItemStack(SolItems.REINFORCED_PLATES, 1, k + 1),
+                        new ItemStack(SolItems.ENGINE_BOOSTERS, 1, k + 1),
+                        new ItemStack(SolItems.ROCKET_FINS, 1, k + 1),
+                        new ItemStack(SolItems.ROCKET_ENGINES, 1, k),
+                        new ItemStack(tierRockets[k], 1, 0),
+                        new ItemStack(tierRockets[k + 1], 1, 0)
+                );
+            }
         }
-        RecipeManagerRocketsTier4.addUniversalRecipes();
-        RecipeManagerRocketsTier5.addUniversalRecipes();
-        RecipeManagerRocketsTier6.addUniversalRecipes();
-        RecipeManagerRocketsTier7.addUniversalRecipes();
-        RecipeManagerRocketsTier8.addUniversalRecipes();
-        RecipeManagerRocketsTier9.addUniversalRecipes();
         // skyRegistry
         MinecraftForge.EVENT_BUS.register(new SolEventHandlerClient.TickHandlerClient());
         // Recipe
@@ -674,27 +654,39 @@ public class TheSol {
         // oreDict
         SolOreDict.registerOres();
         // chest
-        SolTreasureChestRegistry.registry();
+        TileEntity.register("sol:tier_4_treasure_chest", TileEntityTreasureChestTier4.class);
+        TileEntity.register("sol:tier_5_treasure_chest", TileEntityTreasureChestTier5.class);
+        TileEntity.register("sol:tier_6_treasure_chest", TileEntityTreasureChestTier6.class);
+        TileEntity.register("sol:tier_7_treasure_chest", TileEntityTreasureChestTier7.class);
+        TileEntity.register("sol:tier_8_treasure_chest", TileEntityTreasureChestTier8.class);
+        TileEntity.register("sol:tier_9_treasure_chest", TileEntityTreasureChestTier9.class);
+        TileEntity.register("sol:tier_10_treasure_chest", TileEntityTreasureChestTier10.class);
         for (int tier = 4; tier <= 10; tier++) {
             int meta = tier - 4;
-            GalacticraftRegistry.addDungeonLoot(tier, new ItemStack(SolItems.SCHEMATIC_ROCKET, 1, meta));
+            GalacticraftRegistry.addDungeonLoot(tier, new ItemStack(SolItems.SCHEMATICS, 1, meta));
         }
         // entity
-        SolEntityRegistry.register();
+        TheSol.registerEntityCreature(EntityMercuryBossBlaze.class, "mercury_blaze_boss", ColorUtil.to32BitColor(255, 63, 0, 0), ColorUtil.to32BitColor(255, 220, 0, 0));
+        TheSol.registerEntityCreature(EntityJupiterBossGhast.class, "jupiter_ghast_boss", ColorUtil.to32BitColor(255, 127, 0, 0), ColorUtil.to32BitColor(255, 0, 0, 0));
+        TheSol.registerEntityCreature(EntitySaturnBossStray.class, "saturn_stray_boss", ColorUtil.to32BitColor(255, 225, 255, 225), ColorUtil.to32BitColor(255, 0, 15, 255));
+        TheSol.registerEntityCreature(EntityUranusBossSlime.class, "uranus_slime_boss", ColorUtil.to32BitColor(255, 5, 31, 127), ColorUtil.to32BitColor(255, 0, 0, 255));
+        TheSol.registerEntityCreature(EntityNeptuneBossSpider.class, "neptune_spider_boss", ColorUtil.to32BitColor(255, 4, 4, 4), ColorUtil.to32BitColor(255, 127, 0, 16));
+        TheSol.registerEntityCreature(EntityBossSilverfish.class, "silverfish_boss", ColorUtil.to32BitColor(255, 64, 64, 64), ColorUtil.to32BitColor(255, 127, 127, 127));
+        TheSol.registerEntityCreature(EntityBossMagmaCube.class, "magmacube_boss", ColorUtil.to32BitColor(255, 127, 31, 31), ColorUtil.to32BitColor(255, 255, 127, 127));
         // dungeon
-        GameRegistry.registerTileEntity(TileEntityDungeonSpawnerMercury.class, "Sol Mercury Dungeon Spawner");
+        TileEntity.register("sol:mercury_dungeon_spawner", TileEntityDungeonSpawnerMercury.class);
         GCBlocks.hiddenBlocks.add(SolBlocks.BOSS_SPAWNER_MERCURY);
-        GameRegistry.registerTileEntity(TileEntityDungeonSpawnerJupiter.class, "Sol Jupiter Dungeon Spawner");
+        TileEntity.register("sol:jupiter_dungeon_spawner", TileEntityDungeonSpawnerJupiter.class);
         GCBlocks.hiddenBlocks.add(SolBlocks.BOSS_SPAWNER_JUPITER);
-        GameRegistry.registerTileEntity(TileEntityDungeonSpawnerSaturn.class, "Sol Saturn Dungeon Spawner");
+        TileEntity.register("sol:saturn_dungeon_spawner", TileEntityDungeonSpawnerSaturn.class);
         GCBlocks.hiddenBlocks.add(SolBlocks.BOSS_SPAWNER_SATURN);
-        GameRegistry.registerTileEntity(TileEntityDungeonSpawnerUranus.class, "Sol Uranus Dungeon Spawner");
+        TileEntity.register("sol:uranus_dungeon_spawner", TileEntityDungeonSpawnerUranus.class);
         GCBlocks.hiddenBlocks.add(SolBlocks.BOSS_SPAWNER_URANUS);
-        GameRegistry.registerTileEntity(TileEntityDungeonSpawnerNeptune.class, "Sol Neptune Dungeon Spawner");
+        TileEntity.register("sol:neptune_dungeon_spawner", TileEntityDungeonSpawnerNeptune.class);
         GCBlocks.hiddenBlocks.add(SolBlocks.BOSS_SPAWNER_NEPTUNE);
-        GameRegistry.registerTileEntity(TileEntityDungeonSpawnerPluto.class, "Sol Pluto Dungeon Spawner");
+        TileEntity.register("sol:pluto_dungeon_spawner", TileEntityDungeonSpawnerPluto.class);
         GCBlocks.hiddenBlocks.add(SolBlocks.BOSS_SPAWNER_PLUTO);
-        GameRegistry.registerTileEntity(TileEntityDungeonSpawnerSedna.class, "Sol Sedna Dungeon Spawner");
+        TileEntity.register("sol:sedna_dungeon_spawner", TileEntityDungeonSpawnerSedna.class);
         GCBlocks.hiddenBlocks.add(SolBlocks.BOSS_SPAWNER_SEDNA);
 
         MinecraftForge.EVENT_BUS.register(new TheSol());
@@ -704,26 +696,15 @@ public class TheSol {
     @SideOnly(Side.CLIENT)
     public void initClient(FMLInitializationEvent event) {
         for (int tier = 4; tier <= 10; tier++) {
-            ItemSchematicTier.registerTextures(tier);
+            ItemSchematic.registerTextures(tier);
         }
     }
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void onGuiOpenEvent(GuiOpenEvent event) {
-//		if (Config.USE_CUSTOM_CELESTIAL_SELECTION) {
-//			if (((event.getGui() instanceof GuiCelestialSelection))) {
-//				if (event.getGui().getClass().getName().equalsIgnoreCase("asmodeuscore.core.astronomy.gui.screen.NewGuiCelestialSelection"))
-//					MessageUtilities.throwCrashError("Please disable the following option: enableNewGalaxyMap in configs/AsmodeusCore/core.conf");
-//				if (GameSettings.isKeyDown(micdoodle8.mods.galacticraft.core.tick.KeyHandlerClient.galaxyMap)) {
-//					event.setGui(new CustomCelestialSelection(true, ((GuiCelestialSelection) event.getGui()).possibleBodies, ((GuiCelestialSelection) event.getGui()).canCreateStations));
-//				} else {
-//					event.setGui(new CustomCelestialSelection(false, ((GuiCelestialSelection) event.getGui()).possibleBodies, ((GuiCelestialSelection) event.getGui()).canCreateStations));
-//				}
-//			}
-//		}
         if (((event.getGui() instanceof GuiCelestialSelection))) {
-            if (ConfigManagerSol.enableCustomGalaxymap) {
+            if (ConfigManager.misc.enableCustomGalaxymap) {
                 if (event.getGui().getClass().getName().equalsIgnoreCase("asmodeuscore.core.astronomy.gui.screen.NewGuiCelestialSelection"))
                     System.err.println("Please disable Asmodeuscore's Galaxymap in configs/AsmodeusCore/core.conf");
                 if (GameSettings.isKeyDown(micdoodle8.mods.galacticraft.core.tick.KeyHandlerClient.galaxyMap)) {

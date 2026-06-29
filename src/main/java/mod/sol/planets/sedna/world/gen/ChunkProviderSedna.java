@@ -42,7 +42,7 @@ public class ChunkProviderSedna extends ChunkProviderBase {
     private final World world;
     private final MapGenDungeonSedna dungeonGenerator = new MapGenDungeonSedna(new DungeonConfiguration(SolBlocks.SEDNA_DUNGEON_BRICK.getDefaultState(), 25, 8, 16, 5, 6, RoomBossSedna.class, RoomTreasureSedna.class));
     private final MapGenBaseMeta caveGenerator = new MapGenCavesSedna();
-    private Biome[] biomesForGeneration = {BiomeAdaptive.biomeDefault};
+    private final Biome[] biomesForGeneration = {BiomeAdaptive.biomeDefault};
 
     public ChunkProviderSedna(World par1World, long par2, boolean par4) {
         this.world = par1World;

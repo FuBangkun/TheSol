@@ -1,7 +1,6 @@
 package mod.sol.planets.kuiper_belt.world.gen;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 public class SpecialKuiperBeltBlockHandler {

@@ -13,21 +13,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class SchematicRocket extends SchematicPage {
-
     private final int tier;
     private final Item schematicItem;
     private final int meta;
-
-    @FunctionalInterface
-    public interface GuiFactory {
-        GuiScreen create(InventoryPlayer inv, BlockPos pos);
-    }
-
-    @FunctionalInterface
-    public interface ContainerFactory {
-        Container create(InventoryPlayer inv, BlockPos pos);
-    }
-
     private final GuiFactory guiFactory;
     private final ContainerFactory containerFactory;
 
@@ -63,5 +51,15 @@ public class SchematicRocket extends SchematicPage {
     @Override
     public Container getResultContainer(EntityPlayer player, BlockPos pos) {
         return containerFactory.create(player.inventory, pos);
+    }
+
+    @FunctionalInterface
+    public interface GuiFactory {
+        GuiScreen create(InventoryPlayer inv, BlockPos pos);
+    }
+
+    @FunctionalInterface
+    public interface ContainerFactory {
+        Container create(InventoryPlayer inv, BlockPos pos);
     }
 }

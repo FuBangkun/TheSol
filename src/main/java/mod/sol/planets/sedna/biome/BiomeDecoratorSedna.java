@@ -16,11 +16,11 @@ public class BiomeDecoratorSedna extends BiomeDecorator {
     private World world;
     private Random randomGenerator;
 
-    private WorldGenerator dirtGen;
-    private WorldGenerator copperGen;
-    private WorldGenerator ironGen;
-    private WorldGenerator osmiumGen;
-    private WorldGenerator tinGen;
+    private final WorldGenerator dirtGen;
+    private final WorldGenerator copperGen;
+    private final WorldGenerator ironGen;
+    private final WorldGenerator osmiumGen;
+    private final WorldGenerator tinGen;
 
     public BiomeDecoratorSedna() {
         this.copperGen = new WorldGenMinableMeta(SolBlocks.SEDNA_COPPER_ORE, 6, 0, true, SolBlocks.SEDNA_ROCK, 0);

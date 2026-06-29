@@ -28,7 +28,7 @@ public class SkyProviderTitan extends IRenderHandler {
     public int starList;
     public int glSkyList;
     public int glSkyList2;
-    private float sunSize;
+    private final float sunSize;
 
     public SkyProviderTitan(IGalacticraftWorldProvider worldProvider) {
         this.sunSize = 120.0F * worldProvider.getSolarSize();

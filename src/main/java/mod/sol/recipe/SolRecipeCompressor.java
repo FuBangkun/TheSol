@@ -11,12 +11,12 @@ import net.minecraft.item.ItemStack;
 public class SolRecipeCompressor {
     public static void registryRecipe() {
         //plates
-        CompressorRecipes.addShapelessRecipe(new ItemStack(SolItems.REINFORCED_PLATE_T4, 2), new ItemStack(AsteroidsItems.basicItem, 1, 6), new ItemStack(AsteroidsItems.basicItem, 1, 5));
-        CompressorRecipes.addShapelessRecipe(new ItemStack(SolItems.REINFORCED_PLATE_T5, 2), new ItemStack(SolItems.COMPRESSED_SULFUR, 1, 0), new ItemStack(SolItems.REINFORCED_PLATE_T4, 1, 0));
-        CompressorRecipes.addShapelessRecipe(new ItemStack(SolItems.REINFORCED_PLATE_T6, 2), new ItemStack(SolItems.COMPRESSED_MANGANESE, 1, 0), new ItemStack(SolItems.REINFORCED_PLATE_T5, 1, 0));
-        CompressorRecipes.addShapelessRecipe(new ItemStack(SolItems.REINFORCED_PLATE_T7, 2), new ItemStack(SolItems.COMPRESSED_LITHIUM, 1, 0), new ItemStack(SolItems.REINFORCED_PLATE_T6, 1, 0));
-        CompressorRecipes.addShapelessRecipe(new ItemStack(SolItems.REINFORCED_PLATE_T8, 2), new ItemStack(SolItems.COMPRESSED_MAGNESIUM, 1, 0), new ItemStack(SolItems.REINFORCED_PLATE_T7, 1, 0));
-        CompressorRecipes.addShapelessRecipe(new ItemStack(SolItems.REINFORCED_PLATE_T9, 2), new ItemStack(SolItems.COMPRESSED_VANADIUM, 1, 0), new ItemStack(SolItems.REINFORCED_PLATE_T8, 1, 0));
+        CompressorRecipes.addShapelessRecipe(new ItemStack(SolItems.REINFORCED_PLATES, 2, 0), new ItemStack(AsteroidsItems.basicItem, 1, 6), new ItemStack(AsteroidsItems.basicItem, 1, 5));
+        CompressorRecipes.addShapelessRecipe(new ItemStack(SolItems.REINFORCED_PLATES, 2, 1), new ItemStack(SolItems.COMPRESSED_SULFUR, 1, 0), new ItemStack(SolItems.REINFORCED_PLATES, 1, 0));
+        CompressorRecipes.addShapelessRecipe(new ItemStack(SolItems.REINFORCED_PLATES, 2, 2), new ItemStack(SolItems.COMPRESSED_MANGANESE, 1, 0), new ItemStack(SolItems.REINFORCED_PLATES, 1, 1));
+        CompressorRecipes.addShapelessRecipe(new ItemStack(SolItems.REINFORCED_PLATES, 2, 3), new ItemStack(SolItems.COMPRESSED_LITHIUM, 1, 0), new ItemStack(SolItems.REINFORCED_PLATES, 1, 2));
+        CompressorRecipes.addShapelessRecipe(new ItemStack(SolItems.REINFORCED_PLATES, 2, 4), new ItemStack(SolItems.COMPRESSED_MAGNESIUM, 1, 0), new ItemStack(SolItems.REINFORCED_PLATES, 1, 3));
+        CompressorRecipes.addShapelessRecipe(new ItemStack(SolItems.REINFORCED_PLATES, 2, 5), new ItemStack(SolItems.COMPRESSED_VANADIUM, 1, 0), new ItemStack(SolItems.REINFORCED_PLATES, 1, 4));
         //sulfur
         CompressorRecipes.addShapelessRecipe(new ItemStack(SolItems.SULFUR_SHARD, 1), new ItemStack(SolBlocks.IO_SULFUR_BLOCK, 1), new ItemStack(SolBlocks.IO_SULFUR_BLOCK, 1), new ItemStack(SolBlocks.IO_SULFUR_BLOCK, 1), new ItemStack(SolBlocks.IO_SULFUR_BLOCK, 1), new ItemStack(SolBlocks.IO_SULFUR_BLOCK, 1), new ItemStack(SolBlocks.IO_SULFUR_BLOCK, 1), new ItemStack(SolBlocks.IO_SULFUR_BLOCK, 1), new ItemStack(SolBlocks.IO_SULFUR_BLOCK, 1), new ItemStack(SolBlocks.IO_SULFUR_BLOCK, 1));
         CompressorRecipes.addShapelessRecipe(new ItemStack(SolItems.COMPRESSED_SULFUR, 1), new ItemStack(SolItems.SULFUR_INGOT, 1), new ItemStack(SolItems.SULFUR_INGOT, 1));

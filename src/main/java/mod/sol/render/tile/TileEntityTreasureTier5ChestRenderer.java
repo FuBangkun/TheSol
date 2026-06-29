@@ -1,8 +1,8 @@
 package mod.sol.render.tile;
 
 import micdoodle8.mods.galacticraft.core.client.model.block.ModelTreasureChest;
-import mod.sol.tile.TileEntityTreasureChestTier5;
 import mod.sol.Tags;
+import mod.sol.tile.TileEntityTreasureChestTier5;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;

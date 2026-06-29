@@ -2,8 +2,8 @@ package mod.sol.planets.pluto.sky;
 
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
-import mod.sol.planets.pluto.dimension.WorldProviderPluto;
 import mod.sol.Tags;
+import mod.sol.planets.pluto.dimension.WorldProviderPluto;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.*;

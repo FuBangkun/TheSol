@@ -22,10 +22,10 @@ public class BiomeDecoratorIo extends BiomeDecorator {
     private Random randomGenerator;
 
     public BiomeDecoratorIo() {
-        this.aluminumGen = new WorldGenMinableMeta(SolBlocks.IO_ALUMINUM_ORE, 6, 0, true, SolBlocks.IO_ROCK, 0);
-        this.copperGen = new WorldGenMinableMeta(SolBlocks.IO_COPPER_ORE, 6, 0, true, SolBlocks.IO_ROCK, 0);
-        this.ironGen = new WorldGenMinableMeta(SolBlocks.IO_IRON_ORE, 6, 0, true, SolBlocks.IO_ROCK, 0);
-        this.sulfurGen = new WorldGenMinableMeta(SolBlocks.IO_SULFUR_ORE, 6, 0, true, SolBlocks.IO_ROCK, 0);
+        this.aluminumGen = new WorldGenMinableMeta(SolBlocks.IO_ORES, 6, 0, true, SolBlocks.IO_ROCK, 0);
+        this.copperGen   = new WorldGenMinableMeta(SolBlocks.IO_ORES, 6, 1, true, SolBlocks.IO_ROCK, 0);
+        this.ironGen     = new WorldGenMinableMeta(SolBlocks.IO_ORES, 6, 2, true, SolBlocks.IO_ROCK, 0);
+        this.sulfurGen   = new WorldGenMinableMeta(SolBlocks.IO_ORES, 6, 3, true, SolBlocks.IO_ROCK, 0);
         this.dirtGen = new WorldGenMinableMeta(SolBlocks.IO_SUB_SURFACE_ROCK, 10, 0, true, SolBlocks.IO_ROCK, 0);
     }
 

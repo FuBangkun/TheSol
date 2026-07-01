@@ -23,11 +23,11 @@ public class BiomeDecoratorMimas extends BiomeDecorator {
     private Random randomGenerator;
 
     public BiomeDecoratorMimas() {
-        this.copperGen = new WorldGenMinableMeta(SolBlocks.MIMAS_COPPER_ORE, 8, 0, true, SolBlocks.MIMAS_ROCK, 0);
-        this.deshGen = new WorldGenMinableMeta(SolBlocks.MIMAS_DESH_ORE, 8, 0, true, SolBlocks.MIMAS_ROCK, 0);
-        this.ironGen = new WorldGenMinableMeta(SolBlocks.MIMAS_IRON_ORE, 8, 0, true, SolBlocks.MIMAS_ROCK, 0);
-        this.maganeseGen = new WorldGenMinableMeta(SolBlocks.MIMAS_MAGANESE_ORE, 6, 0, true, SolBlocks.MIMAS_ROCK, 0);
-        this.tinGen = new WorldGenMinableMeta(SolBlocks.MIMAS_TIN_ORE, 8, 0, true, SolBlocks.MIMAS_ROCK, 0);
+        this.copperGen = new WorldGenMinableMeta(SolBlocks.MIMAS_ORES, 8, 0, true, SolBlocks.MIMAS_ROCK, 0);
+        this.deshGen = new WorldGenMinableMeta(SolBlocks.MIMAS_ORES, 8, 1, true, SolBlocks.MIMAS_ROCK, 0);
+        this.ironGen = new WorldGenMinableMeta(SolBlocks.MIMAS_ORES, 8, 2, true, SolBlocks.MIMAS_ROCK, 0);
+        this.maganeseGen = new WorldGenMinableMeta(SolBlocks.MIMAS_ORES, 6, 3, true, SolBlocks.MIMAS_ROCK, 0);
+        this.tinGen = new WorldGenMinableMeta(SolBlocks.MIMAS_ORES, 8, 4, true, SolBlocks.MIMAS_ROCK, 0);
         this.dirtGen = new WorldGenMinableMeta(SolBlocks.MIMAS_DIRT, 10, 0, true, SolBlocks.MIMAS_ROCK, 0);
     }
 

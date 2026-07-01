@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "type=0": { "model": "sol:mercury_aluminum_ore" },
+    "type=1": { "model": "sol:mercury_copper_ore" },
+    "type=2": { "model": "sol:mercury_desh_ore" },
+    "type=3": { "model": "sol:mercury_ilmenite_ore" },
+    "type=4": { "model": "sol:mercury_iron_ore" },
+    "type=5": { "model": "sol:mercury_silicon_ore" },
+    "type=6": { "model": "sol:mercury_tin_ore" },
+    "type=7": { "model": "sol:mercury_aluminum_ore" },
+    "type=8": { "model": "sol:mercury_aluminum_ore" },
+    "type=9": { "model": "sol:mercury_aluminum_ore" },
+    "type=10": { "model": "sol:mercury_aluminum_ore" },
+    "type=11": { "model": "sol:mercury_aluminum_ore" },
+    "type=12": { "model": "sol:mercury_aluminum_ore" },
+    "type=13": { "model": "sol:mercury_aluminum_ore" },
+    "type=14": { "model": "sol:mercury_aluminum_ore" },
+    "type=15": { "model": "sol:mercury_aluminum_ore" }
+  }
+}

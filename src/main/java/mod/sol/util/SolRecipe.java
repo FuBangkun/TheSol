@@ -59,33 +59,73 @@ public class SolRecipe {
     }
 
     public static void registrySmeltingRecipe() {
-        GameRegistry.addSmelting(SolItems.SULFUR_SHARD, new ItemStack(SolItems.SULFUR_INGOT, 1, 0), 1F);
+        GameRegistry.addSmelting(SolItems.SULFUR_SHARD, new ItemStack(SolItems.SULFUR_INGOT, 1, 0), 1.0F);
 
-        Map<Class<? extends Block>, ItemStack> oreSmeltingMap = new HashMap<>();
+        ItemStack gcAluminum  = new ItemStack(GCItems.basicItem, 1, 5);
+        ItemStack gcCopper    = new ItemStack(GCItems.basicItem, 1, 3);
+        ItemStack gcTin       = new ItemStack(GCItems.basicItem, 1, 4);
+        ItemStack gcSilicon   = new ItemStack(GCItems.basicItem, 1, 2);
+        ItemStack vanillaIron = new ItemStack(Items.IRON_INGOT, 1, 0);
+        ItemStack marsDesh    = new ItemStack(MarsItems.marsItemBasic, 1, 2);
+        ItemStack astIlmenite = new ItemStack(AsteroidsItems.basicItem, 1, 0);
 
-        oreSmeltingMap.put(BlockBaseAluminumOre.class, new ItemStack(GCItems.basicItem, 1, 5));
-        oreSmeltingMap.put(BlockBaseCopperOre.class, new ItemStack(GCItems.basicItem, 1, 3));
-        oreSmeltingMap.put(BlockBaseTinOre.class, new ItemStack(GCItems.basicItem, 1, 4));
-        oreSmeltingMap.put(BlockBaseSiliconOre.class, new ItemStack(GCItems.basicItem, 1, 2));
-        oreSmeltingMap.put(BlockBaseIronOre.class, new ItemStack(Items.IRON_INGOT, 1, 0));
-        oreSmeltingMap.put(BlockBaseDiamondOre.class, new ItemStack(Items.DIAMOND, 2, 0));
-        oreSmeltingMap.put(BlockBaseDeshOre.class, new ItemStack(MarsItems.marsItemBasic, 1, 2));
-        oreSmeltingMap.put(BlockBaseIlmeniteOre.class, new ItemStack(AsteroidsItems.basicItem, 1, 0));
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.MERCURY_ORES, 1, 0), gcAluminum, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.MERCURY_ORES, 1, 1), gcCopper, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.MERCURY_ORES, 1, 2), marsDesh, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.MERCURY_ORES, 1, 3), astIlmenite, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.MERCURY_ORES, 1, 4), vanillaIron, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.MERCURY_ORES, 1, 5), gcSilicon, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.MERCURY_ORES, 1, 6), gcTin, 1.0F);
 
-        oreSmeltingMap.put(BlockBaseMagnesiumOre.class, new ItemStack(SolItems.MAGNESIUM_INGOT));
-        oreSmeltingMap.put(BlockBaseMagnetOre.class, new ItemStack(SolItems.MAGNET_INGOT));
-        oreSmeltingMap.put(BlockBaseManganeseOre.class, new ItemStack(SolItems.MANGANESE_INGOT));
-        oreSmeltingMap.put(BlockBaseSulfurOre.class, new ItemStack(SolItems.SULFUR_INGOT, 1, 0));
-        oreSmeltingMap.put(BlockBaseLithiumOre.class, new ItemStack(SolItems.LITHIUM_INGOT, 1, 0));
-        oreSmeltingMap.put(BlockBaseVanadiumOre.class, new ItemStack(SolItems.VANADIUM_INGOT, 1, 0));
-        oreSmeltingMap.put(BlockBaseOsmiumOre.class, new ItemStack(SolItems.OSMIUM_INGOT, 1, 0));
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.IO_ORES, 1, 0), gcAluminum, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.IO_ORES, 1, 1), gcCopper, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.IO_ORES, 1, 2), vanillaIron, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.IO_ORES, 1, 3), new ItemStack(SolItems.SULFUR_INGOT, 1, 0), 1.0F);
 
-        for (Block block : SolBlocks.Blocks) {
-            if (oreSmeltingMap.containsKey(block.getClass())) {
-                ItemStack output = oreSmeltingMap.get(block.getClass());
-                GameRegistry.addSmelting(block, output, 1.0F);
-            }
-        }
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.EUROPA_ORES, 1, 0), gcAluminum, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.EUROPA_ORES, 1, 1), gcCopper, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.EUROPA_ORES, 1, 2), vanillaIron, 1.0F);
+
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.MIMAS_ORES, 1, 0), gcCopper, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.MIMAS_ORES, 1, 1), marsDesh, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.MIMAS_ORES, 1, 2), vanillaIron, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.MIMAS_ORES, 1, 3), new ItemStack(SolItems.MANGANESE_INGOT), 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.MIMAS_ORES, 1, 4), gcTin, 1.0F);
+
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.TITAN_ORES, 1, 0), gcAluminum, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.TITAN_ORES, 1, 1), marsDesh, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.TITAN_ORES, 1, 2), new ItemStack(Items.DIAMOND, 2, 0), 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.TITAN_ORES, 1, 3), vanillaIron, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.TITAN_ORES, 1, 4), new ItemStack(SolItems.MANGANESE_INGOT), 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.TITAN_ORES, 1, 5), gcTin, 1.0F);
+
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.ARIEL_ORES, 1, 0), gcAluminum, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.ARIEL_ORES, 1, 1), marsDesh, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.ARIEL_ORES, 1, 2), vanillaIron, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.ARIEL_ORES, 1, 3), astIlmenite, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.ARIEL_ORES, 1, 4), new ItemStack(SolItems.LITHIUM_INGOT, 1, 0), 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.ARIEL_ORES, 1, 5), gcTin, 1.0F);
+
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.TRITON_ORES, 1, 0), gcAluminum, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.TRITON_ORES, 1, 1), marsDesh, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.TRITON_ORES, 1, 2), vanillaIron, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.TRITON_ORES, 1, 3), astIlmenite, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.TRITON_ORES, 1, 4), new ItemStack(SolItems.LITHIUM_INGOT, 1, 0), 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.TRITON_ORES, 1, 5), new ItemStack(SolItems.MAGNESIUM_INGOT), 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.TRITON_ORES, 1, 6), new ItemStack(SolItems.MAGNET_INGOT), 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.TRITON_ORES, 1, 7), gcSilicon, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.TRITON_ORES, 1, 8), gcTin, 1.0F);
+
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.PLUTO_ORES, 1, 0), gcCopper, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.PLUTO_ORES, 1, 1), vanillaIron, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.PLUTO_ORES, 1, 2), gcTin, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.PLUTO_ORES, 1, 3), new ItemStack(SolItems.VANADIUM_INGOT, 1, 0), 1.0F);
+
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.SEDNA_ORES, 1, 0), gcCopper, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.SEDNA_ORES, 1, 1), vanillaIron, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.SEDNA_ORES, 1, 2), new ItemStack(SolItems.OSMIUM_INGOT, 1, 0), 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.SEDNA_ORES, 1, 3), gcTin, 1.0F);
+        GameRegistry.addSmelting(new ItemStack(SolBlocks.SEDNA_ORES, 1, 4), new ItemStack(SolItems.VANADIUM_INGOT, 1, 0), 1.0F);
     }
 
     public static void registerRocketRecipe(int tier, ItemStack noseCone, ItemStack plate, ItemStack booster,

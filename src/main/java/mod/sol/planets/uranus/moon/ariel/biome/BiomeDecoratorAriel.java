@@ -25,12 +25,12 @@ public class BiomeDecoratorAriel extends BiomeDecorator {
     private Random randomGenerator;
 
     public BiomeDecoratorAriel() {
-        this.aluminumGen = new WorldGenMinableMeta(SolBlocks.ARIEL_ALUMINUM_ORE, 6, 0, true, SolBlocks.ARIEL_ROCK, 0);
-        this.deshGen = new WorldGenMinableMeta(SolBlocks.ARIEL_DESH_ORE, 6, 0, true, SolBlocks.ARIEL_ROCK, 0);
-        this.ironGen = new WorldGenMinableMeta(SolBlocks.ARIEL_IRON_ORE, 6, 0, true, SolBlocks.ARIEL_ROCK, 0);
-        this.ilmenitGen = new WorldGenMinableMeta(SolBlocks.ARIEL_ILMENITE_ORE, 6, 0, true, SolBlocks.ARIEL_ROCK, 0);
-        this.lithiumGen = new WorldGenMinableMeta(SolBlocks.ARIEL_LITHIUM_ORE, 4, 0, true, SolBlocks.ARIEL_ROCK, 0);
-        this.tinGen = new WorldGenMinableMeta(SolBlocks.ARIEL_TIN_ORE, 6, 0, true, SolBlocks.ARIEL_ROCK, 0);
+        this.aluminumGen = new WorldGenMinableMeta(SolBlocks.ARIEL_ORES, 6, 0, true, SolBlocks.ARIEL_ROCK, 0);
+        this.deshGen = new WorldGenMinableMeta(SolBlocks.ARIEL_ORES, 6, 1, true, SolBlocks.ARIEL_ROCK, 0);
+        this.ironGen = new WorldGenMinableMeta(SolBlocks.ARIEL_ORES, 6, 2, true, SolBlocks.ARIEL_ROCK, 0);
+        this.ilmenitGen = new WorldGenMinableMeta(SolBlocks.ARIEL_ORES, 6, 3, true, SolBlocks.ARIEL_ROCK, 0);
+        this.lithiumGen = new WorldGenMinableMeta(SolBlocks.ARIEL_ORES, 4, 4, true, SolBlocks.ARIEL_ROCK, 0);
+        this.tinGen = new WorldGenMinableMeta(SolBlocks.ARIEL_ORES, 6, 5, true, SolBlocks.ARIEL_ROCK, 0);
         this.surfaceCarbonGen = new WorldGenMinableMeta(SolBlocks.CARBON_DIOXIDE, 8, 0, true, SolBlocks.ARIEL_TURF, 0);
         this.dirtGen = new WorldGenMinableMeta(SolBlocks.ARIEL_DIRT, 10, 0, true, SolBlocks.ARIEL_ROCK, 0);
     }

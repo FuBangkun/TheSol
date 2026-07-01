@@ -27,15 +27,15 @@ public class BiomeDecoratorTriton extends BiomeDecorator {
     private Random randomGenerator;
 
     public BiomeDecoratorTriton() {
-        this.aluminumGen = new WorldGenMinableMeta(SolBlocks.TRITON_ALUMINUM_ORE, 6, 0, true, SolBlocks.TRITON_ROCK, 0);
-        this.deshGen = new WorldGenMinableMeta(SolBlocks.TRITON_DESH_ORE, 6, 0, true, SolBlocks.TRITON_ROCK, 0);
-        this.ironGen = new WorldGenMinableMeta(SolBlocks.TRITON_IRON_ORE, 6, 0, true, SolBlocks.TRITON_ROCK, 0);
-        this.ilmenitGen = new WorldGenMinableMeta(SolBlocks.TRITON_ILMENITE_ORE, 6, 0, true, SolBlocks.TRITON_ROCK, 0);
-        this.lithiumGen = new WorldGenMinableMeta(SolBlocks.TRITON_LITHIUM_ORE, 4, 0, true, SolBlocks.TRITON_ROCK, 0);
-        this.magnesiumGen = new WorldGenMinableMeta(SolBlocks.TRITON_MAGNESIUM_ORE, 6, 0, true, SolBlocks.TRITON_ROCK, 0);
-        this.magnetGen = new WorldGenMinableMeta(SolBlocks.TRITON_MAGNET_ORE, 5, 0, true, SolBlocks.TRITON_ROCK, 0);
-        this.siliconGen = new WorldGenMinableMeta(SolBlocks.TRITON_SILICON_ORE, 6, 0, true, SolBlocks.TRITON_ROCK, 0);
-        this.tinGen = new WorldGenMinableMeta(SolBlocks.TRITON_TIN_ORE, 6, 0, true, SolBlocks.TRITON_ROCK, 0);
+        this.aluminumGen = new WorldGenMinableMeta(SolBlocks.TRITON_ORES, 6, 0, true, SolBlocks.TRITON_ROCK, 0);
+        this.deshGen = new WorldGenMinableMeta(SolBlocks.TRITON_ORES, 6, 1, true, SolBlocks.TRITON_ROCK, 0);
+        this.ironGen = new WorldGenMinableMeta(SolBlocks.TRITON_ORES, 6, 2, true, SolBlocks.TRITON_ROCK, 0);
+        this.ilmenitGen = new WorldGenMinableMeta(SolBlocks.TRITON_ORES, 6, 3, true, SolBlocks.TRITON_ROCK, 0);
+        this.lithiumGen = new WorldGenMinableMeta(SolBlocks.TRITON_ORES, 4, 4, true, SolBlocks.TRITON_ROCK, 0);
+        this.magnesiumGen = new WorldGenMinableMeta(SolBlocks.TRITON_ORES, 6, 5, true, SolBlocks.TRITON_ROCK, 0);
+        this.magnetGen = new WorldGenMinableMeta(SolBlocks.TRITON_ORES, 5, 6, true, SolBlocks.TRITON_ROCK, 0);
+        this.siliconGen = new WorldGenMinableMeta(SolBlocks.TRITON_ORES, 6, 7, true, SolBlocks.TRITON_ROCK, 0);
+        this.tinGen = new WorldGenMinableMeta(SolBlocks.TRITON_ORES, 6, 8, true, SolBlocks.TRITON_ROCK, 0);
         this.dirtGen = new WorldGenMinableMeta(SolBlocks.TRITON_DIRT, 10, 0, true, SolBlocks.TRITON_ROCK, 0);
     }
 

@@ -24,12 +24,12 @@ public class BiomeDecoratorTitan extends BiomeDecorator {
     private Random randomGenerator;
 
     public BiomeDecoratorTitan() {
-        this.aluminumGen = new WorldGenMinableMeta(SolBlocks.TITAN_ALUMINUM_ORE, 6, 0, true, SolBlocks.TITAN_ROCK, 0);
-        this.deshGen = new WorldGenMinableMeta(SolBlocks.TITAN_DESH_ORE, 6, 0, true, SolBlocks.TITAN_ROCK, 0);
-        this.diamondGen = new WorldGenMinableMeta(SolBlocks.TITAN_DIAMOND_ORE, 6, 0, true, SolBlocks.TITAN_ROCK, 0);
-        this.ilmeniteGen = new WorldGenMinableMeta(SolBlocks.TITAN_ILMENITE_ORE, 6, 0, true, SolBlocks.TITAN_ROCK, 0);
-        this.maganeseGen = new WorldGenMinableMeta(SolBlocks.TITAN_MAGANESE_ORE, 4, 0, true, SolBlocks.TITAN_ROCK, 0);
-        this.tinGen = new WorldGenMinableMeta(SolBlocks.TITAN_TIN_ORE, 6, 0, true, SolBlocks.TITAN_ROCK, 0);
+        this.aluminumGen = new WorldGenMinableMeta(SolBlocks.TITAN_ORES, 6, 0, true, SolBlocks.TITAN_ROCK, 0);
+        this.deshGen = new WorldGenMinableMeta(SolBlocks.TITAN_ORES, 6, 1, true, SolBlocks.TITAN_ROCK, 0);
+        this.diamondGen = new WorldGenMinableMeta(SolBlocks.TITAN_ORES, 6, 2, true, SolBlocks.TITAN_ROCK, 0);
+        this.ilmeniteGen = new WorldGenMinableMeta(SolBlocks.TITAN_ORES, 6, 3, true, SolBlocks.TITAN_ROCK, 0);
+        this.maganeseGen = new WorldGenMinableMeta(SolBlocks.TITAN_ORES, 4, 4, true, SolBlocks.TITAN_ROCK, 0);
+        this.tinGen = new WorldGenMinableMeta(SolBlocks.TITAN_ORES, 6, 5, true, SolBlocks.TITAN_ROCK, 0);
         this.dirtGen = new WorldGenMinableMeta(SolBlocks.TITAN_SUB_SURFACE_ROCK, 10, 0, true, SolBlocks.TITAN_ROCK, 0);
     }
 

@@ -21,9 +21,9 @@ public class BiomeDecoratorEuropa extends BiomeDecorator {
     private Random randomGenerator;
 
     public BiomeDecoratorEuropa() {
-        this.aluminumGen = new WorldGenMinableMeta(SolBlocks.EUROPA_ALUMINUM_ORE, 6, 0, true, SolBlocks.EUROPA_ROCK, 0);
-        this.copperGen = new WorldGenMinableMeta(SolBlocks.EUROPA_COPPER_ORE, 6, 0, true, SolBlocks.EUROPA_ROCK, 0);
-        this.ironGen = new WorldGenMinableMeta(SolBlocks.EUROPA_IRON_ORE, 6, 0, true, SolBlocks.EUROPA_ROCK, 0);
+        this.aluminumGen = new WorldGenMinableMeta(SolBlocks.EUROPA_ORES, 6, 0, true, SolBlocks.EUROPA_ROCK, 0);
+        this.copperGen = new WorldGenMinableMeta(SolBlocks.EUROPA_ORES, 6, 1, true, SolBlocks.EUROPA_ROCK, 0);
+        this.ironGen = new WorldGenMinableMeta(SolBlocks.EUROPA_ORES, 6, 2, true, SolBlocks.EUROPA_ROCK, 0);
         this.dirtGen = new WorldGenMinableMeta(SolBlocks.EUROPA_SUB_SURFACE_ROCK, 10, 0, true, SolBlocks.EUROPA_ROCK, 0);
     }
 

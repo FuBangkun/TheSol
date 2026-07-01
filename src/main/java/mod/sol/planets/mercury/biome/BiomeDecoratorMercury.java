@@ -25,13 +25,13 @@ public class BiomeDecoratorMercury extends BiomeDecorator {
     private Random randomGenerator;
 
     public BiomeDecoratorMercury() {
-        this.aluminumGen = new WorldGenMinableMeta(SolBlocks.MERCURY_ALUMINUM_ORE, 8, 0, true, SolBlocks.MERCURY_ROCK, 0);
-        this.copperGen = new WorldGenMinableMeta(SolBlocks.MERCURY_COPPER_ORE, 8, 0, true, SolBlocks.MERCURY_ROCK, 0);
-        this.deshGen = new WorldGenMinableMeta(SolBlocks.MERCURY_DESH_ORE, 8, 0, true, SolBlocks.MERCURY_ROCK, 0);
-        this.ironGen = new WorldGenMinableMeta(SolBlocks.MERCURY_IRON_ORE, 8, 0, true, SolBlocks.MERCURY_ROCK, 0);
-        this.ilmenitGen = new WorldGenMinableMeta(SolBlocks.MERCURY_ILMENITE_ORE, 8, 0, true, SolBlocks.MERCURY_ROCK, 0);
-        this.siliconGen = new WorldGenMinableMeta(SolBlocks.MERCURY_SILICON_ORE, 8, 0, true, SolBlocks.MERCURY_ROCK, 0);
-        this.tinGen = new WorldGenMinableMeta(SolBlocks.MERCURY_TIN_ORE, 8, 0, true, SolBlocks.MERCURY_ROCK, 0);
+        this.aluminumGen = new WorldGenMinableMeta(SolBlocks.MERCURY_ORES, 8, 0, true, SolBlocks.MERCURY_ROCK, 0);
+        this.copperGen = new WorldGenMinableMeta(SolBlocks.MERCURY_ORES, 8, 1, true, SolBlocks.MERCURY_ROCK, 0);
+        this.deshGen = new WorldGenMinableMeta(SolBlocks.MERCURY_ORES, 8, 2, true, SolBlocks.MERCURY_ROCK, 0);
+        this.ilmenitGen = new WorldGenMinableMeta(SolBlocks.MERCURY_ORES, 8, 3, true, SolBlocks.MERCURY_ROCK, 0);
+        this.ironGen = new WorldGenMinableMeta(SolBlocks.MERCURY_ORES, 8, 4, true, SolBlocks.MERCURY_ROCK, 0);
+        this.siliconGen = new WorldGenMinableMeta(SolBlocks.MERCURY_ORES, 8, 5, true, SolBlocks.MERCURY_ROCK, 0);
+        this.tinGen = new WorldGenMinableMeta(SolBlocks.MERCURY_ORES, 8, 6, true, SolBlocks.MERCURY_ROCK, 0);
         this.dirtGen = new WorldGenMinableMeta(SolBlocks.MERCURY_DIRT, 10, 0, true, SolBlocks.MERCURY_ROCK, 0);
     }
 

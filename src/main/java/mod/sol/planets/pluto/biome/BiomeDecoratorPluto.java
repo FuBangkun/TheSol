@@ -22,10 +22,10 @@ public class BiomeDecoratorPluto extends BiomeDecorator {
     private Random randomGenerator;
 
     public BiomeDecoratorPluto() {
-        this.copperGen = new WorldGenMinableMeta(SolBlocks.PLUTO_COPPER_ORE, 6, 0, true, SolBlocks.PLUTO_ROCK, 0);
-        this.ironGen = new WorldGenMinableMeta(SolBlocks.PLUTO_IRON_ORE, 6, 0, true, SolBlocks.PLUTO_ROCK, 0);
-        this.tinGen = new WorldGenMinableMeta(SolBlocks.PLUTO_TIN_ORE, 6, 0, true, SolBlocks.PLUTO_ROCK, 0);
-        this.vanadiumGen = new WorldGenMinableMeta(SolBlocks.PLUTO_VANADIUM_ORE, 4, 0, true, SolBlocks.PLUTO_ROCK, 0);
+        this.copperGen = new WorldGenMinableMeta(SolBlocks.PLUTO_ORES, 6, 0, true, SolBlocks.PLUTO_ROCK, 0);
+        this.ironGen = new WorldGenMinableMeta(SolBlocks.PLUTO_ORES, 6, 1, true, SolBlocks.PLUTO_ROCK, 0);
+        this.tinGen = new WorldGenMinableMeta(SolBlocks.PLUTO_ORES, 6, 2, true, SolBlocks.PLUTO_ROCK, 0);
+        this.vanadiumGen = new WorldGenMinableMeta(SolBlocks.PLUTO_ORES, 4, 3, true, SolBlocks.PLUTO_ROCK, 0);
         this.dirtGen = new WorldGenMinableMeta(SolBlocks.PLUTO_SUB_SURFACE_ROCK, 10, 0, true, SolBlocks.PLUTO_ROCK, 0);
     }
 

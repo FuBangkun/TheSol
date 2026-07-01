@@ -145,8 +145,6 @@ public class MapGenCavesTitan extends MapGenBaseMeta {
                                                 } else {
                                                     primer.setBlockState(localX, localY, localZ, Blocks.AIR.getDefaultState());
                                                 }
-                                                // primer.setBlockState(localX, localY, localZ, Blocks.AIR.getDefaultState());
-//                                                blockIdArray[coords] = Blocks.AIR;
                                             }
                                         }
                                     }

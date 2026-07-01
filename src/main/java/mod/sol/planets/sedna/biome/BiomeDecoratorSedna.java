@@ -2,6 +2,7 @@ package mod.sol.planets.sedna.biome;
 
 import micdoodle8.mods.galacticraft.api.event.wgen.GCCoreEventPopulate;
 import micdoodle8.mods.galacticraft.core.world.gen.WorldGenMinableMeta;
+import mod.sol.blocks.BlockBaseOre;
 import mod.sol.init.SolBlocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -18,14 +19,16 @@ public class BiomeDecoratorSedna extends BiomeDecorator {
     private final WorldGenerator ironGen;
     private final WorldGenerator osmiumGen;
     private final WorldGenerator tinGen;
+    private final WorldGenerator vanadiumGen;
     private World world;
     private Random randomGenerator;
 
     public BiomeDecoratorSedna() {
-        this.copperGen = new WorldGenMinableMeta(SolBlocks.SEDNA_COPPER_ORE, 6, 0, true, SolBlocks.SEDNA_ROCK, 0);
-        this.ironGen = new WorldGenMinableMeta(SolBlocks.SEDNA_IRON_ORE, 6, 0, true, SolBlocks.SEDNA_ROCK, 0);
-        this.osmiumGen = new WorldGenMinableMeta(SolBlocks.SEDNA_OSMIUM_ORE, 4, 0, true, SolBlocks.SEDNA_ROCK, 0);
-        this.tinGen = new WorldGenMinableMeta(SolBlocks.SEDNA_TIN_ORE, 6, 0, true, SolBlocks.SEDNA_ROCK, 0);
+        this.copperGen = new WorldGenMinableMeta(SolBlocks.SEDNA_ORES, 6, 0, true, SolBlocks.SEDNA_ROCK, 0);
+        this.ironGen = new WorldGenMinableMeta(SolBlocks.SEDNA_ORES, 6, 1, true, SolBlocks.SEDNA_ROCK, 0);
+        this.osmiumGen = new WorldGenMinableMeta(SolBlocks.SEDNA_ORES, 4, 2, true, SolBlocks.SEDNA_ROCK, 0);
+        this.tinGen = new WorldGenMinableMeta(SolBlocks.SEDNA_ORES, 6, 3, true, SolBlocks.SEDNA_ROCK, 0);
+        this.vanadiumGen = new WorldGenMinableMeta(SolBlocks.SEDNA_ORES, 4, 4, true, SolBlocks.PLUTO_ROCK, 0);
         this.dirtGen = new WorldGenMinableMeta(SolBlocks.SEDNA_SUB_SURFACE_ROCK, 10, 0, true, SolBlocks.SEDNA_ROCK, 0);
     }
 
@@ -57,6 +60,7 @@ public class BiomeDecoratorSedna extends BiomeDecorator {
         this.genStandardOre(16, this.ironGen, 0, 60);
         this.genStandardOre(14, this.osmiumGen, 0, 60);
         this.genStandardOre(16, this.tinGen, 0, 60);
+        this.genStandardOre(14, this.vanadiumGen, 0, 60);
         MinecraftForge.EVENT_BUS.post(new GCCoreEventPopulate.Post(this.world, this.randomGenerator, chunkPos));
     }
 }

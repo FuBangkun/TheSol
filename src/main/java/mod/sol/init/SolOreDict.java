@@ -1,26 +1,24 @@
 package mod.sol.init;
 
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class SolOreDict {
     public static void registerOres() {
         //ore
         //aluminum
-        OreDictionary.registerOre("oreAluminum", SolBlocks.MERCURY_ALUMINUM_ORE);
-        OreDictionary.registerOre("oreAluminum", SolBlocks.IO_ALUMINUM_ORE);
-        //aluminium
-        OreDictionary.registerOre("oreAluminium", SolBlocks.MERCURY_ALUMINUM_ORE);
-        OreDictionary.registerOre("oreAluminium", SolBlocks.IO_ALUMINUM_ORE);
+        OreDictionary.registerOre("oreAluminum", new ItemStack(SolBlocks.MERCURY_ORES, 1, 0));
+        OreDictionary.registerOre("oreAluminum", new ItemStack(SolBlocks.IO_ORES, 1, 0));
         //naturalAluminum
-        OreDictionary.registerOre("oreNaturalAluminum", SolBlocks.MERCURY_ALUMINUM_ORE);
-        OreDictionary.registerOre("oreNaturalAluminum", SolBlocks.IO_ALUMINUM_ORE);
+        OreDictionary.registerOre("oreNaturalAluminum", new ItemStack(SolBlocks.MERCURY_ORES, 1, 0));
+        OreDictionary.registerOre("oreNaturalAluminum", new ItemStack(SolBlocks.IO_ORES, 1, 0));
         //copper
-        OreDictionary.registerOre("oreCopper", SolBlocks.MERCURY_COPPER_ORE);
-        OreDictionary.registerOre("oreCopper", SolBlocks.IO_COPPER_ORE);
+        OreDictionary.registerOre("oreCopper", new ItemStack(SolBlocks.MERCURY_ORES, 1, 1));
+        OreDictionary.registerOre("oreCopper", new ItemStack(SolBlocks.IO_ORES, 1, 1));
         //tin
-        OreDictionary.registerOre("oreTin", SolBlocks.MERCURY_TIN_ORE);
+        OreDictionary.registerOre("oreTin", new ItemStack(SolBlocks.MERCURY_ORES, 1, 6));
         //sulfur
-        OreDictionary.registerOre("oreSulfur", SolBlocks.IO_SULFUR_ORE);
+        OreDictionary.registerOre("oreSulfur", new ItemStack(SolBlocks.IO_ORES, 1, 3));
         //ingot
         //sulfur
         OreDictionary.registerOre("ingotSulfur", SolItems.SULFUR_INGOT);

@@ -1,4 +1,4 @@
-package mod.sol.client.jei.tier4rocket;
+package mod.sol.client.jei;
 
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
@@ -8,30 +8,30 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mod.sol.Tags;
-import mod.sol.client.jei.SolJeiManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-public class Tier4RocketRecipeCategory implements IRecipeCategory {
-    private static final ResourceLocation rocketGuiTexture = new ResourceLocation(Tags.MOD_ID, "textures/gui/schematic_rocket_t4_jei.png");
-
+public class RocketRecipeCategory implements IRecipeCategory<IRecipeWrapper> {
+    @Nonnull
+    private final String uid;
     @Nonnull
     private final IDrawable background;
     @Nonnull
     private final String localizedName;
 
-    public Tier4RocketRecipeCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.createDrawable(rocketGuiTexture, 0, 0, 168, 126);
+    public RocketRecipeCategory(IGuiHelper guiHelper, @Nonnull String uid, int tier) {
+        this.uid = uid;
+        ResourceLocation texture = new ResourceLocation(Tags.MOD_ID, "textures/gui/schematic_rocket_t" + tier + "_jei.png");
+        this.background = guiHelper.createDrawable(texture, 0, 0, 168, 126);
         this.localizedName = I18n.format("tile.rocket_workbench.name");
-
     }
 
     @Nonnull
     @Override
     public String getUid() {
-        return SolJeiManager.ROCKET_T4_ID;
+        return this.uid;
     }
 
     @Nonnull
@@ -47,7 +47,7 @@ public class Tier4RocketRecipeCategory implements IRecipeCategory {
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper, IIngredients ingredients) {
+    public void setRecipe(IRecipeLayout recipeLayout, @Nonnull IRecipeWrapper recipeWrapper, @Nonnull IIngredients ingredients) {
         IGuiItemStackGroup itemstacks = recipeLayout.getItemStacks();
 
         itemstacks.init(0, true, 44, 0);
@@ -61,23 +61,23 @@ public class Tier4RocketRecipeCategory implements IRecipeCategory {
         itemstacks.init(8, true, 53, 54);
         itemstacks.init(9, true, 53, 72);
         itemstacks.init(10, true, 53, 90);
-        itemstacks.init(11, true, 17, 72); // Booster left
+        itemstacks.init(11, true, 17, 72);
         itemstacks.init(12, true, 17, 90);
         itemstacks.init(13, true, 71, 90);
-        itemstacks.init(14, true, 44, 108); // Rocket
-        itemstacks.init(15, true, 71, 72); // Booster right
+        itemstacks.init(14, true, 44, 108);
+        itemstacks.init(15, true, 71, 72);
         itemstacks.init(16, true, 17, 108);
         itemstacks.init(17, true, 71, 108);
         itemstacks.init(18, true, 89, 7);
         itemstacks.init(19, true, 115, 7);
         itemstacks.init(20, true, 141, 7);
         itemstacks.init(21, false, 138, 95);
-
         itemstacks.init(22, true, 141, 34);
 
         itemstacks.set(ingredients);
     }
 
+    @Nonnull
     @Override
     public String getModName() {
         return Tags.MOD_NAME;

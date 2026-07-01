@@ -1,4 +1,4 @@
-package mod.sol.client.jei.tier5rocket;
+package mod.sol.client.jei;
 
 import micdoodle8.mods.galacticraft.api.recipe.INasaWorkbenchRecipe;
 import micdoodle8.mods.galacticraft.core.client.jei.tier1rocket.Tier1RocketRecipeMaker;
@@ -7,12 +7,12 @@ import mod.sol.util.RecipeUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tier5RocketRecipeMaker {
-    public static List<INasaWorkbenchRecipe> getRecipesList() {
+public class RocketRecipeMaker {
+    public static List<INasaWorkbenchRecipe> getRecipesList(int tier) {
         List<INasaWorkbenchRecipe> recipes = new ArrayList<>();
 
         int chestCount = -1;
-        for (INasaWorkbenchRecipe recipe : RecipeUtil.getRocketRecipes(5)) {
+        for (INasaWorkbenchRecipe recipe : RecipeUtil.getRocketRecipes(tier)) {
             int chests = Tier1RocketRecipeMaker.countChests(recipe);
             if (chests == chestCount)
                 continue;

@@ -66,7 +66,7 @@ import mod.sol.planets.sedna.dimension.WorldProviderSedna;
 import mod.sol.planets.uranus.moon.ariel.biome.BiomeAriel;
 import mod.sol.planets.uranus.moon.ariel.dimension.TeleportTypeAriel;
 import mod.sol.planets.uranus.moon.ariel.dimension.WorldProviderAriel;
-import mod.sol.proxy.SolCommonProxy;
+import mod.sol.proxy.CommonProxy;
 import mod.sol.recipe.BaseRocketRecipeManager;
 import mod.sol.recipe.SolRecipeCompressor;
 import mod.sol.recipe.SolRecipeSmelting;
@@ -171,8 +171,8 @@ public class TheSol {
     public static Moon moonCharon;
     @Instance
     public static TheSol instance;
-    @SidedProxy(clientSide = "mod.sol.proxy.SolClientProxy", serverSide = "mod.sol.proxy.SolCommonProxy")
-    public static SolCommonProxy proxy;
+    @SidedProxy(clientSide = "mod.sol.proxy.ClientProxy", serverSide = "mod.sol.proxy.CommonProxy")
+    public static CommonProxy proxy;
 
     static {
         FluidRegistry.enableUniversalBucket();

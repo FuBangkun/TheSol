@@ -1,4 +1,4 @@
-package mod.sol.client.jei.tier4rocket;
+package mod.sol.client.jei;
 
 import com.google.common.collect.Lists;
 import mezz.jei.api.ingredients.IIngredients;
@@ -8,11 +8,11 @@ import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
-public class Tier4RocketRecipeWrapper implements IRecipeWrapper {
+public class RocketRecipeWrapper implements IRecipeWrapper {
     @Nonnull
     private final INasaWorkbenchRecipe recipe;
 
-    public Tier4RocketRecipeWrapper(@Nonnull INasaWorkbenchRecipe recipe) {
+    public RocketRecipeWrapper(@Nonnull INasaWorkbenchRecipe recipe) {
         this.recipe = recipe;
     }
 

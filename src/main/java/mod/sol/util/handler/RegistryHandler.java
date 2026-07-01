@@ -22,7 +22,6 @@ public class RegistryHandler {
 
     @SubscribeEvent
     public static void onBlockRegister(RegistryEvent.Register<Block> event) {
-        SolFluid.registerFluids();
         event.getRegistry().registerAll(SolBlocks.Blocks.toArray(new Block[0]));
     }
 

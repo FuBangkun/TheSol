@@ -8,6 +8,7 @@ import micdoodle8.mods.galacticraft.core.perlin.generator.Gradient;
 import micdoodle8.mods.galacticraft.core.world.gen.EnumCraterSize;
 import micdoodle8.mods.galacticraft.core.world.gen.dungeon.DungeonConfiguration;
 import mod.sol.init.SolBlocks;
+import mod.sol.planets.RoomBossUniversal;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
@@ -40,7 +41,7 @@ public class ChunkProviderMercury extends ChunkProviderBase {
     private final NoiseModule noiseGen3;
     private final NoiseModule noiseGen4;
     private final World world;
-    private final MapGenDungeonMercury dungeonGeneratorMercury = new MapGenDungeonMercury(new DungeonConfiguration(SolBlocks.MERCURY_DUNGEON_BRICK.getDefaultState(), 25, 8, 16, 5, 6, RoomBossMercury.class, RoomTreasureMercury.class));
+    private final MapGenDungeonMercury dungeonGeneratorMercury = new MapGenDungeonMercury(new DungeonConfiguration(SolBlocks.MERCURY_DUNGEON_BRICK.getDefaultState(), 25, 8, 16, 5, 6, RoomBossUniversal.class, RoomTreasureMercury.class));
     private final MapGenBaseMeta caveGenerator = new MapGenCavesMercury();
     private final Biome[] biomesForGeneration = {BiomeAdaptive.biomeDefault};
 

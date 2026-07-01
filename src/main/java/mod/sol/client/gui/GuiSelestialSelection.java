@@ -1,4 +1,4 @@
-package mod.sol.client.gui.screen;
+package mod.sol.client.gui;
 
 import com.google.common.collect.Maps;
 import micdoodle8.mods.galacticraft.api.event.client.CelestialBodyRenderEvent;
@@ -23,9 +23,8 @@ import org.lwjgl.util.vector.Matrix4f;
 import java.nio.FloatBuffer;
 import java.util.*;
 
-public class SolCelestialSelection extends GuiCelestialSelection {
-
-    public SolCelestialSelection(boolean mapMode, List<CelestialBody> possibleBodies, boolean canCreateStations) {
+public class GuiSelestialSelection extends GuiCelestialSelection {
+    public GuiSelestialSelection(boolean mapMode, List<CelestialBody> possibleBodies, boolean canCreateStations) {
         super(mapMode, possibleBodies, canCreateStations);
     }
 
@@ -649,6 +648,5 @@ public class SolCelestialSelection extends GuiCelestialSelection {
         if (!handledSliderPos) {
             this.zoomTooltipPos = 0;
         }
-
     }
 }

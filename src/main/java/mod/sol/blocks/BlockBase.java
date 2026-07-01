@@ -19,7 +19,7 @@ public class BlockBase extends Block implements IHasModel {
         this.setCreativeTab(tab);
 
         SolBlocks.Blocks.add(this);
-        SolItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+        SolItems.ITEMS.add(new ItemBlock(this).setRegistryName(name));
     }
 
     @Override

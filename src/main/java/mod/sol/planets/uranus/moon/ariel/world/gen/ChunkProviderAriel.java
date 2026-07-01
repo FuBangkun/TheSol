@@ -8,8 +8,8 @@ import micdoodle8.mods.galacticraft.core.perlin.generator.Gradient;
 import micdoodle8.mods.galacticraft.core.world.gen.EnumCraterSize;
 import micdoodle8.mods.galacticraft.core.world.gen.dungeon.DungeonConfiguration;
 import mod.sol.init.SolBlocks;
+import mod.sol.planets.RoomBossUniversal;
 import mod.sol.planets.uranus.world.gen.MapGenDungeonUranus;
-import mod.sol.planets.uranus.world.gen.RoomBossUranus;
 import mod.sol.planets.uranus.world.gen.RoomTreasureUranus;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
@@ -42,7 +42,7 @@ public class ChunkProviderAriel extends ChunkProviderBase {
     private final NoiseModule noiseGen3;
     private final NoiseModule noiseGen4;
     private final World world;
-    private final MapGenDungeonUranus dungeonGenerator = new MapGenDungeonUranus(new DungeonConfiguration(SolBlocks.URANUS_DUNGEON_BRICK.getDefaultState(), 25, 8, 16, 5, 6, RoomBossUranus.class, RoomTreasureUranus.class));
+    private final MapGenDungeonUranus dungeonGenerator = new MapGenDungeonUranus(new DungeonConfiguration(SolBlocks.URANUS_DUNGEON_BRICK.getDefaultState(), 25, 8, 16, 5, 6, RoomBossUniversal.class, RoomTreasureUranus.class));
     private final MapGenBaseMeta caveGenerator = new MapGenCavesAriel();
     private final Biome[] biomesForGeneration = {BiomeAdaptive.biomeDefault};
 

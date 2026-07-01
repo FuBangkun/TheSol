@@ -21,7 +21,6 @@ public class MapGenDungeonMercury extends MapGenDungeon {
 
     public static void initiateStructures() {
         if (!MapGenDungeonMercury.initialized) {
-            MapGenStructureIO.registerStructureComponent(RoomBossMercury.class, "MercuryDungeonBossRoom");
             MapGenStructureIO.registerStructureComponent(RoomTreasureMercury.class, "MercuryDungeonTreasureRoom");
         }
 

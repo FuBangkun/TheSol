@@ -8,8 +8,8 @@ import micdoodle8.mods.galacticraft.core.perlin.generator.Gradient;
 import micdoodle8.mods.galacticraft.core.world.gen.EnumCraterSize;
 import micdoodle8.mods.galacticraft.core.world.gen.dungeon.DungeonConfiguration;
 import mod.sol.init.SolBlocks;
+import mod.sol.planets.RoomBossUniversal;
 import mod.sol.planets.neptune.world.gen.MapGenDungeonNeptune;
-import mod.sol.planets.neptune.world.gen.RoomBossNeptune;
 import mod.sol.planets.neptune.world.gen.RoomTreasureNeptune;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
@@ -44,7 +44,7 @@ public class ChunkProviderTriton extends ChunkProviderBase {
     private final NoiseModule noiseGen3;
     private final NoiseModule noiseGen4;
     private final World world;
-    private final MapGenDungeonNeptune dungeonGenerator = new MapGenDungeonNeptune(new DungeonConfiguration(SolBlocks.NEPTUNE_DUNGEON_BRICK.getDefaultState(), 25, 8, 16, 5, 6, RoomBossNeptune.class, RoomTreasureNeptune.class));
+    private final MapGenDungeonNeptune dungeonGenerator = new MapGenDungeonNeptune(new DungeonConfiguration(SolBlocks.NEPTUNE_DUNGEON_BRICK.getDefaultState(), 25, 8, 16, 5, 6, RoomBossUniversal.class, RoomTreasureNeptune.class));
     private final MapGenBaseMeta caveGenerator = new MapGenCavesTriton();
     private final Biome[] biomesForGeneration = {BiomeAdaptive.biomeDefault};
 

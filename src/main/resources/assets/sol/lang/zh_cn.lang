@@ -52,7 +52,7 @@ entity.magmacube_boss.name=岩浆怪之王
 
 # Fluid
 fluid.liquid_methane=液态甲烷
-tile.fluid.methane.name=液态甲烷
+tile.liquid_methane.name=液态甲烷
 
 #////////////////           Items            ////////////////#
 

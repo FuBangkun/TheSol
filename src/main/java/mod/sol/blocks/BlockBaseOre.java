@@ -28,19 +28,19 @@ public class BlockBaseOre extends Block implements IHasModel {
     public static final PropertyInteger TYPE = PropertyInteger.create("type", 0, 15);
     private final List<OreVariant> variants;
 
-    public BlockBaseOre(String registryName, List<OreVariant> variants) {
+    public BlockBaseOre(String name, List<OreVariant> variants) {
         super(Material.ROCK);
         this.variants = variants;
 
-        this.setRegistryName(registryName);
-        this.setTranslationKey(registryName);
+        this.setRegistryName(name);
+        this.setTranslationKey(name);
         this.setCreativeTab(TheSol.BLOCK_TAB);
         this.setHardness(3.5F);
 
         this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, 0));
 
         SolBlocks.Blocks.add(this);
-        SolItems.ITEMS.add(new ItemBlockSubtypes(this).setRegistryName(registryName));
+        SolItems.ITEMS.add(new ItemBlockSubtypes(this).setRegistryName(name));
     }
 
     @Override

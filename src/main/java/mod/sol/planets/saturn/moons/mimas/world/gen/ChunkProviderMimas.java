@@ -8,8 +8,8 @@ import micdoodle8.mods.galacticraft.core.perlin.generator.Gradient;
 import micdoodle8.mods.galacticraft.core.world.gen.EnumCraterSize;
 import micdoodle8.mods.galacticraft.core.world.gen.dungeon.DungeonConfiguration;
 import mod.sol.init.SolBlocks;
+import mod.sol.planets.RoomBossUniversal;
 import mod.sol.planets.saturn.world.gen.MapGenDungeonSaturn;
-import mod.sol.planets.saturn.world.gen.RoomBossSaturn;
 import mod.sol.planets.saturn.world.gen.RoomTreasureSaturn;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
@@ -43,7 +43,7 @@ public class ChunkProviderMimas extends ChunkProviderBase {
     private final NoiseModule noiseGen3;
     private final NoiseModule noiseGen4;
     private final World world;
-    private final MapGenDungeonSaturn dungeonGenerator = new MapGenDungeonSaturn(new DungeonConfiguration(SolBlocks.MERCURY_DUNGEON_BRICK.getDefaultState(), 25, 8, 16, 5, 6, RoomBossSaturn.class, RoomTreasureSaturn.class));
+    private final MapGenDungeonSaturn dungeonGenerator = new MapGenDungeonSaturn(new DungeonConfiguration(SolBlocks.MERCURY_DUNGEON_BRICK.getDefaultState(), 25, 8, 16, 5, 6, RoomBossUniversal.class, RoomTreasureSaturn.class));
     private final MapGenBaseMeta caveGenerator = new MapGenCavesMimas();
     private final Biome[] biomesForGeneration = {BiomeAdaptive.biomeDefault};
 

@@ -52,7 +52,7 @@ entity.magmacube_boss.name=Magma Cube Boss
 
 # Fluid
 fluid.liquid_methane=Liquid Methane
-tile.fluid.methane.name=Liquid Methane
+tile.liquid_methane.name=Liquid Methane
 
 #////////////////           Items            ////////////////#
 

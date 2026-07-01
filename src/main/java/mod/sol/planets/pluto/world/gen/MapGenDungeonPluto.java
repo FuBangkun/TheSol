@@ -21,7 +21,6 @@ public class MapGenDungeonPluto extends MapGenDungeon {
 
     public static void initiateStructures() {
         if (!MapGenDungeonPluto.initialized) {
-            MapGenStructureIO.registerStructureComponent(RoomBossPluto.class, "PlutoDungeonBossRoom");
             MapGenStructureIO.registerStructureComponent(RoomTreasurePluto.class, "PlutoDungeonTreasureRoom");
         }
 

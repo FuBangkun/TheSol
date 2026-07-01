@@ -21,7 +21,6 @@ public class MapGenDungeonUranus extends MapGenDungeon {
 
     public static void initiateStructures() {
         if (!MapGenDungeonUranus.initialized) {
-            MapGenStructureIO.registerStructureComponent(RoomBossUranus.class, "UranusDungeonBossRoom");
             MapGenStructureIO.registerStructureComponent(RoomTreasureUranus.class, "UranusDungeonTreasureRoom");
         }
 

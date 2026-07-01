@@ -1,4 +1,4 @@
-package mod.sol.client.gui.container;
+package mod.sol.client.gui;
 
 import micdoodle8.mods.galacticraft.api.recipe.ISchematicResultPage;
 import micdoodle8.mods.galacticraft.api.recipe.SchematicRegistry;

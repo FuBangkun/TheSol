@@ -21,7 +21,6 @@ public class MapGenDungeonSedna extends MapGenDungeon {
 
     public static void initiateStructures() {
         if (!MapGenDungeonSedna.initialized) {
-            MapGenStructureIO.registerStructureComponent(RoomBossSedna.class, "SednaDungeonBossRoom");
             MapGenStructureIO.registerStructureComponent(RoomTreasureSedna.class, "SednaDungeonTreasureRoom");
         }
 

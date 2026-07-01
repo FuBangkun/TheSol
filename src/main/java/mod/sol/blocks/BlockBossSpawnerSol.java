@@ -4,7 +4,6 @@ import micdoodle8.mods.galacticraft.core.blocks.BlockBossSpawner;
 import mod.sol.TheSol;
 import mod.sol.init.SolBlocks;
 import mod.sol.init.SolItems;
-import mod.sol.tile.TileEntityDungeonSpawnerSaturn;
 import mod.sol.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -17,26 +16,34 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockBossSpawnerSaturn extends BlockBossSpawner implements IHasModel {
-    public BlockBossSpawnerSaturn(String assetName) {
-        super(assetName);
-        this.setTranslationKey(assetName);
-        this.setRegistryName(assetName);
+import javax.annotation.Nonnull;
+import java.util.function.Supplier;
+
+public class BlockBossSpawnerSol extends BlockBossSpawner implements IHasModel {
+    private final Supplier<TileEntity> tileEntitySupplier;
+
+    public BlockBossSpawnerSol(String name, Supplier<TileEntity> tileEntitySupplier) {
+        super(name);
+        this.setTranslationKey(name);
+        this.setRegistryName(name);
+        this.tileEntitySupplier = tileEntitySupplier;
 
         SolBlocks.Blocks.add(this);
-        SolItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+        SolItems.ITEMS.add(new ItemBlock(this).setRegistryName(name));
     }
 
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileEntityDungeonSpawnerSaturn();
+        return tileEntitySupplier.get();
     }
 
+    @Nonnull
     @Override
-    public Block setCreativeTab(CreativeTabs tab) {
+    public Block setCreativeTab(@Nonnull CreativeTabs tab) {
         return null;
     }
 
+    @Nonnull
     @Override
     public CreativeTabs getCreativeTab() {
         return null;
@@ -53,7 +60,7 @@ public class BlockBossSpawnerSaturn extends BlockBossSpawner implements IHasMode
     }
 
     @Override
-    public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
+    public boolean isPassable(@Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos) {
         return true;
     }
 

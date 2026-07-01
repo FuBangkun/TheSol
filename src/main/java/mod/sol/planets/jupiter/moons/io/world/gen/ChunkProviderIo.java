@@ -9,8 +9,8 @@ import micdoodle8.mods.galacticraft.core.world.gen.EnumCraterSize;
 import micdoodle8.mods.galacticraft.core.world.gen.dungeon.DungeonConfiguration;
 import micdoodle8.mods.galacticraft.core.world.gen.dungeon.MapGenDungeon;
 import mod.sol.init.SolBlocks;
+import mod.sol.planets.RoomBossUniversal;
 import mod.sol.planets.jupiter.world.gen.MapGenDungeonJupiter;
-import mod.sol.planets.jupiter.world.gen.RoomBossJupiter;
 import mod.sol.planets.jupiter.world.gen.RoomTreasureJupiter;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
@@ -42,7 +42,7 @@ public class ChunkProviderIo extends ChunkProviderBase {
     private final NoiseModule noiseGen3;
     private final NoiseModule noiseGen4;
     private final World world;
-    private final MapGenDungeon dungeonGenerator = new MapGenDungeonJupiter(new DungeonConfiguration(SolBlocks.JUPITER_DUNGEON_BRICK.getDefaultState(), 25, 8, 16, 5, 6, RoomBossJupiter.class, RoomTreasureJupiter.class));
+    private final MapGenDungeon dungeonGenerator = new MapGenDungeonJupiter(new DungeonConfiguration(SolBlocks.JUPITER_DUNGEON_BRICK.getDefaultState(), 25, 8, 16, 5, 6, RoomBossUniversal.class, RoomTreasureJupiter.class));
     private final MapGenBaseMeta caveGenerator = new MapGenCavesIo();
     private Biome[] biomesForGeneration = {BiomeAdaptive.biomeDefault};
 

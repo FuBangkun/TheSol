@@ -6,6 +6,7 @@ import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
 import mod.sol.TheSol;
 import mod.sol.blocks.*;
 import mod.sol.blocks.BlockBaseOre.OreVariant;
+import mod.sol.tile.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Items;
@@ -85,13 +86,13 @@ public class SolBlocks {
     public static final Block SEDNA_DUNGEON_BRICK = new BlockBase("sedna_dungeon_brick", Material.ROCK, "pickaxe", 1, TheSol.BLOCK_TAB).setHardness(4F).setResistance(40F);
     public static final Block TREASURE_CHEST_T10 = new BlockTreasureChest(10);
     //Spawner
-    public static Block BOSS_SPAWNER_MERCURY = new BlockBossSpawnerMercury("boss_spawner_mercury");
-    public static Block BOSS_SPAWNER_JUPITER = new BlockBossSpawnerJupiter("boss_spawner_jupiter");
-    public static Block BOSS_SPAWNER_SATURN = new BlockBossSpawnerSaturn("boss_spawner_saturn");
-    public static Block BOSS_SPAWNER_URANUS = new BlockBossSpawnerUranus("boss_spawner_uranus");
-    public static Block BOSS_SPAWNER_NEPTUNE = new BlockBossSpawnerNeptune("boss_spawner_neptune");
-    public static Block BOSS_SPAWNER_PLUTO = new BlockBossSpawnerPluto("boss_spawner_pluto");
-    public static Block BOSS_SPAWNER_SEDNA = new BlockBossSpawnerSedna("boss_spawner_sedna");
+    public static Block BOSS_SPAWNER_MERCURY = new BlockBossSpawnerSol("boss_spawner_mercury", TileEntityDungeonSpawnerMercury::new);
+    public static Block BOSS_SPAWNER_JUPITER = new BlockBossSpawnerSol("boss_spawner_jupiter", TileEntityDungeonSpawnerJupiter::new);
+    public static Block BOSS_SPAWNER_SATURN = new BlockBossSpawnerSol("boss_spawner_saturn", TileEntityDungeonSpawnerSaturn::new);
+    public static Block BOSS_SPAWNER_URANUS = new BlockBossSpawnerSol("boss_spawner_uranus", TileEntityDungeonSpawnerUranus::new);
+    public static Block BOSS_SPAWNER_NEPTUNE = new BlockBossSpawnerSol("boss_spawner_neptune", TileEntityDungeonSpawnerNeptune::new);
+    public static Block BOSS_SPAWNER_PLUTO = new BlockBossSpawnerSol("boss_spawner_pluto", TileEntityDungeonSpawnerPluto::new);
+    public static Block BOSS_SPAWNER_SEDNA = new BlockBossSpawnerSol("boss_spawner_sedna", TileEntityDungeonSpawnerSedna::new);
 
     public static final Block MERCURY_ORES;
     public static final Block IO_ORES;

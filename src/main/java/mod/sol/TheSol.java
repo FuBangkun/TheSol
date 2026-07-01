@@ -27,8 +27,8 @@ import micdoodle8.mods.galacticraft.planets.venus.dimension.WorldProviderVenus;
 import micdoodle8.mods.galacticraft.planets.venus.world.gen.BiomeVenus;
 import mod.sol.api.galaxy.DwarfPlanet;
 import mod.sol.api.galaxy.GasGiant;
-import mod.sol.client.gui.container.GuiSchematicRocket;
-import mod.sol.client.gui.screen.SolCelestialSelection;
+import mod.sol.client.gui.GuiSchematicRocket;
+import mod.sol.client.gui.GuiSelestialSelection;
 import mod.sol.config.ConfigManager;
 import mod.sol.entities.EntityHugeFireball;
 import mod.sol.entities.EntityTierRocket;
@@ -39,6 +39,7 @@ import mod.sol.init.SolItems;
 import mod.sol.init.SolOreDict;
 import mod.sol.inventory.ContainerSchematicRocket;
 import mod.sol.items.ItemSchematic;
+import mod.sol.planets.RoomBossUniversal;
 import mod.sol.planets.jupiter.moons.europa.biome.BiomeEuropa;
 import mod.sol.planets.jupiter.moons.europa.dimension.TeleportTypeEuropa;
 import mod.sol.planets.jupiter.moons.europa.dimension.WorldProviderEuropa;
@@ -73,7 +74,7 @@ import mod.sol.render.entity.*;
 import mod.sol.tile.*;
 import mod.sol.util.RocketModelUtil;
 import mod.sol.util.SchematicRocket;
-import mod.sol.util.SolRecipe;
+import mod.sol.init.SolRecipe;
 import mod.sol.util.handler.SolEventHandlerClient;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.settings.GameSettings;
@@ -85,6 +86,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
+import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -236,6 +238,8 @@ public class TheSol {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
+        MapGenStructureIO.registerStructureComponent(RoomBossUniversal.class, "SolDungeonBossRoom");
+
         TheSol.planetVenus = (Planet) new Planet("venus").setParentSolarSystem(GalacticraftCore.solarSystemSol).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift(2.0F).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(0.75F, 0.75F)).setRelativeOrbitTime(0.61527929901423877327491785323111F);
         TheSol.planetVenus.setBiomeInfo(BiomeVenus.venusFlat, BiomeVenus.venusMountain, BiomeVenus.venusValley);
         TheSol.planetVenus.setBodyIcon(new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/celestialbodies/venus.png"));
@@ -690,9 +694,9 @@ public class TheSol {
                 if (event.getGui().getClass().getName().equalsIgnoreCase("asmodeuscore.core.astronomy.gui.screen.NewGuiCelestialSelection"))
                     System.err.println("Please disable Asmodeuscore's Galaxymap in configs/AsmodeusCore/core.conf");
                 if (GameSettings.isKeyDown(micdoodle8.mods.galacticraft.core.tick.KeyHandlerClient.galaxyMap)) {
-                    event.setGui(new SolCelestialSelection(true, ((GuiCelestialSelection) event.getGui()).possibleBodies, ((GuiCelestialSelection) event.getGui()).canCreateStations));
+                    event.setGui(new GuiSelestialSelection(true, ((GuiCelestialSelection) event.getGui()).possibleBodies, ((GuiCelestialSelection) event.getGui()).canCreateStations));
                 } else {
-                    event.setGui(new SolCelestialSelection(false, ((GuiCelestialSelection) event.getGui()).possibleBodies, ((GuiCelestialSelection) event.getGui()).canCreateStations));
+                    event.setGui(new GuiSelestialSelection(false, ((GuiCelestialSelection) event.getGui()).possibleBodies, ((GuiCelestialSelection) event.getGui()).canCreateStations));
                 }
             }
         }

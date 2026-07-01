@@ -1,4 +1,4 @@
-package mod.sol.util;
+package mod.sol.init;
 
 import micdoodle8.mods.galacticraft.api.recipe.CompressorRecipes;
 import micdoodle8.mods.galacticraft.core.GCItems;
@@ -6,10 +6,7 @@ import micdoodle8.mods.galacticraft.core.recipe.NasaWorkbenchRecipe;
 import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
 import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
 import mod.sol.Tags;
-import mod.sol.blocks.*;
-import mod.sol.init.SolBlocks;
-import mod.sol.init.SolItems;
-import net.minecraft.block.Block;
+import mod.sol.util.RecipeUtil;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -26,7 +23,6 @@ import net.minecraftforge.oredict.OreIngredient;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import java.util.HashMap;
-import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class SolRecipe {

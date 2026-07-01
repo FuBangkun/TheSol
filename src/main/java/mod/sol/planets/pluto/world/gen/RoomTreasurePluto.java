@@ -1,11 +1,12 @@
 package mod.sol.planets.pluto.world.gen;
 
 import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
+import micdoodle8.mods.galacticraft.core.blocks.BlockTier1TreasureChest;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityTreasureChest;
 import micdoodle8.mods.galacticraft.core.world.gen.dungeon.DungeonConfiguration;
 import micdoodle8.mods.galacticraft.core.world.gen.dungeon.RoomTreasure;
 import mod.sol.Tags;
-import mod.sol.blocks.BlockTier9TreasureChest;
+import mod.sol.blocks.BlockTreasureChest;
 import mod.sol.init.SolBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
@@ -71,7 +72,12 @@ public class RoomTreasurePluto extends RoomTreasure {
                     } else if (i == this.sizeX / 2 && j == 1 && k == this.sizeZ / 2) {
                         BlockPos blockpos = new BlockPos(this.getXWithOffset(i, k), this.getYWithOffset(j), this.getZWithOffset(i, k));
                         if (boundingBox.isVecInside(blockpos)) {
-                            worldIn.setBlockState(blockpos, SolBlocks.TREASURE_CHEST_T9.getDefaultState().withProperty(BlockTier9TreasureChest.FACING, this.getDirection().getOpposite()), 2);
+                            worldIn.setBlockState(
+                                    blockpos,
+                                    SolBlocks.TREASURE_CHEST_T9.getDefaultState()
+                                            .withProperty(BlockTreasureChest.FACING, this.getDirection().getOpposite()),
+                                    2
+                            );
                             TileEntityTreasureChest treasureChest = (TileEntityTreasureChest) worldIn.getTileEntity(blockpos);
                             if (treasureChest != null) {
                                 ResourceLocation chesttype = TABLE_TIER_9_DUNGEON;

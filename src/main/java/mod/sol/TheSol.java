@@ -71,8 +71,8 @@ import mod.sol.recipe.BaseRocketRecipeManager;
 import mod.sol.recipe.SolRecipeCompressor;
 import mod.sol.recipe.SolRecipeSmelting;
 import mod.sol.render.RenderRocketBase;
+import mod.sol.render.TileEntityTreasureChestRenderer;
 import mod.sol.render.entity.*;
-import mod.sol.render.tile.*;
 import mod.sol.schematic.SchematicRocket;
 import mod.sol.tile.*;
 import mod.sol.util.RocketModelUtil;
@@ -201,13 +201,7 @@ public class TheSol {
     @EventHandler
     @SideOnly(Side.CLIENT)
     public static void postInitClient(FMLPostInitializationEvent event) {
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTreasureChestTier4.class, new TileEntityTreasureTier4ChestRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTreasureChestTier5.class, new TileEntityTreasureTier5ChestRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTreasureChestTier6.class, new TileEntityTreasureTier6ChestRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTreasureChestTier7.class, new TileEntityTreasureTier7ChestRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTreasureChestTier8.class, new TileEntityTreasureTier8ChestRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTreasureChestTier9.class, new TileEntityTreasureTier9ChestRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTreasureChestTier10.class, new TileEntityTreasureTier10ChestRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTreasureChest.class, new TileEntityTreasureChestRenderer());
     }
 
     public static void registerNonMobEntity(Class<? extends Entity> var0, String var1, int trackingDistance, int updateFreq, boolean sendVel) {
@@ -654,13 +648,7 @@ public class TheSol {
         // oreDict
         SolOreDict.registerOres();
         // chest
-        TileEntity.register("sol:tier_4_treasure_chest", TileEntityTreasureChestTier4.class);
-        TileEntity.register("sol:tier_5_treasure_chest", TileEntityTreasureChestTier5.class);
-        TileEntity.register("sol:tier_6_treasure_chest", TileEntityTreasureChestTier6.class);
-        TileEntity.register("sol:tier_7_treasure_chest", TileEntityTreasureChestTier7.class);
-        TileEntity.register("sol:tier_8_treasure_chest", TileEntityTreasureChestTier8.class);
-        TileEntity.register("sol:tier_9_treasure_chest", TileEntityTreasureChestTier9.class);
-        TileEntity.register("sol:tier_10_treasure_chest", TileEntityTreasureChestTier10.class);
+        TileEntity.register("sol:treasure_chest", TileEntityTreasureChest.class);
         for (int tier = 4; tier <= 10; tier++) {
             int meta = tier - 4;
             GalacticraftRegistry.addDungeonLoot(tier, new ItemStack(SolItems.SCHEMATICS, 1, meta));

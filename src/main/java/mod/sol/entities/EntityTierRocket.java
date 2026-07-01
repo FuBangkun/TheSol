@@ -22,19 +22,21 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public class EntityTierRocket extends EntityTieredRocket {
     private static final DataParameter<Integer> TIER = EntityDataManager.createKey(EntityTierRocket.class, DataSerializers.VARINT);
     private int tier;
 
-    public EntityTierRocket(World par1World) {
-        super(par1World);
+    @SuppressWarnings("unused")
+    public EntityTierRocket(World worldIn) {
+        super(worldIn);
         this.setSize(1.8F, 6F);
     }
 
-    public EntityTierRocket(World par1World, double par2, double par4, double par6, int tier, EnumRocketType rocketType) {
-        super(par1World, par2, par4, par6);
+    public EntityTierRocket(World worldIn, double par2, double par4, double par6, int tier, EnumRocketType rocketType) {
+        super(worldIn, par2, par4, par6);
         this.rocketType = rocketType;
         this.stacks = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
         this.tier = tier;
@@ -79,8 +81,9 @@ public class EntityTierRocket extends EntityTieredRocket {
         return 1.5F;
     }
 
+    @Nonnull
     @Override
-    public ItemStack getPickedResult(RayTraceResult target) {
+    public ItemStack getPickedResult(@Nonnull RayTraceResult target) {
         return new ItemStack(getRocketItem(), 1, this.rocketType.getIndex());
     }
 

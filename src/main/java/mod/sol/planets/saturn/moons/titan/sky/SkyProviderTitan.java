@@ -24,11 +24,10 @@ import java.util.Random;
 public class SkyProviderTitan extends IRenderHandler {
     private static final ResourceLocation overworldTexture = new ResourceLocation(Tags.MOD_ID, "textures/sky/planets/saturn.png");
     private static final ResourceLocation sunTexture = new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/planets/orbitalsun.png");
-
+    private final float sunSize;
     public int starList;
     public int glSkyList;
     public int glSkyList2;
-    private final float sunSize;
 
     public SkyProviderTitan(IGalacticraftWorldProvider worldProvider) {
         this.sunSize = 120.0F * worldProvider.getSolarSize();

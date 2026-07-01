@@ -17,11 +17,10 @@ import java.util.Random;
 
 public class SkyProviderMercury extends IRenderHandler {
     private static final ResourceLocation sunTexture = new ResourceLocation(Tags.MOD_ID, "textures/sky/star/lightsun.png");
-
+    private final float sunSize;
     public int starList;
     public int glSkyList;
     public int glSkyList2;
-    private final float sunSize;
 
     public SkyProviderMercury(IGalacticraftWorldProvider mercuryProvider) {
         this.sunSize = 17.5F * mercuryProvider.getSolarSize() * 7;

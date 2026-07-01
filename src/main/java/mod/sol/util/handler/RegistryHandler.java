@@ -1,7 +1,6 @@
 package mod.sol.util.handler;
 
 import mod.sol.Tags;
-import mod.sol.blocks.*;
 import mod.sol.init.SolBlocks;
 import mod.sol.init.SolItems;
 import mod.sol.util.IHasModel;

@@ -29,11 +29,21 @@ public class ItemArmorBase extends ItemArmor implements ISortableItem, IHasModel
 
         String slotName;
         switch (slot) {
-            case HEAD:  slotName = "helmet"; break;
-            case CHEST: slotName = "chestplate"; break;
-            case LEGS:  slotName = "leggings"; break;
-            case FEET:  slotName = "boots"; break;
-            default:    slotName = slot.getName().toLowerCase(); break;
+            case HEAD:
+                slotName = "helmet";
+                break;
+            case CHEST:
+                slotName = "chestplate";
+                break;
+            case LEGS:
+                slotName = "leggings";
+                break;
+            case FEET:
+                slotName = "boots";
+                break;
+            default:
+                slotName = slot.getName().toLowerCase();
+                break;
         }
 
         this.setTranslationKey(name + "_" + slotName);

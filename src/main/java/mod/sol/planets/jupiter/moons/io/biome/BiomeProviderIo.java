@@ -21,11 +21,11 @@ import java.util.List;
 import java.util.Random;
 
 public class BiomeProviderIo extends BiomeProvider {
-    private GenLayer unzoomedBiomes;
-    private GenLayer zoomedBiomes;
     private final BiomeCache biomeCache;
     private final List<Biome> biomesToSpawnIn;
     private final CelestialBody body;
+    private GenLayer unzoomedBiomes;
+    private GenLayer zoomedBiomes;
 
     protected BiomeProviderIo() {
         body = TheSol.moonIo;

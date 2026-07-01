@@ -131,17 +131,29 @@ public class ItemRocket extends ItemMetadataBase implements IHoldableItem, ISort
     }
 
     @Override
-    public boolean shouldHoldLeftHandUp(EntityPlayer p) { return true; }
-    @Override
-    public boolean shouldHoldRightHandUp(EntityPlayer p) { return true; }
-    @Override
-    public boolean shouldCrouch(EntityPlayer p) { return true; }
+    public boolean shouldHoldLeftHandUp(EntityPlayer p) {
+        return true;
+    }
 
     @Override
-    public EnumSortCategoryItem getCategory(int meta) { return EnumSortCategoryItem.ROCKET; }
+    public boolean shouldHoldRightHandUp(EntityPlayer p) {
+        return true;
+    }
 
     @Override
-    protected boolean useSubNamesInTranslation() { return false; }
+    public boolean shouldCrouch(EntityPlayer p) {
+        return true;
+    }
+
+    @Override
+    public EnumSortCategoryItem getCategory(int meta) {
+        return EnumSortCategoryItem.ROCKET;
+    }
+
+    @Override
+    protected boolean useSubNamesInTranslation() {
+        return false;
+    }
 
     @Override
     public void registerModels() {

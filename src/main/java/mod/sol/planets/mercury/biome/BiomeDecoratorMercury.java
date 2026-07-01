@@ -13,9 +13,6 @@ import net.minecraftforge.common.MinecraftForge;
 import java.util.Random;
 
 public class BiomeDecoratorMercury extends BiomeDecorator {
-    private World world;
-    private Random randomGenerator;
-
     private final WorldGenerator dirtGen;
     private final WorldGenerator aluminumGen;
     private final WorldGenerator copperGen;
@@ -24,6 +21,8 @@ public class BiomeDecoratorMercury extends BiomeDecorator {
     private final WorldGenerator ironGen;
     private final WorldGenerator siliconGen;
     private final WorldGenerator tinGen;
+    private World world;
+    private Random randomGenerator;
 
     public BiomeDecoratorMercury() {
         this.aluminumGen = new WorldGenMinableMeta(SolBlocks.MERCURY_ALUMINUM_ORE, 8, 0, true, SolBlocks.MERCURY_ROCK, 0);

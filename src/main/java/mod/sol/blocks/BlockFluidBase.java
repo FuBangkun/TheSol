@@ -2,9 +2,9 @@ package mod.sol.blocks;
 
 import mod.sol.init.SolBlocks;
 import mod.sol.init.SolItems;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;

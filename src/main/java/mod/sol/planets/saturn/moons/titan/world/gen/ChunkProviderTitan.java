@@ -34,6 +34,9 @@ public class ChunkProviderTitan extends ChunkProviderBase {
     private final double[] terrainCalcs;
     private final float[] parabolicField;
     private final Random rand;
+    private final World world;
+    private final WorldType worldType;
+    private final MapGenBaseMeta caveGenerator = new MapGenCavesTitan();
     private NoiseGeneratorOctaves noiseGen1;
     private NoiseGeneratorOctaves noiseGen2;
     private NoiseGeneratorOctaves noiseGen3;
@@ -41,10 +44,7 @@ public class ChunkProviderTitan extends ChunkProviderBase {
     private NoiseGeneratorOctaves noiseGen5;
     private NoiseGeneratorOctaves noiseGen6;
     private NoiseGeneratorOctaves mobSpawnerNoise;
-    private final World world;
-    private final WorldType worldType;
     private double[] stoneNoise = new double[256];
-    private final MapGenBaseMeta caveGenerator = new MapGenCavesTitan();
     private Biome[] biomesForGeneration;
     private double[] octaves1;
     private double[] octaves2;

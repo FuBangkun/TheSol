@@ -91,8 +91,8 @@ public class ChunkProviderKuiperBelt extends ChunkProviderBase {
     private final SpecialKuiperBeltBlockHandler coreHandler;
     private final SpecialKuiperBeltBlockHandler shellHandler;
     private final MapGenAbandonedBase dungeonGenerator;
-    EnumType GRASS_TYPE;
     private final LinkedList<ChunkProviderKuiperBelt.AsteroidData> largeAsteroids;
+    EnumType GRASS_TYPE;
     private int largeCount;
     private int largeAsteroidsLastChunkX;
     private int largeAsteroidsLastChunkZ;

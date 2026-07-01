@@ -3,7 +3,6 @@ package mod.sol.init;
 import mod.sol.TheSol;
 import mod.sol.entities.EntityTierRocket;
 import mod.sol.items.*;
-import mod.sol.items.ItemMagnetBoots;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;

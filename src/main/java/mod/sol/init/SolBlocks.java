@@ -2,7 +2,6 @@ package mod.sol.init;
 
 import mod.sol.TheSol;
 import mod.sol.blocks.*;
-import mod.sol.tile.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
@@ -13,8 +12,6 @@ public class SolBlocks {
     public static final List<Block> Blocks = new ArrayList<>();
     //fluid
     public static final Block METHANE_FLUID_BLOCK = new BlockFluidBase("liquid_methane", SolFluid.METHANE, Material.WATER);
-    //machine
-    //public static final Block STABLE_SOLAR = new BlockBase("stayble_solar", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(0.75F).setResistance(2F);
     //misc
     public static final Block IRON_DECORATION_BLOCK = new BlockBase("iron_decoration_block", Material.IRON, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1F).setResistance(4F);
     public static final Block IRON_WALL_BLOCK = new BlockBase("iron_wall_block", Material.IRON, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1F).setResistance(4F);

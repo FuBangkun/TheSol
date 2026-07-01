@@ -13,9 +13,6 @@ import net.minecraftforge.common.MinecraftForge;
 import java.util.Random;
 
 public class BiomeDecoratorAriel extends BiomeDecorator {
-    private World world;
-    private Random randomGenerator;
-
     private final WorldGenerator dirtGen;
     private final WorldGenerator aluminumGen;
     private final WorldGenerator deshGen;
@@ -24,6 +21,8 @@ public class BiomeDecoratorAriel extends BiomeDecorator {
     private final WorldGenerator lithiumGen;
     private final WorldGenerator surfaceCarbonGen;
     private final WorldGenerator tinGen;
+    private World world;
+    private Random randomGenerator;
 
     public BiomeDecoratorAriel() {
         this.aluminumGen = new WorldGenMinableMeta(SolBlocks.ARIEL_ALUMINUM_ORE, 6, 0, true, SolBlocks.ARIEL_ROCK, 0);

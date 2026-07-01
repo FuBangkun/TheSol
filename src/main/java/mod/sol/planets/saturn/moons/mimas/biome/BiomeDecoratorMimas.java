@@ -13,15 +13,14 @@ import net.minecraftforge.common.MinecraftForge;
 import java.util.Random;
 
 public class BiomeDecoratorMimas extends BiomeDecorator {
-    private World world;
-    private Random randomGenerator;
-
     private final WorldGenerator dirtGen;
     private final WorldGenerator copperGen;
     private final WorldGenerator deshGen;
     private final WorldGenerator ironGen;
     private final WorldGenerator maganeseGen;
     private final WorldGenerator tinGen;
+    private World world;
+    private Random randomGenerator;
 
     public BiomeDecoratorMimas() {
         this.copperGen = new WorldGenMinableMeta(SolBlocks.MIMAS_COPPER_ORE, 8, 0, true, SolBlocks.MIMAS_ROCK, 0);

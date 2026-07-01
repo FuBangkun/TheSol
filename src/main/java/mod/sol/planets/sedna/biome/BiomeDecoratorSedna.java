@@ -13,14 +13,13 @@ import net.minecraftforge.common.MinecraftForge;
 import java.util.Random;
 
 public class BiomeDecoratorSedna extends BiomeDecorator {
-    private World world;
-    private Random randomGenerator;
-
     private final WorldGenerator dirtGen;
     private final WorldGenerator copperGen;
     private final WorldGenerator ironGen;
     private final WorldGenerator osmiumGen;
     private final WorldGenerator tinGen;
+    private World world;
+    private Random randomGenerator;
 
     public BiomeDecoratorSedna() {
         this.copperGen = new WorldGenMinableMeta(SolBlocks.SEDNA_COPPER_ORE, 6, 0, true, SolBlocks.SEDNA_ROCK, 0);

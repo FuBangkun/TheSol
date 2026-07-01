@@ -3,13 +3,15 @@ package mod.sol.entities;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class EntityHugeFireball extends EntityFireball {
     public int explosionPower = 3;
 
+    @SuppressWarnings("unused")
     public EntityHugeFireball(World worldIn) {
         super(worldIn);
         this.setSize(0.625F, 0.625F);
@@ -20,19 +22,10 @@ public class EntityHugeFireball extends EntityFireball {
         this.setSize(0.625F, 0.625F);
     }
 
-    public EntityHugeFireball(World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ) {
-        super(worldIn, x, y, z, accelX, accelY, accelZ);
-        this.setSize(0.625F, 0.625F);
-    }
-
-    public static void registerFixesSmallFireball(DataFixer fixer) {
-        EntityFireball.registerFixesFireball(fixer, "HugeFireball");
-    }
-
     /**
      * Called when this EntityFireball hits a block or entity.
      */
-    protected void onImpact(RayTraceResult result) {
+    protected void onImpact(@Nonnull RayTraceResult result) {
         if (!this.world.isRemote) {
             if (result.entityHit != null) {
                 result.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 6.0F);
@@ -55,7 +48,7 @@ public class EntityHugeFireball extends EntityFireball {
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource source, float amount) {
+    public boolean attackEntityFrom(@Nonnull DamageSource source, float amount) {
         return false;
     }
 }

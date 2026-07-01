@@ -13,9 +13,6 @@ import net.minecraftforge.common.MinecraftForge;
 import java.util.Random;
 
 public class BiomeDecoratorTriton extends BiomeDecorator {
-    private World world;
-    private Random randomGenerator;
-
     private final WorldGenerator dirtGen;
     private final WorldGenerator aluminumGen;
     private final WorldGenerator deshGen;
@@ -26,6 +23,8 @@ public class BiomeDecoratorTriton extends BiomeDecorator {
     private final WorldGenerator magnetGen;
     private final WorldGenerator siliconGen;
     private final WorldGenerator tinGen;
+    private World world;
+    private Random randomGenerator;
 
     public BiomeDecoratorTriton() {
         this.aluminumGen = new WorldGenMinableMeta(SolBlocks.TRITON_ALUMINUM_ORE, 6, 0, true, SolBlocks.TRITON_ROCK, 0);

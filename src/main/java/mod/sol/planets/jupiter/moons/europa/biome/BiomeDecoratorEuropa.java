@@ -13,13 +13,12 @@ import net.minecraftforge.common.MinecraftForge;
 import java.util.Random;
 
 public class BiomeDecoratorEuropa extends BiomeDecorator {
-    private World world;
-    private Random randomGenerator;
-
     private final WorldGenerator dirtGen;
     private final WorldGenerator aluminumGen;
     private final WorldGenerator copperGen;
     private final WorldGenerator ironGen;
+    private World world;
+    private Random randomGenerator;
 
     public BiomeDecoratorEuropa() {
         this.aluminumGen = new WorldGenMinableMeta(SolBlocks.EUROPA_ALUMINUM_ORE, 6, 0, true, SolBlocks.EUROPA_ROCK, 0);

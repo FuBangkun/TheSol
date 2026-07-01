@@ -3,12 +3,12 @@ package mod.sol.blocks;
 import mod.sol.TheSol;
 import mod.sol.init.SolBlocks;
 import mod.sol.init.SolItems;
-import net.minecraft.item.ItemBlock;
 import mod.sol.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 
 public class BlockBaseTinOre extends Block implements IHasModel {
     public BlockBaseTinOre(String name, Material material, String toolClass, int harvestLevel, CreativeTabs tab) {

@@ -2,7 +2,7 @@ package mod.sol.blocks;
 
 import mod.sol.init.SolBlocks;
 import mod.sol.init.SolItems;
-import mod.sol.itemblock.ItemBlockBaseSol;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumBlockRenderType;
@@ -17,7 +17,7 @@ public class BlockFluidBase extends BlockFluidClassic {
         this.setTranslationKey(name);
 
         SolBlocks.Blocks.add(this);
-        SolItems.ITEMS.add(new ItemBlockBaseSol(this).setRegistryName(this.getRegistryName()));
+        SolItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
 
     @Override

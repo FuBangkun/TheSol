@@ -4,7 +4,7 @@ import micdoodle8.mods.galacticraft.core.blocks.BlockBossSpawner;
 import mod.sol.TheSol;
 import mod.sol.init.SolBlocks;
 import mod.sol.init.SolItems;
-import mod.sol.itemblock.ItemBlockBaseSol;
+import net.minecraft.item.ItemBlock;
 import mod.sol.tile.TileEntityDungeonSpawnerMercury;
 import mod.sol.util.IHasModel;
 import net.minecraft.block.Block;
@@ -24,7 +24,7 @@ public class BlockBossSpawnerMercury extends BlockBossSpawner implements IHasMod
         this.setRegistryName(assetName);
 
         SolBlocks.Blocks.add(this);
-        SolItems.ITEMS.add(new ItemBlockBaseSol(this).setRegistryName(this.getRegistryName()));
+        SolItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
 
     @Override

@@ -3,10 +3,7 @@ package mod.sol.init;
 import mod.sol.TheSol;
 import mod.sol.entities.EntityTierRocket;
 import mod.sol.items.*;
-import mod.sol.items.armor.ItemMagnetBoots;
-import mod.sol.items.armor.manganese.ItemArmorManganese;
-import mod.sol.items.armor.sulfur.ItemArmorSulfur;
-import mod.sol.items.tools.*;
+import mod.sol.items.ItemMagnetBoots;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -17,6 +14,7 @@ import net.minecraftforge.common.util.EnumHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class SolItems {
     public static final List<Item> ITEMS = new ArrayList<>();
     // rocket stuff
@@ -69,16 +67,18 @@ public class SolItems {
     public static final Item COMPRESSED_OSMIUM = new ItemBase("compressed_osmium", TheSol.ITEM_TAB);
     // armor
     public static final ArmorMaterial ARMOR_SULFUR = EnumHelper.addArmorMaterial("SULFUR", "", 42, new int[]{5, 8, 9, 5}, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
-    public static final Item SULFUR_HELMET = new ItemArmorSulfur(SolItems.ARMOR_SULFUR, 7, EntityEquipmentSlot.HEAD).setTranslationKey("sulfur_helmet").setRegistryName("sulfur_helmet");
-    public static final Item SULFUR_CHESTPLATE = new ItemArmorSulfur(SolItems.ARMOR_SULFUR, 7, EntityEquipmentSlot.CHEST).setTranslationKey("sulfur_chestplate").setRegistryName("sulfur_chestplate");
-    public static final Item SULFUR_LEGGINGS = new ItemArmorSulfur(SolItems.ARMOR_SULFUR, 7, EntityEquipmentSlot.LEGS).setTranslationKey("sulfur_leggings").setRegistryName("sulfur_leggings");
-    public static final Item SULFUR_BOOTS = new ItemArmorSulfur(SolItems.ARMOR_SULFUR, 7, EntityEquipmentSlot.FEET).setTranslationKey("sulfur_boots").setRegistryName("sulfur_boots");
+
+    public static final Item SULFUR_HELMET = new ItemArmorBase(ARMOR_SULFUR, EntityEquipmentSlot.HEAD, "sulfur", () -> SolItems.COMPRESSED_SULFUR);
+    public static final Item SULFUR_CHESTPLATE = new ItemArmorBase(ARMOR_SULFUR, EntityEquipmentSlot.CHEST, "sulfur", () -> SolItems.COMPRESSED_SULFUR);
+    public static final Item SULFUR_LEGGINGS = new ItemArmorBase(ARMOR_SULFUR, EntityEquipmentSlot.LEGS, "sulfur", () -> SolItems.COMPRESSED_SULFUR);
+    public static final Item SULFUR_BOOTS = new ItemArmorBase(ARMOR_SULFUR, EntityEquipmentSlot.FEET, "sulfur", () -> SolItems.COMPRESSED_SULFUR);
 
     public static final ArmorMaterial ARMOR_MANGANESE = EnumHelper.addArmorMaterial("MANGANESE", "", 42, new int[]{6, 9, 10, 6}, 8, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.0F);
-    public static final Item MANGANESE_HELMET = new ItemArmorManganese(SolItems.ARMOR_MANGANESE, 7, EntityEquipmentSlot.HEAD).setTranslationKey("manganese_helmet").setRegistryName("manganese_helmet");
-    public static final Item MANGANESE_CHESTPLATE = new ItemArmorManganese(SolItems.ARMOR_MANGANESE, 7, EntityEquipmentSlot.CHEST).setTranslationKey("manganese_chestplate").setRegistryName("manganese_chestplate");
-    public static final Item MANGANESE_LEGGINGS = new ItemArmorManganese(SolItems.ARMOR_MANGANESE, 7, EntityEquipmentSlot.LEGS).setTranslationKey("manganese_leggings").setRegistryName("manganese_leggings");
-    public static final Item MANGANESE_BOOTS = new ItemArmorManganese(SolItems.ARMOR_MANGANESE, 7, EntityEquipmentSlot.FEET).setTranslationKey("manganese_boots").setRegistryName("manganese_boots");
+
+    public static final Item MANGANESE_HELMET = new ItemArmorBase(ARMOR_MANGANESE, EntityEquipmentSlot.HEAD, "manganese", () -> SolItems.COMPRESSED_MANGANESE);
+    public static final Item MANGANESE_CHESTPLATE = new ItemArmorBase(ARMOR_MANGANESE, EntityEquipmentSlot.CHEST, "manganese", () -> SolItems.COMPRESSED_MANGANESE);
+    public static final Item MANGANESE_LEGGINGS = new ItemArmorBase(ARMOR_MANGANESE, EntityEquipmentSlot.LEGS, "manganese", () -> SolItems.COMPRESSED_MANGANESE);
+    public static final Item MANGANESE_BOOTS = new ItemArmorBase(ARMOR_MANGANESE, EntityEquipmentSlot.FEET, "manganese", () -> SolItems.COMPRESSED_MANGANESE);
 
     // tools
     public static final ToolMaterial TOOL_SULFUR = EnumHelper.addToolMaterial("SULFUR", 3, 780, 8.0F, 6.5F, 12);

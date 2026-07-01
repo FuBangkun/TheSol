@@ -67,13 +67,11 @@ import mod.sol.planets.uranus.moon.ariel.biome.BiomeAriel;
 import mod.sol.planets.uranus.moon.ariel.dimension.TeleportTypeAriel;
 import mod.sol.planets.uranus.moon.ariel.dimension.WorldProviderAriel;
 import mod.sol.proxy.CommonProxy;
-import mod.sol.recipe.BaseRocketRecipeManager;
-import mod.sol.recipe.SolRecipeCompressor;
-import mod.sol.recipe.SolRecipeSmelting;
+import mod.sol.util.SolRecipe;
 import mod.sol.render.RenderRocketBase;
 import mod.sol.render.TileEntityTreasureChestRenderer;
 import mod.sol.render.entity.*;
-import mod.sol.schematic.SchematicRocket;
+import mod.sol.util.SchematicRocket;
 import mod.sol.tile.*;
 import mod.sol.util.RocketModelUtil;
 import mod.sol.util.handler.SolEventHandlerClient;
@@ -580,10 +578,6 @@ public class TheSol {
         // override
         //GalaxyRegistry.registerPlanet(TheSol.planetAsteroids);
         GalaxyRegistry.registerPlanet(AsteroidsModule.planetAsteroids);
-        // planets
-
-        // moons
-
         // rockets
         TheSol.registerNonMobEntity(EntityHugeFireball.class, "fireball_huge", 150, 1, false);
 
@@ -616,7 +610,7 @@ public class TheSol {
             ItemSchematic.registerSchematicItems(new ItemStack(schematicItem, 1, meta));
 
             if (tier == 4) {
-                BaseRocketRecipeManager.registerRocketRecipes(
+                SolRecipe.registerRocketRecipe(
                         4,
                         new ItemStack(AsteroidsItems.heavyNoseCone),
                         new ItemStack(SolItems.REINFORCED_PLATES, 1, 0),
@@ -628,7 +622,7 @@ public class TheSol {
                 );
             } else {
                 int k = tier - 5;
-                BaseRocketRecipeManager.registerRocketRecipes(
+                SolRecipe.registerRocketRecipe(
                         tier,
                         new ItemStack(SolItems.NOSE_CONES, 1, k),
                         new ItemStack(SolItems.REINFORCED_PLATES, 1, k + 1),
@@ -643,8 +637,8 @@ public class TheSol {
         // skyRegistry
         MinecraftForge.EVENT_BUS.register(new SolEventHandlerClient.TickHandlerClient());
         // Recipe
-        SolRecipeCompressor.registryRecipe();
-        SolRecipeSmelting.registryRecipe();
+        SolRecipe.registryCompressorRecipe();
+        SolRecipe.registrySmeltingRecipe();
         // oreDict
         SolOreDict.registerOres();
         // chest

@@ -3,7 +3,7 @@ package mod.sol.blocks;
 import mod.sol.TheSol;
 import mod.sol.init.SolBlocks;
 import mod.sol.init.SolItems;
-import mod.sol.itemblock.ItemBlockBaseSol;
+import net.minecraft.item.ItemBlock;
 import mod.sol.tile.TileEntityTreasureChest;
 import mod.sol.util.IHasModel;
 import net.minecraft.block.BlockContainer;
@@ -50,7 +50,7 @@ public class BlockTreasureChest extends BlockContainer implements IHasModel {
         this.setCreativeTab(TheSol.BLOCK_TAB);
 
         SolBlocks.Blocks.add(this);
-        SolItems.ITEMS.add(new ItemBlockBaseSol(this).setRegistryName(name));
+        SolItems.ITEMS.add(new ItemBlock(this).setRegistryName(name));
     }
 
     @Override

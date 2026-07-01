@@ -1,4 +1,4 @@
-package mod.sol.items.tools;
+package mod.sol.items;
 
 import com.google.common.collect.Sets;
 import micdoodle8.mods.galacticraft.core.items.ISortableItem;

@@ -390,6 +390,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                                 int k2;
                                 int count;
                                 int k;
+                                boolean b = mousePosX >= xPos && mousePosX <= xPos + 16 && mousePosY >= yPos && mousePosY <= yPos + 16;
                                 if (next instanceof ItemStack) {
                                     point = this.getAmountInInventory((ItemStack) next);
                                     RenderHelper.enableGUIStandardItemLighting();
@@ -398,7 +399,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                                     this.itemRender.renderItemOverlayIntoGUI(this.mc.fontRenderer, toRender, xPos, yPos, null);
                                     RenderHelper.disableStandardItemLighting();
                                     GL11.glEnable(3042);
-                                    if (mousePosX >= xPos && mousePosX <= xPos + 16 && mousePosY >= yPos && mousePosY <= yPos + 16) {
+                                    if (b) {
                                         GL11.glDepthMask(true);
                                         GL11.glEnable(2929);
                                         GL11.glPushMatrix();
@@ -474,7 +475,7 @@ public class SolCelestialSelection extends GuiCelestialSelection {
                                     this.itemRender.renderItemOverlayIntoGUI(this.mc.fontRenderer, toRender, xPos, yPos, null);
                                     RenderHelper.disableStandardItemLighting();
                                     GL11.glEnable(3042);
-                                    if (mousePosX >= xPos && mousePosX <= xPos + 16 && mousePosY >= yPos && mousePosY <= yPos + 16) {
+                                    if (b) {
                                         GL11.glDepthMask(true);
                                         GL11.glEnable(2929);
                                         GL11.glPushMatrix();

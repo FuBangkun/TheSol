@@ -1,4 +1,4 @@
-package mod.sol.schematic;
+package mod.sol.util;
 
 import micdoodle8.mods.galacticraft.api.recipe.SchematicPage;
 import mod.sol.Tags;

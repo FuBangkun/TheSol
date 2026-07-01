@@ -1,4 +1,4 @@
-package mod.sol.items.armor;
+package mod.sol.items;
 
 import micdoodle8.mods.galacticraft.api.item.IArmorGravity;
 import micdoodle8.mods.galacticraft.core.dimension.WorldProviderSpaceStation;

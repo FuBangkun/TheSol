@@ -50,8 +50,6 @@ public class EntityTierRocket extends EntityTieredRocket {
     public Item getRocketItem() {
         int t = getRocketTier();
         switch (t) {
-            case 4:
-                return SolItems.ROCKET_T4;
             case 5:
                 return SolItems.ROCKET_T5;
             case 6:
@@ -62,6 +60,7 @@ public class EntityTierRocket extends EntityTieredRocket {
                 return SolItems.ROCKET_T8;
             case 9:
                 return SolItems.ROCKET_T9;
+            case 4:
             default:
                 return SolItems.ROCKET_T4;
         }

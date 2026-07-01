@@ -1,8 +1,8 @@
 package mod.sol.util.handler;
 
+import mod.sol.Tags;
 import mod.sol.blocks.*;
 import mod.sol.init.SolBlocks;
-import mod.sol.init.SolFluid;
 import mod.sol.init.SolItems;
 import mod.sol.util.IHasModel;
 import net.minecraft.block.Block;
@@ -12,9 +12,8 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@EventBusSubscriber
+@EventBusSubscriber(modid = Tags.MOD_ID)
 public class RegistryHandler {
-
     @SubscribeEvent
     public static void onItemRegister(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(SolItems.ITEMS.toArray(new Item[0]));
@@ -26,7 +25,6 @@ public class RegistryHandler {
     }
 
     @SubscribeEvent
-//	@SideOnly(Side.CLIENT)
     public static void onBlockMeshRegister(RegistryEvent.Register<Block> event) {
         RenderHandler.registerCustomMeshesAndStates();
     }

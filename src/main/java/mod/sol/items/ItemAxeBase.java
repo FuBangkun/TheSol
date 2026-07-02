@@ -4,17 +4,15 @@ import com.google.common.collect.Sets;
 import micdoodle8.mods.galacticraft.core.items.ISortableItem;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
 import mod.sol.TheSol;
+import mod.sol.init.SolCreativeTabs;
 import mod.sol.init.SolItems;
 import mod.sol.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.Set;
@@ -24,16 +22,12 @@ public class ItemAxeBase extends ItemTool implements ISortableItem, IHasModel {
 
     public ItemAxeBase(ToolMaterial material, int attackDamage) {
         super(material, EFFECTIVE_ON);
+
+        this.setCreativeTab(SolCreativeTabs.ITEM_TAB);
         this.attackDamage = attackDamage - 1;
         this.attackSpeed = -3.0F;
 
         SolItems.ITEMS.add(this);
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public CreativeTabs getCreativeTab() {
-        return TheSol.ITEM_TAB;
     }
 
     @Override

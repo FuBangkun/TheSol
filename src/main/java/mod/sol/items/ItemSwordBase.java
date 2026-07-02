@@ -3,17 +3,15 @@ package mod.sol.items;
 import micdoodle8.mods.galacticraft.core.items.ISortableItem;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
 import mod.sol.TheSol;
+import mod.sol.init.SolCreativeTabs;
 import mod.sol.init.SolItems;
 import mod.sol.util.IHasModel;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
@@ -21,13 +19,9 @@ public class ItemSwordBase extends ItemSword implements ISortableItem, IHasModel
     public ItemSwordBase(ToolMaterial par2EnumToolMaterial) {
         super(par2EnumToolMaterial);
 
-        SolItems.ITEMS.add(this);
-    }
+        this.setCreativeTab(SolCreativeTabs.ITEM_TAB);
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public CreativeTabs getCreativeTab() {
-        return TheSol.ITEM_TAB;
+        SolItems.ITEMS.add(this);
     }
 
     @Override

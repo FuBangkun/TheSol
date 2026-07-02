@@ -6,6 +6,7 @@ import micdoodle8.mods.galacticraft.core.items.ISortableItem;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
 import mod.sol.Tags;
 import mod.sol.TheSol;
+import mod.sol.init.SolCreativeTabs;
 import mod.sol.init.SolItems;
 import mod.sol.util.IHasModel;
 import net.minecraft.block.material.Material;
@@ -24,7 +25,7 @@ public class ItemMagnetBoots extends ItemArmor implements IArmorGravity, ISortab
     public ItemMagnetBoots(String name, ArmorMaterial materialIn, int renderIndexIn) {
         super(materialIn, renderIndexIn, EntityEquipmentSlot.FEET);
         this.material = materialIn;
-        this.setCreativeTab(TheSol.ITEM_TAB);
+        this.setCreativeTab(SolCreativeTabs.ITEM_TAB);
         this.setRegistryName(name);
         this.setTranslationKey(name);
 

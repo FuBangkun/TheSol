@@ -5,6 +5,7 @@ import micdoodle8.mods.galacticraft.core.energy.item.ItemElectricBase;
 import micdoodle8.mods.galacticraft.core.items.ISortableItem;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
 import mod.sol.TheSol;
+import mod.sol.init.SolCreativeTabs;
 import mod.sol.init.SolItems;
 import mod.sol.util.IHasModel;
 import net.minecraft.creativetab.CreativeTabs;
@@ -19,6 +20,7 @@ public class ItemAdvancedBattery extends ItemElectricBase implements ISortableIt
         this.setMaxStackSize(4);
         this.setRegistryName(assetName);
         this.setTranslationKey(assetName);
+        this.setCreativeTab(SolCreativeTabs.ITEM_TAB);
         this.batteryTier = tier;
 
         SolItems.ITEMS.add(this);
@@ -26,15 +28,10 @@ public class ItemAdvancedBattery extends ItemElectricBase implements ISortableIt
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-        if (tab == TheSol.ITEM_TAB || tab == CreativeTabs.SEARCH) {
+        if (tab == SolCreativeTabs.ITEM_TAB || tab == CreativeTabs.SEARCH) {
             list.add(ElectricItemHelper.getUncharged(new ItemStack(this)));
             list.add(ElectricItemHelper.getWithCharge(new ItemStack(this), this.getMaxElectricityStored(new ItemStack(this))));
         }
-    }
-
-    @Override
-    public CreativeTabs getCreativeTab() {
-        return TheSol.ITEM_TAB;
     }
 
     @Override

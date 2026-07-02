@@ -1,7 +1,7 @@
 package mod.sol.blocks;
 
-import mod.sol.TheSol;
 import mod.sol.init.SolBlocks;
+import mod.sol.init.SolCreativeTabs;
 import mod.sol.init.SolItems;
 import mod.sol.util.IHasModel;
 import net.minecraft.block.Block;
@@ -34,7 +34,7 @@ public class BlockBaseOre extends Block implements IHasModel {
 
         this.setRegistryName(name);
         this.setTranslationKey(name);
-        this.setCreativeTab(TheSol.BLOCK_TAB);
+        this.setCreativeTab(SolCreativeTabs.BLOCK_TAB);
         this.setHardness(3.5F);
 
         this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, 0));

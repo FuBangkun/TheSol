@@ -2,12 +2,12 @@ package mod.sol.blocks;
 
 import mod.sol.TheSol;
 import mod.sol.init.SolBlocks;
+import mod.sol.init.SolCreativeTabs;
 import mod.sol.init.SolItems;
 import mod.sol.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -18,14 +18,16 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockGas extends Block implements IHasModel {
-    public BlockGas(String name, CreativeTabs tab) {
+    public BlockGas(String name) {
         super(Material.SNOW);
         this.setLightOpacity(0);
         this.setLightLevel(0);
         this.setTranslationKey(name);
         this.setRegistryName(name);
-        this.setCreativeTab(tab);
+        this.setCreativeTab(SolCreativeTabs.BLOCK_TAB);
 
         SolBlocks.Blocks.add(this);
         SolItems.ITEMS.add(new ItemBlock(this).setRegistryName(name));
@@ -33,33 +35,35 @@ public class BlockGas extends Block implements IHasModel {
 
     @Override
     @javax.annotation.Nullable
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    public AxisAlignedBB getCollisionBoundingBox(@Nonnull IBlockState blockState, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos) {
         return NULL_AABB;
     }
 
     @Override
-    public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
+    public boolean isPassable(@Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos) {
         return true;
     }
 
     @Override
-    public boolean isFullCube(IBlockState state) {
+    public boolean isFullCube(@Nonnull IBlockState state) {
         return false;
     }
 
     @Override
-    public boolean isOpaqueCube(IBlockState state) {
+    public boolean isOpaqueCube(@Nonnull IBlockState state) {
         return false;
     }
 
+    @Nonnull
     @SideOnly(Side.CLIENT)
     @Override
     public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.TRANSLUCENT;
     }
 
+    @Nonnull
     @Override
-    protected ItemStack getSilkTouchDrop(IBlockState state) {
+    protected ItemStack getSilkTouchDrop(@Nonnull IBlockState state) {
         return new ItemStack(SolBlocks.CARBON_DIOXIDE, 1, 0);
     }
 

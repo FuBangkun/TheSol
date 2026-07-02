@@ -11,7 +11,6 @@ itemGroup.sol_blocks=太阳系 | 方块
 planet.ceres=谷神星
 planet.pluto=冥王星
 planet.eris=阋神星
-planet.kuiper_belt=柯伊伯带
 planet.haumea=妊神星
 planet.makemake=鸟神星
 planet.sedna=小行星90377
@@ -52,7 +51,7 @@ entity.magmacube_boss.name=岩浆怪之王
 
 # Fluid
 fluid.liquid_methane=液态甲烷
-tile.liquid_methane.name=液态甲烷
+tile.fluid.methane.name=液态甲烷
 
 #////////////////           Items            ////////////////#
 

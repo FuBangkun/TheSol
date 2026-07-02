@@ -11,7 +11,6 @@ itemGroup.sol_blocks=The Sol - Blocks
 planet.ceres=Ceres
 planet.pluto=Pluto
 planet.eris=Eris
-planet.kuiper_belt=Kuiper Belt
 planet.haumea=Haumea
 planet.makemake=Makemake
 planet.sedna=Sedna
@@ -52,7 +51,7 @@ entity.magmacube_boss.name=Magma Cube Boss
 
 # Fluid
 fluid.liquid_methane=Liquid Methane
-tile.liquid_methane.name=Liquid Methane
+tile.fluid.methane.name=Liquid Methane
 
 #////////////////           Items            ////////////////#
 

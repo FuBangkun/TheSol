@@ -1,16 +1,16 @@
 package mod.sol.items;
 
 import mod.sol.TheSol;
+import mod.sol.init.SolCreativeTabs;
 import mod.sol.init.SolItems;
 import mod.sol.util.IHasModel;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
 public class ItemBase extends Item implements IHasModel {
-    public ItemBase(String name, CreativeTabs tab) {
+    public ItemBase(String name) {
         setTranslationKey(name);
         setRegistryName(name);
-        setCreativeTab(tab);
+        setCreativeTab(SolCreativeTabs.ITEM_TAB);
 
         SolItems.ITEMS.add(this);
     }

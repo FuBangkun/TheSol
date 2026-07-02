@@ -3,7 +3,6 @@ package mod.sol.init;
 import micdoodle8.mods.galacticraft.core.GCItems;
 import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
 import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
-import mod.sol.TheSol;
 import mod.sol.blocks.*;
 import mod.sol.blocks.BlockBaseOre.OreVariant;
 import mod.sol.tile.*;
@@ -21,69 +20,69 @@ public class SolBlocks {
     //Fluid
     public static final Block METHANE_FLUID_BLOCK = new BlockFluidBase("liquid_methane", SolFluid.METHANE, Material.WATER);
     //Misc
-    public static final Block IRON_DECORATION_BLOCK = new BlockBase("iron_decoration_block", Material.IRON, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1F).setResistance(4F);
-    public static final Block IRON_WALL_BLOCK = new BlockBase("iron_wall_block", Material.IRON, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1F).setResistance(4F);
+    public static final Block IRON_DECORATION_BLOCK = new BlockBase("iron_decoration_block", Material.IRON, "pickaxe", 0).setHardness(1F).setResistance(4F);
+    public static final Block IRON_WALL_BLOCK = new BlockBase("iron_wall_block", Material.IRON, "pickaxe", 0).setHardness(1F).setResistance(4F);
     //Mercury
-    public static final Block MERCURY_TURF = new BlockBase("mercury_turf", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(0.75F).setResistance(2F);
-    public static final Block MERCURY_DIRT = new BlockBase("mercury_dirt", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1F).setResistance(3F);
-    public static final Block MERCURY_ROCK = new BlockBase("mercury_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1.5F).setResistance(6F);
-    public static final Block MERCURY_DUNGEON_BRICK = new BlockBase("mercury_dungeon_brick", Material.ROCK, "pickaxe", 1, TheSol.BLOCK_TAB).setHardness(4F).setResistance(40F);
+    public static final Block MERCURY_TURF = new BlockBase("mercury_turf", Material.ROCK, "pickaxe", 0).setHardness(0.75F).setResistance(2F);
+    public static final Block MERCURY_DIRT = new BlockBase("mercury_dirt", Material.ROCK, "pickaxe", 0).setHardness(1F).setResistance(3F);
+    public static final Block MERCURY_ROCK = new BlockBase("mercury_rock", Material.ROCK, "pickaxe", 0).setHardness(1.5F).setResistance(6F);
+    public static final Block MERCURY_DUNGEON_BRICK = new BlockBase("mercury_dungeon_brick", Material.ROCK, "pickaxe", 1).setHardness(4F).setResistance(40F);
     public static final Block TREASURE_CHEST_T4 = new BlockTreasureChest(4);
     //Jupiter
     //Io
-    public static final Block IO_SURFACE_ROCK = new BlockBase("io_surface_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1.25F).setResistance(2F);
-    public static final Block IO_SULFUR_BLOCK = new BlockBase("io_sulfur_block", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1F).setResistance(2F);
-    public static final Block IO_ASH_BLOCK = new BlockBase("io_ash_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1F).setResistance(2F);
-    public static final Block IO_SUB_SURFACE_ROCK = new BlockBase("io_sub_surface_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1.5F).setResistance(3F);
-    public static final Block IO_ROCK = new BlockBase("io_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(2F).setResistance(6F);
+    public static final Block IO_SURFACE_ROCK = new BlockBase("io_surface_rock", Material.ROCK, "pickaxe", 0).setHardness(1.25F).setResistance(2F);
+    public static final Block IO_SULFUR_BLOCK = new BlockBase("io_sulfur_block", Material.ROCK, "pickaxe", 0).setHardness(1F).setResistance(2F);
+    public static final Block IO_ASH_BLOCK = new BlockBase("io_ash_rock", Material.ROCK, "pickaxe", 0).setHardness(1F).setResistance(2F);
+    public static final Block IO_SUB_SURFACE_ROCK = new BlockBase("io_sub_surface_rock", Material.ROCK, "pickaxe", 0).setHardness(1.5F).setResistance(3F);
+    public static final Block IO_ROCK = new BlockBase("io_rock", Material.ROCK, "pickaxe", 0).setHardness(2F).setResistance(6F);
     //Europa
-    public static final Block EUROPA_SURFACE_ROCK = new BlockBase("europa_surface_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1.25F).setResistance(2F);
-    public static final Block EUROPA_SUB_SURFACE_ROCK = new BlockBase("europa_sub_surface_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1.5F).setResistance(3F);
-    public static final Block EUROPA_ROCK = new BlockBase("europa_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(2F).setResistance(6F);
+    public static final Block EUROPA_SURFACE_ROCK = new BlockBase("europa_surface_rock", Material.ROCK, "pickaxe", 0).setHardness(1.25F).setResistance(2F);
+    public static final Block EUROPA_SUB_SURFACE_ROCK = new BlockBase("europa_sub_surface_rock", Material.ROCK, "pickaxe", 0).setHardness(1.5F).setResistance(3F);
+    public static final Block EUROPA_ROCK = new BlockBase("europa_rock", Material.ROCK, "pickaxe", 0).setHardness(2F).setResistance(6F);
     //Jupiter misc
-    public static final Block JUPITER_DUNGEON_BRICK = new BlockBase("jupiter_dungeon_brick", Material.ROCK, "pickaxe", 1, TheSol.BLOCK_TAB).setHardness(4F).setResistance(40F);
+    public static final Block JUPITER_DUNGEON_BRICK = new BlockBase("jupiter_dungeon_brick", Material.ROCK, "pickaxe", 1).setHardness(4F).setResistance(40F);
     public static final Block TREASURE_CHEST_T5 = new BlockTreasureChest(5);
     //Saturn
     //Mimas
-    public static final Block MIMAS_TURF = new BlockBase("mimas_turf", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(0.75F).setResistance(2F);
-    public static final Block MIMAS_DIRT = new BlockBase("mimas_dirt", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1F).setResistance(3F);
-    public static final Block MIMAS_ROCK = new BlockBase("mimas_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1.5F).setResistance(6F);
+    public static final Block MIMAS_TURF = new BlockBase("mimas_turf", Material.ROCK, "pickaxe", 0).setHardness(0.75F).setResistance(2F);
+    public static final Block MIMAS_DIRT = new BlockBase("mimas_dirt", Material.ROCK, "pickaxe", 0).setHardness(1F).setResistance(3F);
+    public static final Block MIMAS_ROCK = new BlockBase("mimas_rock", Material.ROCK, "pickaxe", 0).setHardness(1.5F).setResistance(6F);
     //Titan
-    public static final Block TITAN_SURFACE_ROCK = new BlockBase("titan_surface_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1.25F).setResistance(2F);
-    public static final Block TITAN_SUB_SURFACE_ROCK = new BlockBase("titan_sub_surface_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1.5F).setResistance(3F);
-    public static final Block TITAN_ROCK = new BlockBase("titan_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(2F).setResistance(6F);
+    public static final Block TITAN_SURFACE_ROCK = new BlockBase("titan_surface_rock", Material.ROCK, "pickaxe", 0).setHardness(1.25F).setResistance(2F);
+    public static final Block TITAN_SUB_SURFACE_ROCK = new BlockBase("titan_sub_surface_rock", Material.ROCK, "pickaxe", 0).setHardness(1.5F).setResistance(3F);
+    public static final Block TITAN_ROCK = new BlockBase("titan_rock", Material.ROCK, "pickaxe", 0).setHardness(2F).setResistance(6F);
     //Saturn misc
-    public static final Block SATURN_DUNGEON_BRICK = new BlockBase("saturn_dungeon_brick", Material.ROCK, "pickaxe", 1, TheSol.BLOCK_TAB).setHardness(4F).setResistance(40F);
+    public static final Block SATURN_DUNGEON_BRICK = new BlockBase("saturn_dungeon_brick", Material.ROCK, "pickaxe", 1).setHardness(4F).setResistance(40F);
     public static final Block TREASURE_CHEST_T6 = new BlockTreasureChest(6);
     //Ariel
-    public static final Block ARIEL_TURF = new BlockBase("ariel_turf", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1.25F).setResistance(2F);
-    public static final Block ARIEL_DIRT = new BlockBase("ariel_dirt", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1.5F).setResistance(3F);
-    public static final Block ARIEL_ROCK = new BlockBase("ariel_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(2F).setResistance(6F);
-    public static final Block CARBON_DIOXIDE = new BlockGas("carbon_dioxide", TheSol.BLOCK_TAB).setHardness(0.0F).setResistance(0F);
+    public static final Block ARIEL_TURF = new BlockBase("ariel_turf", Material.ROCK, "pickaxe", 0).setHardness(1.25F).setResistance(2F);
+    public static final Block ARIEL_DIRT = new BlockBase("ariel_dirt", Material.ROCK, "pickaxe", 0).setHardness(1.5F).setResistance(3F);
+    public static final Block ARIEL_ROCK = new BlockBase("ariel_rock", Material.ROCK, "pickaxe", 0).setHardness(2F).setResistance(6F);
+    public static final Block CARBON_DIOXIDE = new BlockGas("carbon_dioxide").setHardness(0.0F).setResistance(0F);
     //Uranus misc
-    public static final Block URANUS_DUNGEON_BRICK = new BlockBase("uranus_dungeon_brick", Material.ROCK, "pickaxe", 1, TheSol.BLOCK_TAB).setHardness(4F).setResistance(40F);
+    public static final Block URANUS_DUNGEON_BRICK = new BlockBase("uranus_dungeon_brick", Material.ROCK, "pickaxe", 1).setHardness(4F).setResistance(40F);
     public static final Block TREASURE_CHEST_T7 = new BlockTreasureChest(7);
     //Triton
-    public static final Block TRITON_SOFT_ROCK = new BlockBase("triton_soft_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1.25F).setResistance(2F);
-    public static final Block TRITON_SURFACE_ROCK = new BlockBase("triton_surface_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1.25F).setResistance(2F);
-    public static final Block TRITON_TURF = new BlockBase("triton_turf", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1.25F).setResistance(2F);
-    public static final Block TRITON_DIRT = new BlockBase("triton_dirt", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1.5F).setResistance(3F);
-    public static final Block TRITON_ROCK = new BlockBase("triton_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(2F).setResistance(6F);
+    public static final Block TRITON_SOFT_ROCK = new BlockBase("triton_soft_rock", Material.ROCK, "pickaxe", 0).setHardness(1.25F).setResistance(2F);
+    public static final Block TRITON_SURFACE_ROCK = new BlockBase("triton_surface_rock", Material.ROCK, "pickaxe", 0).setHardness(1.25F).setResistance(2F);
+    public static final Block TRITON_TURF = new BlockBase("triton_turf", Material.ROCK, "pickaxe", 0).setHardness(1.25F).setResistance(2F);
+    public static final Block TRITON_DIRT = new BlockBase("triton_dirt", Material.ROCK, "pickaxe", 0).setHardness(1.5F).setResistance(3F);
+    public static final Block TRITON_ROCK = new BlockBase("triton_rock", Material.ROCK, "pickaxe", 0).setHardness(2F).setResistance(6F);
     //Uranus misc
-    public static final Block NEPTUNE_DUNGEON_BRICK = new BlockBase("neptune_dungeon_brick", Material.ROCK, "pickaxe", 1, TheSol.BLOCK_TAB).setHardness(4F).setResistance(40F);
+    public static final Block NEPTUNE_DUNGEON_BRICK = new BlockBase("neptune_dungeon_brick", Material.ROCK, "pickaxe", 1).setHardness(4F).setResistance(40F);
     public static final Block TREASURE_CHEST_T8 = new BlockTreasureChest(8);
     //Pluto
-    public static final Block PLUTO_SURFACE_ROCK = new BlockBase("pluto_surface_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1.25F).setResistance(2F);
-    public static final Block PLUTO_SUB_SURFACE_ROCK = new BlockBase("pluto_sub_surface_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1.5F).setResistance(3F);
-    public static final Block PLUTO_ROCK = new BlockBase("pluto_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(2F).setResistance(6F);
-    public static final Block PLUTO_DUNGEON_BRICK = new BlockBase("pluto_dungeon_brick", Material.ROCK, "pickaxe", 1, TheSol.BLOCK_TAB).setHardness(4F).setResistance(40F);
+    public static final Block PLUTO_SURFACE_ROCK = new BlockBase("pluto_surface_rock", Material.ROCK, "pickaxe", 0).setHardness(1.25F).setResistance(2F);
+    public static final Block PLUTO_SUB_SURFACE_ROCK = new BlockBase("pluto_sub_surface_rock", Material.ROCK, "pickaxe", 0).setHardness(1.5F).setResistance(3F);
+    public static final Block PLUTO_ROCK = new BlockBase("pluto_rock", Material.ROCK, "pickaxe", 0).setHardness(2F).setResistance(6F);
+    public static final Block PLUTO_DUNGEON_BRICK = new BlockBase("pluto_dungeon_brick", Material.ROCK, "pickaxe", 1).setHardness(4F).setResistance(40F);
     public static final Block TREASURE_CHEST_T9 = new BlockTreasureChest(9);
     //Sedna
-    public static final Block SEDNA_TURF = new BlockBase("sedna_turf", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1.25F).setResistance(2F);
-    public static final Block SEDNA_SURFACE_ROCK = new BlockBase("sedna_surface_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1.25F).setResistance(2F);
-    public static final Block SEDNA_SUB_SURFACE_ROCK = new BlockBase("sedna_sub_surface_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(1.5F).setResistance(3F);
-    public static final Block SEDNA_ROCK = new BlockBase("sedna_rock", Material.ROCK, "pickaxe", 0, TheSol.BLOCK_TAB).setHardness(2F).setResistance(6F);
-    public static final Block SEDNA_DUNGEON_BRICK = new BlockBase("sedna_dungeon_brick", Material.ROCK, "pickaxe", 1, TheSol.BLOCK_TAB).setHardness(4F).setResistance(40F);
+    public static final Block SEDNA_TURF = new BlockBase("sedna_turf", Material.ROCK, "pickaxe", 0).setHardness(1.25F).setResistance(2F);
+    public static final Block SEDNA_SURFACE_ROCK = new BlockBase("sedna_surface_rock", Material.ROCK, "pickaxe", 0).setHardness(1.25F).setResistance(2F);
+    public static final Block SEDNA_SUB_SURFACE_ROCK = new BlockBase("sedna_sub_surface_rock", Material.ROCK, "pickaxe", 0).setHardness(1.5F).setResistance(3F);
+    public static final Block SEDNA_ROCK = new BlockBase("sedna_rock", Material.ROCK, "pickaxe", 0).setHardness(2F).setResistance(6F);
+    public static final Block SEDNA_DUNGEON_BRICK = new BlockBase("sedna_dungeon_brick", Material.ROCK, "pickaxe", 1).setHardness(4F).setResistance(40F);
     public static final Block TREASURE_CHEST_T10 = new BlockTreasureChest(10);
     //Spawner
     public static Block BOSS_SPAWNER_MERCURY = new BlockBossSpawnerSol("boss_spawner_mercury", TileEntityDungeonSpawnerMercury::new);

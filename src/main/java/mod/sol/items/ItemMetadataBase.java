@@ -1,6 +1,7 @@
 package mod.sol.items;
 
 import mod.sol.TheSol;
+import mod.sol.init.SolCreativeTabs;
 import mod.sol.init.SolItems;
 import mod.sol.util.IHasModel;
 import net.minecraft.creativetab.CreativeTabs;
@@ -22,7 +23,7 @@ public class ItemMetadataBase extends Item implements IHasModel {
         this.setMaxDamage(0);
         this.setRegistryName(registryName);
         this.setTranslationKey(registryName);
-        this.setCreativeTab(TheSol.ITEM_TAB);
+        this.setCreativeTab(SolCreativeTabs.ITEM_TAB);
 
         SolItems.ITEMS.add(this);
     }

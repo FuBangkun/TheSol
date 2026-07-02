@@ -27,7 +27,6 @@ public class ConfigManager {
         public int dimensionidAriel = BASE - 701;
         public int dimensionidTriton = BASE - 801;
         public int dimensionidPluto = BASE - 900;
-        public int dimensionidKuiperBelt = BASE - 1000;
         public int dimensionidSedna = BASE - 1100;
     }
 }

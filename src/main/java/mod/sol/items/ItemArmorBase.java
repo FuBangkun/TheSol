@@ -4,16 +4,14 @@ import micdoodle8.mods.galacticraft.core.items.ISortableItem;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
 import mod.sol.Tags;
 import mod.sol.TheSol;
+import mod.sol.init.SolCreativeTabs;
 import mod.sol.init.SolItems;
 import mod.sol.util.IHasModel;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
@@ -24,6 +22,8 @@ public class ItemArmorBase extends ItemArmor implements ISortableItem, IHasModel
 
     public ItemArmorBase(ArmorMaterial material, EntityEquipmentSlot slot, String name, Supplier<Item> repairIngredient) {
         super(material, 7, slot);
+
+        this.setCreativeTab(SolCreativeTabs.ITEM_TAB);
         this.textureName = name.toLowerCase();
         this.repairIngredient = repairIngredient;
 
@@ -60,12 +60,6 @@ public class ItemArmorBase extends ItemArmor implements ISortableItem, IHasModel
             layer = 3;
         }
         return Tags.MOD_ID + ":textures/model/" + this.textureName + "_" + layer + ".png";
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public CreativeTabs getCreativeTab() {
-        return TheSol.ITEM_TAB;
     }
 
     @Override

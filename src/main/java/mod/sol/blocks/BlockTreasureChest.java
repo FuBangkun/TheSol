@@ -2,6 +2,7 @@ package mod.sol.blocks;
 
 import mod.sol.TheSol;
 import mod.sol.init.SolBlocks;
+import mod.sol.init.SolCreativeTabs;
 import mod.sol.init.SolItems;
 import mod.sol.tile.TileEntityTreasureChest;
 import mod.sol.util.IHasModel;
@@ -47,7 +48,7 @@ public class BlockTreasureChest extends BlockContainer implements IHasModel {
 
         this.setTranslationKey(name);
         this.setRegistryName(name);
-        this.setCreativeTab(TheSol.BLOCK_TAB);
+        this.setCreativeTab(SolCreativeTabs.BLOCK_TAB);
 
         SolBlocks.Blocks.add(this);
         SolItems.ITEMS.add(new ItemBlock(this).setRegistryName(name));

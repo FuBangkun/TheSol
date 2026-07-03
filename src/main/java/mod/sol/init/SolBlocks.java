@@ -6,14 +6,13 @@ import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
 import mod.sol.blocks.*;
 import mod.sol.blocks.BlockBaseOre.OreVariant;
 import mod.sol.tile.*;
+import mod.sol.util.EnumSolPlanet;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class SolBlocks {
     public static final List<Block> Blocks = new ArrayList<>();
@@ -85,13 +84,7 @@ public class SolBlocks {
     public static final Block SEDNA_DUNGEON_BRICK = new BlockBase("sedna_dungeon_brick", Material.ROCK, "pickaxe", 1).setHardness(4F).setResistance(40F);
     public static final Block TREASURE_CHEST_T10 = new BlockTreasureChest(10);
     //Spawner
-    public static Block BOSS_SPAWNER_MERCURY = new BlockBossSpawnerSol("boss_spawner_mercury", TileEntityDungeonSpawnerMercury::new);
-    public static Block BOSS_SPAWNER_JUPITER = new BlockBossSpawnerSol("boss_spawner_jupiter", TileEntityDungeonSpawnerJupiter::new);
-    public static Block BOSS_SPAWNER_SATURN = new BlockBossSpawnerSol("boss_spawner_saturn", TileEntityDungeonSpawnerSaturn::new);
-    public static Block BOSS_SPAWNER_URANUS = new BlockBossSpawnerSol("boss_spawner_uranus", TileEntityDungeonSpawnerUranus::new);
-    public static Block BOSS_SPAWNER_NEPTUNE = new BlockBossSpawnerSol("boss_spawner_neptune", TileEntityDungeonSpawnerNeptune::new);
-    public static Block BOSS_SPAWNER_PLUTO = new BlockBossSpawnerSol("boss_spawner_pluto", TileEntityDungeonSpawnerPluto::new);
-    public static Block BOSS_SPAWNER_SEDNA = new BlockBossSpawnerSol("boss_spawner_sedna", TileEntityDungeonSpawnerSedna::new);
+    public static final Map<EnumSolPlanet, Block> BOSS_SPAWNERS = new EnumMap<>(EnumSolPlanet.class);
 
     public static final Block MERCURY_ORES;
     public static final Block IO_ORES;
@@ -104,6 +97,15 @@ public class SolBlocks {
     public static final Block SEDNA_ORES;
 
     static {
+        // ==================== SPAWNER ====================
+        for (EnumSolPlanet planet : EnumSolPlanet.values()) {
+            BOSS_SPAWNERS.put(planet, new BlockBossSpawnerSol("boss_spawner_" + planet.getName(), () -> {
+                TileEntityDungeonSpawnerSol te = new TileEntityDungeonSpawnerSol();
+                te.setBossClass(planet.getBossClass());
+                return te;
+            }));
+        }
+
         // ==================== MERCURY ====================
         List<OreVariant> mercuryList = new ArrayList<>();
         mercuryList.add(new OreVariant("aluminum_ore", 1)); // Meta 0

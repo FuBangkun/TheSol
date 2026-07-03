@@ -112,6 +112,12 @@ public class BlockBaseOre extends Block implements IHasModel {
         }
     }
 
+    @Nonnull
+    @Override
+    public ItemStack getPickBlock(@Nonnull IBlockState state, net.minecraft.util.math.RayTraceResult target, @Nonnull net.minecraft.world.World world, @Nonnull BlockPos pos, net.minecraft.entity.player.EntityPlayer player) {
+        return new ItemStack(this, 1, state.getValue(TYPE));
+    }
+
     public static class OreVariant {
         public final String name;
         public final int harvestLevel;

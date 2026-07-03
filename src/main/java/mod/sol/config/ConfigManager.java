@@ -8,7 +8,7 @@ public class ConfigManager {
     @Config.Comment("Misc settings")
     public static final Misc misc = new Misc();
 
-    @Config.Comment("Dimension IDs for The Sol")
+    @Config.Comment("Dimension IDs")
     public static final DimensionIds dimensionIds = new DimensionIds();
 
     public static class Misc {

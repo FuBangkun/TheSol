@@ -184,7 +184,7 @@ public class EntityNeptuneBossSpider extends EntityBossBase implements IEntityBr
             livingdata = new EntityNeptuneBossSpider.GroupData();
 
             if (this.world.getDifficulty() == EnumDifficulty.HARD && this.world.rand.nextFloat() < 0.1F * difficulty.getClampedAdditionalDifficulty()) {
-                ((EntityNeptuneBossSpider.GroupData) livingdata).setRandomEffect(this.world.rand);
+                ((EntityNeptuneBossSpider.GroupData) livingdata).setRandomEffect();
             }
         }
 
@@ -275,7 +275,7 @@ public class EntityNeptuneBossSpider extends EntityBossBase implements IEntityBr
     public static class GroupData implements IEntityLivingData {
         public Potion effect;
 
-        public void setRandomEffect(Random rand) {
+        public void setRandomEffect() {
         }
     }
 }

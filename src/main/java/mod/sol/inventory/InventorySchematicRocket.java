@@ -12,13 +12,12 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 public class InventorySchematicRocket implements IInventory {
     private final NonNullList<ItemStack> stacks;
-    private final int inventoryWidth;
     private final Container eventHandler;
 
     public InventorySchematicRocket(Container par1Container) {
         this.stacks = NonNullList.withSize(23, ItemStack.EMPTY);
         this.eventHandler = par1Container;
-        this.inventoryWidth = 5;
+        int inventoryWidth = 5;
     }
 
     @Override

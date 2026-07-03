@@ -13,6 +13,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
+import javax.annotation.Nonnull;
+
 public class ContainerSchematicRocket extends Container {
     private final World world;
     private final int tier;
@@ -76,7 +78,7 @@ public class ContainerSchematicRocket extends Container {
     }
 
     @Override
-    public void onContainerClosed(EntityPlayer par1EntityPlayer) {
+    public void onContainerClosed(@Nonnull EntityPlayer par1EntityPlayer) {
         super.onContainerClosed(par1EntityPlayer);
 
         if (!this.world.isRemote) {
@@ -91,17 +93,18 @@ public class ContainerSchematicRocket extends Container {
     }
 
     @Override
-    public void onCraftMatrixChanged(IInventory par1IInventory) {
+    public void onCraftMatrixChanged(@Nonnull IInventory par1IInventory) {
         this.craftResult.setInventorySlotContents(0, RecipeUtil.findMatchingSpaceshipRecipe(this.craftMatrix, tier));
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
+    public boolean canInteractWith(@Nonnull EntityPlayer par1EntityPlayer) {
         return true;
     }
 
+    @Nonnull
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par1) {
+    public ItemStack transferStackInSlot(@Nonnull EntityPlayer par1EntityPlayer, int par1) {
         ItemStack var2 = ItemStack.EMPTY;
         final Slot var3 = this.inventorySlots.get(par1);
 
@@ -125,7 +128,7 @@ public class ContainerSchematicRocket extends Container {
                     }
                 }
                 if (valid) {
-                    if (!this.mergeOneItemTestValid(var4, 1, 19, false)) {
+                    if (this.mergeOneItemTestInvalid(var4, 1, 19, false)) {
                         return ItemStack.EMPTY;
                     }
                 } else {
@@ -137,7 +140,7 @@ public class ContainerSchematicRocket extends Container {
                         }
                     }
                     if (foundChest) {
-                        if (!this.mergeOneItemTestValid(var4, 19, 22, false)) {
+                        if (this.mergeOneItemTestInvalid(var4, 19, 22, false)) {
                             return ItemStack.EMPTY;
                         }
                     } else if (par1 >= 22 && par1 < 49) {
@@ -170,7 +173,7 @@ public class ContainerSchematicRocket extends Container {
         return var2;
     }
 
-    protected boolean mergeOneItemTestValid(ItemStack par1ItemStack, int par2, int par3, boolean par4) {
+    protected boolean mergeOneItemTestInvalid(ItemStack par1ItemStack, int par2, int par3, boolean par4) {
         boolean flag1 = false;
         if (!par1ItemStack.isEmpty()) {
             Slot slot;
@@ -192,6 +195,6 @@ public class ContainerSchematicRocket extends Container {
             }
         }
 
-        return flag1;
+        return !flag1;
     }
 }

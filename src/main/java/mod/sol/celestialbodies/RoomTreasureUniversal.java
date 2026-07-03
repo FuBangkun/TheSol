@@ -116,27 +116,27 @@ public class RoomTreasureUniversal extends RoomTreasure {
     private IBlockState getChestBlockState(EnumSolPlanet type) {
         EnumFacing face = this.getDirection().getOpposite();
         switch (type) {
-            case MERCURY: return SolBlocks.TREASURE_CHEST_T4.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
             case JUPITER: return SolBlocks.TREASURE_CHEST_T5.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
             case SATURN:  return SolBlocks.TREASURE_CHEST_T6.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
             case URANUS:  return SolBlocks.TREASURE_CHEST_T7.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
             case NEPTUNE: return SolBlocks.TREASURE_CHEST_T8.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
             case PLUTO:   return SolBlocks.TREASURE_CHEST_T9.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
             case SEDNA:   return SolBlocks.TREASURE_CHEST_T10.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
-            default:      return SolBlocks.TREASURE_CHEST_T5.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
+            case MERCURY:
+            default:      return SolBlocks.TREASURE_CHEST_T4.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
         }
     }
 
     private ResourceLocation getLootTable(EnumSolPlanet type) {
         switch (type) {
-            case MERCURY: return TABLE_MERCURY;
             case JUPITER: return TABLE_JUPITER;
             case SATURN:  return TABLE_SATURN;
             case URANUS:  return TABLE_URANUS;
             case NEPTUNE: return TABLE_NEPTUNE;
             case PLUTO:   return TABLE_PLUTO;
             case SEDNA:   return TABLE_SEDNA;
-            default:      return TABLE_JUPITER;
+            case MERCURY:
+            default:      return TABLE_MERCURY;
         }
     }
 }

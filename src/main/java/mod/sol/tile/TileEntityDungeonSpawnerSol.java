@@ -8,13 +8,17 @@ import micdoodle8.mods.galacticraft.core.tile.TileEntityDungeonSpawner;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.SoundCategory;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class TileEntityDungeonSpawnerSol<E extends EntityLiving> extends TileEntityDungeonSpawner<E> {
-    public TileEntityDungeonSpawnerSol(Class<E> bossClass) {
-        super(bossClass);
+public class TileEntityDungeonSpawnerSol extends TileEntityDungeonSpawner<EntityLiving> {
+    public TileEntityDungeonSpawnerSol() {
+        super(null);
+    }
+
+    @SuppressWarnings("unchecked")
+    public void setBossClass(Class<? extends EntityLiving> bossClass) {
+        this.bossClass = (Class<EntityLiving>) bossClass;
     }
 
     @Override
@@ -28,6 +32,8 @@ public abstract class TileEntityDungeonSpawnerSol<E extends EntityLiving> extend
 
     @Override
     public void playSpawnSound(Entity entity) {
-        this.world.playSound(null, entity.posX, entity.posY, entity.posZ, GCSounds.scaryScape, SoundCategory.AMBIENT, 9.0F, 1.4F);
+        if (this.world != null) {
+            this.world.playSound(null, entity.posX, entity.posY, entity.posZ, GCSounds.scaryScape, SoundCategory.AMBIENT, 9.0F, 1.4F);
+        }
     }
 }

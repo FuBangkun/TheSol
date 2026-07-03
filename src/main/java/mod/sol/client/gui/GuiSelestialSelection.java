@@ -272,7 +272,8 @@ public class GuiSelestialSelection extends GuiCelestialSelection {
                     this.drawTexturedModalRect(RHS - 96, LHS, 96, 139, 63, 0, 96, 139, false, false);
                 } else {
                     selectedSatellite = (Satellite) this.selectedBody;
-                    barY = this.spaceStationMap.get(this.getSatelliteParentID(selectedSatellite)).size();
+                    Map<String, GuiCelestialSelection.StationDataGUI> map = this.spaceStationMap.get(this.getSatelliteParentID(selectedSatellite));
+                    barY = map.size();
                     this.mc.renderEngine.bindTexture(guiMain1);
                     int max = Math.min(this.height / 2 / 14, barY);
                     this.drawTexturedModalRect(RHS - 95, LHS, 95, 53, this.selectedStationOwner.isEmpty() ? 95 : 0, 186, 95, 53, false, false);
@@ -291,7 +292,7 @@ public class GuiSelestialSelection extends GuiCelestialSelection {
 
                     this.drawTexturedModalRect(RHS - 85, LHS + 49 + max * 14, 61, 4, 0, 239, 61, 4, false, true);
                     GL11.glColor4f(0.0F, 0.6F, 1.0F, 1.0F);
-                    if (((Map<?, ?>) this.spaceStationMap.get(this.getSatelliteParentID(selectedSatellite))).get(this.selectedStationOwner) == null) {
+                    if ((map.get(this.selectedStationOwner) == null)) {
                         str = I18n.format("gui.message.select_ss.name");
                         this.drawSplitString(str, RHS - 47, LHS + 20, 91, WHITE, false, false);
                     } else {
@@ -301,7 +302,7 @@ public class GuiSelestialSelection extends GuiCelestialSelection {
                         this.fontRenderer.drawString(str, RHS - 47 - this.fontRenderer.getStringWidth(str) / 2, LHS + 30, WHITE);
                     }
 
-                    Iterator<Map.Entry<String, StationDataGUI>> it = ((Map) this.spaceStationMap.get(this.getSatelliteParentID(selectedSatellite))).entrySet().iterator();
+                    Iterator<Map.Entry<String, GuiCelestialSelection.StationDataGUI>> it = map.entrySet().iterator();
                     i = 0;
 
                     for (int j = 0; it.hasNext() && i < max; ++j) {
@@ -446,27 +447,29 @@ public class GuiSelestialSelection extends GuiCelestialSelection {
                                     break;
                                 }
 
-                                Collection items = (Collection) next;
+                                @SuppressWarnings("unchecked")
+                                Collection<ItemStack> items = (Collection<ItemStack>) next;
+
                                 int amount = 0;
 
-                                Iterator it;
-                                ItemStack stack;
-                                for (it = items.iterator(); it.hasNext(); amount += this.getAmountInInventory(stack)) {
-                                    stack = (ItemStack) it.next();
+                                for (ItemStack stack : items) {
+                                    amount += this.getAmountInInventory(stack);
                                 }
 
                                 RenderHelper.enableGUIStandardItemLighting();
-                                it = items.iterator();
-                                count = 0;
-                                toRenderIndex = (int) this.ticksSinceMenuOpenF / 20 % items.size();
 
-                                ItemStack toRender;
-                                for (toRender = null; it.hasNext(); ++count) {
-                                    stack = (ItemStack) it.next();
+                                count = 0;
+                                int size = items.size();
+                                toRenderIndex = (int) this.ticksSinceMenuOpenF / 20 % size;
+
+                                ItemStack toRender = null;
+
+                                for (ItemStack stack : items) {
                                     if (count == toRenderIndex) {
                                         toRender = stack;
                                         break;
                                     }
+                                    count++;
                                 }
 
                                 if (toRender != null) {

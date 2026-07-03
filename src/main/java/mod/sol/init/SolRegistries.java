@@ -18,6 +18,7 @@ import mod.sol.entities.EntityTierRocket;
 import mod.sol.entities.boss.*;
 import mod.sol.inventory.ContainerSchematicRocket;
 import mod.sol.items.ItemSchematic;
+import mod.sol.tile.TileEntityDungeonSpawnerSol;
 import mod.sol.util.RecipeUtil;
 import mod.sol.util.SchematicRocket;
 import net.minecraft.init.Items;
@@ -308,20 +309,8 @@ public class SolRegistries {
             GalacticraftRegistry.addDungeonLoot(tier, new ItemStack(SolItems.SCHEMATICS, 1, meta));
         }
 
-        TileEntity.register("sol:mercury_dungeon_spawner", mod.sol.tile.TileEntityDungeonSpawnerMercury.class);
-        GCBlocks.hiddenBlocks.add(SolBlocks.BOSS_SPAWNER_MERCURY);
-        TileEntity.register("sol:jupiter_dungeon_spawner", mod.sol.tile.TileEntityDungeonSpawnerJupiter.class);
-        GCBlocks.hiddenBlocks.add(SolBlocks.BOSS_SPAWNER_JUPITER);
-        TileEntity.register("sol:saturn_dungeon_spawner", mod.sol.tile.TileEntityDungeonSpawnerSaturn.class);
-        GCBlocks.hiddenBlocks.add(SolBlocks.BOSS_SPAWNER_SATURN);
-        TileEntity.register("sol:uranus_dungeon_spawner", mod.sol.tile.TileEntityDungeonSpawnerUranus.class);
-        GCBlocks.hiddenBlocks.add(SolBlocks.BOSS_SPAWNER_URANUS);
-        TileEntity.register("sol:neptune_dungeon_spawner", mod.sol.tile.TileEntityDungeonSpawnerNeptune.class);
-        GCBlocks.hiddenBlocks.add(SolBlocks.BOSS_SPAWNER_NEPTUNE);
-        TileEntity.register("sol:pluto_dungeon_spawner", mod.sol.tile.TileEntityDungeonSpawnerPluto.class);
-        GCBlocks.hiddenBlocks.add(SolBlocks.BOSS_SPAWNER_PLUTO);
-        TileEntity.register("sol:sedna_dungeon_spawner", mod.sol.tile.TileEntityDungeonSpawnerSedna.class);
-        GCBlocks.hiddenBlocks.add(SolBlocks.BOSS_SPAWNER_SEDNA);
+        TileEntity.register("sol:universal_dungeon_spawner", TileEntityDungeonSpawnerSol.class);
+        GCBlocks.hiddenBlocks.addAll(SolBlocks.BOSS_SPAWNERS.values());
     }
 
     private static void registerEventHandlers() {

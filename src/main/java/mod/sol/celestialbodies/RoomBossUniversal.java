@@ -127,15 +127,6 @@ public class RoomBossUniversal extends RoomBoss {
     }
 
     private Block getSpawnerBlock(EnumSolPlanet type) {
-        switch (type) {
-            case JUPITER: return SolBlocks.BOSS_SPAWNER_JUPITER;
-            case MERCURY: return SolBlocks.BOSS_SPAWNER_MERCURY;
-            case NEPTUNE: return SolBlocks.BOSS_SPAWNER_NEPTUNE;
-            case PLUTO:   return SolBlocks.BOSS_SPAWNER_PLUTO;
-            case SATURN:  return SolBlocks.BOSS_SPAWNER_SATURN;
-            case SEDNA:   return SolBlocks.BOSS_SPAWNER_SEDNA;
-            case URANUS:  return SolBlocks.BOSS_SPAWNER_URANUS;
-            default:      return Blocks.AIR;
-        }
+        return SolBlocks.BOSS_SPAWNERS.getOrDefault(type, Blocks.AIR);
     }
 }

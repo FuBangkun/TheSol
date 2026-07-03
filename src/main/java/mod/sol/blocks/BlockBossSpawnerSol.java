@@ -1,14 +1,11 @@
 package mod.sol.blocks;
 
 import micdoodle8.mods.galacticraft.core.blocks.BlockBossSpawner;
-import mod.sol.TheSol;
 import mod.sol.init.SolBlocks;
 import mod.sol.init.SolItems;
-import mod.sol.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -19,7 +16,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-public class BlockBossSpawnerSol extends BlockBossSpawner implements IHasModel {
+public class BlockBossSpawnerSol extends BlockBossSpawner {
     private final Supplier<TileEntity> tileEntitySupplier;
 
     public BlockBossSpawnerSol(String name, Supplier<TileEntity> tileEntitySupplier) {
@@ -47,11 +44,6 @@ public class BlockBossSpawnerSol extends BlockBossSpawner implements IHasModel {
     @Override
     public CreativeTabs getCreativeTab() {
         return null;
-    }
-
-    @Override
-    public void registerModels() {
-        TheSol.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
 
     @Override

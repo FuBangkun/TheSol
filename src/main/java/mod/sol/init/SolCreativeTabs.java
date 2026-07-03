@@ -2,6 +2,7 @@ package mod.sol.init;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+
 import javax.annotation.Nonnull;
 
 public class SolCreativeTabs {

@@ -81,13 +81,12 @@ public final class RocketModelUtil {
     // ModelBakeEvent hook
     // -----------------------
     public static void replaceModel(ModelBakeEvent event, int tier) {
+        RAW_CACHE.clear();
+        SPRITE_CACHE.clear();
+
         IBakedModel raw = bakeRocket(tier, BASE_GROUPS);
-
-        // wrapper ONLY here
         IBakedModel wrapped = new ItemModelRocket(raw);
-
         ModelResourceLocation mrl = new ModelResourceLocation(Tags.MOD_ID + ":rocket_t" + tier, "inventory");
-
         event.getModelRegistry().putObject(mrl, wrapped);
     }
 }

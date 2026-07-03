@@ -8,7 +8,6 @@ import micdoodle8.mods.galacticraft.core.items.ISortableItem;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityLandingPad;
 import micdoodle8.mods.galacticraft.core.util.EnumColor;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
-import mod.sol.TheSol;
 import mod.sol.entities.EntityTierRocket;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -153,13 +152,6 @@ public class ItemRocket extends ItemMetadataBase implements IHoldableItem, ISort
     @Override
     protected boolean useSubNamesInTranslation() {
         return false;
-    }
-
-    @Override
-    public void registerModels() {
-        for (int i = 0; i <= maxMeta; i++) {
-            TheSol.proxy.registerItemRenderer(this, i, this.getRegistryName().getPath());
-        }
     }
 
     @FunctionalInterface

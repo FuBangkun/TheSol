@@ -1,5 +1,7 @@
 package mod.sol.celestialbodies;
 
+import micdoodle8.mods.galacticraft.api.prefab.world.gen.MapGenBaseMeta;
+import micdoodle8.mods.galacticraft.core.perlin.generator.Gradient;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -12,8 +14,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
-import micdoodle8.mods.galacticraft.api.prefab.world.gen.MapGenBaseMeta;
-import micdoodle8.mods.galacticraft.core.perlin.generator.Gradient;
+
 import javax.annotation.Nonnull;
 
 public abstract class ChunkProviderSolAdvanced extends ChunkProviderSolBase {
@@ -46,8 +47,11 @@ public abstract class ChunkProviderSolAdvanced extends ChunkProviderSolBase {
     }
 
     protected abstract IBlockState getFillBlock();
+
     protected abstract MapGenBaseMeta getCaveGenerator();
+
     protected abstract void generateOcean(ChunkPrimer primer);
+
     protected abstract void generateSurfaceFeatures(ChunkPrimer primer);
 
     public void setBlocksInChunk(int chunkX, int chunkZ, ChunkPrimer primer) {

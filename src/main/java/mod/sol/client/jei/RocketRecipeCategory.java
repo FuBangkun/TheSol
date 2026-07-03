@@ -21,9 +21,9 @@ public class RocketRecipeCategory implements IRecipeCategory<IRecipeWrapper> {
     @Nonnull
     private final String localizedName;
 
-    public RocketRecipeCategory(IGuiHelper guiHelper, @Nonnull String uid, int tier) {
+    public RocketRecipeCategory(IGuiHelper guiHelper, @Nonnull String uid) {
         this.uid = uid;
-        ResourceLocation texture = new ResourceLocation(Tags.MOD_ID, "textures/gui/schematic_rocket_t" + tier + "_jei.png");
+        ResourceLocation texture = new ResourceLocation(Tags.MOD_ID, "textures/gui/schematic_rocket_jei.png");
         this.background = guiHelper.createDrawable(texture, 0, 0, 168, 126);
         this.localizedName = I18n.format("tile.rocket_workbench.name");
     }

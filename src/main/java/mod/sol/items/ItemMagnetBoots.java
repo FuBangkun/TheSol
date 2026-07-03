@@ -5,10 +5,8 @@ import micdoodle8.mods.galacticraft.core.dimension.WorldProviderSpaceStation;
 import micdoodle8.mods.galacticraft.core.items.ISortableItem;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
 import mod.sol.Tags;
-import mod.sol.TheSol;
 import mod.sol.init.SolCreativeTabs;
 import mod.sol.init.SolItems;
-import mod.sol.util.IHasModel;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,7 +17,7 @@ import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.Nonnull;
 
-public class ItemMagnetBoots extends ItemArmor implements IArmorGravity, ISortableItem, IHasModel {
+public class ItemMagnetBoots extends ItemArmor implements IArmorGravity, ISortableItem {
     private final ArmorMaterial material;
 
     public ItemMagnetBoots(String name, ArmorMaterial materialIn, int renderIndexIn) {
@@ -74,10 +72,5 @@ public class ItemMagnetBoots extends ItemArmor implements IArmorGravity, ISortab
     @Override
     public boolean getIsRepairable(@Nonnull ItemStack toRepair, ItemStack repair) {
         return repair.getItem() == SolItems.MAGNET_INGOT;
-    }
-
-    @Override
-    public void registerModels() {
-        TheSol.proxy.registerItemRenderer(this, 0, "inventory");
     }
 }

@@ -1,11 +1,9 @@
 package mod.sol.blocks;
 
-import mod.sol.TheSol;
 import mod.sol.init.SolBlocks;
 import mod.sol.init.SolCreativeTabs;
 import mod.sol.init.SolItems;
 import mod.sol.tile.TileEntityTreasureChest;
-import mod.sol.util.IHasModel;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -17,7 +15,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -30,7 +27,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class BlockTreasureChest extends BlockContainer implements IHasModel {
+public class BlockTreasureChest extends BlockContainer {
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
     protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.875D, 0.9375D);
 
@@ -133,10 +130,5 @@ public class BlockTreasureChest extends BlockContainer implements IHasModel {
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING);
-    }
-
-    @Override
-    public void registerModels() {
-        TheSol.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
 }

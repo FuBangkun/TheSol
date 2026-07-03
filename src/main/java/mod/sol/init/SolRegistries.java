@@ -9,6 +9,7 @@ import micdoodle8.mods.galacticraft.core.recipe.NasaWorkbenchRecipe;
 import micdoodle8.mods.galacticraft.core.util.ColorUtil;
 import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
 import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
+import mod.sol.Tags;
 import mod.sol.TheSol;
 import mod.sol.celestialbodies.RoomBossUniversal;
 import mod.sol.celestialbodies.RoomTreasureUniversal;
@@ -21,18 +22,27 @@ import mod.sol.items.ItemSchematic;
 import mod.sol.tile.TileEntityDungeonSpawnerSol;
 import mod.sol.util.RecipeUtil;
 import mod.sol.util.SchematicRocket;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.OreIngredient;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import java.util.HashMap;
 
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class SolRegistries {
     public static void register() {
         registerStructures();
@@ -51,16 +61,16 @@ public class SolRegistries {
     }
 
     private static void registerEntities() {
-        TheSol.registerNonMobEntity(EntityHugeFireball.class, "fireball_huge", 150, 1, false);
-        TheSol.registerNonMobEntity(EntityTierRocket.class, "rocket", 150, 1, false);
+        TheSol.proxy.registerNonMobEntity(EntityHugeFireball.class, "fireball_huge", 150, 1, false);
+        TheSol.proxy.registerNonMobEntity(EntityTierRocket.class, "rocket", 150, 1, false);
 
-        TheSol.registerEntityCreature(EntityMercuryBossBlaze.class, "mercury_blaze_boss", ColorUtil.to32BitColor(255, 63, 0, 0), ColorUtil.to32BitColor(255, 220, 0, 0));
-        TheSol.registerEntityCreature(EntityJupiterBossGhast.class, "jupiter_ghast_boss", ColorUtil.to32BitColor(255, 127, 0, 0), ColorUtil.to32BitColor(255, 0, 0, 0));
-        TheSol.registerEntityCreature(EntitySaturnBossStray.class, "saturn_stray_boss", ColorUtil.to32BitColor(255, 225, 255, 225), ColorUtil.to32BitColor(255, 0, 15, 255));
-        TheSol.registerEntityCreature(EntityUranusBossSlime.class, "uranus_slime_boss", ColorUtil.to32BitColor(255, 5, 31, 127), ColorUtil.to32BitColor(255, 0, 0, 255));
-        TheSol.registerEntityCreature(EntityNeptuneBossSpider.class, "neptune_spider_boss", ColorUtil.to32BitColor(255, 4, 4, 4), ColorUtil.to32BitColor(255, 127, 0, 16));
-        TheSol.registerEntityCreature(EntityBossSilverfish.class, "silverfish_boss", ColorUtil.to32BitColor(255, 64, 64, 64), ColorUtil.to32BitColor(255, 127, 127, 127));
-        TheSol.registerEntityCreature(EntityBossMagmaCube.class, "magmacube_boss", ColorUtil.to32BitColor(255, 127, 31, 31), ColorUtil.to32BitColor(255, 255, 127, 127));
+        TheSol.proxy.registerEntityCreature(EntityMercuryBossBlaze.class, "mercury_blaze_boss", ColorUtil.to32BitColor(255, 63, 0, 0), ColorUtil.to32BitColor(255, 220, 0, 0));
+        TheSol.proxy.registerEntityCreature(EntityJupiterBossGhast.class, "jupiter_ghast_boss", ColorUtil.to32BitColor(255, 127, 0, 0), ColorUtil.to32BitColor(255, 0, 0, 0));
+        TheSol.proxy.registerEntityCreature(EntitySaturnBossStray.class, "saturn_stray_boss", ColorUtil.to32BitColor(255, 225, 255, 225), ColorUtil.to32BitColor(255, 0, 15, 255));
+        TheSol.proxy.registerEntityCreature(EntityUranusBossSlime.class, "uranus_slime_boss", ColorUtil.to32BitColor(255, 5, 31, 127), ColorUtil.to32BitColor(255, 0, 0, 255));
+        TheSol.proxy.registerEntityCreature(EntityNeptuneBossSpider.class, "neptune_spider_boss", ColorUtil.to32BitColor(255, 4, 4, 4), ColorUtil.to32BitColor(255, 127, 0, 16));
+        TheSol.proxy.registerEntityCreature(EntityBossSilverfish.class, "silverfish_boss", ColorUtil.to32BitColor(255, 64, 64, 64), ColorUtil.to32BitColor(255, 127, 127, 127));
+        TheSol.proxy.registerEntityCreature(EntityBossMagmaCube.class, "magmacube_boss", ColorUtil.to32BitColor(255, 127, 31, 31), ColorUtil.to32BitColor(255, 255, 127, 127));
     }
 
     private static void registerSchematics() {
@@ -207,12 +217,12 @@ public class SolRegistries {
     private static void registrySmeltingRecipe() {
         GameRegistry.addSmelting(SolItems.SULFUR_SHARD, new ItemStack(SolItems.SULFUR_INGOT, 1, 0), 1.0F);
 
-        ItemStack gcAluminum  = new ItemStack(GCItems.basicItem, 1, 5);
-        ItemStack gcCopper    = new ItemStack(GCItems.basicItem, 1, 3);
-        ItemStack gcTin       = new ItemStack(GCItems.basicItem, 1, 4);
-        ItemStack gcSilicon   = new ItemStack(GCItems.basicItem, 1, 2);
+        ItemStack gcAluminum = new ItemStack(GCItems.basicItem, 1, 5);
+        ItemStack gcCopper = new ItemStack(GCItems.basicItem, 1, 3);
+        ItemStack gcTin = new ItemStack(GCItems.basicItem, 1, 4);
+        ItemStack gcSilicon = new ItemStack(GCItems.basicItem, 1, 2);
         ItemStack vanillaIron = new ItemStack(Items.IRON_INGOT, 1, 0);
-        ItemStack marsDesh    = new ItemStack(MarsItems.marsItemBasic, 1, 2);
+        ItemStack marsDesh = new ItemStack(MarsItems.marsItemBasic, 1, 2);
         ItemStack astIlmenite = new ItemStack(AsteroidsItems.basicItem, 1, 0);
 
         GameRegistry.addSmelting(new ItemStack(SolBlocks.MERCURY_ORES, 1, 0), gcAluminum, 1.0F);
@@ -315,5 +325,73 @@ public class SolRegistries {
 
     private static void registerEventHandlers() {
         MinecraftForge.EVENT_BUS.register(new TheSol());
+    }
+
+    @SubscribeEvent
+    public static void registerRocketPartRecipe(RegistryEvent.Register<IRecipe> event) {
+        Item airVent = GCItems.oxygenVent;
+        Item fuelCanisterPartial = GCItems.fuelCanister;
+        Item gcCanister = GCItems.canister;
+
+        Object[] tierMaterials = new Object[]{
+                new OreIngredient("compressedTitanium"),
+                new ItemStack(SolItems.COMPRESSED_SULFUR),
+                new ItemStack(SolItems.COMPRESSED_MANGANESE),
+                new ItemStack(SolItems.COMPRESSED_LITHIUM),
+                new ItemStack(SolItems.COMPRESSED_MAGNESIUM),
+                new ItemStack(SolItems.COMPRESSED_VANADIUM)
+        };
+
+        int[] woolDataList = new int[]{3, 3, 13, 10, 1, 9};
+
+        for (int meta = 0; meta < 6; meta++) {
+            int tier = meta + 4;
+            ItemStack currentPlate = new ItemStack(SolItems.REINFORCED_PLATES, 1, meta);
+            Object currentMaterial = tierMaterials[meta];
+
+            if (airVent != null && fuelCanisterPartial != null) {
+                ResourceLocation regName = new ResourceLocation(Tags.MOD_ID, "engine_booster_t" + tier);
+                event.getRegistry().register(new ShapedOreRecipe(regName, new ItemStack(SolItems.ENGINE_BOOSTERS, 1, meta),
+                        "ZYZ", "ZWZ", "XVX",
+                        'V', airVent,
+                        'W', new ItemStack(fuelCanisterPartial, 1, 1),
+                        'X', currentPlate,
+                        'Y', new ItemStack(Blocks.WOOL, 1, woolDataList[meta]),
+                        'Z', currentMaterial
+                ).setRegistryName(regName));
+            }
+
+            if (tier >= 5 && gcCanister != null) {
+                int targetMeta = meta - 1;
+                ResourceLocation regName = new ResourceLocation(Tags.MOD_ID, "rocket_engine_t" + tier);
+                event.getRegistry().register(new ShapedOreRecipe(regName, new ItemStack(SolItems.ROCKET_ENGINES, 1, targetMeta),
+                        " YV", "XWX", "XZX",
+                        'V', Blocks.STONE_BUTTON, 'W', new ItemStack(gcCanister, 1, 32767),
+                        'X', currentPlate, 'Y', Items.FLINT_AND_STEEL, 'Z', airVent
+                ).setRegistryName(regName));
+
+                ResourceLocation regNameAlt = new ResourceLocation(Tags.MOD_ID, "rocket_engine_t" + tier + "_alt");
+                event.getRegistry().register(new ShapedOreRecipe(regNameAlt, new ItemStack(SolItems.ROCKET_ENGINES, 1, targetMeta),
+                        "VY ", "XWX", "XZX",
+                        'V', Blocks.STONE_BUTTON, 'W', new ItemStack(gcCanister, 1, 32767),
+                        'X', currentPlate, 'Y', Items.FLINT_AND_STEEL, 'Z', airVent
+                ).setRegistryName(regNameAlt));
+            }
+
+            if (tier >= 5) {
+                int targetMeta = meta - 1;
+                ResourceLocation regName = new ResourceLocation(Tags.MOD_ID, "nose_cone_t" + tier);
+                event.getRegistry().register(new ShapedOreRecipe(regName, new ItemStack(SolItems.NOSE_CONES, 1, targetMeta),
+                        " Y ", " X ", "X X",
+                        'X', currentPlate, 'Y', Blocks.REDSTONE_TORCH
+                ).setRegistryName(regName));
+            }
+
+            ResourceLocation regName = new ResourceLocation(Tags.MOD_ID, "rocket_fins_t" + tier);
+            event.getRegistry().register(new ShapedOreRecipe(regName, new ItemStack(SolItems.ROCKET_FINS, 1, meta),
+                    " Y ", "XYX", "X X",
+                    'X', currentPlate, 'Y', currentMaterial
+            ).setRegistryName(regName));
+        }
     }
 }

@@ -9,6 +9,7 @@ import micdoodle8.mods.galacticraft.api.world.AtmosphereInfo;
 import micdoodle8.mods.galacticraft.api.world.EnumAtmosphericGas;
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.dimension.WorldProviderMoon;
 import micdoodle8.mods.galacticraft.core.entities.*;
 import micdoodle8.mods.galacticraft.planets.asteroids.AsteroidsModule;
 import micdoodle8.mods.galacticraft.planets.mars.MarsModule;
@@ -76,7 +77,7 @@ public class SolPlanets {
     public static Moon moonTriton;
     // Moons — Pluto
     public static Moon moonCharon;
-    
+
     public static void registerCelestialBodies() {
         // === Venus (overrides Galacticraft's Venus) ===
         planetVenus = (Planet) new Planet("venus").setParentSolarSystem(GalacticraftCore.solarSystemSol).setRingColorRGB(0.1F, 0.9F, 0.6F).setPhaseShift(2.0F).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(0.75F, 0.75F)).setRelativeOrbitTime(0.61527929901423877327491785323111F);
@@ -338,7 +339,7 @@ public class SolPlanets {
 
         // === Register all with GalaxyRegistry ===
         // Misc — override vanilla moon rocket GUI
-        GalacticraftRegistry.registerRocketGui(micdoodle8.mods.galacticraft.core.dimension.WorldProviderMoon.class, new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/moon_rocket_gui.png"));
+        GalacticraftRegistry.registerRocketGui(WorldProviderMoon.class, new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/moon_rocket_gui.png"));
 
         // Planets
         GalaxyRegistry.registerPlanet(planetMercury);

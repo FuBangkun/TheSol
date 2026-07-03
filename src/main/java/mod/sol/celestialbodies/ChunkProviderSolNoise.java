@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
+
 import javax.annotation.Nonnull;
 import java.util.Random;
 
@@ -42,15 +43,21 @@ public abstract class ChunkProviderSolNoise extends ChunkProviderSolBase {
     }
 
     protected abstract float getNoiseScale();
+
     protected abstract MapGenDungeon createDungeonGenerator();
+
     protected abstract MapGenBaseMeta createCaveGenerator();
 
     // 获取各层方块，子类可根据 y 坐标或生物群系返回不同方块
     protected abstract IBlockState getTopBlock(int x, int y, int z, Biome biome);
+
     protected abstract IBlockState getFillBlock(int x, int y, int z, Biome biome);
+
     protected abstract IBlockState getLowerBlock();
 
-    protected double getTerrainHeightModifier() { return 16.0; }
+    protected double getTerrainHeightModifier() {
+        return 16.0;
+    }
 
     public void setBlocksInChunk(int chunkX, int chunkZ, ChunkPrimer primer) {
         this.noiseGen1.setFrequency(0.0125F);
@@ -148,8 +155,8 @@ public abstract class ChunkProviderSolNoise extends ChunkProviderSolBase {
     protected void makeCrater(int craterX, int craterZ, int chunkX, int chunkZ, int size, ChunkPrimer primer) {
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                double xDev = (craterX - (chunkX + x)) / (double)size;
-                double zDev = (craterZ - (chunkZ + z)) / (double)size;
+                double xDev = (craterX - (chunkX + x)) / (double) size;
+                double zDev = (craterZ - (chunkZ + z)) / (double) size;
                 double distSq = xDev * xDev + zDev * zDev;
                 if (distSq < 1.0) {
                     double yDev = (5 - (distSq * distSq * 6));
@@ -181,7 +188,8 @@ public abstract class ChunkProviderSolNoise extends ChunkProviderSolBase {
         BlockFalling.fallInstantly = false;
     }
 
-    protected void onPopulateExtra(int x, int z, BlockPos pos) {}
+    protected void onPopulateExtra(int x, int z, BlockPos pos) {
+    }
 
     @Override
     public void recreateStructures(@Nonnull Chunk chunk, int x, int z) {

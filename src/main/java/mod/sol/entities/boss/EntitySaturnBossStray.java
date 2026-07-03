@@ -36,12 +36,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
+import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
 public class EntitySaturnBossStray extends EntityBossBase implements IEntityBreathable, IRangedAttackMob, IIgnoreShift {
-    private static final ItemStack defaultHeldItem = new ItemStack(Items.BOW, 1);
     public int throwTimer;
     public int postThrowDelay = 20;
     public Entity thrownEntity;
@@ -100,7 +100,7 @@ public class EntitySaturnBossStray extends EntityBossBase implements IEntityBrea
     }
 
     @Override
-    public void updatePassenger(Entity passenger) {
+    public void updatePassenger(@Nonnull Entity passenger) {
         if (this.isPassenger(passenger)) {
             final double offsetX = Math.sin(-this.rotationYawHead / Constants.RADIANS_TO_DEGREES_D);
             final double offsetZ = Math.cos(this.rotationYawHead / Constants.RADIANS_TO_DEGREES_D);
@@ -111,11 +111,11 @@ public class EntitySaturnBossStray extends EntityBossBase implements IEntityBrea
     }
 
     @Override
-    public void knockBack(Entity par1Entity, float par2, double par3, double par5) {
+    public void knockBack(@Nonnull Entity par1Entity, float par2, double par3, double par5) {
     }
 
     @Override
-    public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
+    public void onCollideWithPlayer(@Nonnull EntityPlayer par1EntityPlayer) {
         if (!this.isAIDisabled() && this.getPassengers().isEmpty() && this.postThrowDelay == 0 && this.throwTimer == 0 && par1EntityPlayer.equals(this.targetEntity) && this.deathTicks == 0) {
             if (!this.world.isRemote) {
                 GalacticraftCore.packetPipeline.sendToAllAround(new PacketSimple(EnumSimplePacket.C_PLAY_SOUND_BOSS_LAUGH, GCCoreUtil.getDimensionID(this.world), new Object[]{}), new TargetPoint(GCCoreUtil.getDimensionID(this.world), this.posX, this.posY, this.posZ, 40.0D));
@@ -133,24 +133,20 @@ public class EntitySaturnBossStray extends EntityBossBase implements IEntityBrea
         return false;
     }
 
+    @Nonnull
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
         this.playSound(GCSounds.bossOoh, this.getSoundVolume(), this.getSoundPitch() + 1.0F);
         return null;
     }
 
+    @Nonnull
     @Override
     protected SoundEvent getDeathSound() {
         return null;
     }
 
-//    @Override
-//    @SideOnly(Side.CLIENT)
-//    public ItemStack getHeldItem()
-//    {
-//        return EntitySkeletonBoss.defaultHeldItem;
-//    }
-
+    @Nonnull
     @Override
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.UNDEAD;
@@ -245,7 +241,7 @@ public class EntitySaturnBossStray extends EntityBossBase implements IEntityBrea
     }
 
     @Override
-    public EntityItem entityDropItem(ItemStack par1ItemStack, float par2) {
+    public EntityItem entityDropItem(@Nonnull ItemStack par1ItemStack, float par2) {
         final EntityItem entityitem = new EntityItem(this.world, this.posX, this.posY + par2, this.posZ, par1ItemStack);
         entityitem.motionY = -2.0D;
         entityitem.setDefaultPickupDelay();
@@ -278,7 +274,7 @@ public class EntitySaturnBossStray extends EntityBossBase implements IEntityBrea
     }
 
     @Override
-    public void attackEntityWithRangedAttack(EntityLivingBase target, float f) {
+    public void attackEntityWithRangedAttack(@Nonnull EntityLivingBase target, float f) {
         if (!this.getPassengers().isEmpty()) {
             return;
         }

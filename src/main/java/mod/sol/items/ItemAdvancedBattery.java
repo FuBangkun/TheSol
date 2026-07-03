@@ -4,15 +4,13 @@ import micdoodle8.mods.galacticraft.api.item.ElectricItemHelper;
 import micdoodle8.mods.galacticraft.core.energy.item.ItemElectricBase;
 import micdoodle8.mods.galacticraft.core.items.ISortableItem;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
-import mod.sol.TheSol;
 import mod.sol.init.SolCreativeTabs;
 import mod.sol.init.SolItems;
-import mod.sol.util.IHasModel;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-public class ItemAdvancedBattery extends ItemElectricBase implements ISortableItem, IHasModel {
+public class ItemAdvancedBattery extends ItemElectricBase implements ISortableItem {
     private final int batteryTier;
 
     public ItemAdvancedBattery(String assetName, int tier) {
@@ -50,10 +48,5 @@ public class ItemAdvancedBattery extends ItemElectricBase implements ISortableIt
             return 1;
         }
         return this.getItemStackLimit();
-    }
-
-    @Override
-    public void registerModels() {
-        TheSol.proxy.registerItemRenderer(this, 0, "inventory");
     }
 }

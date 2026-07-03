@@ -70,10 +70,11 @@ public class EntityTierRocket extends EntityTieredRocket {
 
     @Override
     public int getRocketTier() {
-        if (this.world != null && this.world.isRemote) {
-            return this.dataManager.get(TIER);
+        int t = this.dataManager.get(TIER);
+        if (t == 0 && this.tier != 0) {
+            return this.tier;
         }
-        return tier;
+        return t;
     }
 
     @Override
@@ -199,11 +200,10 @@ public class EntityTierRocket extends EntityTieredRocket {
     @Override
     public void readEntityFromNBT(NBTTagCompound nbt) {
         super.readEntityFromNBT(nbt);
-        tier = nbt.getInteger("RocketTier");
-        if (this.world != null && !this.world.isRemote) {
-            this.dataManager.set(TIER, tier);
-        }
+        this.tier = nbt.getInteger("RocketTier");
+        this.dataManager.set(TIER, this.tier);
     }
+
 
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {

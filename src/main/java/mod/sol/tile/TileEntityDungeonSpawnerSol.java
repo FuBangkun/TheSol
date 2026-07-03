@@ -8,6 +8,7 @@ import micdoodle8.mods.galacticraft.core.tile.TileEntityDungeonSpawner;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.SoundCategory;
+
 import java.util.ArrayList;
 import java.util.List;
 

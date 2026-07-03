@@ -9,7 +9,6 @@ import micdoodle8.mods.galacticraft.core.network.PacketSimple.EnumSimplePacket;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import mod.sol.init.SolItems;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -25,7 +24,6 @@ import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BossInfo;
@@ -35,6 +33,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -59,10 +58,6 @@ public class EntityMercuryBossBlaze extends EntityBossBase implements IEntityBre
         this.setPathPriority(PathNodeType.DAMAGE_FIRE, 0.0F);
         this.isImmuneToFire = true;
         this.experienceValue = 10;
-    }
-
-    public static void registerFixesBlaze(DataFixer fixer) {
-        EntityLiving.registerFixesMob(fixer, EntityMercuryBossBlaze.class);
     }
 
     protected void initEntityAI() {
@@ -97,10 +92,12 @@ public class EntityMercuryBossBlaze extends EntityBossBase implements IEntityBre
         return SoundEvents.ENTITY_BLAZE_AMBIENT;
     }
 
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+    @Nonnull
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
         return SoundEvents.ENTITY_BLAZE_HURT;
     }
 
+    @Nonnull
     protected SoundEvent getDeathSound() {
         return null;
     }

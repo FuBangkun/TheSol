@@ -50,6 +50,17 @@ public class RenderRocketBase<T extends EntityTierRocket> extends Render<T> {
     @Override
     public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
         int tier = entity.getRocketTier();
+
+        if (tier == 0) {
+            net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getMinecraft();
+            if (mc.player != null && mc.player.getRidingEntity() instanceof EntityTierRocket) {
+                EntityTierRocket realRocket = (EntityTierRocket) mc.player.getRidingEntity();
+                tier = realRocket.getRocketTier();
+            }
+        }
+
+        if (tier == 0) tier = 4;
+
         IBakedModel rocketModel = getRocketModel(tier);
         IBakedModel coneModel = getConeModel(tier);
         IBakedModel cubeModel = getCubeModel(tier);
@@ -78,6 +89,11 @@ public class RenderRocketBase<T extends EntityTierRocket> extends Render<T> {
         }
 
         bindEntityTexture(entity);
+
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        this.renderManager.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+
+        net.minecraft.client.renderer.RenderHelper.enableStandardItemLighting();
 
         GlStateManager.scale(-1.0F, -1.0F, 1.0F);
         GlStateManager.scale(0.8F, 0.8F, 0.8F);
@@ -117,6 +133,8 @@ public class RenderRocketBase<T extends EntityTierRocket> extends Render<T> {
         GlStateManager.popMatrix();
 
         RenderHelper.enableStandardItemLighting();
+
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
     @Override

@@ -2,13 +2,11 @@ package mod.sol.items;
 
 import micdoodle8.mods.galacticraft.core.items.ISortableItem;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
-import mod.sol.TheSol;
 import mod.sol.init.SolCreativeTabs;
 import mod.sol.init.SolItems;
-import mod.sol.util.IHasModel;
 import net.minecraft.item.ItemHoe;
 
-public class ItemHoeBase extends ItemHoe implements ISortableItem, IHasModel {
+public class ItemHoeBase extends ItemHoe implements ISortableItem {
     public ItemHoeBase(ToolMaterial material) {
         super(material);
 
@@ -19,10 +17,5 @@ public class ItemHoeBase extends ItemHoe implements ISortableItem, IHasModel {
     @Override
     public EnumSortCategoryItem getCategory(int meta) {
         return EnumSortCategoryItem.TOOLS;
-    }
-
-    @Override
-    public void registerModels() {
-        TheSol.proxy.registerItemRenderer(this, 0, "inventory");
     }
 }

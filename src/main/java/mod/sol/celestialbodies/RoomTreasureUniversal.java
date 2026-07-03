@@ -23,11 +23,11 @@ import java.util.Random;
 public class RoomTreasureUniversal extends RoomTreasure {
     public static final ResourceLocation TABLE_MERCURY = LootTableList.register(new ResourceLocation(Tags.MOD_ID, "dungeon_tier_4"));
     public static final ResourceLocation TABLE_JUPITER = LootTableList.register(new ResourceLocation(Tags.MOD_ID, "dungeon_tier_5"));
-    public static final ResourceLocation TABLE_SATURN  = LootTableList.register(new ResourceLocation(Tags.MOD_ID, "dungeon_tier_6"));
-    public static final ResourceLocation TABLE_URANUS  = LootTableList.register(new ResourceLocation(Tags.MOD_ID, "dungeon_tier_7"));
+    public static final ResourceLocation TABLE_SATURN = LootTableList.register(new ResourceLocation(Tags.MOD_ID, "dungeon_tier_6"));
+    public static final ResourceLocation TABLE_URANUS = LootTableList.register(new ResourceLocation(Tags.MOD_ID, "dungeon_tier_7"));
     public static final ResourceLocation TABLE_NEPTUNE = LootTableList.register(new ResourceLocation(Tags.MOD_ID, "dungeon_tier_8"));
-    public static final ResourceLocation TABLE_PLUTO   = LootTableList.register(new ResourceLocation(Tags.MOD_ID, "dungeon_tier_9"));
-    public static final ResourceLocation TABLE_SEDNA   = LootTableList.register(new ResourceLocation(Tags.MOD_ID, "dungeon_tier_10"));
+    public static final ResourceLocation TABLE_PLUTO = LootTableList.register(new ResourceLocation(Tags.MOD_ID, "dungeon_tier_9"));
+    public static final ResourceLocation TABLE_SEDNA = LootTableList.register(new ResourceLocation(Tags.MOD_ID, "dungeon_tier_10"));
 
     @SuppressWarnings("unused")
     public RoomTreasureUniversal() {
@@ -50,10 +50,10 @@ public class RoomTreasureUniversal extends RoomTreasure {
         if (brick == SolBlocks.JUPITER_DUNGEON_BRICK) return EnumSolPlanet.JUPITER;
         if (brick == SolBlocks.MERCURY_DUNGEON_BRICK) return EnumSolPlanet.MERCURY;
         if (brick == SolBlocks.NEPTUNE_DUNGEON_BRICK) return EnumSolPlanet.NEPTUNE;
-        if (brick == SolBlocks.PLUTO_DUNGEON_BRICK)   return EnumSolPlanet.PLUTO;
-        if (brick == SolBlocks.SATURN_DUNGEON_BRICK)  return EnumSolPlanet.SATURN;
-        if (brick == SolBlocks.SEDNA_DUNGEON_BRICK)   return EnumSolPlanet.SEDNA;
-        if (brick == SolBlocks.URANUS_DUNGEON_BRICK)  return EnumSolPlanet.URANUS;
+        if (brick == SolBlocks.PLUTO_DUNGEON_BRICK) return EnumSolPlanet.PLUTO;
+        if (brick == SolBlocks.SATURN_DUNGEON_BRICK) return EnumSolPlanet.SATURN;
+        if (brick == SolBlocks.SEDNA_DUNGEON_BRICK) return EnumSolPlanet.SEDNA;
+        if (brick == SolBlocks.URANUS_DUNGEON_BRICK) return EnumSolPlanet.URANUS;
 
         return EnumSolPlanet.JUPITER;
     }
@@ -116,27 +116,41 @@ public class RoomTreasureUniversal extends RoomTreasure {
     private IBlockState getChestBlockState(EnumSolPlanet type) {
         EnumFacing face = this.getDirection().getOpposite();
         switch (type) {
-            case JUPITER: return SolBlocks.TREASURE_CHEST_T5.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
-            case SATURN:  return SolBlocks.TREASURE_CHEST_T6.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
-            case URANUS:  return SolBlocks.TREASURE_CHEST_T7.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
-            case NEPTUNE: return SolBlocks.TREASURE_CHEST_T8.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
-            case PLUTO:   return SolBlocks.TREASURE_CHEST_T9.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
-            case SEDNA:   return SolBlocks.TREASURE_CHEST_T10.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
+            case JUPITER:
+                return SolBlocks.TREASURE_CHEST_T5.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
+            case SATURN:
+                return SolBlocks.TREASURE_CHEST_T6.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
+            case URANUS:
+                return SolBlocks.TREASURE_CHEST_T7.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
+            case NEPTUNE:
+                return SolBlocks.TREASURE_CHEST_T8.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
+            case PLUTO:
+                return SolBlocks.TREASURE_CHEST_T9.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
+            case SEDNA:
+                return SolBlocks.TREASURE_CHEST_T10.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
             case MERCURY:
-            default:      return SolBlocks.TREASURE_CHEST_T4.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
+            default:
+                return SolBlocks.TREASURE_CHEST_T4.getDefaultState().withProperty(BlockTreasureChest.FACING, face);
         }
     }
 
     private ResourceLocation getLootTable(EnumSolPlanet type) {
         switch (type) {
-            case JUPITER: return TABLE_JUPITER;
-            case SATURN:  return TABLE_SATURN;
-            case URANUS:  return TABLE_URANUS;
-            case NEPTUNE: return TABLE_NEPTUNE;
-            case PLUTO:   return TABLE_PLUTO;
-            case SEDNA:   return TABLE_SEDNA;
+            case JUPITER:
+                return TABLE_JUPITER;
+            case SATURN:
+                return TABLE_SATURN;
+            case URANUS:
+                return TABLE_URANUS;
+            case NEPTUNE:
+                return TABLE_NEPTUNE;
+            case PLUTO:
+                return TABLE_PLUTO;
+            case SEDNA:
+                return TABLE_SEDNA;
             case MERCURY:
-            default:      return TABLE_MERCURY;
+            default:
+                return TABLE_MERCURY;
         }
     }
 }

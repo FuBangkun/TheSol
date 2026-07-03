@@ -5,7 +5,6 @@ import micdoodle8.mods.galacticraft.api.entity.IEntityBreathable;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import mod.sol.entities.EntityHugeFireball;
 import mod.sol.init.SolItems;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -23,7 +22,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -36,6 +34,7 @@ import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.LinkedList;
 import java.util.List;
@@ -56,10 +55,6 @@ public class EntityJupiterBossGhast extends EntityFlyingBossBase implements IEnt
         this.moveHelper = new EntityJupiterBossGhast.GhastMoveHelper(this);
     }
 
-    public static void registerFixesGhast(DataFixer fixer) {
-        EntityLiving.registerFixesMob(fixer, EntityJupiterBossGhast.class);
-    }
-
     protected void initEntityAI() {
         this.tasks.addTask(5, new EntityJupiterBossGhast.AIRandomFly(this));
         this.tasks.addTask(7, new EntityJupiterBossGhast.AILookAround(this));
@@ -76,10 +71,6 @@ public class EntityJupiterBossGhast extends EntityFlyingBossBase implements IEnt
         this.dataManager.set(ATTACKING, attacking);
     }
 
-    public int getFireballStrength() {
-        return this.explosionStrength;
-    }
-
     /**
      * Called to update the entity's position/logic.
      */
@@ -94,7 +85,7 @@ public class EntityJupiterBossGhast extends EntityFlyingBossBase implements IEnt
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource source, float amount) {
+    public boolean attackEntityFrom(@Nonnull DamageSource source, float amount) {
         if (this.isEntityInvulnerable(source)) {
             return false;
         } else if (source.getImmediateSource() instanceof EntityLargeFireball && source.getTrueSource() instanceof EntityPlayer) {
@@ -116,6 +107,7 @@ public class EntityJupiterBossGhast extends EntityFlyingBossBase implements IEnt
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100.0D);
     }
 
+    @Nonnull
     public SoundCategory getSoundCategory() {
         return SoundCategory.HOSTILE;
     }
@@ -124,7 +116,7 @@ public class EntityJupiterBossGhast extends EntityFlyingBossBase implements IEnt
         return SoundEvents.ENTITY_GHAST_AMBIENT;
     }
 
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
         return SoundEvents.ENTITY_GHAST_HURT;
     }
 
@@ -161,7 +153,7 @@ public class EntityJupiterBossGhast extends EntityFlyingBossBase implements IEnt
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound compound) {
+    public void writeEntityToNBT(@Nonnull NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
         compound.setInteger("ExplosionPower", this.explosionStrength);
     }
@@ -169,7 +161,7 @@ public class EntityJupiterBossGhast extends EntityFlyingBossBase implements IEnt
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound compound) {
+    public void readEntityFromNBT(@Nonnull NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
 
         if (compound.hasKey("ExplosionPower", 99)) {
@@ -246,7 +238,6 @@ public class EntityJupiterBossGhast extends EntityFlyingBossBase implements IEnt
          */
         public void updateTask() {
             EntityLivingBase entitylivingbase = this.parentEntity.getAttackTarget();
-            double d0 = 64.0D;
 
             if (entitylivingbase.getDistanceSq(this.parentEntity) < 4096.0D && this.parentEntity.canEntityBeSeen(entitylivingbase)) {
                 World world = this.parentEntity.world;
@@ -257,14 +248,12 @@ public class EntityJupiterBossGhast extends EntityFlyingBossBase implements IEnt
                 }
 
                 if (this.attackTimer == 20) {
-                    double d1 = 4.0D;
                     Vec3d vec3d = this.parentEntity.getLook(1.0F);
                     double d2 = entitylivingbase.posX - (this.parentEntity.posX + vec3d.x * 4.0D);
                     double d3 = entitylivingbase.getEntityBoundingBox().minY + (double) (entitylivingbase.height / 2.0F) - (0.5D + this.parentEntity.posY + (double) (this.parentEntity.height / 2.0F));
                     double d4 = entitylivingbase.posZ - (this.parentEntity.posZ + vec3d.z * 4.0D);
                     world.playEvent(null, 1016, new BlockPos(this.parentEntity), 0);
                     EntityHugeFireball entitylargefireball = new EntityHugeFireball(world, this.parentEntity, d2, d3, d4);
-//                    entitylargefireball.explosionPower = this.parentEntity.getFireballStrength();
                     entitylargefireball.posX = this.parentEntity.posX + vec3d.x * 4.0D;
                     entitylargefireball.posY = this.parentEntity.posY + (double) (this.parentEntity.height / 2.0F) + 0.5D;
                     entitylargefireball.posZ = this.parentEntity.posZ + vec3d.z * 4.0D;
@@ -303,7 +292,6 @@ public class EntityJupiterBossGhast extends EntityFlyingBossBase implements IEnt
                 this.parentEntity.renderYawOffset = this.parentEntity.rotationYaw;
             } else {
                 EntityLivingBase entitylivingbase = this.parentEntity.getAttackTarget();
-                double d0 = 64.0D;
 
                 if (entitylivingbase.getDistanceSq(this.parentEntity) < 4096.0D) {
                     double d1 = entitylivingbase.posX - this.parentEntity.posX;

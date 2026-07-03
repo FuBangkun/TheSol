@@ -3,28 +3,23 @@ package mod.sol.blocks;
 import mod.sol.init.SolBlocks;
 import mod.sol.init.SolCreativeTabs;
 import mod.sol.init.SolItems;
-import mod.sol.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.client.model.ModelLoader;
 
 import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
 
-public class BlockBaseOre extends Block implements IHasModel {
+public class BlockBaseOre extends Block {
     public static final PropertyInteger TYPE = PropertyInteger.create("type", 0, 15);
     private final List<OreVariant> variants;
 
@@ -41,6 +36,10 @@ public class BlockBaseOre extends Block implements IHasModel {
 
         SolBlocks.Blocks.add(this);
         SolItems.ITEMS.add(new ItemBlockSubtypes(this).setRegistryName(name));
+    }
+
+    public int getVariantCount() {
+        return variants.size();
     }
 
     @Override
@@ -99,22 +98,9 @@ public class BlockBaseOre extends Block implements IHasModel {
         }
     }
 
-    @Override
-    public void registerModels() {
-        Item item = Item.getItemFromBlock(this);
-        ResourceLocation registryName = this.getRegistryName();
-
-        if (registryName != null) {
-            for (int i = 0; i < variants.size(); i++) {
-                ModelResourceLocation itemMRL = new ModelResourceLocation(registryName, "type=" + i);
-                ModelLoader.setCustomModelResourceLocation(item, i, itemMRL);
-            }
-        }
-    }
-
     @Nonnull
     @Override
-    public ItemStack getPickBlock(@Nonnull IBlockState state, net.minecraft.util.math.RayTraceResult target, @Nonnull net.minecraft.world.World world, @Nonnull BlockPos pos, net.minecraft.entity.player.EntityPlayer player) {
+    public ItemStack getPickBlock(@Nonnull IBlockState state, @Nonnull net.minecraft.util.math.RayTraceResult target, @Nonnull net.minecraft.world.World world, @Nonnull BlockPos pos, @Nonnull net.minecraft.entity.player.EntityPlayer player) {
         return new ItemStack(this, 1, state.getValue(TYPE));
     }
 

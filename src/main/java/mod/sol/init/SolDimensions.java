@@ -1,15 +1,15 @@
 package mod.sol.init;
 
 import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
-import mod.sol.config.ConfigManager;
+import mod.sol.celestialbodies.ariel.WorldProviderAriel;
 import mod.sol.celestialbodies.europa.WorldProviderEuropa;
 import mod.sol.celestialbodies.io.WorldProviderIo;
 import mod.sol.celestialbodies.mercury.WorldProviderMercury;
-import mod.sol.celestialbodies.pluto.WorldProviderPluto;
 import mod.sol.celestialbodies.mimas.WorldProviderMimas;
-import mod.sol.celestialbodies.titan.WorldProviderTitan;
+import mod.sol.celestialbodies.pluto.WorldProviderPluto;
 import mod.sol.celestialbodies.sedna.WorldProviderSedna;
-import mod.sol.celestialbodies.ariel.WorldProviderAriel;
+import mod.sol.celestialbodies.titan.WorldProviderTitan;
+import mod.sol.config.ConfigManager;
 import net.minecraft.world.DimensionType;
 
 public class SolDimensions {

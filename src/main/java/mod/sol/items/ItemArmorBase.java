@@ -3,10 +3,8 @@ package mod.sol.items;
 import micdoodle8.mods.galacticraft.core.items.ISortableItem;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
 import mod.sol.Tags;
-import mod.sol.TheSol;
 import mod.sol.init.SolCreativeTabs;
 import mod.sol.init.SolItems;
-import mod.sol.util.IHasModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -16,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-public class ItemArmorBase extends ItemArmor implements ISortableItem, IHasModel {
+public class ItemArmorBase extends ItemArmor implements ISortableItem {
     private final String textureName;
     private final Supplier<Item> repairIngredient;
 
@@ -70,10 +68,5 @@ public class ItemArmorBase extends ItemArmor implements ISortableItem, IHasModel
     @Override
     public boolean getIsRepairable(@Nonnull ItemStack toRepair, ItemStack repair) {
         return repair.getItem() == repairIngredient.get();
-    }
-
-    @Override
-    public void registerModels() {
-        TheSol.proxy.registerItemRenderer(this, 0, "inventory");
     }
 }

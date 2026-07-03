@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/main/java/mod/sol/celestialbodies/MapGenCavesSolBase.java
 package mod.sol.celestialbodies;
-========
-package mod.sol.celestialbodies.ariel;
->>>>>>>> origin/main:src/main/java/mod/sol/celestialbodies/ariel/MapGenCavesAriel.java
 
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.MapGenBaseMeta;
 import micdoodle8.mods.galacticraft.core.Constants;

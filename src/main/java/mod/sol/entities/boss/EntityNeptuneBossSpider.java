@@ -6,7 +6,9 @@ import micdoodle8.mods.galacticraft.core.entities.EntityBossBase;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import mod.sol.init.SolItems;
 import net.minecraft.block.Block;
-import net.minecraft.entity.*;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,19 +20,16 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateClimber;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BossInfo;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,10 +41,6 @@ public class EntityNeptuneBossSpider extends EntityBossBase implements IEntityBr
     public EntityNeptuneBossSpider(World worldIn) {
         super(worldIn);
         this.setSize(4.2F, 2.7F);
-    }
-
-    public static void registerFixesSpider(DataFixer fixer) {
-        EntityLiving.registerFixesMob(fixer, EntityNeptuneBossSpider.class);
     }
 
     protected void initEntityAI() {
@@ -70,7 +65,8 @@ public class EntityNeptuneBossSpider extends EntityBossBase implements IEntityBr
     /**
      * Returns new PathNavigateGround instance
      */
-    protected PathNavigate createNavigator(World worldIn) {
+    @Nonnull
+    protected PathNavigate createNavigator(@Nonnull World worldIn) {
         return new PathNavigateClimber(this, worldIn);
     }
 
@@ -101,15 +97,17 @@ public class EntityNeptuneBossSpider extends EntityBossBase implements IEntityBr
         return SoundEvents.ENTITY_SPIDER_AMBIENT;
     }
 
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+    @Nonnull
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
         return SoundEvents.ENTITY_SPIDER_HURT;
     }
 
+    @Nonnull
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_SPIDER_DEATH;
     }
 
-    protected void playStepSound(BlockPos pos, Block blockIn) {
+    protected void playStepSound(@Nonnull BlockPos pos, @Nonnull Block blockIn) {
         this.playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
     }
 
@@ -135,6 +133,7 @@ public class EntityNeptuneBossSpider extends EntityBossBase implements IEntityBr
     /**
      * Get this Entity's EnumCreatureAttribute
      */
+    @Nonnull
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.ARTHROPOD;
     }
@@ -170,33 +169,6 @@ public class EntityNeptuneBossSpider extends EntityBossBase implements IEntityBr
         }
 
         this.dataManager.set(CLIMBING, b0);
-    }
-
-    /**
-     * Called only once on an entity when first time spawned, via egg, mob spawner, natural spawning etc, but not called
-     * when entity is reloaded from nbt. Mainly used for initializing attributes and inventory
-     */
-    @Nullable
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
-        livingdata = super.onInitialSpawn(difficulty, livingdata);
-
-        if (livingdata == null) {
-            livingdata = new EntityNeptuneBossSpider.GroupData();
-
-            if (this.world.getDifficulty() == EnumDifficulty.HARD && this.world.rand.nextFloat() < 0.1F * difficulty.getClampedAdditionalDifficulty()) {
-                ((EntityNeptuneBossSpider.GroupData) livingdata).setRandomEffect();
-            }
-        }
-
-        if (livingdata instanceof EntityNeptuneBossSpider.GroupData) {
-            Potion potion = ((EntityNeptuneBossSpider.GroupData) livingdata).effect;
-
-            if (potion != null) {
-                this.addPotionEffect(new PotionEffect(potion, Integer.MAX_VALUE));
-            }
-        }
-
-        return livingdata;
     }
 
     public float getEyeHeight() {
@@ -269,13 +241,6 @@ public class EntityNeptuneBossSpider extends EntityBossBase implements IEntityBr
         public boolean shouldExecute() {
             float f = this.taskOwner.getBrightness();
             return !(f >= 0.5F) && super.shouldExecute();
-        }
-    }
-
-    public static class GroupData implements IEntityLivingData {
-        public Potion effect;
-
-        public void setRandomEffect() {
         }
     }
 }

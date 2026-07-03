@@ -28,6 +28,7 @@ import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
+import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -55,23 +56,27 @@ public class EntityUranusBossSlime extends EntityBossBase implements IMob, IEnti
         this.attackTimer += 1;
     }
 
+    @Nonnull
     @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_SLIME_DEATH;
     }
 
+    @Nonnull
     @Override
     protected SoundEvent getFallSound(int heightIn) {
         return SoundEvents.BLOCK_SLIME_FALL;
     }
 
+    @Nonnull
     @Override
     protected SoundEvent getSwimSound() {
         return SoundEvents.ENTITY_SLIME_SQUISH;
     }
 
+    @Nonnull
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
         return SoundEvents.ENTITY_SLIME_ATTACK;
     }
 

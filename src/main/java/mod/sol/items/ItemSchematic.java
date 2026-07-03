@@ -53,7 +53,7 @@ public class ItemSchematic extends ItemMetadataBase implements ISchematicItem, I
     }
 
     @Override
-    protected String getModelSuffix(int meta) {
+    public String getModelSuffix(int meta) {
         return "t" + (meta + 4);
     }
 }

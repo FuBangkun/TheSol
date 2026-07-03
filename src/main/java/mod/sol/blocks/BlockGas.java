@@ -1,14 +1,11 @@
 package mod.sol.blocks;
 
-import mod.sol.TheSol;
 import mod.sol.init.SolBlocks;
 import mod.sol.init.SolCreativeTabs;
 import mod.sol.init.SolItems;
-import mod.sol.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -20,7 +17,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-public class BlockGas extends Block implements IHasModel {
+public class BlockGas extends Block {
     public BlockGas(String name) {
         super(Material.SNOW);
         this.setLightOpacity(0);
@@ -65,10 +62,5 @@ public class BlockGas extends Block implements IHasModel {
     @Override
     protected ItemStack getSilkTouchDrop(@Nonnull IBlockState state) {
         return new ItemStack(SolBlocks.CARBON_DIOXIDE, 1, 0);
-    }
-
-    @Override
-    public void registerModels() {
-        TheSol.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
 }

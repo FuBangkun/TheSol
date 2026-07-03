@@ -1,9 +1,8 @@
 package mod.sol.items;
 
-import mod.sol.TheSol;
+import lombok.Getter;
 import mod.sol.init.SolCreativeTabs;
 import mod.sol.init.SolItems;
-import mod.sol.util.IHasModel;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,8 +10,9 @@ import net.minecraft.util.NonNullList;
 
 import javax.annotation.Nonnull;
 
-public class ItemMetadataBase extends Item implements IHasModel {
+public class ItemMetadataBase extends Item {
     protected final String[] subNames;
+    @Getter
     protected final int maxMeta;
 
     public ItemMetadataBase(String registryName, String... subNames) {
@@ -26,6 +26,13 @@ public class ItemMetadataBase extends Item implements IHasModel {
         this.setCreativeTab(SolCreativeTabs.ITEM_TAB);
 
         SolItems.ITEMS.add(this);
+    }
+
+    public String getModelSuffix(int meta) {
+        if (meta >= 0 && meta < subNames.length) {
+            return subNames[meta];
+        }
+        return "default";
     }
 
     @Nonnull
@@ -51,20 +58,5 @@ public class ItemMetadataBase extends Item implements IHasModel {
                 items.add(new ItemStack(this, 1, meta));
             }
         }
-    }
-
-    @Override
-    public void registerModels() {
-        for (int meta = 0; meta <= maxMeta; meta++) {
-            String modelName = this.getRegistryName().getPath() + "_" + getModelSuffix(meta);
-            TheSol.proxy.registerItemRenderer(this, meta, modelName);
-        }
-    }
-
-    protected String getModelSuffix(int meta) {
-        if (meta >= 0 && meta < subNames.length) {
-            return subNames[meta];
-        }
-        return "default";
     }
 }

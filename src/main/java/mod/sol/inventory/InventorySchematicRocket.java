@@ -10,6 +10,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 
+import javax.annotation.Nonnull;
+
 public class InventorySchematicRocket implements IInventory {
     private final NonNullList<ItemStack> stacks;
     private final Container eventHandler;
@@ -17,7 +19,6 @@ public class InventorySchematicRocket implements IInventory {
     public InventorySchematicRocket(Container par1Container) {
         this.stacks = NonNullList.withSize(23, ItemStack.EMPTY);
         this.eventHandler = par1Container;
-        int inventoryWidth = 5;
     }
 
     @Override
@@ -25,16 +26,19 @@ public class InventorySchematicRocket implements IInventory {
         return this.stacks.size();
     }
 
+    @Nonnull
     @Override
     public ItemStack getStackInSlot(int par1) {
         return par1 >= this.getSizeInventory() ? ItemStack.EMPTY : this.stacks.get(par1);
     }
 
+    @Nonnull
     @Override
     public String getName() {
         return "container.crafting";
     }
 
+    @Nonnull
     @Override
     public ItemStack removeStackFromSlot(int index) {
         ItemStack oldstack = ItemStackHelper.getAndRemove(this.stacks, index);
@@ -45,6 +49,7 @@ public class InventorySchematicRocket implements IInventory {
         return oldstack;
     }
 
+    @Nonnull
     @Override
     public ItemStack decrStackSize(int index, int count) {
         ItemStack itemstack = ItemStackHelper.getAndSplit(this.stacks, index, count);
@@ -89,23 +94,23 @@ public class InventorySchematicRocket implements IInventory {
     }
 
     @Override
-    public boolean isUsableByPlayer(EntityPlayer par1EntityPlayer) {
+    public boolean isUsableByPlayer(@Nonnull EntityPlayer par1EntityPlayer) {
         return true;
     }
 
     @Override
-    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+    public boolean isItemValidForSlot(int i, @Nonnull ItemStack itemstack) {
         return false;
     }
 
     //We don't use these because we use forge containers
     @Override
-    public void openInventory(EntityPlayer player) {
+    public void openInventory(@Nonnull EntityPlayer player) {
     }
 
     //We don't use these because we use forge containers
     @Override
-    public void closeInventory(EntityPlayer player) {
+    public void closeInventory(@Nonnull EntityPlayer player) {
     }
 
     @Override
@@ -132,6 +137,7 @@ public class InventorySchematicRocket implements IInventory {
         return false;
     }
 
+    @Nonnull
     @Override
     public ITextComponent getDisplayName() {
         return this.hasCustomName() ? new TextComponentString(this.getName()) : new TextComponentTranslation(this.getName());

@@ -1,7 +1,7 @@
 package mod.sol.init;
 
-import mod.sol.celestialbodies.BiomeSolTerrain;
 import mod.sol.celestialbodies.BiomeSol;
+import mod.sol.celestialbodies.BiomeSolTerrain;
 import mod.sol.celestialbodies.ariel.BiomeDecoratorAriel;
 import mod.sol.celestialbodies.europa.BiomeDecoratorEuropa;
 import mod.sol.celestialbodies.io.BiomeDecoratorIo;
@@ -43,7 +43,10 @@ public class SolBiomes {
         // ==================== ARIEL ====================
         ARIEL_FLAT = new BiomeSol(createProperties("Ariel", 1.5F)) {
             @Nonnull
-            @Override public BiomeDecorator createBiomeDecorator() { return getModdedBiomeDecorator(new BiomeDecoratorAriel()); }
+            @Override
+            public BiomeDecorator createBiomeDecorator() {
+                return getModdedBiomeDecorator(new BiomeDecoratorAriel());
+            }
         };
 
         // ==================== EUROPA ====================
@@ -55,7 +58,11 @@ public class SolBiomes {
                 null,
                 BiomeDictionary.Type.COLD, BiomeDictionary.Type.WET, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.SNOWY
         ) {
-            @Nonnull @Override public BiomeDecorator createBiomeDecorator() { return getModdedBiomeDecorator(new BiomeDecoratorEuropa()); }
+            @Nonnull
+            @Override
+            public BiomeDecorator createBiomeDecorator() {
+                return getModdedBiomeDecorator(new BiomeDecoratorEuropa());
+            }
         };
         EUROPA_MOUNTAIN = new BiomeSolTerrain(
                 new Biome.BiomeProperties("Europa Mountain").setRainfall(0.0F).setRainDisabled().setBaseHeight(1.7F).setHeightVariation(1.0F).setTemperature(4.0F),
@@ -65,7 +72,11 @@ public class SolBiomes {
                 null,
                 BiomeDictionary.Type.HOT, BiomeDictionary.Type.DRY, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.SANDY
         ) {
-            @Nonnull @Override public BiomeDecorator createBiomeDecorator() { return getModdedBiomeDecorator(new BiomeDecoratorEuropa()); }
+            @Nonnull
+            @Override
+            public BiomeDecorator createBiomeDecorator() {
+                return getModdedBiomeDecorator(new BiomeDecoratorEuropa());
+            }
         };
         EUROPA_VALLEY = new BiomeSolTerrain(
                 new Biome.BiomeProperties("Europa Valley").setRainfall(0.0F).setRainDisabled().setBaseHeight(-0.4F).setHeightVariation(0.2F).setTemperature(4.0F),
@@ -75,7 +86,11 @@ public class SolBiomes {
                 SolBlocks.EUROPA_SUB_SURFACE_ROCK.getDefaultState(), // Valley 有 gravel 参数
                 BiomeDictionary.Type.COLD, BiomeDictionary.Type.WET, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.SNOWY
         ) {
-            @Nonnull @Override public BiomeDecorator createBiomeDecorator() { return getModdedBiomeDecorator(new BiomeDecoratorEuropa()); }
+            @Nonnull
+            @Override
+            public BiomeDecorator createBiomeDecorator() {
+                return getModdedBiomeDecorator(new BiomeDecoratorEuropa());
+            }
         };
 
         // ==================== IO ====================
@@ -85,7 +100,10 @@ public class SolBiomes {
                 BiomeDictionary.Type.COLD, BiomeDictionary.Type.DRY, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.SANDY
         ) {
             @Nonnull
-            @Override public BiomeDecorator createBiomeDecorator() { return getModdedBiomeDecorator(new BiomeDecoratorIo()); }
+            @Override
+            public BiomeDecorator createBiomeDecorator() {
+                return getModdedBiomeDecorator(new BiomeDecoratorIo());
+            }
         };
         IO_ASH_LAND = new BiomeSol(
                 createProperties("Io Ash Land", 1.5F),
@@ -93,7 +111,10 @@ public class SolBiomes {
                 BiomeDictionary.Type.COLD, BiomeDictionary.Type.DRY, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.SANDY
         ) {
             @Nonnull
-            @Override public BiomeDecorator createBiomeDecorator() { return getModdedBiomeDecorator(new BiomeDecoratorIo()); }
+            @Override
+            public BiomeDecorator createBiomeDecorator() {
+                return getModdedBiomeDecorator(new BiomeDecoratorIo());
+            }
         };
         IO_SULFUR_FIELD = new BiomeSol(
                 createProperties("Io Sulfur Field", 1.5F),
@@ -101,25 +122,37 @@ public class SolBiomes {
                 BiomeDictionary.Type.COLD, BiomeDictionary.Type.DRY, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.SANDY
         ) {
             @Nonnull
-            @Override public BiomeDecorator createBiomeDecorator() { return getModdedBiomeDecorator(new BiomeDecoratorIo()); }
+            @Override
+            public BiomeDecorator createBiomeDecorator() {
+                return getModdedBiomeDecorator(new BiomeDecoratorIo());
+            }
         };
 
         // ==================== MERCURY ====================
         MERCURY_FLAT = new BiomeSol(createProperties("Mercury", 1.5F), SolBlocks.MERCURY_TURF.getDefaultState(), SolBlocks.MERCURY_ROCK.getDefaultState()) {
             @Nonnull
-            @Override public BiomeDecorator createBiomeDecorator() { return getModdedBiomeDecorator(new BiomeDecoratorMercury()); }
+            @Override
+            public BiomeDecorator createBiomeDecorator() {
+                return getModdedBiomeDecorator(new BiomeDecoratorMercury());
+            }
         };
 
         // ==================== MIMAS ====================
         MIMAS_FLAT = new BiomeSol(createProperties("Mimas", 1.5F), SolBlocks.MIMAS_TURF.getDefaultState(), SolBlocks.MIMAS_ROCK.getDefaultState()) {
             @Nonnull
-            @Override public BiomeDecorator createBiomeDecorator() { return getModdedBiomeDecorator(new BiomeDecoratorMimas()); }
+            @Override
+            public BiomeDecorator createBiomeDecorator() {
+                return getModdedBiomeDecorator(new BiomeDecoratorMimas());
+            }
         };
 
         // ==================== PLUTO ====================
         PLUTO_FLAT = new BiomeSol(createProperties("Pluto Flat", 1.0F), SolBlocks.PLUTO_SURFACE_ROCK.getDefaultState(), null) {
             @Nonnull
-            @Override public BiomeDecorator createBiomeDecorator() { return getModdedBiomeDecorator(new BiomeDecoratorPluto()); }
+            @Override
+            public BiomeDecorator createBiomeDecorator() {
+                return getModdedBiomeDecorator(new BiomeDecoratorPluto());
+            }
         };
         PLUTO_SNOWFIELD = new BiomeSol(
                 createProperties("Pluto Snowfield", 1.0F),
@@ -127,13 +160,19 @@ public class SolBiomes {
                 BiomeDictionary.Type.COLD, BiomeDictionary.Type.DRY, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.SANDY
         ) {
             @Nonnull
-            @Override public BiomeDecorator createBiomeDecorator() { return getModdedBiomeDecorator(new BiomeDecoratorPluto()); }
+            @Override
+            public BiomeDecorator createBiomeDecorator() {
+                return getModdedBiomeDecorator(new BiomeDecoratorPluto());
+            }
         };
 
         // ==================== SEDNA ====================
         SEDNA_FLAT = new BiomeSol(createProperties("Sedna", 1.5F)) {
             @Nonnull
-            @Override public BiomeDecorator createBiomeDecorator() { return getModdedBiomeDecorator(new BiomeDecoratorSedna()); }
+            @Override
+            public BiomeDecorator createBiomeDecorator() {
+                return getModdedBiomeDecorator(new BiomeDecoratorSedna());
+            }
         };
 
         // ==================== TITAN ====================
@@ -145,7 +184,11 @@ public class SolBiomes {
                 null,
                 BiomeDictionary.Type.COLD, BiomeDictionary.Type.WET, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.SNOWY
         ) {
-            @Nonnull @Override public BiomeDecorator createBiomeDecorator() { return getModdedBiomeDecorator(new BiomeDecoratorTitan()); }
+            @Nonnull
+            @Override
+            public BiomeDecorator createBiomeDecorator() {
+                return getModdedBiomeDecorator(new BiomeDecoratorTitan());
+            }
         };
         TITAN_MOUNTAIN = new BiomeSolTerrain(
                 new Biome.BiomeProperties("Titan Mountain").setRainfall(0.0F).setRainDisabled().setBaseHeight(3.5F).setHeightVariation(1.0F).setTemperature(4.0F),
@@ -155,7 +198,11 @@ public class SolBiomes {
                 null,
                 BiomeDictionary.Type.HOT, BiomeDictionary.Type.DRY, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.SANDY
         ) {
-            @Nonnull @Override public BiomeDecorator createBiomeDecorator() { return getModdedBiomeDecorator(new BiomeDecoratorTitan()); }
+            @Nonnull
+            @Override
+            public BiomeDecorator createBiomeDecorator() {
+                return getModdedBiomeDecorator(new BiomeDecoratorTitan());
+            }
         };
         TITAN_OCEAN = new BiomeSolTerrain(
                 new Biome.BiomeProperties("Titan Ocean").setRainfall(0.0F).setRainDisabled().setBaseHeight(-0.4F).setHeightVariation(0.2F).setTemperature(4.0F),
@@ -165,13 +212,20 @@ public class SolBiomes {
                 SolBlocks.TITAN_SUB_SURFACE_ROCK.getDefaultState(), // Ocean 有 gravel 参数
                 BiomeDictionary.Type.COLD, BiomeDictionary.Type.WET, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.SNOWY
         ) {
-            @Nonnull @Override public BiomeDecorator createBiomeDecorator() { return getModdedBiomeDecorator(new BiomeDecoratorTitan()); }
+            @Nonnull
+            @Override
+            public BiomeDecorator createBiomeDecorator() {
+                return getModdedBiomeDecorator(new BiomeDecoratorTitan());
+            }
         };
 
         // ==================== TRITON ====================
         TRITON_FLAT = new BiomeSol(createProperties("Triton", 1.5F)) {
             @Nonnull
-            @Override public BiomeDecorator createBiomeDecorator() { return getModdedBiomeDecorator(new BiomeDecoratorTriton()); }
+            @Override
+            public BiomeDecorator createBiomeDecorator() {
+                return getModdedBiomeDecorator(new BiomeDecoratorTriton());
+            }
         };
     }
 }

@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/main/java/mod/sol/celestialbodies/SkyProviderSolBase.java
 package mod.sol.celestialbodies;
-========
-package mod.sol.celestialbodies.io;
->>>>>>>> origin/main:src/main/java/mod/sol/celestialbodies/io/SkyProviderIo.java
 
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.WorldProviderSpace;
 import micdoodle8.mods.galacticraft.core.Constants;
@@ -12,8 +8,6 @@ import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import org.lwjgl.opengl.GL11;
@@ -21,22 +15,6 @@ import org.lwjgl.opengl.GL11;
 import java.util.Random;
 
 public abstract class SkyProviderSolBase extends IRenderHandler {
-
-    protected abstract ResourceLocation getOverworldTexture();
-    protected abstract float getSunSize();
-    protected abstract float getOverworldSpriteSize();
-
-    protected float getSunBlankSize() {
-        return getSunSize();
-    }
-
-    protected boolean hasOverworldSprite() {
-        return true;
-    }
-
-    protected ResourceLocation getSunTexture() {
-        return new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/planets/orbitalsun.png");
-    }
 
     public int starGLCallList = GLAllocation.generateDisplayLists(3);
     public int glSkyList;
@@ -84,6 +62,24 @@ public abstract class SkyProviderSolBase extends IRenderHandler {
 
         tessellator.draw();
         GL11.glEndList();
+    }
+
+    protected abstract ResourceLocation getOverworldTexture();
+
+    protected abstract float getSunSize();
+
+    protected abstract float getOverworldSpriteSize();
+
+    protected float getSunBlankSize() {
+        return getSunSize();
+    }
+
+    protected boolean hasOverworldSprite() {
+        return true;
+    }
+
+    protected ResourceLocation getSunTexture() {
+        return new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/planets/orbitalsun.png");
     }
 
     @Override
@@ -289,17 +285,5 @@ public abstract class SkyProviderSolBase extends IRenderHandler {
         }
 
         var2.draw();
-    }
-
-    private Vec3d getCustomSkyColor() {
-        return new Vec3d(0.26796875D, 0.1796875D, 0.0D);
-    }
-
-    public float getSkyBrightness(float par1) {
-        final float var2 = FMLClientHandler.instance().getClient().world.getCelestialAngle(par1);
-        float var3 = 1.0F - (MathHelper.sin(var2 * Constants.twoPI) * 2.0F + 0.25F);
-        if (var3 < 0.0F) var3 = 0.0F;
-        if (var3 > 1.0F) var3 = 1.0F;
-        return var3 * var3 * 1F;
     }
 }

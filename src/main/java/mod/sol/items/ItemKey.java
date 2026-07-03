@@ -22,7 +22,7 @@ public class ItemKey extends ItemMetadataBase implements IKeyItem, ISortableItem
     }
 
     @Override
-    protected String getModelSuffix(int meta) {
+    public String getModelSuffix(int meta) {
         return "t" + (meta + 4);
     }
 }

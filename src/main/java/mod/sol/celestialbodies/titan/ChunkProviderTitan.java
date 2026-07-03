@@ -1,5 +1,6 @@
 package mod.sol.celestialbodies.titan;
 
+import micdoodle8.mods.galacticraft.api.prefab.world.gen.MapGenBaseMeta;
 import mod.sol.celestialbodies.ChunkProviderSolAdvanced;
 import mod.sol.init.SolBlocks;
 import net.minecraft.block.state.IBlockState;
@@ -7,14 +8,24 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import micdoodle8.mods.galacticraft.api.prefab.world.gen.MapGenBaseMeta;
 
 import javax.annotation.Nonnull;
 
 public class ChunkProviderTitan extends ChunkProviderSolAdvanced {
-    public ChunkProviderTitan(World world, long seed) { super(world, seed); }
-    @Override protected IBlockState getFillBlock() { return SolBlocks.TITAN_ROCK.getDefaultState(); }
-    @Override protected MapGenBaseMeta getCaveGenerator() { return new MapGenCavesTitan(); }
+    public ChunkProviderTitan(World world, long seed) {
+        super(world, seed);
+    }
+
+    @Override
+    protected IBlockState getFillBlock() {
+        return SolBlocks.TITAN_ROCK.getDefaultState();
+    }
+
+    @Override
+    protected MapGenBaseMeta getCaveGenerator() {
+        return new MapGenCavesTitan();
+    }
+
     @Override
     protected void generateOcean(ChunkPrimer primer) {
         for (int x = 0; x < 16; ++x) {
@@ -27,6 +38,7 @@ public class ChunkProviderTitan extends ChunkProviderSolAdvanced {
             }
         }
     }
+
     @Override
     protected void generateSurfaceFeatures(ChunkPrimer primer) {
         for (int x = 0; x < 16; ++x) {

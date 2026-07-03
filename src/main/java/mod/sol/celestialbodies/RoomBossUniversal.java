@@ -37,10 +37,10 @@ public class RoomBossUniversal extends RoomBoss {
         if (brick == SolBlocks.JUPITER_DUNGEON_BRICK) return EnumSolPlanet.JUPITER;
         if (brick == SolBlocks.MERCURY_DUNGEON_BRICK) return EnumSolPlanet.MERCURY;
         if (brick == SolBlocks.NEPTUNE_DUNGEON_BRICK) return EnumSolPlanet.NEPTUNE;
-        if (brick == SolBlocks.PLUTO_DUNGEON_BRICK)   return EnumSolPlanet.PLUTO;
-        if (brick == SolBlocks.SATURN_DUNGEON_BRICK)  return EnumSolPlanet.SATURN;
-        if (brick == SolBlocks.SEDNA_DUNGEON_BRICK)   return EnumSolPlanet.SEDNA;
-        if (brick == SolBlocks.URANUS_DUNGEON_BRICK)  return EnumSolPlanet.URANUS;
+        if (brick == SolBlocks.PLUTO_DUNGEON_BRICK) return EnumSolPlanet.PLUTO;
+        if (brick == SolBlocks.SATURN_DUNGEON_BRICK) return EnumSolPlanet.SATURN;
+        if (brick == SolBlocks.SEDNA_DUNGEON_BRICK) return EnumSolPlanet.SEDNA;
+        if (brick == SolBlocks.URANUS_DUNGEON_BRICK) return EnumSolPlanet.URANUS;
 
         return EnumSolPlanet.JUPITER;
     }

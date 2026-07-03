@@ -9,7 +9,7 @@ public class ItemRocketPart extends ItemMetadataBase {
     }
 
     @Override
-    protected String getModelSuffix(int meta) {
+    public String getModelSuffix(int meta) {
         int tier = meta + (t4 ? 4 : 5);
         return "t" + tier;
     }

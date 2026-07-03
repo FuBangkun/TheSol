@@ -5,7 +5,7 @@ import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
 import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
 import mod.sol.blocks.*;
 import mod.sol.blocks.BlockBaseOre.OreVariant;
-import mod.sol.tile.*;
+import mod.sol.tile.TileEntityDungeonSpawnerSol;
 import mod.sol.util.EnumSolPlanet;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

@@ -8,7 +8,6 @@ import mod.sol.init.SolItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSilverfish;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -16,13 +15,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
-import net.minecraft.util.datafix.DataFixer;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,16 +38,11 @@ public class EntityBossSilverfish extends EntityBossBase implements IEntityBreat
         this.setSize(2.8F, 2.1F);
     }
 
-    public static void registerFixesSilverfish(DataFixer fixer) {
-        EntityLiving.registerFixesMob(fixer, EntityBossSilverfish.class);
-    }
-
     protected void initEntityAI() {
         this.summonSilverfish = new EntityBossSilverfish.AISummonSilverfish(this);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(3, this.summonSilverfish);
         this.tasks.addTask(4, new EntityAIAttackMelee(this, 1.0D, false));
-//        this.tasks.addTask(5, new EntityBossSilverfish.AIHideInStone(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
     }
@@ -80,22 +77,24 @@ public class EntityBossSilverfish extends EntityBossBase implements IEntityBreat
         return SoundEvents.ENTITY_SILVERFISH_AMBIENT;
     }
 
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+    @Nonnull
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
         return SoundEvents.ENTITY_SILVERFISH_HURT;
     }
 
+    @Nonnull
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_SILVERFISH_DEATH;
     }
 
-    protected void playStepSound(BlockPos pos, Block blockIn) {
+    protected void playStepSound(@Nonnull BlockPos pos, @Nonnull Block blockIn) {
         this.playSound(SoundEvents.ENTITY_SILVERFISH_STEP, 0.15F, 1.0F);
     }
 
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource source, float amount) {
+    public boolean attackEntityFrom(@Nonnull DamageSource source, float amount) {
         if (this.isEntityInvulnerable(source)) {
             return false;
         } else {
@@ -154,6 +153,7 @@ public class EntityBossSilverfish extends EntityBossBase implements IEntityBreat
     /**
      * Get this Entity's EnumCreatureAttribute
      */
+    @Nonnull
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.ARTHROPOD;
     }
@@ -187,69 +187,6 @@ public class EntityBossSilverfish extends EntityBossBase implements IEntityBreat
     @Override
     public boolean canBreath() {
         return true;
-    }
-
-    static class AIHideInStone extends EntityAIWander {
-        private EnumFacing facing;
-        private boolean doMerge;
-
-        public AIHideInStone(EntityBossSilverfish silverfishIn) {
-            super(silverfishIn, 1.0D, 10);
-            this.setMutexBits(1);
-        }
-
-        /**
-         * Returns whether the EntityAIBase should begin execution.
-         */
-        public boolean shouldExecute() {
-            if (this.entity.getAttackTarget() != null) {
-                return false;
-            } else if (!this.entity.getNavigator().noPath()) {
-                return false;
-            } else {
-                Random random = this.entity.getRNG();
-
-                if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.entity.world, this.entity) && random.nextInt(10) == 0) {
-                    this.facing = EnumFacing.random(random);
-                    BlockPos blockpos = (new BlockPos(this.entity.posX, this.entity.posY + 0.5D, this.entity.posZ)).offset(this.facing);
-                    IBlockState iblockstate = this.entity.world.getBlockState(blockpos);
-
-                    if (BlockSilverfish.canContainSilverfish(iblockstate)) {
-                        this.doMerge = true;
-                        return true;
-                    }
-                }
-
-                this.doMerge = false;
-                return super.shouldExecute();
-            }
-        }
-
-        /**
-         * Returns whether an in-progress EntityAIBase should continue executing
-         */
-        public boolean shouldContinueExecuting() {
-            return !this.doMerge && super.shouldContinueExecuting();
-        }
-
-        /**
-         * Execute a one shot task or start executing a continuous task
-         */
-        public void startExecuting() {
-            if (!this.doMerge) {
-                super.startExecuting();
-            } else {
-                World world = this.entity.world;
-                BlockPos blockpos = (new BlockPos(this.entity.posX, this.entity.posY + 0.5D, this.entity.posZ)).offset(this.facing);
-                IBlockState iblockstate = world.getBlockState(blockpos);
-
-                if (BlockSilverfish.canContainSilverfish(iblockstate)) {
-                    world.setBlockState(blockpos, Blocks.MONSTER_EGG.getDefaultState().withProperty(BlockSilverfish.VARIANT, BlockSilverfish.EnumType.forModelBlock(iblockstate)), 3);
-                    this.entity.spawnExplosionParticle();
-                    this.entity.setDead();
-                }
-            }
-        }
     }
 
     static class AISummonSilverfish extends EntityAIBase {

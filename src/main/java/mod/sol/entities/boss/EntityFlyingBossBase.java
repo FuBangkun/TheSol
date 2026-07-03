@@ -22,6 +22,7 @@ import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Random;
 
@@ -118,12 +119,6 @@ public abstract class EntityFlyingBossBase extends EntityFlying implements IBoss
 
                     chest.fillWithLoot(null);
 
-//                    ChestGenHooks info = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
-//
-//                    // Generate twice, since it's an extra special chest
-//                    WeightedRandomChestContent.generateChestContents(this.rand, info.getItems(this.rand), chest, info.getCount(this.rand));
-//                    WeightedRandomChestContent.generateChestContents(this.rand, info.getItems(this.rand), chest, info.getCount(this.rand));
-
                     ItemStack schematic = this.getGuaranteedLoot(this.rand);
                     int slot = this.rand.nextInt(chest.getSizeInventory());
                     chest.setInventorySlotContents(slot, schematic);
@@ -194,13 +189,13 @@ public abstract class EntityFlyingBossBase extends EntityFlying implements IBoss
     }
 
     @Override
-    public void addTrackingPlayer(EntityPlayerMP player) {
+    public void addTrackingPlayer(@Nonnull EntityPlayerMP player) {
         super.addTrackingPlayer(player);
         this.bossInfo.addPlayer(player);
     }
 
     @Override
-    public void removeTrackingPlayer(EntityPlayerMP player) {
+    public void removeTrackingPlayer(@Nonnull EntityPlayerMP player) {
         super.removeTrackingPlayer(player);
         this.bossInfo.removePlayer(player);
     }

@@ -22,7 +22,7 @@ public class GuiSchematicRocket extends GuiPositionedContainer implements ISchem
     public GuiSchematicRocket(InventoryPlayer par1InventoryPlayer, BlockPos pos, int tier, Item rocketItem) {
         super(new ContainerSchematicRocket(par1InventoryPlayer, pos, tier), pos);
         this.ySize = 238;
-        this.schematicTexture = new ResourceLocation(Tags.MOD_ID, "textures/gui/schematic_rocket_t" + tier + ".png");
+        this.schematicTexture = new ResourceLocation(Tags.MOD_ID, "textures/gui/schematic_rocket.png");
         this.rocketItem = rocketItem;
     }
 

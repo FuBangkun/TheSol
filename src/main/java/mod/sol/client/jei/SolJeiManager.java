@@ -38,6 +38,6 @@ public class SolJeiManager extends BlankModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registry) {
         IGuiHelper guiHelper = registry.getJeiHelpers().getGuiHelper();
 
-        ROCKET_TIERS.forEach((tier, uid) -> registry.addRecipeCategories(new RocketRecipeCategory(guiHelper, uid, tier)));
+        ROCKET_TIERS.forEach((tier, uid) -> registry.addRecipeCategories(new RocketRecipeCategory(guiHelper, uid)));
     }
 }

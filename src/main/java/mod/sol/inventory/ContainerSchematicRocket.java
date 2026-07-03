@@ -128,7 +128,7 @@ public class ContainerSchematicRocket extends Container {
                     }
                 }
                 if (valid) {
-                    if (this.mergeOneItemTestInvalid(var4, 1, 19, false)) {
+                    if (this.mergeOneItemTestInvalid(var4, 1, 19)) {
                         return ItemStack.EMPTY;
                     }
                 } else {
@@ -140,7 +140,7 @@ public class ContainerSchematicRocket extends Container {
                         }
                     }
                     if (foundChest) {
-                        if (this.mergeOneItemTestInvalid(var4, 19, 22, false)) {
+                        if (this.mergeOneItemTestInvalid(var4, 19, 22)) {
                             return ItemStack.EMPTY;
                         }
                     } else if (par1 >= 22 && par1 < 49) {
@@ -173,7 +173,7 @@ public class ContainerSchematicRocket extends Container {
         return var2;
     }
 
-    protected boolean mergeOneItemTestInvalid(ItemStack par1ItemStack, int par2, int par3, boolean par4) {
+    protected boolean mergeOneItemTestInvalid(ItemStack par1ItemStack, int par2, int par3) {
         boolean flag1 = false;
         if (!par1ItemStack.isEmpty()) {
             Slot slot;

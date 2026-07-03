@@ -12,6 +12,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public class SlotSchematicRocket extends Slot {
@@ -37,14 +38,12 @@ public class SlotSchematicRocket extends Slot {
     }
 
     @Override
-    public boolean isItemValid(ItemStack par1ItemStack) {
-        if (par1ItemStack == null)
-            return false;
-
+    public boolean isItemValid(@Nonnull ItemStack par1ItemStack) {
         List<INasaWorkbenchRecipe> recipes = RecipeUtil.getRocketRecipes(tier);
         for (INasaWorkbenchRecipe recipe : recipes) {
-            if (ItemStack.areItemsEqual(par1ItemStack, recipe.getRecipeInput().get(this.index)))
+            if (ItemStack.areItemsEqual(par1ItemStack, recipe.getRecipeInput().get(this.index))) {
                 return true;
+            }
         }
         return false;
     }

@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:src/main/java/mod/sol/celestialbodies/WorldProviderSolBase.java
 package mod.sol.celestialbodies;
+========
+package mod.sol.celestialbodies.mimas;
+>>>>>>>> origin/main:src/main/java/mod/sol/celestialbodies/mimas/WorldProviderMimas.java
 
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.WorldProviderSpace;
@@ -7,6 +11,13 @@ import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
 import micdoodle8.mods.galacticraft.api.world.ISolarLevel;
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.event.EventHandlerGC;
+<<<<<<<< HEAD:src/main/java/mod/sol/celestialbodies/WorldProviderSolBase.java
+========
+import mod.sol.init.SolBlocks;
+import mod.sol.init.SolDimensions;
+import mod.sol.celestialbodies.RoomTreasureUniversal;
+import mod.sol.init.SolPlanets;
+>>>>>>>> origin/main:src/main/java/mod/sol/celestialbodies/mimas/WorldProviderMimas.java
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;

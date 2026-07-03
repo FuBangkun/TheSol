@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:src/main/java/mod/sol/celestialbodies/SkyProviderSolBase.java
 package mod.sol.celestialbodies;
+========
+package mod.sol.celestialbodies.io;
+>>>>>>>> origin/main:src/main/java/mod/sol/celestialbodies/io/SkyProviderIo.java
 
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.WorldProviderSpace;
 import micdoodle8.mods.galacticraft.core.Constants;

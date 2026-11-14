@@ -2,7 +2,7 @@ package mod.sol.items;
 
 import micdoodle8.mods.galacticraft.core.items.ISortableItem;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
-import mod.sol.Tags;
+import mod.sol.Reference;
 import mod.sol.init.SolCreativeTabs;
 import mod.sol.init.SolItems;
 import net.minecraft.entity.Entity;
@@ -57,7 +57,7 @@ public class ItemArmorBase extends ItemArmor implements ISortableItem {
         } else if (slot == EntityEquipmentSlot.LEGS) {
             layer = 3;
         }
-        return Tags.MOD_ID + ":textures/model/" + this.textureName + "_" + layer + ".png";
+        return Reference.MOD_ID + ":textures/model/" + this.textureName + "_" + layer + ".png";
     }
 
     @Override

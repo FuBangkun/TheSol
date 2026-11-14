@@ -20,18 +20,20 @@ import java.util.List;
 
 public abstract class WorldProviderSolBase extends WorldProviderSpace implements IGalacticraftWorldProvider, ISolarLevel {
 
+    private static final Vector3 VOID_COLOR = new Vector3(0, 0, 0);
+
     @Nonnull
     @Override
     public abstract DimensionType getDimensionType();
 
     @Override
     public Vector3 getFogColor() {
-        return new Vector3(0, 0, 0);
+        return VOID_COLOR;
     }
 
     @Override
     public Vector3 getSkyColor() {
-        return new Vector3(0, 0, 0);
+        return VOID_COLOR;
     }
 
     @Override

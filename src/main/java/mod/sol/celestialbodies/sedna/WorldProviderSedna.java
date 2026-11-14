@@ -12,10 +12,11 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.gen.IChunkGenerator;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
 
 public class WorldProviderSedna extends WorldProviderSolBase {
+    private static final List<Block> SURFACE_BLOCKS = Collections.singletonList(SolBlocks.SEDNA_SURFACE_ROCK);
     @Nonnull
     @Override
     public DimensionType getDimensionType() {
@@ -64,8 +65,6 @@ public class WorldProviderSedna extends WorldProviderSolBase {
 
     @Override
     public List<Block> getSurfaceBlocks() {
-        List<Block> list = new LinkedList<>();
-        list.add(SolBlocks.SEDNA_SURFACE_ROCK);
-        return list;
+        return SURFACE_BLOCKS;
     }
 }

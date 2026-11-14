@@ -59,6 +59,11 @@ public abstract class ChunkProviderSolAdvanced extends ChunkProviderSolBase {
         this.biomesForGeneration = this.world.getBiomeProvider().getBiomesForGeneration(this.biomesForGeneration, chunkX * 4 - 2, chunkZ * 4 - 2, 10, 10);
         this.createLandPerBiome(chunkX * 4, chunkZ * 4);
 
+        final IBlockState fillBlock = getFillBlock();
+        // The smooth noise depends only on the column, so evaluate it once per column
+        // instead of once per block.
+        final double[] thresholds = new double[16];
+
         for (int i = 0; i < 4; ++i) {
             int j = i * 5;
             int k = (i + 1) * 5;
@@ -68,6 +73,12 @@ public abstract class ChunkProviderSolAdvanced extends ChunkProviderSolBase {
                 int j1 = (j + l + 1) * 33;
                 int k1 = (k + l) * 33;
                 int l1 = (k + l + 1) * 33;
+
+                for (int k2 = 0; k2 < 4; ++k2) {
+                    for (int l2 = 0; l2 < 4; ++l2) {
+                        thresholds[k2 * 4 + l2] = this.noiseGenSmooth1.getNoise(chunkX * 16 + (i * 4 + k2), chunkZ * 16 + (l * 4 + l2)) * 20.0;
+                    }
+                }
 
                 for (int i2 = 0; i2 < 32; ++i2) {
                     double d0 = 0.125D;
@@ -93,8 +104,8 @@ public abstract class ChunkProviderSolAdvanced extends ChunkProviderSolBase {
                             double lvt_45_1_ = d10 - d16;
 
                             for (int l2 = 0; l2 < 4; ++l2) {
-                                if ((lvt_45_1_ += d16) > this.noiseGenSmooth1.getNoise(chunkX * 16 + (i * 4 + k2), chunkZ * 16 + (l * 4 + l2)) * 20.0) {
-                                    primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, getFillBlock());
+                                if ((lvt_45_1_ += d16) > thresholds[k2 * 4 + l2]) {
+                                    primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, fillBlock);
                                 }
                             }
 

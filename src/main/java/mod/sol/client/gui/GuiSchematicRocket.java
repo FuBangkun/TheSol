@@ -3,7 +3,7 @@ package mod.sol.client.gui;
 import micdoodle8.mods.galacticraft.api.recipe.ISchematicResultPage;
 import micdoodle8.mods.galacticraft.api.recipe.SchematicRegistry;
 import micdoodle8.mods.galacticraft.core.client.gui.container.GuiPositionedContainer;
-import mod.sol.Tags;
+import mod.sol.Reference;
 import mod.sol.inventory.ContainerSchematicRocket;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
@@ -22,7 +22,7 @@ public class GuiSchematicRocket extends GuiPositionedContainer implements ISchem
     public GuiSchematicRocket(InventoryPlayer par1InventoryPlayer, BlockPos pos, int tier, Item rocketItem) {
         super(new ContainerSchematicRocket(par1InventoryPlayer, pos, tier), pos);
         this.ySize = 238;
-        this.schematicTexture = new ResourceLocation(Tags.MOD_ID, "textures/gui/schematic_rocket.png");
+        this.schematicTexture = new ResourceLocation(Reference.MOD_ID, "textures/gui/schematic_rocket.png");
         this.rocketItem = rocketItem;
     }
 

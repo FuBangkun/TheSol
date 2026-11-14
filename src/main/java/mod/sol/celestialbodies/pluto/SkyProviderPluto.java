@@ -1,11 +1,11 @@
 package mod.sol.celestialbodies.pluto;
 
-import mod.sol.Tags;
+import mod.sol.Reference;
 import mod.sol.celestialbodies.SkyProviderSolBase;
 import net.minecraft.util.ResourceLocation;
 
 public class SkyProviderPluto extends SkyProviderSolBase {
-    private static final ResourceLocation OVERWORLD_TEXTURE = new ResourceLocation(Tags.MOD_ID, "textures/planets/charon.png");
+    private static final ResourceLocation OVERWORLD_TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/planets/charon.png");
 
     @Override
     protected ResourceLocation getOverworldTexture() {

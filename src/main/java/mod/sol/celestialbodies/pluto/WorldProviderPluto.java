@@ -16,10 +16,11 @@ import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedList;
+import java.util.Arrays;
 import java.util.List;
 
 public class WorldProviderPluto extends WorldProviderSolBase {
+    private static final List<Block> SURFACE_BLOCKS = Arrays.asList(SolBlocks.PLUTO_SURFACE_ROCK, Blocks.SNOW, Blocks.SNOW_LAYER);
     @Nonnull
     @Override
     public DimensionType getDimensionType() {
@@ -74,10 +75,6 @@ public class WorldProviderPluto extends WorldProviderSolBase {
 
     @Override
     public List<Block> getSurfaceBlocks() {
-        List<Block> list = new LinkedList<>();
-        list.add(SolBlocks.PLUTO_SURFACE_ROCK);
-        list.add(Blocks.SNOW);
-        list.add(Blocks.SNOW_LAYER);
-        return list;
+        return SURFACE_BLOCKS;
     }
 }

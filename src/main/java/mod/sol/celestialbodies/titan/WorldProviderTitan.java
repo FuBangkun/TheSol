@@ -16,10 +16,11 @@ import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
 
 public class WorldProviderTitan extends WorldProviderSolBase {
+    private static final List<Block> SURFACE_BLOCKS = Collections.singletonList(SolBlocks.TITAN_SURFACE_ROCK);
     @Override
     public Vector3 getFogColor() {
         float night = this.getStarBrightness(1.0F);
@@ -109,8 +110,6 @@ public class WorldProviderTitan extends WorldProviderSolBase {
 
     @Override
     public List<Block> getSurfaceBlocks() {
-        List<Block> list = new LinkedList<>();
-        list.add(SolBlocks.TITAN_SURFACE_ROCK);
-        return list;
+        return SURFACE_BLOCKS;
     }
 }

@@ -9,6 +9,7 @@ import micdoodle8.mods.galacticraft.core.client.CloudRenderer;
 import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection;
 import micdoodle8.mods.galacticraft.core.proxy.ClientProxyCore;
 import micdoodle8.mods.galacticraft.core.util.ClientUtil;
+import mod.sol.celestialbodies.SkyProviderSolBase;
 import mod.sol.celestialbodies.ariel.SkyProviderAriel;
 import mod.sol.celestialbodies.ariel.WorldProviderAriel;
 import mod.sol.celestialbodies.europa.SkyProviderEuropa;
@@ -32,104 +33,96 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldProvider;
+import net.minecraftforge.client.IRenderHandler;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.function.Function;
+
 public class SolEventHandlerClient {
     public static class TickHandlerClient {
+        private static final Map<Class<?>, Function<WorldProvider, IRenderHandler>> SKY_RENDERERS = new LinkedHashMap<>();
+
+        static {
+            SKY_RENDERERS.put(WorldProviderMercury.class, provider -> new SkyProviderMercury((IGalacticraftWorldProvider) provider));
+            SKY_RENDERERS.put(WorldProviderIo.class, provider -> new SkyProviderIo());
+            SKY_RENDERERS.put(WorldProviderEuropa.class, provider -> new SkyProviderEuropa());
+            SKY_RENDERERS.put(WorldProviderMimas.class, provider -> new SkyProviderMimas());
+            SKY_RENDERERS.put(WorldProviderTitan.class, provider -> new SkyProviderTitan((IGalacticraftWorldProvider) provider));
+            SKY_RENDERERS.put(WorldProviderAriel.class, provider -> new SkyProviderAriel());
+            SKY_RENDERERS.put(WorldProviderTriton.class, provider -> new SkyProviderTriton());
+            SKY_RENDERERS.put(WorldProviderPluto.class, provider -> new SkyProviderPluto());
+            SKY_RENDERERS.put(WorldProviderSedna.class, provider -> new SkyProviderSedna());
+        }
+
+        private WorldClient lastWorld;
+
         @SideOnly(Side.CLIENT)
         @SubscribeEvent
         public void onClientTick(ClientTickEvent event) {
-            final Minecraft minecraft = FMLClientHandler.instance().getClient();
+            if (event.phase != TickEvent.Phase.END) {
+                return;
+            }
 
-            final WorldClient world = minecraft.world;
+            final WorldClient world = FMLClientHandler.instance().getClient().world;
+            if (world == this.lastWorld) {
+                return;
+            }
 
+            this.lastWorld = world;
             if (world != null) {
-                if (world.provider instanceof WorldProviderMercury) {
-                    if (world.provider.getSkyRenderer() == null) {
-                        world.provider.setSkyRenderer(new SkyProviderMercury((IGalacticraftWorldProvider) world.provider));
-                    }
+                this.configureSky(world.provider);
+            }
+        }
 
-                    if (world.provider.getCloudRenderer() == null) {
-                        world.provider.setCloudRenderer(new CloudRenderer());
-                    }
+        @SideOnly(Side.CLIENT)
+        private void configureSky(WorldProvider provider) {
+            for (Map.Entry<Class<?>, Function<WorldProvider, IRenderHandler>> entry : SKY_RENDERERS.entrySet()) {
+                if (!entry.getKey().isInstance(provider)) {
+                    continue;
                 }
-                if (world.provider instanceof WorldProviderIo) {
-                    if (world.provider.getSkyRenderer() == null) {
-                        world.provider.setSkyRenderer(new SkyProviderIo());
-                    }
 
-                    if (world.provider.getCloudRenderer() == null) {
-                        world.provider.setCloudRenderer(new CloudRenderer());
-                    }
+                if (provider.getSkyRenderer() == null) {
+                    provider.setSkyRenderer(entry.getValue().apply(provider));
                 }
-                if (world.provider instanceof WorldProviderEuropa) {
-                    if (world.provider.getSkyRenderer() == null) {
-                        world.provider.setSkyRenderer(new SkyProviderEuropa());
-                    }
 
-                    if (world.provider.getCloudRenderer() == null) {
-                        world.provider.setCloudRenderer(new CloudRenderer());
-                    }
+                if (provider.getCloudRenderer() == null) {
+                    provider.setCloudRenderer(new CloudRenderer());
                 }
-                if (world.provider instanceof WorldProviderMimas) {
-                    if (world.provider.getSkyRenderer() == null) {
-                        world.provider.setSkyRenderer(new SkyProviderMimas());
-                    }
 
-                    if (world.provider.getCloudRenderer() == null) {
-                        world.provider.setCloudRenderer(new CloudRenderer());
-                    }
-                }
-                if (world.provider instanceof WorldProviderTitan) {
-                    if (world.provider.getSkyRenderer() == null) {
-                        world.provider.setSkyRenderer(new SkyProviderTitan((IGalacticraftWorldProvider) world.provider));
-                    }
+                return;
+            }
+        }
 
-                    if (world.provider.getCloudRenderer() == null) {
-                        world.provider.setCloudRenderer(new CloudRenderer());
-                    }
-                }
-                if (world.provider instanceof WorldProviderAriel) {
-                    if (world.provider.getSkyRenderer() == null) {
-                        world.provider.setSkyRenderer(new SkyProviderAriel());
-                    }
+        @SideOnly(Side.CLIENT)
+        @SubscribeEvent
+        public void onWorldUnload(WorldEvent.Unload event) {
+            final World world = event.getWorld();
+            if (!world.isRemote) {
+                return;
+            }
 
-                    if (world.provider.getCloudRenderer() == null) {
-                        world.provider.setCloudRenderer(new CloudRenderer());
-                    }
-                }
-                if (world.provider instanceof WorldProviderTriton) {
-                    if (world.provider.getSkyRenderer() == null) {
-                        world.provider.setSkyRenderer(new SkyProviderTriton());
-                    }
+            if (world == this.lastWorld) {
+                this.lastWorld = null;
+            }
 
-                    if (world.provider.getCloudRenderer() == null) {
-                        world.provider.setCloudRenderer(new CloudRenderer());
-                    }
-                }
-                if (world.provider instanceof WorldProviderPluto) {
-                    if (world.provider.getSkyRenderer() == null) {
-                        world.provider.setSkyRenderer(new SkyProviderPluto());
-                    }
-
-                    if (world.provider.getCloudRenderer() == null) {
-                        world.provider.setCloudRenderer(new CloudRenderer());
-                    }
-                }
-                if (world.provider instanceof WorldProviderSedna) {
-                    if (world.provider.getSkyRenderer() == null) {
-                        world.provider.setSkyRenderer(new SkyProviderSedna());
-                    }
-
-                    if (world.provider.getCloudRenderer() == null) {
-                        world.provider.setCloudRenderer(new CloudRenderer());
-                    }
-                }
+            final IRenderHandler skyRenderer = world.provider.getSkyRenderer();
+            if (skyRenderer instanceof SkyProviderSolBase) {
+                ((SkyProviderSolBase) skyRenderer).dispose();
+            } else if (skyRenderer instanceof SkyProviderMercury) {
+                ((SkyProviderMercury) skyRenderer).dispose();
+            } else if (skyRenderer instanceof SkyProviderTitan) {
+                ((SkyProviderTitan) skyRenderer).dispose();
             }
         }
 

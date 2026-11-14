@@ -7,7 +7,7 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import mod.sol.Tags;
+import mod.sol.Reference;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
@@ -23,7 +23,7 @@ public class RocketRecipeCategory implements IRecipeCategory<IRecipeWrapper> {
 
     public RocketRecipeCategory(IGuiHelper guiHelper, @Nonnull String uid) {
         this.uid = uid;
-        ResourceLocation texture = new ResourceLocation(Tags.MOD_ID, "textures/gui/schematic_rocket_jei.png");
+        ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, "textures/gui/schematic_rocket_jei.png");
         this.background = guiHelper.createDrawable(texture, 0, 0, 168, 126);
         this.localizedName = I18n.format("tile.rocket_workbench.name");
     }
@@ -80,6 +80,6 @@ public class RocketRecipeCategory implements IRecipeCategory<IRecipeWrapper> {
     @Nonnull
     @Override
     public String getModName() {
-        return Tags.MOD_NAME;
+        return Reference.MOD_NAME;
     }
 }

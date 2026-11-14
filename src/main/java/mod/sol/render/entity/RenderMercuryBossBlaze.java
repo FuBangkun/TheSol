@@ -1,6 +1,6 @@
 package mod.sol.render.entity;
 
-import mod.sol.Tags;
+import mod.sol.Reference;
 import mod.sol.entities.boss.EntityMercuryBossBlaze;
 import net.minecraft.client.model.ModelBlaze;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderMercuryBossBlaze extends RenderBossBase<EntityMercuryBossBlaze> {
-    private static final ResourceLocation TEX = new ResourceLocation(Tags.MOD_ID, "textures/entities/mercury_blaze_boss.png");
+    private static final ResourceLocation TEX = new ResourceLocation(Reference.MOD_ID, "textures/entities/mercury_blaze_boss.png");
 
     public RenderMercuryBossBlaze(RenderManager manager) {
         super(manager, new ModelBlaze(), 2.0F, 4.0F, TEX);

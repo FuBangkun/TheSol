@@ -41,7 +41,7 @@ import java.util.Random;
 public class EntityMercuryBossBlaze extends EntityBossBase implements IEntityBreathable {
     private static final DataParameter<Byte> ON_FIRE = EntityDataManager.createKey(EntityMercuryBossBlaze.class, DataSerializers.BYTE);
     /**
-     * Random offset used in floating behaviour
+     * Random offset used in floating behavior
      */
     private float heightOffset = 0.5F;
     /**

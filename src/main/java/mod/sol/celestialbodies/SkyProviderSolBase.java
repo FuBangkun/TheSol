@@ -2,66 +2,26 @@ package mod.sol.celestialbodies;
 
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.WorldProviderSpace;
 import micdoodle8.mods.galacticraft.core.Constants;
-import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import org.lwjgl.opengl.GL11;
 
-import java.util.Random;
-
 public abstract class SkyProviderSolBase extends IRenderHandler {
 
-    public int starGLCallList = GLAllocation.generateDisplayLists(3);
-    public int glSkyList;
-    public int glSkyList2;
+    private static final ResourceLocation SUN_TEXTURE = new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/planets/orbitalsun.png");
+
+    protected final SkyDisplayLists skyLists;
 
     public SkyProviderSolBase() {
-        GL11.glPushMatrix();
-        GL11.glNewList(this.starGLCallList, GL11.GL_COMPILE);
-        this.renderStars();
-        GL11.glEndList();
-        GL11.glPopMatrix();
-        final Tessellator tessellator = Tessellator.getInstance();
-        this.glSkyList = this.starGLCallList + 1;
-        GL11.glNewList(this.glSkyList, GL11.GL_COMPILE);
-        final byte byte2 = 64;
-        final int i = 256 / byte2 + 2;
-        float f = 16F;
-        BufferBuilder worldRenderer = tessellator.getBuffer();
-
-        for (int j = -byte2 * i; j <= byte2 * i; j += byte2) {
-            for (int l = -byte2 * i; l <= byte2 * i; l += byte2) {
-                worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
-                worldRenderer.pos(j, f, l).endVertex();
-                worldRenderer.pos(j + byte2, f, l).endVertex();
-                worldRenderer.pos(j + byte2, f, l + byte2).endVertex();
-                worldRenderer.pos(j, f, l + byte2).endVertex();
-                tessellator.draw();
-            }
-        }
-
-        GL11.glEndList();
-        this.glSkyList2 = this.starGLCallList + 2;
-        GL11.glNewList(this.glSkyList2, GL11.GL_COMPILE);
-        f = -16F;
-        worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
-
-        for (int k = -byte2 * i; k <= byte2 * i; k += byte2) {
-            for (int i1 = -byte2 * i; i1 <= byte2 * i; i1 += byte2) {
-                worldRenderer.pos(k + byte2, f, i1).endVertex();
-                worldRenderer.pos(k, f, i1).endVertex();
-                worldRenderer.pos(k, f, i1 + byte2).endVertex();
-                worldRenderer.pos(k + byte2, f, i1 + byte2).endVertex();
-            }
-        }
-
-        tessellator.draw();
-        GL11.glEndList();
+        this.skyLists = new SkyDisplayLists(6000, 20000, 150.0D, 100.0D);
     }
 
     protected abstract ResourceLocation getOverworldTexture();
@@ -79,7 +39,7 @@ public abstract class SkyProviderSolBase extends IRenderHandler {
     }
 
     protected ResourceLocation getSunTexture() {
-        return new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/planets/orbitalsun.png");
+        return SUN_TEXTURE;
     }
 
     @Override
@@ -91,7 +51,7 @@ public abstract class SkyProviderSolBase extends IRenderHandler {
         GL11.glDepthMask(false);
         GL11.glEnable(GL11.GL_FOG);
         GL11.glColor3f(0, 0, 0);
-        GL11.glCallList(this.glSkyList);
+        GL11.glCallList(this.skyLists.skyList);
         GL11.glDisable(GL11.GL_FOG);
         GL11.glDisable(GL11.GL_ALPHA_TEST);
         GL11.glEnable(GL11.GL_BLEND);
@@ -114,7 +74,7 @@ public abstract class SkyProviderSolBase extends IRenderHandler {
             GL11.glRotatef(world.getCelestialAngle(partialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
             GL11.glRotatef(-19.0F, 0, 1.0F, 0);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, var20);
-            GL11.glCallList(this.starGLCallList);
+            GL11.glCallList(this.skyLists.starList);
             GL11.glPopMatrix();
         }
 
@@ -195,7 +155,7 @@ public abstract class SkyProviderSolBase extends IRenderHandler {
         if (var25 < 0.0D) {
             GL11.glPushMatrix();
             GL11.glTranslatef(0.0F, 12.0F, 0.0F);
-            GL11.glCallList(this.glSkyList2);
+            GL11.glCallList(this.skyLists.skyListDown);
             GL11.glPopMatrix();
             var10 = 1.0F;
             var11 = -((float) (var25 + 65.0D));
@@ -228,7 +188,7 @@ public abstract class SkyProviderSolBase extends IRenderHandler {
 
         GL11.glPushMatrix();
         GL11.glTranslatef(0.0F, -((float) (var25 - 16.0D)), 0.0F);
-        GL11.glCallList(this.glSkyList2);
+        GL11.glCallList(this.skyLists.skyListDown);
         GL11.glPopMatrix();
         GlStateManager.enableRescaleNormal();
         GL11.glEnable(GL11.GL_TEXTURE_2D);
@@ -238,52 +198,7 @@ public abstract class SkyProviderSolBase extends IRenderHandler {
         GL11.glDisable(GL11.GL_BLEND);
     }
 
-    private void renderStars() {
-        final Random var1 = new Random(10842L);
-        final Tessellator var2 = Tessellator.getInstance();
-        BufferBuilder worldRenderer = var2.getBuffer();
-        worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
-
-        for (int var3 = 0; var3 < (ConfigManagerCore.moreStars ? 20000 : 6000); ++var3) {
-            double var4 = var1.nextFloat() * 2.0F - 1.0F;
-            double var6 = var1.nextFloat() * 2.0F - 1.0F;
-            double var8 = var1.nextFloat() * 2.0F - 1.0F;
-            final double var10 = 0.15F + var1.nextFloat() * 0.1F;
-            double var12 = var4 * var4 + var6 * var6 + var8 * var8;
-
-            if (var12 < 1.0D && var12 > 0.01D) {
-                var12 = 1.0D / Math.sqrt(var12);
-                var4 *= var12;
-                var6 *= var12;
-                var8 *= var12;
-                final double var14 = var4 * (ConfigManagerCore.moreStars ? var1.nextDouble() * 100D + 150D : 100.0D);
-                final double var16 = var6 * (ConfigManagerCore.moreStars ? var1.nextDouble() * 100D + 150D : 100.0D);
-                final double var18 = var8 * (ConfigManagerCore.moreStars ? var1.nextDouble() * 100D + 150D : 100.0D);
-                final double var20 = Math.atan2(var4, var8);
-                final double var22 = Math.sin(var20);
-                final double var24 = Math.cos(var20);
-                final double var26 = Math.atan2(Math.sqrt(var4 * var4 + var8 * var8), var6);
-                final double var28 = Math.sin(var26);
-                final double var30 = Math.cos(var26);
-                final double var32 = var1.nextDouble() * Math.PI * 2.0D;
-                final double var34 = Math.sin(var32);
-                final double var36 = Math.cos(var32);
-
-                for (int var38 = 0; var38 < 4; ++var38) {
-                    final double var39 = 0.0D;
-                    final double var41 = ((var38 & 2) - 1) * var10;
-                    final double var43 = ((var38 + 1 & 2) - 1) * var10;
-                    final double var47 = var41 * var36 - var43 * var34;
-                    final double var49 = var43 * var36 + var41 * var34;
-                    final double var53 = var47 * var28 + var39 * var30;
-                    final double var55 = var39 * var28 - var47 * var30;
-                    final double var57 = var55 * var22 - var49 * var24;
-                    final double var61 = var49 * var22 + var55 * var24;
-                    worldRenderer.pos(var14 + var57, var16 + var53, var18 + var61).endVertex();
-                }
-            }
-        }
-
-        var2.draw();
+    public void dispose() {
+        this.skyLists.dispose();
     }
 }

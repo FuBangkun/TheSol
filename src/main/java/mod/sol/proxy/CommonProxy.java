@@ -2,7 +2,7 @@ package mod.sol.proxy;
 
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
-import mod.sol.Tags;
+import mod.sol.Reference;
 import mod.sol.TheSol;
 import mod.sol.config.ConfigManager;
 import mod.sol.init.SolBiomes;
@@ -40,7 +40,7 @@ public class CommonProxy {
     }
 
     public void registerNonMobEntity(Class<? extends Entity> var0, String var1, int trackingDistance, int updateFreq, boolean sendVel) {
-        ResourceLocation registryName = new ResourceLocation(Tags.MOD_ID, var1);
+        ResourceLocation registryName = new ResourceLocation(Reference.MOD_ID, var1);
         EntityRegistry.registerModEntity(registryName, var0, var1, GCCoreUtil.nextInternalID(), TheSol.instance, trackingDistance, updateFreq, sendVel);
     }
 
@@ -48,7 +48,7 @@ public class CommonProxy {
         this.registerNonMobEntity(clazz, name, 80, 3, true);
         int nextEggID = GCCoreUtil.getNextValidID();
         if (nextEggID < 65536) {
-            ResourceLocation resourcelocation = new ResourceLocation(Tags.MOD_ID, name);
+            ResourceLocation resourcelocation = new ResourceLocation(Reference.MOD_ID, name);
             EntityList.ENTITY_EGGS.put(resourcelocation, new EntityList.EntityEggInfo(resourcelocation, back, fore));
         }
     }

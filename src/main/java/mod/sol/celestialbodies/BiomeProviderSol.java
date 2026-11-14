@@ -90,7 +90,7 @@ public class BiomeProviderSol extends BiomeProvider {
         IntCache.resetIntCache();
         BiomeAdaptive.setBodyMultiBiome(this.body);
 
-        if (biomes == null || biomes.length < length * width) {
+        if (biomes.length < length * width) {
             biomes = new Biome[length * width];
         }
 

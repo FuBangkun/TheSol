@@ -1,6 +1,6 @@
 package mod.sol.util.handler;
 
-import mod.sol.Tags;
+import mod.sol.Reference;
 import mod.sol.blocks.BlockBaseOre;
 import mod.sol.blocks.BlockFluidBase;
 import mod.sol.init.SolBlocks;
@@ -23,7 +23,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import javax.annotation.Nonnull;
 
-@EventBusSubscriber(modid = Tags.MOD_ID)
+@EventBusSubscriber(modid = Reference.MOD_ID)
 public class RegistryHandler {
     @SubscribeEvent
     public static void onItemRegister(RegistryEvent.Register<Item> event) {
@@ -65,7 +65,7 @@ public class RegistryHandler {
                 ItemMetadataBase metaItem = (ItemMetadataBase) item;
                 for (int i = 0; i <= metaItem.getMaxMeta(); i++) {
                     String modelPath = loc.getPath() + "_" + metaItem.getModelSuffix(i);
-                    ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(new ResourceLocation(Tags.MOD_ID, modelPath), "inventory"));
+                    ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(new ResourceLocation(Reference.MOD_ID, modelPath), "inventory"));
                 }
             } else {
                 ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(loc, "inventory"));

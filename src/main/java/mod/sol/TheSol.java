@@ -12,9 +12,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION, dependencies = "required-after:galacticraftcore;required-after:galacticraftplanets")
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION, dependencies = "required-after:galacticraftcore;required-after:galacticraftplanets")
 public class TheSol {
-    public static final Logger LOGGER = LogManager.getLogger(Tags.MOD_NAME);
+    public static final Logger LOGGER = LogManager.getLogger(Reference.MOD_NAME);
 
     @Instance
     public static TheSol instance;

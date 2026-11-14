@@ -12,10 +12,11 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.gen.IChunkGenerator;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
 
 public class WorldProviderAriel extends WorldProviderSolBase {
+    private static final List<Block> SURFACE_BLOCKS = Collections.singletonList(SolBlocks.ARIEL_TURF);
     @Nonnull
     @Override
     public DimensionType getDimensionType() {
@@ -64,8 +65,6 @@ public class WorldProviderAriel extends WorldProviderSolBase {
 
     @Override
     public List<Block> getSurfaceBlocks() {
-        List<Block> list = new LinkedList<>();
-        list.add(SolBlocks.ARIEL_TURF);
-        return list;
+        return SURFACE_BLOCKS;
     }
 }

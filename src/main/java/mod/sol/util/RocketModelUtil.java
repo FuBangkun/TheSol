@@ -3,7 +3,7 @@ package mod.sol.util;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import micdoodle8.mods.galacticraft.core.client.model.OBJLoaderGC;
-import mod.sol.Tags;
+import mod.sol.Reference;
 import mod.sol.render.model.ItemModelRocket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.IBakedModel;
@@ -32,7 +32,7 @@ public final class RocketModelUtil {
         if (cachedModel != null) return cachedModel;
 
         try {
-            cachedModel = (OBJModel) OBJLoaderGC.instance.loadModel(new ResourceLocation(Tags.MOD_ID, "rocket.obj"));
+            cachedModel = (OBJModel) OBJLoaderGC.instance.loadModel(new ResourceLocation(Reference.MOD_ID, "rocket.obj"));
             return cachedModel;
         } catch (IOException e) {
             throw new RuntimeException("Failed to load rocket.obj", e);
@@ -86,7 +86,7 @@ public final class RocketModelUtil {
 
         IBakedModel raw = bakeRocket(tier, BASE_GROUPS);
         IBakedModel wrapped = new ItemModelRocket(raw);
-        ModelResourceLocation mrl = new ModelResourceLocation(Tags.MOD_ID + ":rocket_t" + tier, "inventory");
+        ModelResourceLocation mrl = new ModelResourceLocation(Reference.MOD_ID + ":rocket_t" + tier, "inventory");
         event.getModelRegistry().putObject(mrl, wrapped);
     }
 }

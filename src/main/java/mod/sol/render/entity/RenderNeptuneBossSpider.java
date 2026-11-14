@@ -1,6 +1,6 @@
 package mod.sol.render.entity;
 
-import mod.sol.Tags;
+import mod.sol.Reference;
 import mod.sol.entities.boss.EntityNeptuneBossSpider;
 import mod.sol.render.layer.LayerNeptuneBossSpiderEye;
 import net.minecraft.client.model.ModelSpider;
@@ -13,7 +13,7 @@ import javax.annotation.Nonnull;
 
 @SideOnly(Side.CLIENT)
 public class RenderNeptuneBossSpider<T extends EntityNeptuneBossSpider> extends RenderBossBase<T> {
-    private static final ResourceLocation TEX = new ResourceLocation(Tags.MOD_ID, "textures/entities/spider.png");
+    private static final ResourceLocation TEX = new ResourceLocation(Reference.MOD_ID, "textures/entities/spider.png");
 
     public RenderNeptuneBossSpider(RenderManager manager) {
         super(manager, new ModelSpider(), 3.0F, 3.0F, TEX);

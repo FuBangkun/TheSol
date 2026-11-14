@@ -1,7 +1,7 @@
 package mod.sol.render;
 
 import micdoodle8.mods.galacticraft.core.client.model.block.ModelTreasureChest;
-import mod.sol.Tags;
+import mod.sol.Reference;
 import mod.sol.tile.TileEntityTreasureChest;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -16,7 +16,7 @@ public class TileEntityTreasureChestRenderer extends TileEntitySpecialRenderer<T
 
     static {
         for (int i = 4; i <= 10; i++) {
-            TEXTURES[i] = new ResourceLocation(Tags.MOD_ID, "textures/model/treasure_t" + i + ".png");
+            TEXTURES[i] = new ResourceLocation(Reference.MOD_ID, "textures/model/treasure_t" + i + ".png");
         }
     }
 

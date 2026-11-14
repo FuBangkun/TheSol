@@ -4,7 +4,7 @@ import micdoodle8.mods.galacticraft.api.recipe.ISchematicItem;
 import micdoodle8.mods.galacticraft.api.recipe.SchematicRegistry;
 import micdoodle8.mods.galacticraft.core.items.ISortableItem;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
-import mod.sol.Tags;
+import mod.sol.Reference;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -28,7 +28,7 @@ public class ItemSchematic extends ItemMetadataBase implements ISchematicItem, I
 
     @SideOnly(Side.CLIENT)
     public static void registerTextures(int tier) {
-        SchematicRegistry.registerTexture(new ResourceLocation(Tags.MOD_ID, "textures/items/schematic_t" + tier + ".png"));
+        SchematicRegistry.registerTexture(new ResourceLocation(Reference.MOD_ID, "textures/items/schematic_t" + tier + ".png"));
     }
 
     public int getMetaFromTier(int tier) {

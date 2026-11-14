@@ -64,17 +64,20 @@ public abstract class ChunkProviderSolNoise extends ChunkProviderSolBase {
         this.noiseGen2.setFrequency(0.010F);
         this.noiseGen3.setFrequency(0.0075F);
 
+        final double heightModifier = getTerrainHeightModifier();
+        final IBlockState lowerBlock = getLowerBlock();
+
         for (int x = 0; x < CHUNK_SIZE_X; x++) {
             for (int z = 0; z < CHUNK_SIZE_Z; z++) {
-                final double d = this.noiseGen1.getNoise(x + chunkX * 16, z + chunkZ * 16) * getTerrainHeightModifier();
-                final double d2 = this.noiseGen2.getNoise(x + chunkX * 16, z + chunkZ * 16) * (getTerrainHeightModifier() * 3);
+                final double d = this.noiseGen1.getNoise(x + chunkX * 16, z + chunkZ * 16) * heightModifier;
+                final double d2 = this.noiseGen2.getNoise(x + chunkX * 16, z + chunkZ * 16) * (heightModifier * 3);
                 double d3 = (this.noiseGen3.getNoise(x + chunkX * 16, z + chunkZ * 16) - 0.1) * 4;
 
                 double yDev = d3 < 0 ? d : (d3 > 1 ? d2 : d + (d2 - d) * d3);
 
                 for (int y = 0; y < CHUNK_SIZE_Y; y++) {
                     if (y < MID_HEIGHT + yDev) {
-                        primer.setBlockState(x, y, z, getLowerBlock());
+                        primer.setBlockState(x, y, z, lowerBlock);
                     }
                 }
             }
@@ -82,6 +85,8 @@ public abstract class ChunkProviderSolNoise extends ChunkProviderSolBase {
     }
 
     public void replaceBlocksForBiome(int chunkX, int chunkZ, ChunkPrimer primer, Biome[] biomes) {
+        final IBlockState lowerBlock = getLowerBlock();
+
         for (int x = 0; x < 16; ++x) {
             for (int z = 0; z < 16; ++z) {
                 Biome biome = (biomes == null) ? BiomeAdaptive.biomeDefault : biomes[x + z * 16];
@@ -95,7 +100,7 @@ public abstract class ChunkProviderSolNoise extends ChunkProviderSolBase {
                         IBlockState current = primer.getBlockState(x, y, z);
                         if (current.getBlock() == Blocks.AIR) {
                             var13 = -1;
-                        } else if (current == getLowerBlock()) {
+                        } else if (current == lowerBlock) {
                             if (var13 == -1) {
                                 var13 = var12;
                                 if (y >= 19) {

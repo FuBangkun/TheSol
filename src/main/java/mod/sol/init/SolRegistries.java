@@ -9,7 +9,7 @@ import micdoodle8.mods.galacticraft.core.recipe.NasaWorkbenchRecipe;
 import micdoodle8.mods.galacticraft.core.util.ColorUtil;
 import micdoodle8.mods.galacticraft.planets.asteroids.items.AsteroidsItems;
 import micdoodle8.mods.galacticraft.planets.mars.items.MarsItems;
-import mod.sol.Tags;
+import mod.sol.Reference;
 import mod.sol.TheSol;
 import mod.sol.celestialbodies.RoomBossUniversal;
 import mod.sol.celestialbodies.RoomTreasureUniversal;
@@ -42,7 +42,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import java.util.HashMap;
 
-@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
+@Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 public class SolRegistries {
     public static void register() {
         registerStructures();
@@ -350,7 +350,7 @@ public class SolRegistries {
             Object currentMaterial = tierMaterials[meta];
 
             if (airVent != null && fuelCanisterPartial != null) {
-                ResourceLocation regName = new ResourceLocation(Tags.MOD_ID, "engine_booster_t" + tier);
+                ResourceLocation regName = new ResourceLocation(Reference.MOD_ID, "engine_booster_t" + tier);
                 event.getRegistry().register(new ShapedOreRecipe(regName, new ItemStack(SolItems.ENGINE_BOOSTERS, 1, meta),
                         "ZYZ", "ZWZ", "XVX",
                         'V', airVent,
@@ -363,14 +363,14 @@ public class SolRegistries {
 
             if (tier >= 5 && gcCanister != null) {
                 int targetMeta = meta - 1;
-                ResourceLocation regName = new ResourceLocation(Tags.MOD_ID, "rocket_engine_t" + tier);
+                ResourceLocation regName = new ResourceLocation(Reference.MOD_ID, "rocket_engine_t" + tier);
                 event.getRegistry().register(new ShapedOreRecipe(regName, new ItemStack(SolItems.ROCKET_ENGINES, 1, targetMeta),
                         " YV", "XWX", "XZX",
                         'V', Blocks.STONE_BUTTON, 'W', new ItemStack(gcCanister, 1, 32767),
                         'X', currentPlate, 'Y', Items.FLINT_AND_STEEL, 'Z', airVent
                 ).setRegistryName(regName));
 
-                ResourceLocation regNameAlt = new ResourceLocation(Tags.MOD_ID, "rocket_engine_t" + tier + "_alt");
+                ResourceLocation regNameAlt = new ResourceLocation(Reference.MOD_ID, "rocket_engine_t" + tier + "_alt");
                 event.getRegistry().register(new ShapedOreRecipe(regNameAlt, new ItemStack(SolItems.ROCKET_ENGINES, 1, targetMeta),
                         "VY ", "XWX", "XZX",
                         'V', Blocks.STONE_BUTTON, 'W', new ItemStack(gcCanister, 1, 32767),
@@ -380,14 +380,14 @@ public class SolRegistries {
 
             if (tier >= 5) {
                 int targetMeta = meta - 1;
-                ResourceLocation regName = new ResourceLocation(Tags.MOD_ID, "nose_cone_t" + tier);
+                ResourceLocation regName = new ResourceLocation(Reference.MOD_ID, "nose_cone_t" + tier);
                 event.getRegistry().register(new ShapedOreRecipe(regName, new ItemStack(SolItems.NOSE_CONES, 1, targetMeta),
                         " Y ", " X ", "X X",
                         'X', currentPlate, 'Y', Blocks.REDSTONE_TORCH
                 ).setRegistryName(regName));
             }
 
-            ResourceLocation regName = new ResourceLocation(Tags.MOD_ID, "rocket_fins_t" + tier);
+            ResourceLocation regName = new ResourceLocation(Reference.MOD_ID, "rocket_fins_t" + tier);
             event.getRegistry().register(new ShapedOreRecipe(regName, new ItemStack(SolItems.ROCKET_FINS, 1, meta),
                     " Y ", "XYX", "X X",
                     'X', currentPlate, 'Y', currentMaterial

@@ -1,6 +1,6 @@
 package mod.sol.render.entity;
 
-import mod.sol.Tags;
+import mod.sol.Reference;
 import mod.sol.entities.boss.EntityBossSilverfish;
 import net.minecraft.client.model.ModelSilverfish;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -12,7 +12,7 @@ import javax.annotation.Nonnull;
 
 @SideOnly(Side.CLIENT)
 public class RenderBossSilverfish extends RenderBossBase<EntityBossSilverfish> {
-    private static final ResourceLocation TEX = new ResourceLocation(Tags.MOD_ID, "textures/entities/silverfish.png");
+    private static final ResourceLocation TEX = new ResourceLocation(Reference.MOD_ID, "textures/entities/silverfish.png");
 
     public RenderBossSilverfish(RenderManager manager) {
         super(manager, new ModelSilverfish(), 2.4F, 8.0F, TEX);

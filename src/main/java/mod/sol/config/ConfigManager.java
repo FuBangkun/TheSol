@@ -1,9 +1,9 @@
 package mod.sol.config;
 
-import mod.sol.Tags;
+import mod.sol.Reference;
 import net.minecraftforge.common.config.Config;
 
-@Config(modid = Tags.MOD_ID, name = Tags.MOD_NAME)
+@Config(modid = Reference.MOD_ID, name = Reference.MOD_NAME)
 public class ConfigManager {
     @Config.Comment("Misc settings")
     public static final Misc misc = new Misc();
@@ -17,7 +17,7 @@ public class ConfigManager {
     }
 
     public static class DimensionIds {
-        private static final int BASE = -(Tags.MOD_ID.hashCode());
+        private static final int BASE = -(Reference.MOD_ID.hashCode());
 
         public int dimensionidMercury = BASE - 100;
         public int dimensionidIo = BASE - 501;

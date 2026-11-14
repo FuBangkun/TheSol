@@ -1,7 +1,7 @@
 package mod.sol.util;
 
 import micdoodle8.mods.galacticraft.api.recipe.SchematicPage;
-import mod.sol.Tags;
+import mod.sol.Reference;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -29,12 +29,12 @@ public class SchematicRocket extends SchematicPage {
 
     @Override
     public int getPageID() {
-        return (tier + 3) + Tags.MOD_ID.hashCode();
+        return (tier + 3) + Reference.MOD_ID.hashCode();
     }
 
     @Override
     public int getGuiID() {
-        return (tier - 3) + Tags.MOD_ID.hashCode();
+        return (tier - 3) + Reference.MOD_ID.hashCode();
     }
 
     @Override

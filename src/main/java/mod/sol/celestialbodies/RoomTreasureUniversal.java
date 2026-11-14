@@ -4,7 +4,7 @@ import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
 import micdoodle8.mods.galacticraft.core.tile.TileEntityTreasureChest;
 import micdoodle8.mods.galacticraft.core.world.gen.dungeon.DungeonConfiguration;
 import micdoodle8.mods.galacticraft.core.world.gen.dungeon.RoomTreasure;
-import mod.sol.Tags;
+import mod.sol.Reference;
 import mod.sol.blocks.BlockTreasureChest;
 import mod.sol.init.SolBlocks;
 import mod.sol.util.EnumSolPlanet;
@@ -21,13 +21,13 @@ import net.minecraft.world.storage.loot.LootTableList;
 import java.util.Random;
 
 public class RoomTreasureUniversal extends RoomTreasure {
-    public static final ResourceLocation TABLE_MERCURY = LootTableList.register(new ResourceLocation(Tags.MOD_ID, "dungeon_tier_4"));
-    public static final ResourceLocation TABLE_JUPITER = LootTableList.register(new ResourceLocation(Tags.MOD_ID, "dungeon_tier_5"));
-    public static final ResourceLocation TABLE_SATURN = LootTableList.register(new ResourceLocation(Tags.MOD_ID, "dungeon_tier_6"));
-    public static final ResourceLocation TABLE_URANUS = LootTableList.register(new ResourceLocation(Tags.MOD_ID, "dungeon_tier_7"));
-    public static final ResourceLocation TABLE_NEPTUNE = LootTableList.register(new ResourceLocation(Tags.MOD_ID, "dungeon_tier_8"));
-    public static final ResourceLocation TABLE_PLUTO = LootTableList.register(new ResourceLocation(Tags.MOD_ID, "dungeon_tier_9"));
-    public static final ResourceLocation TABLE_SEDNA = LootTableList.register(new ResourceLocation(Tags.MOD_ID, "dungeon_tier_10"));
+    public static final ResourceLocation TABLE_MERCURY = LootTableList.register(new ResourceLocation(Reference.MOD_ID, "dungeon_tier_4"));
+    public static final ResourceLocation TABLE_JUPITER = LootTableList.register(new ResourceLocation(Reference.MOD_ID, "dungeon_tier_5"));
+    public static final ResourceLocation TABLE_SATURN = LootTableList.register(new ResourceLocation(Reference.MOD_ID, "dungeon_tier_6"));
+    public static final ResourceLocation TABLE_URANUS = LootTableList.register(new ResourceLocation(Reference.MOD_ID, "dungeon_tier_7"));
+    public static final ResourceLocation TABLE_NEPTUNE = LootTableList.register(new ResourceLocation(Reference.MOD_ID, "dungeon_tier_8"));
+    public static final ResourceLocation TABLE_PLUTO = LootTableList.register(new ResourceLocation(Reference.MOD_ID, "dungeon_tier_9"));
+    public static final ResourceLocation TABLE_SEDNA = LootTableList.register(new ResourceLocation(Reference.MOD_ID, "dungeon_tier_10"));
 
     @SuppressWarnings("unused")
     public RoomTreasureUniversal() {

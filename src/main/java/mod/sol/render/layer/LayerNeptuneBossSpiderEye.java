@@ -1,6 +1,6 @@
 package mod.sol.render.layer;
 
-import mod.sol.Tags;
+import mod.sol.Reference;
 import mod.sol.entities.boss.EntityNeptuneBossSpider;
 import mod.sol.render.entity.RenderNeptuneBossSpider;
 import net.minecraft.client.Minecraft;
@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class LayerNeptuneBossSpiderEye<T extends EntityNeptuneBossSpider> implements LayerRenderer<T> {
-    private static final ResourceLocation SPIDER_EYES = new ResourceLocation(Tags.MOD_ID, "textures/entities/spider_eyes.png");
+    private static final ResourceLocation SPIDER_EYES = new ResourceLocation(Reference.MOD_ID, "textures/entities/spider_eyes.png");
     private final RenderNeptuneBossSpider<T> spiderRenderer;
 
     public LayerNeptuneBossSpiderEye(RenderNeptuneBossSpider<T> spiderRendererIn) {

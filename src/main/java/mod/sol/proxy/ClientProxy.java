@@ -2,13 +2,12 @@ package mod.sol.proxy;
 
 import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection;
 import micdoodle8.mods.galacticraft.core.client.model.OBJLoaderGC;
-import mod.sol.Tags;
+import mod.sol.Reference;
 import mod.sol.client.gui.GuiSelestialSelection;
 import mod.sol.config.ConfigManager;
 import mod.sol.entities.EntityHugeFireball;
 import mod.sol.entities.EntityTierRocket;
 import mod.sol.entities.boss.*;
-import mod.sol.init.SolBiomes;
 import mod.sol.items.ItemSchematic;
 import mod.sol.render.RenderRocketBase;
 import mod.sol.render.TileEntityTreasureChestRenderer;
@@ -35,7 +34,7 @@ public class ClientProxy extends CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
         MinecraftForge.EVENT_BUS.register(this);
-        OBJLoaderGC.instance.addDomain(Tags.MOD_ID);
+        OBJLoaderGC.instance.addDomain(Reference.MOD_ID);
 
         RenderingRegistry.registerEntityRenderingHandler(EntityTierRocket.class, RenderRocketBase::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHugeFireball.class, manager -> new RenderFireball(manager, 2.0F));
@@ -90,7 +89,7 @@ public class ClientProxy extends CommonProxy {
     @SubscribeEvent
     public void loadTextures(TextureStitchEvent.Pre event) {
         for (int i = 4; i <= 9; i++) {
-            event.getMap().registerSprite(new ResourceLocation(Tags.MOD_ID, "rockets/tier" + i + "rocket"));
+            event.getMap().registerSprite(new ResourceLocation(Reference.MOD_ID, "rockets/tier" + i + "rocket"));
         }
     }
 }

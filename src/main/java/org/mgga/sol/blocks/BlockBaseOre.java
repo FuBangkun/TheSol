@@ -1,0 +1,155 @@
+package org.mgga.sol.blocks;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import org.mgga.sol.init.SolBlocks;
+import org.mgga.sol.init.SolCreativeTabs;
+import org.mgga.sol.init.SolItems;
+
+import javax.annotation.Nonnull;
+import java.util.Collections;
+import java.util.List;
+
+public class BlockBaseOre extends Block {
+    public static final PropertyInteger TYPE = PropertyInteger.create("type", 0, 15);
+    private final List<OreVariant> variants;
+
+    public BlockBaseOre(String name, List<OreVariant> variants) {
+        super(Material.ROCK);
+        this.variants = variants;
+
+        this.setRegistryName(name);
+        this.setTranslationKey(name);
+        this.setCreativeTab(SolCreativeTabs.BLOCK_TAB);
+        this.setHardness(3.5F);
+
+        this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, 0));
+
+        SolBlocks.Blocks.add(this);
+        SolItems.ITEMS.add(new ItemBlockSubtypes(this).setRegistryName(name));
+    }
+
+    public int getVariantCount() {
+        return variants.size();
+    }
+
+    @Override
+    public int getHarvestLevel(@Nonnull IBlockState state) {
+        int meta = state.getValue(TYPE);
+        if (meta < variants.size()) {
+            return variants.get(meta).harvestLevel;
+        }
+        return 0;
+    }
+
+    @Nonnull
+    @Override
+    public String getHarvestTool(@Nonnull IBlockState state) {
+        return "pickaxe";
+    }
+
+    @Override
+    public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
+        int meta = state.getValue(TYPE);
+        if (meta < variants.size()) {
+            List<ItemStack> customDrops = variants.get(meta).customDrops;
+            if (customDrops != null && !customDrops.isEmpty()) {
+                for (ItemStack stack : customDrops) {
+                    drops.add(stack.copy());
+                }
+                return;
+            }
+        }
+        drops.add(new ItemStack(this, 1, meta));
+    }
+
+    @Nonnull
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return this.getDefaultState().withProperty(TYPE, meta);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(TYPE);
+    }
+
+    @Nonnull
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, TYPE);
+    }
+
+    @Override
+    public void getSubBlocks(@Nonnull CreativeTabs itemIn, @Nonnull NonNullList<ItemStack> items) {
+        if (this.getCreativeTab() == itemIn) {
+            for (int i = 0; i < variants.size(); i++) {
+                items.add(new ItemStack(this, 1, i));
+            }
+        }
+    }
+
+    @Nonnull
+    @Override
+    public ItemStack getPickBlock(@Nonnull IBlockState state, @Nonnull net.minecraft.util.math.RayTraceResult target, @Nonnull net.minecraft.world.World world, @Nonnull BlockPos pos, @Nonnull net.minecraft.entity.player.EntityPlayer player) {
+        return new ItemStack(this, 1, state.getValue(TYPE));
+    }
+
+    public static class OreVariant {
+        public final String name;
+        public final int harvestLevel;
+        public List<ItemStack> customDrops = null;
+
+        public OreVariant(String name, int harvestLevel) {
+            this.name = name;
+            this.harvestLevel = harvestLevel;
+        }
+
+        public OreVariant(String name, int harvestLevel, ItemStack drop) {
+            this(name, harvestLevel);
+            if (drop != null && !drop.isEmpty()) {
+                this.customDrops = Collections.singletonList(drop);
+            }
+        }
+
+        public OreVariant(String name, int harvestLevel, List<ItemStack> drops) {
+            this(name, harvestLevel);
+            this.customDrops = drops;
+        }
+    }
+
+    private static class ItemBlockSubtypes extends ItemBlock {
+        private final BlockBaseOre oreBlock;
+
+        public ItemBlockSubtypes(BlockBaseOre block) {
+            super(block);
+            this.oreBlock = block;
+            this.setMaxDamage(0);
+            this.setHasSubtypes(true);
+        }
+
+        @Override
+        public int getMetadata(int damage) {
+            return damage;
+        }
+
+        @Nonnull
+        @Override
+        public String getTranslationKey(@Nonnull ItemStack stack) {
+            int meta = stack.getMetadata();
+            if (meta < oreBlock.variants.size()) {
+                return super.getTranslationKey() + "_" + oreBlock.variants.get(meta).name;
+            }
+            return super.getTranslationKey();
+        }
+    }
+}

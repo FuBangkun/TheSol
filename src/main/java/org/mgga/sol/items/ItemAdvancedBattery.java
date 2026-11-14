@@ -1,0 +1,52 @@
+package org.mgga.sol.items;
+
+import micdoodle8.mods.galacticraft.api.item.ElectricItemHelper;
+import micdoodle8.mods.galacticraft.core.energy.item.ItemElectricBase;
+import micdoodle8.mods.galacticraft.core.items.ISortableItem;
+import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import org.mgga.sol.init.SolCreativeTabs;
+import org.mgga.sol.init.SolItems;
+
+public class ItemAdvancedBattery extends ItemElectricBase implements ISortableItem {
+    private final int batteryTier;
+
+    public ItemAdvancedBattery(String assetName, int tier) {
+        super();
+        this.setMaxStackSize(4);
+        this.setRegistryName(assetName);
+        this.setTranslationKey(assetName);
+        this.setCreativeTab(SolCreativeTabs.ITEM_TAB);
+        this.batteryTier = tier;
+
+        SolItems.ITEMS.add(this);
+    }
+
+    @Override
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
+        if (tab == SolCreativeTabs.ITEM_TAB || tab == CreativeTabs.SEARCH) {
+            list.add(ElectricItemHelper.getUncharged(new ItemStack(this)));
+            list.add(ElectricItemHelper.getWithCharge(new ItemStack(this), this.getMaxElectricityStored(new ItemStack(this))));
+        }
+    }
+
+    @Override
+    public float getMaxElectricityStored(ItemStack itemStack) {
+        return 15000 + (this.batteryTier * 5000);
+    }
+
+    @Override
+    public EnumSortCategoryItem getCategory(int meta) {
+        return EnumSortCategoryItem.GENERAL;
+    }
+
+    @Override
+    public int getItemStackLimit(ItemStack stack) {
+        if (stack.getItemDamage() < 100 || stack.hasTagCompound() && stack.getTagCompound().hasKey("electricity")) {
+            return 1;
+        }
+        return this.getItemStackLimit();
+    }
+}

@@ -1,0 +1,32 @@
+package org.mgga.sol.render.entity;
+
+import net.minecraft.client.model.ModelSpider;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import org.mgga.sol.Reference;
+import org.mgga.sol.entities.boss.EntityNeptuneBossSpider;
+import org.mgga.sol.render.layer.LayerNeptuneBossSpiderEye;
+
+import javax.annotation.Nonnull;
+
+@SideOnly(Side.CLIENT)
+public class RenderNeptuneBossSpider<T extends EntityNeptuneBossSpider> extends RenderBossBase<T> {
+    private static final ResourceLocation TEX = new ResourceLocation(Reference.MOD_ID, "textures/entities/spider.png");
+
+    public RenderNeptuneBossSpider(RenderManager manager) {
+        super(manager, new ModelSpider(), 3.0F, 3.0F, TEX);
+        this.addLayer(new LayerNeptuneBossSpiderEye<>(this));
+    }
+
+    @Override
+    protected int getDeathTicks(T entity) {
+        return entity.deathTicks;
+    }
+
+    @Override
+    protected float getDeathMaxRotation(@Nonnull T entity) {
+        return 180.0F;
+    }
+}
